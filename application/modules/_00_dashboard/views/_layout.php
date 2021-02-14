@@ -103,7 +103,7 @@
                             <li class="nav-item has-treeview
                                 <?php
                                 switch ($this->uri->segment(1)) {
-                                    case 'company':
+                                    case '_01_company':
                                     case 'user-management':
                                     case 'customer':
                                     case 'shipper':
@@ -129,7 +129,7 @@
                                 <ul class="nav nav-treeview">
                                     <!-- perusahaan -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('company'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'company' ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_01_company'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_01_company' ? 'active' : ''; ?>">
                                             <i class="fas fa-door-open nav-icon"></i>
                                             <p>Company</p>
                                         </a>
@@ -590,28 +590,9 @@
                                     <li class="breadcrumb-item active">Dashboard v1</li>
                                 </ol> -->
                                 <ol class="breadcrumb float-sm-right">
-                                    <?php if ($this->uri->uri_string == ''): ?>
-                                        <li class="breadcrumb-item">Dashboard</li>
-                                    <?php else: ?>
-                                        <li class="breadcrumb-item"><a href="<?php echo site_url(); ?>">Dashboard</a></li>
-                                    <?php endif; ?>
-
-                                    <?php $index = 0; ?>
+                                    <li class="breadcrumb-item">Dashboard</li>
                                     <?php foreach ($this->uri->segments as $segment): ?>
-                                        <?php
-                                            ++$index;
-                                            $url = substr($this->uri->uri_string, 0, strpos($this->uri->uri_string, $segment)) . $segment;
-                                            $is_active =  $url == $this->uri->uri_string;
-                                        ?>
-                                        <?php if ($index <= 2): ?>
-                                            <li class="breadcrumb-item <?php echo $is_active ? 'active': '' ?>">
-                                                <?php if ($is_active): ?>
-                                                    <?php echo ucfirst($segment) ?>
-                                                <?php else: ?>
-                                                    <a href="<?php echo site_url($url) ?>"><?php echo ucfirst($segment) ?></a>
-                                                <?php endif; ?>
-                                            </li>
-                                        <?php endif; ?>
+                                    <li class="breadcrumb-item"><?php echo ucfirst($segment) ?></li>
                                     <?php endforeach; ?>
                                 </ol>
                             </div><!-- /.col -->

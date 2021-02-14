@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 13, 2021 at 07:48 PM
+-- Generation Time: Feb 14, 2021 at 09:37 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_siat2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t01_company`
+--
+
+CREATE TABLE `t01_company` (
+  `idcompany` int(11) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `Alamat` varchar(50) NOT NULL,
+  `Kota` varchar(50) NOT NULL,
+  `Group_Kode` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t01_company`
+--
+
+INSERT INTO `t01_company` (`idcompany`, `Nama`, `Alamat`, `Kota`, `Group_Kode`, `created_at`, `updated_at`) VALUES
+(1, 'PT LTS', 'Andhika Plaza', 'Surabaya', 'LTS', '2021-01-02 11:39:38', '2021-02-14 14:33:33');
 
 -- --------------------------------------------------------
 
@@ -54,7 +77,8 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613220087, 1, 'Admin', 'istrator', 'ADMIN', '0');
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613307895, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(2, '::1', 'adi', '$2y$10$vPbQth0idvyMbrURrM.YDOuncIuLAzjrawwCiiz031bz0WRxLMfcu', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1613305305, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -74,7 +98,8 @@ CREATE TABLE `t47_groups` (
 
 INSERT INTO `t47_groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
-(2, 'members', 'General User');
+(2, 'members', 'General User'),
+(3, 'Accounting', '');
 
 -- --------------------------------------------------------
 
@@ -93,8 +118,10 @@ CREATE TABLE `t48_users_groups` (
 --
 
 INSERT INTO `t48_users_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(3, 1, 1),
+(4, 1, 2),
+(10, 2, 2),
+(11, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -112,6 +139,12 @@ CREATE TABLE `t49_login_attempts` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `t01_company`
+--
+ALTER TABLE `t01_company`
+  ADD PRIMARY KEY (`idcompany`);
 
 --
 -- Indexes for table `t46_users`
@@ -149,22 +182,28 @@ ALTER TABLE `t49_login_attempts`
 --
 
 --
+-- AUTO_INCREMENT for table `t01_company`
+--
+ALTER TABLE `t01_company`
+  MODIFY `idcompany` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `t46_users`
 --
 ALTER TABLE `t46_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t47_groups`
 --
 ALTER TABLE `t47_groups`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t48_users_groups`
 --
 ALTER TABLE `t48_users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `t49_login_attempts`
