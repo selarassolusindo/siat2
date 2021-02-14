@@ -615,7 +615,7 @@
             <!-- /.content-wrapper -->
 
             <footer class="main-footer">
-                <?php echo SITE_NAME_LONG; ?> &copy; <?php echo date('Y'); ?> created by <a href="http://selusin.online" target="_blank" title="SELARAS SOLUSINDO">SELUSIN</a>. All rights reserved. Licensed to <strong><a href="#">[CustomerCompany]</a></strong>.
+                <?php echo SITE_NAME_LONG; ?> &copy; <?php echo date('Y'); ?> created by <a href="http://selusin.online" target="_blank" title="SELARAS SOLUSINDO">SELUSIN</a>. All rights reserved. Licensed to <strong><a href="http://lts.io" target="_blank">PT. LTS</a></strong>.
                 <!-- <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> -->
                 <!-- All rights reserved. -->
                 <div class="float-right d-none d-sm-inline-block">
