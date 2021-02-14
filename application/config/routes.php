@@ -55,6 +55,14 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // $route['welcome']   = '_01_welcome/welcome';
-$route['dashboard'] = '_00_dashboard/dashboard';
-$route['users']     = '_46_users/_46_users';
-$route['groups']    = '_47_groups/_47_groups';
+$route['dashboard']         = '_00_dashboard/dashboard';
+
+$route['user-management']   = 'auth';
+$route['create-user']       = 'auth/create_user';
+$route['create-group']      = 'auth/create_group';
+$route['edit-group/(:num)'] = 'auth/edit_group/$1';
+$route['deactivate/(:num)'] = 'auth/deactivate/$1';
+$route['activate/(:num)']   = 'auth/activate/$1';
+$route['edit-user/(:num)']  = 'auth/edit_user/$1';
+$route['change-password']   = 'auth/change_password';
+$route['select-company']    = 'auth/selectCompany';

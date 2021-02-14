@@ -76,7 +76,7 @@
                         <div class="info">
                             <!-- <a href="#" class="d-block">Administrator</a> -->
                             <?php if ($this->session->userdata('fullName')) { ?>
-                                <a href="#" class="d-block" ><?php echo $this->session->userdata('fullName') . ' - ' . $this->session->userdata('groupName'); ?></a>
+                                <a href="#" class="d-block" ><?php echo $this->session->userdata('fullName'); ?></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -581,7 +581,8 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Dashboard</h1>
+                                <!-- <h1 class="m-0 text-dark">Dashboard</h1> -->
+                                <h1 class="m-0 text-dark"><?php echo $_caption; ?></h1>
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <!-- <ol class="breadcrumb float-sm-right">
