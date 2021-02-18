@@ -203,14 +203,14 @@
                                     case '_01_company':
                                     case 'user-management':
                                     case '_02_akun':
-                                    case 'customer':
-                                    case 'shipper':
-                                    case 'vendor1':
-                                    case 'armada':
+                                    case '_03_saldoawal':
+                                    case '_04_tglsaldoawal':
+                                    case '_05_customer':
+                                    case '_06_shipper':
+                                    case '_07_vendor':
+                                    case '_08_armada':
                                     case 'sparepart':
                                     case 'input-tanggal-saldo-awal':
-                                    case 'tanggal-saldo-awal':
-                                    case 'saldo-awal':
                                     case 'package':
                                         echo 'menu-open';
                                         break;
@@ -241,21 +241,21 @@
                                     <div class="dropdown-divider"></div>
                                     <!-- customer -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('customer'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'customer') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_05_customer'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_05_customer') ? 'active' : ''; ?>">
                                             <i class="fas fa-hands-helping nav-icon"></i>
                                             <p>Customer</p>
                                         </a>
                                     </li>
                                     <!-- shipper -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('shipper'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'shipper') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_06_shipper'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_06_shipper') ? 'active' : ''; ?>">
                                             <i class="fas fa-dolly-flatbed nav-icon"></i>
                                             <p>Shipper</p>
                                         </a>
                                     </li>
                                     <!-- vendor -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('vendor1'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'vendor1') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_07_vendor'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_07_vendor') ? 'active' : ''; ?>">
                                             <i class="fas fa-user-tie nav-icon"></i>
                                             <p>Vendor</p>
                                         </a>
@@ -263,7 +263,7 @@
                                     <div class="dropdown-divider"></div>
                                     <!-- armada -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('armada'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'armada') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_08_armada'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_08_armada') ? 'active' : ''; ?>">
                                             <i class="fas fa-truck-moving nav-icon"></i>
                                             <p>Armada</p>
                                         </a>
@@ -286,14 +286,14 @@
                                     <!-- saldo awal -->
                                     <li class="nav-item">
                                         <!-- <a href="<?php //echo site_url('saldo-awal'); ?>" class="nav-link <?php //echo ($this->uri->segment(1) == 'saldo-awal') ? 'active' : ''; ?>"> -->
-                                        <a href="<?php echo site_url('input-tanggal-saldo-awal'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'input-tanggal-saldo-awal' or $this->uri->segment(1) == 'saldo-awal') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('input-tanggal-saldo-awal'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'input-tanggal-saldo-awal' or $this->uri->segment(1) == '_03_saldoawal') ? 'active' : ''; ?>">
                                             <i class="fas fa-code-branch nav-icon"></i>
                                             <p>Saldo Awal</p>
                                         </a>
                                     </li>
                                     <!-- tgl. input saldo awal -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('tanggal-saldo-awal'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'tanggal-saldo-awal') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_04_tglsaldoawal'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_04_tglsaldoawal') ? 'active' : ''; ?>">
                                             <i class="fas fa-calendar-check nav-icon"></i>
                                             <p>Tgl. Input Saldo Awal</p>
                                         </a>
