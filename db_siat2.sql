@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 14, 2021 at 10:33 PM
+-- Generation Time: Feb 18, 2021 at 11:41 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -365,6 +365,147 @@ INSERT INTO `t02_akun` (`idakun`, `Kode`, `Nama`, `Induk`, `Urut`, `created_at`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t03_saldoawal`
+--
+
+CREATE TABLE `t03_saldoawal` (
+  `idsa` int(11) NOT NULL,
+  `idakun` int(11) NOT NULL,
+  `Debit` double NOT NULL DEFAULT 0,
+  `Kredit` double NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t04_tglsaldoawal`
+--
+
+CREATE TABLE `t04_tglsaldoawal` (
+  `idtgl` int(11) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t05_customer`
+--
+
+CREATE TABLE `t05_customer` (
+  `idcustomer` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `ContactPerson` varchar(50) NOT NULL,
+  `Telepon` varchar(25) NOT NULL,
+  `Alamat` varchar(50) NOT NULL,
+  `Kota` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t05_customer`
+--
+
+INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
+(1, 'C0001', 'Cus1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-01-03 15:38:53', '2021-02-17 11:52:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t06_shipper`
+--
+
+CREATE TABLE `t06_shipper` (
+  `idcustomer` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `ContactPerson` varchar(50) NOT NULL,
+  `Telepon` varchar(25) NOT NULL,
+  `Alamat` varchar(50) NOT NULL,
+  `Kota` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t06_shipper`
+--
+
+INSERT INTO `t06_shipper` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
+(1, 'SHI00', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 12:43:47', '2021-02-17 12:43:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t07_vendor`
+--
+
+CREATE TABLE `t07_vendor` (
+  `idcustomer` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `ContactPerson` varchar(50) NOT NULL,
+  `Telepon` varchar(25) NOT NULL,
+  `Alamat` varchar(50) NOT NULL,
+  `Kota` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t07_vendor`
+--
+
+INSERT INTO `t07_vendor` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
+(1, 'VEN00', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 13:47:47', '2021-02-17 13:47:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t08_armada`
+--
+
+CREATE TABLE `t08_armada` (
+  `idarmada` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Merk` varchar(50) NOT NULL,
+  `Tipe` varchar(25) NOT NULL,
+  `TahunPembuatan` varchar(4) NOT NULL,
+  `Nopol` varchar(15) NOT NULL,
+  `Norangka` varchar(50) NOT NULL,
+  `Nomesin` varchar(50) NOT NULL,
+  `JatuhTempoPajak` date NOT NULL,
+  `JatuhTempoKir` date NOT NULL,
+  `KodeEkor` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t09_sparepart`
+--
+
+CREATE TABLE `t09_sparepart` (
+  `idsparepart` int(11) NOT NULL,
+  `Kode` varchar(6) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `Merk` varchar(50) NOT NULL,
+  `Tipe` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t46_users`
 --
 
@@ -395,7 +536,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613307895, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613660794, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$vPbQth0idvyMbrURrM.YDOuncIuLAzjrawwCiiz031bz0WRxLMfcu', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1613305305, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -472,6 +613,49 @@ ALTER TABLE `t02_akun`
   ADD UNIQUE KEY `Kode` (`Kode`);
 
 --
+-- Indexes for table `t03_saldoawal`
+--
+ALTER TABLE `t03_saldoawal`
+  ADD PRIMARY KEY (`idsa`),
+  ADD UNIQUE KEY `idakun` (`idakun`);
+
+--
+-- Indexes for table `t04_tglsaldoawal`
+--
+ALTER TABLE `t04_tglsaldoawal`
+  ADD PRIMARY KEY (`idtgl`);
+
+--
+-- Indexes for table `t05_customer`
+--
+ALTER TABLE `t05_customer`
+  ADD PRIMARY KEY (`idcustomer`);
+
+--
+-- Indexes for table `t06_shipper`
+--
+ALTER TABLE `t06_shipper`
+  ADD PRIMARY KEY (`idcustomer`);
+
+--
+-- Indexes for table `t07_vendor`
+--
+ALTER TABLE `t07_vendor`
+  ADD PRIMARY KEY (`idcustomer`);
+
+--
+-- Indexes for table `t08_armada`
+--
+ALTER TABLE `t08_armada`
+  ADD PRIMARY KEY (`idarmada`);
+
+--
+-- Indexes for table `t09_sparepart`
+--
+ALTER TABLE `t09_sparepart`
+  ADD PRIMARY KEY (`idsparepart`);
+
+--
 -- Indexes for table `t46_users`
 --
 ALTER TABLE `t46_users`
@@ -517,6 +701,48 @@ ALTER TABLE `t01_company`
 --
 ALTER TABLE `t02_akun`
   MODIFY `idakun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
+
+--
+-- AUTO_INCREMENT for table `t03_saldoawal`
+--
+ALTER TABLE `t03_saldoawal`
+  MODIFY `idsa` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t04_tglsaldoawal`
+--
+ALTER TABLE `t04_tglsaldoawal`
+  MODIFY `idtgl` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t05_customer`
+--
+ALTER TABLE `t05_customer`
+  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `t06_shipper`
+--
+ALTER TABLE `t06_shipper`
+  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `t07_vendor`
+--
+ALTER TABLE `t07_vendor`
+  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `t08_armada`
+--
+ALTER TABLE `t08_armada`
+  MODIFY `idarmada` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t09_sparepart`
+--
+ALTER TABLE `t09_sparepart`
+  MODIFY `idsparepart` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t46_users`

@@ -209,7 +209,7 @@
                                     case '_06_shipper':
                                     case '_07_vendor':
                                     case '_08_armada':
-                                    case 'sparepart':
+                                    case '_09_sparepart':
                                     case 'input-tanggal-saldo-awal':
                                     case 'package':
                                         echo 'menu-open';
@@ -270,7 +270,7 @@
                                     </li>
                                     <!-- stock spare part -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('sparepart'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'sparepart') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_09_sparepart'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_09_sparepart') ? 'active' : ''; ?>">
                                             <i class="fas fa-drum-steelpan nav-icon"></i>
                                             <p>Spare Part</p>
                                         </a>
