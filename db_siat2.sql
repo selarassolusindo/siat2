@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2021 at 04:20 AM
+-- Generation Time: Feb 20, 2021 at 11:09 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -495,7 +495,7 @@ CREATE TABLE `t08_armada` (
 
 CREATE TABLE `t09_sparepart` (
   `idsparepart` int(11) NOT NULL,
-  `Kode` varchar(6) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `Merk` varchar(50) NOT NULL,
   `Tipe` varchar(25) NOT NULL,
@@ -511,7 +511,7 @@ CREATE TABLE `t09_sparepart` (
 
 CREATE TABLE `t10_service` (
   `idservice` int(11) NOT NULL,
-  `Kode` varchar(6) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -525,9 +525,37 @@ CREATE TABLE `t10_service` (
 
 CREATE TABLE `t11_cost` (
   `idcost` int(11) NOT NULL,
-  `Kode` varchar(6) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `idakun` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t12_lokasi`
+--
+
+CREATE TABLE `t12_lokasi` (
+  `idservice` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t13_satuan`
+--
+
+CREATE TABLE `t13_satuan` (
+  `idservice` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -565,7 +593,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613789768, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613815098, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$vPbQth0idvyMbrURrM.YDOuncIuLAzjrawwCiiz031bz0WRxLMfcu', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1613305305, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -697,6 +725,18 @@ ALTER TABLE `t11_cost`
   ADD PRIMARY KEY (`idcost`);
 
 --
+-- Indexes for table `t12_lokasi`
+--
+ALTER TABLE `t12_lokasi`
+  ADD PRIMARY KEY (`idservice`);
+
+--
+-- Indexes for table `t13_satuan`
+--
+ALTER TABLE `t13_satuan`
+  ADD PRIMARY KEY (`idservice`);
+
+--
 -- Indexes for table `t46_users`
 --
 ALTER TABLE `t46_users`
@@ -796,6 +836,18 @@ ALTER TABLE `t10_service`
 --
 ALTER TABLE `t11_cost`
   MODIFY `idcost` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t12_lokasi`
+--
+ALTER TABLE `t12_lokasi`
+  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t13_satuan`
+--
+ALTER TABLE `t13_satuan`
+  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t46_users`

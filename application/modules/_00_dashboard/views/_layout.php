@@ -213,6 +213,7 @@
                                     case '_10_service':
                                     case '_11_cost':
                                     case '_12_lokasi':
+                                    case '_13_satuan':
                                     case 'input-tanggal-saldo-awal':
                                     case 'package':
                                         echo 'menu-open';
@@ -292,11 +293,18 @@
                                             <p>Cost</p>
                                         </a>
                                     </li>
-                                    <!-- cost -->
+                                    <!-- lokasi -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_12_lokasi'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_12_lokasi') ? 'active' : ''; ?>">
                                             <i class="fas fa-drum-steelpan nav-icon"></i>
                                             <p>Lokasi</p>
+                                        </a>
+                                    </li>
+                                    <!-- satuan -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_13_satuan'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_13_satuan') ? 'active' : ''; ?>">
+                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <p>Satuan</p>
                                         </a>
                                     </li>
                                     <div class="dropdown-divider"></div>
