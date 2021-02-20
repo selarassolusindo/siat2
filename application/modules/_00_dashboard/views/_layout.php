@@ -217,7 +217,6 @@
                                     case '_14_bank':
                                     case '_15_driver':
                                     case 'input-tanggal-saldo-awal':
-                                    case 'package':
                                         echo 'menu-open';
                                         break;
                                     default:
@@ -355,7 +354,9 @@
                             <li class="nav-item has-treeview
                                 <?php
                                 switch ($this->uri->segment(1)) {
-                                    case 'sales-order':
+                                    case 'job-order':
+                                    case 'cost-sheet':
+                                    case 'invoice':
                                     // case 'user-management':
                                     // case 'customer':
                                     // case 'shipper':
@@ -379,11 +380,25 @@
                                     <p>TRANSAKSI<i class="right fas fa-angle-left"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
+                                    <!-- Job Order (JO) -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('job-order'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'job-order' ? 'active' : ''; ?>">
+                                            <i class="far fa-edit nav-icon"></i>
+                                            <p>Job Order</p>
+                                        </a>
+                                    </li>
                                     <!-- Cost Sheet -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('s01_thaj'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 's01_thaj' ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('cost-sheet'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'cost-sheet' ? 'active' : ''; ?>">
                                             <i class="far fa-copy nav-icon"></i>
                                             <p>Cost Sheet</p>
+                                        </a>
+                                    </li>
+                                    <!-- Invoice -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('invoice'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'invoice' ? 'active' : ''; ?>">
+                                            <i class="fas fa-file-invoice nav-icon"></i>
+                                            <p>Invoice</p>
                                         </a>
                                     </li>
 
@@ -453,7 +468,7 @@
                                     <li class="nav-item has-treeview
                                         <?php
                                         switch ($this->uri->segment(1)) {
-                                            case 'sales-order':
+                                            case 'job-orderx':
                                             // case 'user-management':
                                             // case 'customer':
                                             // case 'shipper':
@@ -477,13 +492,6 @@
                                             <p>Penjualan<i class="right fas fa-angle-left"></i></p>
                                         </a>
                                         <ul class="nav nav-treeview">
-                                            <!-- Pesanan Penjualan (SO) -->
-                                            <li class="nav-item">
-                                                <a href="<?php echo site_url('sales-order'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'sales-order' ? 'active' : ''; ?>">
-                                                    <i class="far fa-edit nav-icon"></i>
-                                                    <p>Pesanan Penjualan (SO)</p>
-                                                </a>
-                                            </li>
                                             <!-- Uang Jalan / Kas Bon -->
                                             <li class="nav-item">
                                                 <a href="<?php echo site_url('s01_thaj'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 's01_thaj' ? 'active' : ''; ?>">
@@ -496,13 +504,6 @@
                                                 <a href="<?php echo site_url('s01_thaj'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 's01_thaj' ? 'active' : ''; ?>">
                                                     <i class="far fa-check-square nav-icon"></i>
                                                     <p>Validasi Uang Jalan</p>
-                                                </a>
-                                            </li>
-                                            <!-- Invoice Trucking -->
-                                            <li class="nav-item">
-                                                <a href="<?php echo site_url('s01_thaj'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 's01_thaj' ? 'active' : ''; ?>">
-                                                    <i class="fas fa-file-invoice nav-icon"></i>
-                                                    <p>Invoice Trucking</p>
                                                 </a>
                                             </li>
                                             <!-- Nota Debit -->
