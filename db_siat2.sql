@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2021 at 12:47 PM
+-- Generation Time: Feb 20, 2021 at 01:10 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -592,6 +592,8 @@ CREATE TABLE `t15_driver` (
   `iddriver` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
+  `HP` varchar(50) NOT NULL,
+  `KTP` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

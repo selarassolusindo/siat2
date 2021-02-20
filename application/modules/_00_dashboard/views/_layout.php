@@ -215,6 +215,7 @@
                                     case '_12_lokasi':
                                     case '_13_satuan':
                                     case '_14_bank':
+                                    case '_15_driver':
                                     case 'input-tanggal-saldo-awal':
                                     case 'package':
                                         echo 'menu-open';
@@ -313,6 +314,13 @@
                                         <a href="<?php echo site_url('_14_bank'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_14_bank') ? 'active' : ''; ?>">
                                             <i class="fas fa-drum-steelpan nav-icon"></i>
                                             <p>Bank</p>
+                                        </a>
+                                    </li>
+                                    <!-- driver -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_15_driver'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_15_driver') ? 'active' : ''; ?>">
+                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <p>Driver</p>
                                         </a>
                                     </li>
                                     <div class="dropdown-divider"></div>
