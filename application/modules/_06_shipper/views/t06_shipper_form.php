@@ -44,7 +44,7 @@
             <label for="timestamp">Updated At <?php echo form_error('updated_at') ?></label>
             <input type="text" class="form-control" name="updated_at" id="updated_at" placeholder="Updated At" value="<?php echo $updated_at; ?>" />
         </div> -->
-	    <input type="hidden" name="idcustomer" value="<?php echo $idcustomer; ?>" />
+	    <input type="hidden" name="idshipper" value="<?php echo $idshipper; ?>" />
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 	    <a href="<?php echo site_url('_06_shipper') ?>" class="btn btn-default">Cancel</a>
 	</form>

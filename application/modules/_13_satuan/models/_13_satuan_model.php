@@ -7,7 +7,7 @@ class _13_satuan_model extends CI_Model
 {
 
     public $table = 't13_satuan';
-    public $id = 'idservice';
+    public $id = 'idsatuan';
     public $order = 'DESC';
 
     function __construct()
@@ -31,7 +31,7 @@ class _13_satuan_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('idservice', $q);
+        $this->db->like('idsatuan', $q);
 	$this->db->or_like('Kode', $q);
 	$this->db->or_like('Nama', $q);
 	$this->db->or_like('created_at', $q);
@@ -43,7 +43,7 @@ class _13_satuan_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('idservice', $q);
+        $this->db->like('idsatuan', $q);
 	$this->db->or_like('Kode', $q);
 	$this->db->or_like('Nama', $q);
 	$this->db->or_like('created_at', $q);

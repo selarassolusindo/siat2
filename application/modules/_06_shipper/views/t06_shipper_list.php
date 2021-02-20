@@ -69,11 +69,11 @@
 			<td><?php echo $_06_shipper->updated_at ?></td> -->
 			<td style="text-align:center" width="200px">
 				<?php
-				echo anchor(site_url('_06_shipper/read/'.$_06_shipper->idcustomer),'Read');
+				echo anchor(site_url('_06_shipper/read/'.$_06_shipper->idshipper),'Read');
 				echo ' | ';
-				echo anchor(site_url('_06_shipper/update/'.$_06_shipper->idcustomer),'Update');
+				echo anchor(site_url('_06_shipper/update/'.$_06_shipper->idshipper),'Update');
 				echo ' | ';
-				echo anchor(site_url('_06_shipper/delete/'.$_06_shipper->idcustomer),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+				echo anchor(site_url('_06_shipper/delete/'.$_06_shipper->idshipper),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
 				?>
 			</td>
 		</tr>

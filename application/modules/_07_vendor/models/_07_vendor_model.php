@@ -7,7 +7,7 @@ class _07_vendor_model extends CI_Model
 {
 
     public $table = 't07_vendor';
-    public $id = 'idcustomer';
+    public $id = 'idvendor';
     public $order = 'DESC';
 
     function __construct()
@@ -31,7 +31,7 @@ class _07_vendor_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('idcustomer', $q);
+        $this->db->like('idvendor', $q);
 	$this->db->or_like('Kode', $q);
 	$this->db->or_like('Nama', $q);
 	$this->db->or_like('ContactPerson', $q);
@@ -47,7 +47,7 @@ class _07_vendor_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('idcustomer', $q);
+        $this->db->like('idvendor', $q);
 	$this->db->or_like('Kode', $q);
 	$this->db->or_like('Nama', $q);
 	$this->db->or_like('ContactPerson', $q);

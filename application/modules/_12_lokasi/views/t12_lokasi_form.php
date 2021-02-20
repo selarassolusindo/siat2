@@ -28,7 +28,7 @@
             <label for="timestamp">Updated At <?php echo form_error('updated_at') ?></label>
             <input type="text" class="form-control" name="updated_at" id="updated_at" placeholder="Updated At" value="<?php echo $updated_at; ?>" />
         </div> -->
-	    <input type="hidden" name="idservice" value="<?php echo $idservice; ?>" />
+	    <input type="hidden" name="idlokasi" value="<?php echo $idlokasi; ?>" />
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 	    <a href="<?php echo site_url('_12_lokasi') ?>" class="btn btn-default">Cancel</a>
 	</form>

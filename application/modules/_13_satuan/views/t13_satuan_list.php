@@ -61,11 +61,11 @@
 			<td><?php echo $_13_satuan->updated_at ?></td> -->
 			<td style="text-align:center" width="200px">
 				<?php
-				echo anchor(site_url('_13_satuan/read/'.$_13_satuan->idservice),'Read');
+				echo anchor(site_url('_13_satuan/read/'.$_13_satuan->idsatuan),'Read');
 				echo ' | ';
-				echo anchor(site_url('_13_satuan/update/'.$_13_satuan->idservice),'Update');
+				echo anchor(site_url('_13_satuan/update/'.$_13_satuan->idsatuan),'Update');
 				echo ' | ';
-				echo anchor(site_url('_13_satuan/delete/'.$_13_satuan->idservice),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+				echo anchor(site_url('_13_satuan/delete/'.$_13_satuan->idsatuan),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
 				?>
 			</td>
 		</tr>

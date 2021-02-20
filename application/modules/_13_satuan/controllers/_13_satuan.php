@@ -51,7 +51,7 @@ class _13_satuan extends CI_Controller
         $row = $this->_13_satuan_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'idservice' => $row->idservice,
+		'idsatuan' => $row->idsatuan,
 		'Kode' => $row->Kode,
 		'Nama' => $row->Nama,
 		// 'created_at' => $row->created_at,
@@ -72,7 +72,7 @@ class _13_satuan extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('_13_satuan/create_action'),
-	    'idservice' => set_value('idservice'),
+	    'idsatuan' => set_value('idsatuan'),
 	    'Kode' => set_value('Kode'),
 	    'Nama' => set_value('Nama'),
 	    // 'created_at' => set_value('created_at'),
@@ -112,7 +112,7 @@ class _13_satuan extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('_13_satuan/update_action'),
-		'idservice' => set_value('idservice', $row->idservice),
+		'idsatuan' => set_value('idsatuan', $row->idsatuan),
 		'Kode' => set_value('Kode', $row->Kode),
 		'Nama' => set_value('Nama', $row->Nama),
 		// 'created_at' => set_value('created_at', $row->created_at),
@@ -133,7 +133,7 @@ class _13_satuan extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('idservice', TRUE));
+            $this->update($this->input->post('idsatuan', TRUE));
         } else {
             $data = array(
 		'Kode' => $this->input->post('Kode',TRUE),
@@ -142,7 +142,7 @@ class _13_satuan extends CI_Controller
 		// 'updated_at' => $this->input->post('updated_at',TRUE),
 	    );
 
-            $this->_13_satuan_model->update($this->input->post('idservice', TRUE), $data);
+            $this->_13_satuan_model->update($this->input->post('idsatuan', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_13_satuan'));
         }
@@ -169,7 +169,7 @@ class _13_satuan extends CI_Controller
 	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
 	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
 
-	$this->form_validation->set_rules('idservice', 'idservice', 'trim');
+	$this->form_validation->set_rules('idsatuan', 'idsatuan', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

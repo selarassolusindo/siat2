@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2021 at 11:09 AM
+-- Generation Time: Feb 20, 2021 at 12:47 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -422,7 +422,7 @@ INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Tele
 --
 
 CREATE TABLE `t06_shipper` (
-  `idcustomer` int(11) NOT NULL,
+  `idshipper` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `ContactPerson` varchar(50) NOT NULL,
@@ -437,7 +437,7 @@ CREATE TABLE `t06_shipper` (
 -- Dumping data for table `t06_shipper`
 --
 
-INSERT INTO `t06_shipper` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
+INSERT INTO `t06_shipper` (`idshipper`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
 (1, 'SHI00', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 12:43:47', '2021-02-17 12:43:47');
 
 -- --------------------------------------------------------
@@ -447,7 +447,7 @@ INSERT INTO `t06_shipper` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telep
 --
 
 CREATE TABLE `t07_vendor` (
-  `idcustomer` int(11) NOT NULL,
+  `idvendor` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `ContactPerson` varchar(50) NOT NULL,
@@ -462,7 +462,7 @@ CREATE TABLE `t07_vendor` (
 -- Dumping data for table `t07_vendor`
 --
 
-INSERT INTO `t07_vendor` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
+INSERT INTO `t07_vendor` (`idvendor`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
 (1, 'VEN00', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 13:47:47', '2021-02-17 13:47:47');
 
 -- --------------------------------------------------------
@@ -539,7 +539,28 @@ CREATE TABLE `t11_cost` (
 --
 
 CREATE TABLE `t12_lokasi` (
-  `idservice` int(11) NOT NULL,
+  `idlokasi` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t12_lokasi`
+--
+
+INSERT INTO `t12_lokasi` (`idlokasi`, `Kode`, `Nama`, `created_at`, `updated_at`) VALUES
+(1, 'LK001', 'Surabaya', '2021-02-20 10:57:31', '2021-02-20 10:57:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t13_satuan`
+--
+
+CREATE TABLE `t13_satuan` (
+  `idsatuan` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -549,11 +570,26 @@ CREATE TABLE `t12_lokasi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t13_satuan`
+-- Table structure for table `t14_bank`
 --
 
-CREATE TABLE `t13_satuan` (
-  `idservice` int(11) NOT NULL,
+CREATE TABLE `t14_bank` (
+  `idbank` int(11) NOT NULL,
+  `Kode` varchar(5) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `NomorRekening` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t15_driver`
+--
+
+CREATE TABLE `t15_driver` (
+  `iddriver` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -692,13 +728,13 @@ ALTER TABLE `t05_customer`
 -- Indexes for table `t06_shipper`
 --
 ALTER TABLE `t06_shipper`
-  ADD PRIMARY KEY (`idcustomer`);
+  ADD PRIMARY KEY (`idshipper`);
 
 --
 -- Indexes for table `t07_vendor`
 --
 ALTER TABLE `t07_vendor`
-  ADD PRIMARY KEY (`idcustomer`);
+  ADD PRIMARY KEY (`idvendor`);
 
 --
 -- Indexes for table `t08_armada`
@@ -728,13 +764,25 @@ ALTER TABLE `t11_cost`
 -- Indexes for table `t12_lokasi`
 --
 ALTER TABLE `t12_lokasi`
-  ADD PRIMARY KEY (`idservice`);
+  ADD PRIMARY KEY (`idlokasi`);
 
 --
 -- Indexes for table `t13_satuan`
 --
 ALTER TABLE `t13_satuan`
-  ADD PRIMARY KEY (`idservice`);
+  ADD PRIMARY KEY (`idsatuan`);
+
+--
+-- Indexes for table `t14_bank`
+--
+ALTER TABLE `t14_bank`
+  ADD PRIMARY KEY (`idbank`);
+
+--
+-- Indexes for table `t15_driver`
+--
+ALTER TABLE `t15_driver`
+  ADD PRIMARY KEY (`iddriver`);
 
 --
 -- Indexes for table `t46_users`
@@ -805,13 +853,13 @@ ALTER TABLE `t05_customer`
 -- AUTO_INCREMENT for table `t06_shipper`
 --
 ALTER TABLE `t06_shipper`
-  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idshipper` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t07_vendor`
 --
 ALTER TABLE `t07_vendor`
-  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idvendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t08_armada`
@@ -841,13 +889,25 @@ ALTER TABLE `t11_cost`
 -- AUTO_INCREMENT for table `t12_lokasi`
 --
 ALTER TABLE `t12_lokasi`
-  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idlokasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t13_satuan`
 --
 ALTER TABLE `t13_satuan`
-  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idsatuan` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t14_bank`
+--
+ALTER TABLE `t14_bank`
+  MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t15_driver`
+--
+ALTER TABLE `t15_driver`
+  MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t46_users`

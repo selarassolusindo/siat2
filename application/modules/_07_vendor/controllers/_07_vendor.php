@@ -51,7 +51,7 @@ class _07_vendor extends CI_Controller
         $row = $this->_07_vendor_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'idcustomer' => $row->idcustomer,
+		'idvendor' => $row->idvendor,
 		'Kode' => $row->Kode,
 		'Nama' => $row->Nama,
 		'ContactPerson' => $row->ContactPerson,
@@ -76,7 +76,7 @@ class _07_vendor extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('_07_vendor/create_action'),
-	    'idcustomer' => set_value('idcustomer'),
+	    'idvendor' => set_value('idvendor'),
 	    'Kode' => set_value('Kode'),
 	    'Nama' => set_value('Nama'),
 	    'ContactPerson' => set_value('ContactPerson'),
@@ -124,7 +124,7 @@ class _07_vendor extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('_07_vendor/update_action'),
-		'idcustomer' => set_value('idcustomer', $row->idcustomer),
+		'idvendor' => set_value('idvendor', $row->idvendor),
 		'Kode' => set_value('Kode', $row->Kode),
 		'Nama' => set_value('Nama', $row->Nama),
 		'ContactPerson' => set_value('ContactPerson', $row->ContactPerson),
@@ -149,7 +149,7 @@ class _07_vendor extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('idcustomer', TRUE));
+            $this->update($this->input->post('idvendor', TRUE));
         } else {
             $data = array(
 		'Kode' => $this->input->post('Kode',TRUE),
@@ -162,7 +162,7 @@ class _07_vendor extends CI_Controller
 		// 'updated_at' => $this->input->post('updated_at',TRUE),
 	    );
 
-            $this->_07_vendor_model->update($this->input->post('idcustomer', TRUE), $data);
+            $this->_07_vendor_model->update($this->input->post('idvendor', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_07_vendor'));
         }
@@ -193,7 +193,7 @@ class _07_vendor extends CI_Controller
 	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
 	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
 
-	$this->form_validation->set_rules('idcustomer', 'idcustomer', 'trim');
+	$this->form_validation->set_rules('idvendor', 'idvendor', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
