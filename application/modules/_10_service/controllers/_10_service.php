@@ -73,7 +73,7 @@ class _10_service extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_10_service/create_action'),
 	    'idservice' => set_value('idservice'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('SR', 'Kode', 't10_service')),
 	    'Nama' => set_value('Nama'),
 	    // 'created_at' => set_value('created_at'),
 	    // 'updated_at' => set_value('updated_at'),

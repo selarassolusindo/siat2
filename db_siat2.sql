@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2021 at 01:15 PM
+-- Generation Time: Feb 20, 2021 at 04:14 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -413,7 +413,7 @@ CREATE TABLE `t05_customer` (
 --
 
 INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
-(1, 'C0001', 'Cus1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-01-03 15:38:53', '2021-02-17 11:52:37');
+(1, 'CS001', 'Cus1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-01-03 15:38:53', '2021-02-20 14:40:09');
 
 -- --------------------------------------------------------
 
@@ -438,7 +438,7 @@ CREATE TABLE `t06_shipper` (
 --
 
 INSERT INTO `t06_shipper` (`idshipper`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
-(1, 'SHI00', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 12:43:47', '2021-02-17 12:43:47');
+(1, 'SH001', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 12:43:47', '2021-02-20 15:00:50');
 
 -- --------------------------------------------------------
 
@@ -463,7 +463,7 @@ CREATE TABLE `t07_vendor` (
 --
 
 INSERT INTO `t07_vendor` (`idvendor`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
-(1, 'VEN00', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 13:47:47', '2021-02-17 13:47:47');
+(1, 'VN001', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 13:47:47', '2021-02-20 15:07:00');
 
 -- --------------------------------------------------------
 

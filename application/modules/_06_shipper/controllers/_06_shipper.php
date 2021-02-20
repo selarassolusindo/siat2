@@ -77,7 +77,7 @@ class _06_shipper extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_06_shipper/create_action'),
 	    'idshipper' => set_value('idshipper'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('SH', 'Kode', 't06_shipper')),
 	    'Nama' => set_value('Nama'),
 	    'ContactPerson' => set_value('ContactPerson'),
 	    'Telepon' => set_value('Telepon'),

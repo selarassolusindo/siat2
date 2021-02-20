@@ -74,7 +74,7 @@ class _11_cost extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_11_cost/create_action'),
 	    'idcost' => set_value('idcost'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('CT', 'Kode', 't11_cost')),
 	    'Nama' => set_value('Nama'),
 	    'idakun' => set_value('idakun'),
 	    // 'created_at' => set_value('created_at'),

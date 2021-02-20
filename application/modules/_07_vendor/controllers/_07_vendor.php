@@ -77,7 +77,7 @@ class _07_vendor extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_07_vendor/create_action'),
 	    'idvendor' => set_value('idvendor'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('VN', 'Kode', 't07_vendor')),
 	    'Nama' => set_value('Nama'),
 	    'ContactPerson' => set_value('ContactPerson'),
 	    'Telepon' => set_value('Telepon'),

@@ -73,7 +73,7 @@ class _12_lokasi extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_12_lokasi/create_action'),
 	    'idlokasi' => set_value('idlokasi'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('LK', 'Kode', 't12_lokasi')),
 	    'Nama' => set_value('Nama'),
 	    // 'created_at' => set_value('created_at'),
 	    // 'updated_at' => set_value('updated_at'),

@@ -73,7 +73,7 @@ class _13_satuan extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_13_satuan/create_action'),
 	    'idsatuan' => set_value('idsatuan'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('ST', 'Kode', 't13_satuan')),
 	    'Nama' => set_value('Nama'),
 	    // 'created_at' => set_value('created_at'),
 	    // 'updated_at' => set_value('updated_at'),

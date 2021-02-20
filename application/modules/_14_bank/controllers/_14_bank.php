@@ -74,7 +74,7 @@ class _14_bank extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_14_bank/create_action'),
 	    'idbank' => set_value('idbank'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('BN', 'Kode', 't14_bank')),
 	    'Nama' => set_value('Nama'),
 	    'NomorRekening' => set_value('NomorRekening'),
 	    // 'created_at' => set_value('created_at'),

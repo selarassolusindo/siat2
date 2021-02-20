@@ -75,7 +75,7 @@ class _09_sparepart extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_09_sparepart/create_action'),
 	    'idsparepart' => set_value('idsparepart'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('SP', 'Kode', 't09_sparepart')),
 	    'Nama' => set_value('Nama'),
 	    'Merk' => set_value('Merk'),
 	    'Tipe' => set_value('Tipe'),

@@ -75,7 +75,7 @@ class _15_driver extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_15_driver/create_action'),
 	    'iddriver' => set_value('iddriver'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('DR', 'Kode', 't15_driver')),
 	    'Nama' => set_value('Nama'),
 	    'HP' => set_value('HP'),
 	    'KTP' => set_value('KTP'),

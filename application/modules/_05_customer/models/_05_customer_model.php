@@ -28,7 +28,7 @@ class _05_customer_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
-    
+
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('idcustomer', $q);

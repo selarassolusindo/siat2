@@ -81,7 +81,7 @@ class _08_armada extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_08_armada/create_action'),
 	    'idarmada' => set_value('idarmada'),
-	    'Kode' => set_value('Kode'),
+	    'Kode' => set_value('Kode', getNewKode('AR', 'Kode', 't08_armada')),
 	    'Merk' => set_value('Merk'),
 	    'Tipe' => set_value('Tipe'),
 	    'TahunPembuatan' => set_value('TahunPembuatan'),
