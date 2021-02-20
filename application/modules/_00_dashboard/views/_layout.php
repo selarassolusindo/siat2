@@ -210,6 +210,8 @@
                                     case '_07_vendor':
                                     case '_08_armada':
                                     case '_09_sparepart':
+                                    case '_10_service':
+                                    case '_11_cost':
                                     case 'input-tanggal-saldo-awal':
                                     case 'package':
                                         echo 'menu-open';
@@ -273,6 +275,20 @@
                                         <a href="<?php echo site_url('_09_sparepart'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_09_sparepart') ? 'active' : ''; ?>">
                                             <i class="fas fa-drum-steelpan nav-icon"></i>
                                             <p>Spare Part</p>
+                                        </a>
+                                    </li>
+                                    <!-- service -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_10_service'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_10_service') ? 'active' : ''; ?>">
+                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <p>Service</p>
+                                        </a>
+                                    </li>
+                                    <!-- cost -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_11_cost'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_11_cost') ? 'active' : ''; ?>">
+                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <p>Cost</p>
                                         </a>
                                     </li>
                                     <div class="dropdown-divider"></div>
