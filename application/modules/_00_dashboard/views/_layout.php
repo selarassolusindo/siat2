@@ -230,6 +230,7 @@
                                     <p>SETUP<i class="right fas fa-angle-left"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
+                                    <div class="dropdown-divider"></div>
                                     <!-- perusahaan -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_01_company'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_01_company' ? 'active' : ''; ?>">
@@ -284,42 +285,42 @@
                                     <!-- service -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_10_service'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_10_service') ? 'active' : ''; ?>">
-                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <i class="fas fa-truck-loading nav-icon"></i>
                                             <p>Service</p>
                                         </a>
                                     </li>
                                     <!-- cost -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_11_cost'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_11_cost') ? 'active' : ''; ?>">
-                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <i class="fas fa-file-signature nav-icon"></i>
                                             <p>Cost</p>
                                         </a>
                                     </li>
                                     <!-- lokasi -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_12_lokasi'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_12_lokasi') ? 'active' : ''; ?>">
-                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <i class="fas fa-search-location nav-icon"></i>
                                             <p>Lokasi</p>
                                         </a>
                                     </li>
                                     <!-- satuan -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_13_satuan'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_13_satuan') ? 'active' : ''; ?>">
-                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <i class="fas fa-weight nav-icon"></i>
                                             <p>Satuan</p>
                                         </a>
                                     </li>
                                     <!-- bank -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_14_bank'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_14_bank') ? 'active' : ''; ?>">
-                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <i class="fab fa-bootstrap nav-icon"></i>
                                             <p>Bank</p>
                                         </a>
                                     </li>
                                     <!-- driver -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_15_driver'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_15_driver') ? 'active' : ''; ?>">
-                                            <i class="fas fa-drum-steelpan nav-icon"></i>
+                                            <i class="fab fa-napster nav-icon"></i>
                                             <p>Driver</p>
                                         </a>
                                     </li>
@@ -346,6 +347,7 @@
                                             <p>Tgl. Input Saldo Awal</p>
                                         </a>
                                     </li>
+                                    <div class="dropdown-divider"></div>
                                 </ul>
                             </li>
                             <!-- /setup -->
