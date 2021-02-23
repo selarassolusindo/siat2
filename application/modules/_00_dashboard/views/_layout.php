@@ -354,7 +354,7 @@
                             <li class="nav-item has-treeview
                                 <?php
                                 switch ($this->uri->segment(1)) {
-                                    case 'job-order':
+                                    case '_30_jo':
                                     case 'cost-sheet':
                                     case 'invoice':
                                     // case 'user-management':
@@ -382,7 +382,7 @@
                                 <ul class="nav nav-treeview">
                                     <!-- Job Order (JO) -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('job-order'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'job-order' ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_30_jo'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_30_jo' ? 'active' : ''; ?>">
                                             <i class="far fa-edit nav-icon"></i>
                                             <p>Job Order</p>
                                         </a>

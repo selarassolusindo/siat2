@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2021 at 04:14 PM
+-- Generation Time: Feb 23, 2021 at 01:40 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -601,6 +601,27 @@ CREATE TABLE `t15_driver` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t30_jo`
+--
+
+CREATE TABLE `t30_jo` (
+  `idjo` int(11) NOT NULL,
+  `NoJO` varchar(25) NOT NULL,
+  `TglJO` date NOT NULL,
+  `idcustomer` int(11) NOT NULL,
+  `idshipper` int(11) NOT NULL,
+  `TglMB` date NOT NULL,
+  `idlokasi` int(11) NOT NULL,
+  `idarmada` int(11) NOT NULL,
+  `idekor` int(11) NOT NULL,
+  `iddriver` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t46_users`
 --
 
@@ -631,7 +652,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613815098, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613896606, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$vPbQth0idvyMbrURrM.YDOuncIuLAzjrawwCiiz031bz0WRxLMfcu', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1613305305, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -787,6 +808,12 @@ ALTER TABLE `t15_driver`
   ADD PRIMARY KEY (`iddriver`);
 
 --
+-- Indexes for table `t30_jo`
+--
+ALTER TABLE `t30_jo`
+  ADD PRIMARY KEY (`idjo`);
+
+--
 -- Indexes for table `t46_users`
 --
 ALTER TABLE `t46_users`
@@ -910,6 +937,12 @@ ALTER TABLE `t14_bank`
 --
 ALTER TABLE `t15_driver`
   MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t30_jo`
+--
+ALTER TABLE `t30_jo`
+  MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t46_users`
