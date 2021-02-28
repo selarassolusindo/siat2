@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 23, 2021 at 01:40 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.15
+-- Host: localhost
+-- Generation Time: Feb 28, 2021 at 09:42 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -377,6 +377,13 @@ CREATE TABLE `t03_saldoawal` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `t03_saldoawal`
+--
+
+INSERT INTO `t03_saldoawal` (`idsa`, `idakun`, `Debit`, `Kredit`, `created_at`, `updated_at`) VALUES
+(1, 170, 1000000000, 0, '2021-02-27 22:47:45', '2021-02-27 22:47:45');
+
 -- --------------------------------------------------------
 
 --
@@ -389,6 +396,13 @@ CREATE TABLE `t04_tglsaldoawal` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t04_tglsaldoawal`
+--
+
+INSERT INTO `t04_tglsaldoawal` (`idtgl`, `Tanggal`, `created_at`, `updated_at`) VALUES
+(1, '2021-03-01', '2021-02-27 22:47:10', '2021-02-27 22:47:10');
 
 -- --------------------------------------------------------
 
@@ -517,6 +531,15 @@ CREATE TABLE `t10_service` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `t10_service`
+--
+
+INSERT INTO `t10_service` (`idservice`, `Kode`, `Nama`, `created_at`, `updated_at`) VALUES
+(1, 'SR001', 'Sewa Pelabuhan', '2021-02-28 14:04:50', '2021-02-28 14:04:50'),
+(2, 'SR002', 'Sewa Armada', '2021-02-28 14:04:58', '2021-02-28 14:04:58'),
+(3, 'SR003', 'Sewa Container', '2021-02-28 14:05:15', '2021-02-28 14:05:15');
+
 -- --------------------------------------------------------
 
 --
@@ -531,6 +554,15 @@ CREATE TABLE `t11_cost` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t11_cost`
+--
+
+INSERT INTO `t11_cost` (`idcost`, `Kode`, `Nama`, `idakun`, `created_at`, `updated_at`) VALUES
+(1, 'CT001', 'Solar', 170, '2021-02-23 13:29:32', '2021-02-23 13:29:32'),
+(2, 'CT002', 'Oli', 171, '2021-02-23 13:29:49', '2021-02-23 13:29:49'),
+(3, 'CT003', 'Sangu Sopir', 172, '2021-02-23 13:30:12', '2021-02-23 13:30:12');
 
 -- --------------------------------------------------------
 
@@ -622,6 +654,97 @@ CREATE TABLE `t30_jo` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t31_csheet`
+--
+
+CREATE TABLE `t31_csheet` (
+  `idcsheet` int(11) NOT NULL,
+  `NoCSheet` varchar(10) NOT NULL,
+  `TglCSheet` date NOT NULL,
+  `idjo` int(11) NOT NULL,
+  `Total` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t31_csheet`
+--
+
+INSERT INTO `t31_csheet` (`idcsheet`, `NoCSheet`, `TglCSheet`, `idjo`, `Total`, `created_at`, `updated_at`) VALUES
+(1, 'CH001', '2021-02-28', 1, 10000, '2021-02-28 08:23:38', '2021-02-28 08:27:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t32_csheetd`
+--
+
+CREATE TABLE `t32_csheetd` (
+  `idcsheetd` int(11) NOT NULL,
+  `idcsheet` int(11) NOT NULL,
+  `idcost` int(11) NOT NULL,
+  `Jumlah` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t32_csheetd`
+--
+
+INSERT INTO `t32_csheetd` (`idcsheetd`, `idcsheet`, `idcost`, `Jumlah`, `created_at`, `updated_at`) VALUES
+(4, 1, 3, 2, '2021-02-28 08:30:15', '2021-02-28 08:30:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t33_invoice`
+--
+
+CREATE TABLE `t33_invoice` (
+  `idinvoice` int(11) NOT NULL,
+  `NoInvoice` varchar(10) NOT NULL,
+  `TglInvoice` date NOT NULL,
+  `idjo` int(11) NOT NULL,
+  `Total` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t33_invoice`
+--
+
+INSERT INTO `t33_invoice` (`idinvoice`, `NoInvoice`, `TglInvoice`, `idjo`, `Total`, `created_at`, `updated_at`) VALUES
+(1, 'INV0001', '2021-03-01', 0, 125000, '2021-02-28 14:15:45', '2021-02-28 14:15:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t34_invoiced`
+--
+
+CREATE TABLE `t34_invoiced` (
+  `idinvoiced` int(11) NOT NULL,
+  `idinvoice` int(11) NOT NULL,
+  `idservice` int(11) NOT NULL,
+  `Jumlah` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t34_invoiced`
+--
+
+INSERT INTO `t34_invoiced` (`idinvoiced`, `idinvoice`, `idservice`, `Jumlah`, `created_at`, `updated_at`) VALUES
+(3, 1, 2, 12500, '2021-02-28 14:16:08', '2021-02-28 14:16:08'),
+(4, 1, 3, 10000, '2021-02-28 14:16:08', '2021-02-28 14:16:08');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t46_users`
 --
 
@@ -652,7 +775,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1613896606, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1614511598, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$vPbQth0idvyMbrURrM.YDOuncIuLAzjrawwCiiz031bz0WRxLMfcu', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1613305305, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -814,6 +937,30 @@ ALTER TABLE `t30_jo`
   ADD PRIMARY KEY (`idjo`);
 
 --
+-- Indexes for table `t31_csheet`
+--
+ALTER TABLE `t31_csheet`
+  ADD PRIMARY KEY (`idcsheet`);
+
+--
+-- Indexes for table `t32_csheetd`
+--
+ALTER TABLE `t32_csheetd`
+  ADD PRIMARY KEY (`idcsheetd`);
+
+--
+-- Indexes for table `t33_invoice`
+--
+ALTER TABLE `t33_invoice`
+  ADD PRIMARY KEY (`idinvoice`);
+
+--
+-- Indexes for table `t34_invoiced`
+--
+ALTER TABLE `t34_invoiced`
+  ADD PRIMARY KEY (`idinvoiced`);
+
+--
 -- Indexes for table `t46_users`
 --
 ALTER TABLE `t46_users`
@@ -864,13 +1011,13 @@ ALTER TABLE `t02_akun`
 -- AUTO_INCREMENT for table `t03_saldoawal`
 --
 ALTER TABLE `t03_saldoawal`
-  MODIFY `idsa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idsa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t04_tglsaldoawal`
 --
 ALTER TABLE `t04_tglsaldoawal`
-  MODIFY `idtgl` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idtgl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t05_customer`
@@ -906,13 +1053,13 @@ ALTER TABLE `t09_sparepart`
 -- AUTO_INCREMENT for table `t10_service`
 --
 ALTER TABLE `t10_service`
-  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t11_cost`
 --
 ALTER TABLE `t11_cost`
-  MODIFY `idcost` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t12_lokasi`
@@ -943,6 +1090,30 @@ ALTER TABLE `t15_driver`
 --
 ALTER TABLE `t30_jo`
   MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t31_csheet`
+--
+ALTER TABLE `t31_csheet`
+  MODIFY `idcsheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `t32_csheetd`
+--
+ALTER TABLE `t32_csheetd`
+  MODIFY `idcsheetd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `t33_invoice`
+--
+ALTER TABLE `t33_invoice`
+  MODIFY `idinvoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `t34_invoiced`
+--
+ALTER TABLE `t34_invoiced`
+  MODIFY `idinvoiced` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `t46_users`
