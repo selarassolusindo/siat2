@@ -231,6 +231,15 @@ class _10_service extends CI_Controller
         $this->load->view('_10_service/t10_service_doc',$data);
     }
 
+    public function getService()
+	{
+		$dataService = $this->_10_service_model->getService(); // $this->model->get_title($this->input->get('q', TRUE));
+
+		echo json_encode((object)[
+			'items' => $dataService
+		]);
+	}
+
 }
 
 /* End of file _10_service.php */

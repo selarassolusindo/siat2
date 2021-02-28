@@ -239,6 +239,15 @@ class _11_cost extends CI_Controller
         $this->load->view('_11_cost/t11_cost_doc',$data);
     }
 
+    public function getCost()
+	{
+		$datacost = $this->_11_cost_model->getCost(); // $this->model->get_title($this->input->get('q', TRUE));
+
+		echo json_encode((object)[
+			'items' => $datacost
+		]);
+	}
+
 }
 
 /* End of file _11_cost.php */

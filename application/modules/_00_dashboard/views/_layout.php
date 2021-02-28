@@ -29,6 +29,8 @@
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/select2/css/select2.min.css">
+
         <style>
           .pagination {
             display: inline-block;
@@ -125,6 +127,8 @@
           }
 
         </style>
+        <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jquery/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/adminlte/plugins/select2/js/select2.min.js"></script>
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed text-sm">
@@ -334,7 +338,7 @@
                                     <!-- saldo awal -->
                                     <li class="nav-item">
                                         <!-- <a href="<?php //echo site_url('saldo-awal'); ?>" class="nav-link <?php //echo ($this->uri->segment(1) == 'saldo-awal') ? 'active' : ''; ?>"> -->
-                                        <a href="<?php echo site_url('input-tanggal-saldo-awal'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'input-tanggal-saldo-awal' or $this->uri->segment(1) == '_03_saldoawal') ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_03_saldoawal'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'input-tanggal-saldo-awal' or $this->uri->segment(1) == '_03_saldoawal') ? 'active' : ''; ?>">
                                             <i class="fas fa-code-branch nav-icon"></i>
                                             <p>Saldo Awal</p>
                                         </a>
@@ -355,8 +359,8 @@
                                 <?php
                                 switch ($this->uri->segment(1)) {
                                     case '_30_jo':
-                                    case 'cost-sheet':
-                                    case 'invoice':
+                                    case '_31_csheet':
+                                    case '_33_invoice':
                                     // case 'user-management':
                                     // case 'customer':
                                     // case 'shipper':
@@ -375,11 +379,13 @@
                                 }
                                 ?>
                             ">
+
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-calculator nav-icon"></i>
                                     <p>TRANSAKSI<i class="right fas fa-angle-left"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
+                                    <div class="dropdown-divider"></div>
                                     <!-- Job Order (JO) -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_30_jo'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_30_jo' ? 'active' : ''; ?>">
@@ -389,18 +395,19 @@
                                     </li>
                                     <!-- Cost Sheet -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('cost-sheet'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'cost-sheet' ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_31_csheet'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_31_csheet' ? 'active' : ''; ?>">
                                             <i class="far fa-copy nav-icon"></i>
                                             <p>Cost Sheet</p>
                                         </a>
                                     </li>
                                     <!-- Invoice -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('invoice'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'invoice' ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('_33_invoice'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_33_invoice' ? 'active' : ''; ?>">
                                             <i class="fas fa-file-invoice nav-icon"></i>
                                             <p>Invoice</p>
                                         </a>
                                     </li>
+                                    <div class="dropdown-divider"></div>
 
                                     <!-- pembelian -->
                                     <li class="nav-item has-treeview">
@@ -781,7 +788,7 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-        <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jquery/jquery.min.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jquery/jquery.min.js"></script> -->
         <!-- jQuery UI 1.11.4 -->
         <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -793,7 +800,7 @@
         <!-- ChartJS -->
         <script src="<?php echo base_url(); ?>assets/adminlte/plugins/chart.js/Chart.min.js"></script>
         <!-- Sparkline -->
-        <script src="<?php echo base_url(); ?>assets/adminlte/plugins/sparklines/sparkline.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/adminlte/plugins/sparklines/sparkline.js"></script> -->
         <!-- JQVMap -->
         <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jqvmap/jquery.vmap.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
@@ -811,9 +818,11 @@
         <!-- AdminLTE App -->
         <script src="<?php echo base_url(); ?>assets/adminlte/dist/js/adminlte.js"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="<?php echo base_url(); ?>assets/adminlte/dist/js/pages/dashboard.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/adminlte/dist/js/pages/dashboard.js"></script> -->
         <!-- AdminLTE for demo purposes -->
         <script src="<?php echo base_url(); ?>assets/adminlte/dist/js/demo.js"></script>
+
+        <!-- <script src="<?php echo base_url(); ?>assets/adminlte/plugins/select2/js/select2.min.js"></script> -->
 
         <script>
         $(function () {

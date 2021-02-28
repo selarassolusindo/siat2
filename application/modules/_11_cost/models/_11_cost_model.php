@@ -28,7 +28,7 @@ class _11_cost_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
-    
+
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('idcost', $q);
@@ -73,6 +73,16 @@ class _11_cost_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
+
+    public function getCost()
+	{
+		$this->db->order_by($this->id, 'asc');
+        $this->db->select("$this->id as id, Nama");
+
+		$q = $this->db->get($this->table);
+
+		return $q->result();
+	}
 
 }
 
