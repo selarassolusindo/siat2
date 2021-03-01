@@ -60,7 +60,7 @@
         define('DBPREFIX', 'db');
 		break;
 
-	case "siat2.selusin.online":
+	case "selusin.online":
 		$env = "testing";
         define('DBPREFIX', 'u473805576');
 		break;
@@ -87,10 +87,10 @@ switch (ENVIRONMENT)
 	break;
 
 	case 'testing':
-        error_reporting(-1);
+        // error_reporting(-1);
         ini_set('display_errors', 1);
         break;
-        
+
 	case 'production':
 		ini_set('display_errors', 1);
 		if (version_compare(PHP_VERSION, '5.3', '>='))
