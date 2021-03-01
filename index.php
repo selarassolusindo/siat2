@@ -60,7 +60,7 @@
         define('DBPREFIX', 'db');
 		break;
 
-	case "selusin.online":
+	case "siat2.selusin.online":
 		$env = "testing";
         define('DBPREFIX', 'u473805576');
 		break;
