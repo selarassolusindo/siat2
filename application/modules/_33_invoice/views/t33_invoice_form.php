@@ -13,15 +13,15 @@
         <h2 style="margin-top:0px">T33_invoice <?php echo $button ?></h2> -->
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
-            <label for="varchar">NoInvoice <?php echo form_error('NoInvoice') ?></label>
+            <label for="varchar">No. Invoice <?php echo form_error('NoInvoice') ?></label>
             <input type="text" class="form-control" name="NoInvoice" id="NoInvoice" placeholder="NoInvoice" value="<?php echo $NoInvoice; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="date">TglInvoice <?php echo form_error('TglInvoice') ?></label>
+            <label for="date">Tgl. <?php echo form_error('TglInvoice') ?></label>
             <input type="text" class="form-control" name="TglInvoice" id="TglInvoice" placeholder="TglInvoice" value="<?php echo $TglInvoice; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="int">Idjo <?php echo form_error('idjo') ?></label>
+            <label for="int">No. JO <?php echo form_error('idjo') ?></label>
             <input type="text" class="form-control" name="idjo" id="idjo" placeholder="Idjo" value="<?php echo $idjo; ?>" />
         </div>
 	    <div class="form-group">
@@ -38,9 +38,9 @@
         </div> -->
 
         <div class="form-group">
-            <label for="double">Detail</label>
+            <label for="double">Service</label>
 
-            <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Detail</a></p>
+            <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Service</a></p>
 
             <div id="tmp">
             <?php if ($this->uri->segment(2) == 'update') { ?>
@@ -93,7 +93,8 @@
                         };
                     },
 
-                }
+                },
+                placeholder : 'Service',
             });
             </script>
         </div>
@@ -134,7 +135,8 @@
                             results: data.items
                         };
                     }
-                }
+                },
+                placeholder : 'Service',
             });
 
     	};

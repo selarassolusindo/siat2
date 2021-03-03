@@ -25,3 +25,29 @@ function getNewKode($prefix, $fieldName, $tableName)
     }
     return $sNextKode;
 }
+
+/**
+ * buat nomor invoice baru
+ * INV0001
+ */
+function getNewInvoice($prefix, $fieldName, $tableName)
+{
+    $sNextKode = "";
+    $sLastKode = "";
+    $CI =& get_instance();
+    $CI->db->order_by($fieldName, 'desc');
+    $CI->db->limit(1);
+    $row = $CI->db->get($tableName)->row();
+    if ($row) {
+        $value = $row->$fieldName;
+        $sLastKode = intval(substr($value, 3, 4));
+        $sLastKode = intval($sLastKode) + 1;
+        $sNextKode = $prefix . sprintf('%04s', $sLastKode);
+        if (strlen($sNextKode) > 7) {
+            $sNextKode = $prefix . "9999";
+        }
+    } else {
+        $sNextKode = $prefix . "0001";
+    }
+    return $sNextKode;
+}

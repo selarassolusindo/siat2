@@ -75,7 +75,7 @@ class _33_invoice extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_33_invoice/create_action'),
 	    'idinvoice' => set_value('idinvoice'),
-	    'NoInvoice' => set_value('NoInvoice'),
+	    'NoInvoice' => set_value('NoInvoice', getNewInvoice('INV', 'NoInvoice', 't33_invoice')),
 	    'TglInvoice' => set_value('TglInvoice'),
 	    'idjo' => set_value('idjo'),
 	    'Total' => set_value('Total'),
