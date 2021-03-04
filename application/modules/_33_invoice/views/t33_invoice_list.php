@@ -43,9 +43,9 @@
         </div>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
-                <th>No</th>
+                <th>No.</th>
 		<th>No. Invoice</th>
-		<th>Tgl.</th>
+		<th>Tgl. Invoice</th>
 		<th>No. JO</th>
 		<th>Total</th>
 		<!-- <th>Created At</th>
