@@ -43,10 +43,10 @@
         </div>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
-                <th>No</th>
-		<th>NoCSheet</th>
-		<th>TglCSheet</th>
-		<th>Idjo</th>
+                <th>No.</th>
+		<th>No. Cost Sheet</th>
+		<th>Tgl. Cost Sheet</th>
+		<th>No. JO</th>
 		<th>Total</th>
 		<!-- <th>Created At</th>
 		<th>Updated At</th> -->
@@ -58,9 +58,9 @@
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $_31_csheet->NoCSheet ?></td>
-			<td><?php echo $_31_csheet->TglCSheet ?></td>
-			<td><?php echo $_31_csheet->idjo ?></td>
-			<td><?php echo $_31_csheet->Total ?></td>
+            <td><?php echo date_format(date_create($_31_csheet->TglCSheet), 'd-m-Y') ?></td>
+			<td><?php echo $_31_csheet->NoJO ?></td>
+            <td align="right"><?php echo number_format($_31_csheet->Total) ?></td>
 			<!-- <td><?php echo $_31_csheet->created_at ?></td>
 			<td><?php echo $_31_csheet->updated_at ?></td> -->
 			<td style="text-align:center" width="200px">
