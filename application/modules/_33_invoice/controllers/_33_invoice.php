@@ -56,6 +56,7 @@ class _33_invoice extends CI_Controller
 		'TglInvoice' => $row->TglInvoice,
 		'idjo' => $row->idjo,
 		'Total' => $row->Total,
+        'NoJO' => $row->NoJO,
 		// 'created_at' => $row->created_at,
 		// 'updated_at' => $row->updated_at,
 	    );

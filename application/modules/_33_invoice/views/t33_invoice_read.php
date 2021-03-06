@@ -12,9 +12,9 @@
     <body>
         <h2 style="margin-top:0px">T33_invoice Read</h2> -->
         <table class="table">
-	    <tr><td>NoInvoice</td><td><?php echo $NoInvoice; ?></td></tr>
-	    <tr><td>TglInvoice</td><td><?php echo date_format(date_create($TglInvoice), 'd-m-Y'); ?></td></tr>
-	    <tr><td>Idjo</td><td><?php echo $idjo; ?></td></tr>
+	    <tr><td>No. Invoice</td><td><?php echo $NoInvoice; ?></td></tr>
+	    <tr><td>Tgl. Invoice</td><td><?php echo date_format(date_create($TglInvoice), 'd-m-Y'); ?></td></tr>
+	    <tr><td>No. JO</td><td><?php echo $NoJO; ?></td></tr>
 	    <tr><td>Total</td><td><?php echo number_format($Total); ?></td></tr>
 	    <!-- <tr><td>Created At</td><td><?php echo $created_at; ?></td></tr>
 	    <tr><td>Updated At</td><td><?php echo $updated_at; ?></td></tr> -->

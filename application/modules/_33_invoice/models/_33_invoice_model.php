@@ -26,7 +26,11 @@ class _33_invoice_model extends CI_Model
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        // return $this->db->get($this->table)->row();
+        $this->db->select($this->table . '.*, t30_jo.NoJO');
+        $this->db->from($this->table);
+        $this->db->join('t30_jo', 't30_jo.idjo = '.$this->table.'.idjo'); //echo $this->db->get_compiled_select();
+        return $this->db->get()->row();
     }
 
     // get total rows
