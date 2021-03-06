@@ -39,8 +39,7 @@ class _33_invoice extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-        );
-        // $this->load->view('_33_invoice/t33_invoice_list', $data);
+            );
         $data['_view'] = '_33_invoice/t33_invoice_list';
         $data['_caption'] = 'Invoice';
         $this->load->view('_00_dashboard/_layout', $data);
@@ -51,16 +50,13 @@ class _33_invoice extends CI_Controller
         $row = $this->_33_invoice_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'idinvoice' => $row->idinvoice,
-		'NoInvoice' => $row->NoInvoice,
-		'TglInvoice' => $row->TglInvoice,
-		'idjo' => $row->idjo,
-		'Total' => $row->Total,
-        'NoJO' => $row->NoJO,
-		// 'created_at' => $row->created_at,
-		// 'updated_at' => $row->updated_at,
-	    );
-            // $this->load->view('_33_invoice/t33_invoice_read', $data);
+        		'idinvoice' => $row->idinvoice,
+        		'NoInvoice' => $row->NoInvoice,
+        		'TglInvoice' => $row->TglInvoice,
+        		'idjo' => $row->idjo,
+        		'Total' => $row->Total,
+                'NoJO' => $row->NoJO,
+                );
             $data['_view'] = '_33_invoice/t33_invoice_read';
             $data['_caption'] = 'Invoice';
             $this->load->view('_00_dashboard/_layout', $data);
@@ -77,16 +73,13 @@ class _33_invoice extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('_33_invoice/create_action'),
-	    'idinvoice' => set_value('idinvoice'),
-	    'NoInvoice' => set_value('NoInvoice', getNewInvoice('INV', 'NoInvoice', 't33_invoice')),
-	    'TglInvoice' => set_value('TglInvoice'),
-	    'idjo' => set_value('idjo'),
-	    'Total' => set_value('Total'),
-	    // 'created_at' => set_value('created_at'),
-	    // 'updated_at' => set_value('updated_at'),
-        'jo_data' => $jo,
-	);
-        // $this->load->view('_33_invoice/t33_invoice_form', $data);
+    	    'idinvoice' => set_value('idinvoice'),
+    	    'NoInvoice' => set_value('NoInvoice', getNewInvoice('INV', 'NoInvoice', 't33_invoice')),
+    	    'TglInvoice' => set_value('TglInvoice'),
+    	    'idjo' => set_value('idjo'),
+    	    'Total' => set_value('Total'),
+            'jo_data' => $jo,
+            );
         $data['_view'] = '_33_invoice/t33_invoice_form';
         $data['_caption'] = 'Invoice';
         $this->load->view('_00_dashboard/_layout', $data);
@@ -100,14 +93,11 @@ class _33_invoice extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'NoInvoice' => $this->input->post('NoInvoice',TRUE),
-		// 'TglInvoice' => $this->input->post('TglInvoice',TRUE),
-        'TglInvoice' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglInvoice', true)))),
-		'idjo' => $this->input->post('idjo',TRUE),
-		'Total' => $this->input->post('Total',TRUE),
-		// 'created_at' => $this->input->post('created_at',TRUE),
-		// 'updated_at' => $this->input->post('updated_at',TRUE),
-	    );
+        		'NoInvoice' => $this->input->post('NoInvoice',TRUE),
+                'TglInvoice' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglInvoice', true)))),
+        		'idjo' => $this->input->post('idjo',TRUE),
+        		'Total' => $this->input->post('Total',TRUE),
+                );
 
             /**
              * simpan data ke tabel master
@@ -122,15 +112,26 @@ class _33_invoice extends CI_Controller
             /**
              * simpan data ke tabel detail
              */
+            $totalJumlah = 0;
             $data = $this->input->post();
             foreach ($data['idservice'] as $key => $item) {
                 $detail = [
                     'idinvoice' => $insert_id,
                     'idservice' => $item,
                     'Jumlah' => $data['jumlah'][$key]
-                ];
+                    ];
+                $totalJumlah += $data['jumlah'][$key];
                 $this->db->insert('t34_invoiced', $detail);
             }
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            $data = array(
+        		'Total' => $totalJumlah
+                );
+            $this->_33_invoice_model->update($this->input->post('idinvoice', TRUE), $data);
+
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_33_invoice'));
         }
@@ -146,18 +147,17 @@ class _33_invoice extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('_33_invoice/update_action'),
-		'idinvoice' => set_value('idinvoice', $row->idinvoice),
-		'NoInvoice' => set_value('NoInvoice', $row->NoInvoice),
-		'TglInvoice' => set_value('TglInvoice', date_format(date_create($row->TglInvoice), 'd-m-Y')),
-		'idjo' => set_value('idjo', $row->idjo),
-		'Total' => set_value('Total', $row->Total),
-		// 'created_at' => set_value('created_at', $row->created_at),
-		// 'updated_at' => set_value('updated_at', $row->updated_at),
-        'jo_data' => $jo,
-	    );
-        /**
-         * ambil data dari tabel detail
-         */
+        		'idinvoice' => set_value('idinvoice', $row->idinvoice),
+        		'NoInvoice' => set_value('NoInvoice', $row->NoInvoice),
+        		'TglInvoice' => set_value('TglInvoice', date_format(date_create($row->TglInvoice), 'd-m-Y')),
+        		'idjo' => set_value('idjo', $row->idjo),
+        		'Total' => set_value('Total', $row->Total),
+                'jo_data' => $jo,
+                );
+
+            /**
+             * ambil data dari tabel detail
+             */
             $data['detail'] =
                 $this->db
                     ->select('t34_invoiced.*, Nama')
@@ -166,7 +166,7 @@ class _33_invoice extends CI_Controller
                     ->join('t10_service', 't34_invoiced.idservice = t10_service.idservice')
                     ->get()->result()
                     ;
-            // $this->load->view('_33_invoice/t33_invoice_form', $data);
+
             $data['_view'] = '_33_invoice/t33_invoice_form';
             $data['_caption'] = 'Invoice';
             $this->load->view('_00_dashboard/_layout', $data);
@@ -184,14 +184,11 @@ class _33_invoice extends CI_Controller
             $this->update($this->input->post('idinvoice', TRUE));
         } else {
             $data = array(
-		'NoInvoice' => $this->input->post('NoInvoice',TRUE),
-		// 'TglInvoice' => $this->input->post('TglInvoice',TRUE),
-        'TglInvoice' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglInvoice', true)))),
-		'idjo' => $this->input->post('idjo',TRUE),
-		'Total' => $this->input->post('Total',TRUE),
-		// 'created_at' => $this->input->post('created_at',TRUE),
-		// 'updated_at' => $this->input->post('updated_at',TRUE),
-	    );
+        		'NoInvoice' => $this->input->post('NoInvoice',TRUE),
+                'TglInvoice' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglInvoice', true)))),
+        		'idjo' => $this->input->post('idjo',TRUE),
+        		'Total' => $this->input->post('Total',TRUE),
+                );
 
             /**
              * update data di tabel master
@@ -212,15 +209,26 @@ class _33_invoice extends CI_Controller
             /**
              * simpan data di tabel detail
              */
-             $data = $this->input->post();
-             foreach ($data['idservice'] as $key => $item) {
+            $totalJumlah = 0;
+            $data = $this->input->post();
+            foreach ($data['idservice'] as $key => $item) {
   				$detail = [
   					'idinvoice' => $id,
   					'idservice' => $item,
   					'Jumlah' => $data['jumlah'][$key]
-  				];
+                    ];
+                $totalJumlah += $data['jumlah'][$key];
   				$this->db->insert('t34_invoiced',$detail);
   			}
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            $data = array(
+                'Total' => $totalJumlah
+                );
+            $this->_33_invoice_model->update($this->input->post('idinvoice', TRUE), $data);
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_33_invoice'));
         }
@@ -241,6 +249,7 @@ class _33_invoice extends CI_Controller
              */
             $this->db->where('idinvoice',$id);
      		$this->db->delete('t34_invoiced');
+
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('_33_invoice'));
         } else {
@@ -251,15 +260,12 @@ class _33_invoice extends CI_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('NoInvoice', 'noinvoice', 'trim|required');
-	$this->form_validation->set_rules('TglInvoice', 'tglinvoice', 'trim|required');
-	$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
-	$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
-	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
-
-	$this->form_validation->set_rules('idinvoice', 'idinvoice', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    	$this->form_validation->set_rules('NoInvoice', 'noinvoice', 'trim|required');
+    	$this->form_validation->set_rules('TglInvoice', 'tglinvoice', 'trim|required');
+    	$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
+    	$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
+    	$this->form_validation->set_rules('idinvoice', 'idinvoice', 'trim');
+    	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -284,26 +290,26 @@ class _33_invoice extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "NoInvoice");
-	xlsWriteLabel($tablehead, $kolomhead++, "TglInvoice");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idjo");
-	xlsWriteLabel($tablehead, $kolomhead++, "Total");
-	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
-	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
+    	xlsWriteLabel($tablehead, $kolomhead++, "NoInvoice");
+    	xlsWriteLabel($tablehead, $kolomhead++, "TglInvoice");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Idjo");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Total");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
 
-	foreach ($this->_33_invoice_model->get_all() as $data) {
+    	foreach ($this->_33_invoice_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->NoInvoice);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->TglInvoice);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idjo);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->Total);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->NoInvoice);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->TglInvoice);
+    	    xlsWriteNumber($tablebody, $kolombody++, $data->idjo);
+    	    xlsWriteNumber($tablebody, $kolombody++, $data->Total);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
 
-	    $tablebody++;
+    	    $tablebody++;
             $nourut++;
         }
 

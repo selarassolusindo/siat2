@@ -26,7 +26,6 @@ class _33_invoice_model extends CI_Model
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        // return $this->db->get($this->table)->row();
         $this->db->select($this->table . '.*, t30_jo.NoJO');
         $this->db->from($this->table);
         $this->db->join('t30_jo', 't30_jo.idjo = '.$this->table.'.idjo'); //echo $this->db->get_compiled_select();
@@ -36,13 +35,13 @@ class _33_invoice_model extends CI_Model
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('idinvoice', $q);
-	$this->db->or_like('NoInvoice', $q);
-	$this->db->or_like('TglInvoice', $q);
-	$this->db->or_like('idjo', $q);
-	$this->db->or_like('Total', $q);
-	$this->db->or_like('created_at', $q);
-	$this->db->or_like('updated_at', $q);
-	$this->db->from($this->table);
+    	$this->db->or_like('NoInvoice', $q);
+    	$this->db->or_like('TglInvoice', $q);
+    	$this->db->or_like('idjo', $q);
+    	$this->db->or_like('Total', $q);
+    	$this->db->or_like('created_at', $q);
+    	$this->db->or_like('updated_at', $q);
+    	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
@@ -50,14 +49,12 @@ class _33_invoice_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('idinvoice', $q);
-	$this->db->or_like('NoInvoice', $q);
-	$this->db->or_like('TglInvoice', $q);
-	$this->db->or_like($this->table.'.idjo', $q);
-	$this->db->or_like('Total', $q);
-	// $this->db->or_like('created_at', $q);
-	// $this->db->or_like('updated_at', $q);
-	$this->db->limit($limit, $start);
-    $this->db->select($this->table . '.*, t30_jo.NoJO');
+    	$this->db->or_like('NoInvoice', $q);
+    	$this->db->or_like('TglInvoice', $q);
+    	$this->db->or_like($this->table.'.idjo', $q);
+    	$this->db->or_like('Total', $q);
+    	$this->db->limit($limit, $start);
+        $this->db->select($this->table . '.*, t30_jo.NoJO');
         $this->db->from($this->table);
         $this->db->join('t30_jo', 't30_jo.idjo = '.$this->table.'.idjo'); //echo $this->db->get_compiled_select();
         return $this->db->get()->result();
