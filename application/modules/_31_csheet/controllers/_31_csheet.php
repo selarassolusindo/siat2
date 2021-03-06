@@ -56,6 +56,7 @@ class _31_csheet extends CI_Controller
 		'TglCSheet' => $row->TglCSheet,
 		'idjo' => $row->idjo,
 		'Total' => $row->Total,
+        'NoJO' => $row->NoJO,
 		// 'created_at' => $row->created_at,
 		// 'updated_at' => $row->updated_at,
 	    );
