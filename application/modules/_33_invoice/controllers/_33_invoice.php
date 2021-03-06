@@ -263,7 +263,7 @@ class _33_invoice extends CI_Controller
     	$this->form_validation->set_rules('NoInvoice', 'noinvoice', 'trim|required');
     	$this->form_validation->set_rules('TglInvoice', 'tglinvoice', 'trim|required');
     	$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
-    	$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
+    	$this->form_validation->set_rules('Total', 'total', 'trim|required');
     	$this->form_validation->set_rules('idinvoice', 'idinvoice', 'trim');
     	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
