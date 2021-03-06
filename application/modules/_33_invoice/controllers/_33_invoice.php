@@ -57,6 +57,19 @@ class _33_invoice extends CI_Controller
         		'Total' => $row->Total,
                 'NoJO' => $row->NoJO,
                 );
+
+            /**
+             * ambil data dari tabel detail
+             */
+            $data['detail'] =
+                $this->db
+                    ->select('t34_invoiced.*, Nama')
+                    ->from('t34_invoiced')
+                    ->where('idinvoice', $id)
+                    ->join('t10_service', 't34_invoiced.idservice = t10_service.idservice')
+                    ->get()->result()
+                    ;
+
             $data['_view'] = '_33_invoice/t33_invoice_read';
             $data['_caption'] = 'Invoice';
             $this->load->view('_00_dashboard/_layout', $data);
