@@ -18,11 +18,39 @@
         </div>
 	    <div class="form-group">
             <label for="date">Tgl. <?php echo form_error('TglInvoice') ?></label>
-            <input type="text" class="form-control" name="TglInvoice" id="TglInvoice" placeholder="TglInvoice" value="<?php echo $TglInvoice; ?>" />
+            <!-- <input type="text" class="form-control" name="TglInvoice" id="TglInvoice" placeholder="TglInvoice" value="<?php echo $TglInvoice; ?>" /> -->
+        <!-- </div> -->
+
+            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <input type="text" name="TglInvoice" value="<?php echo $TglInvoice; ?>" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+
+            </div>
         </div>
+
+        <!-- <div class="col-sm-2 input-group date" id="reservationdate" data-target-input="nearest">
+            <input type="text" name="Tanggal" value="<?php echo $Tanggal; ?>" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div> -->
+
 	    <div class="form-group">
             <label for="int">No. JO <?php echo form_error('idjo') ?></label>
-            <input type="text" class="form-control" name="idjo" id="idjo" placeholder="Idjo" value="<?php echo $idjo; ?>" />
+            <!-- <input type="text" class="form-control" name="idjo" id="idjo" placeholder="Idjo" value="<?php echo $idjo; ?>" /> -->
+            <select name="idjo" class="form-control">
+    				<option value="">No. JO</option>
+    				<?php
+    				foreach($jo_data as $jo)
+    				{
+    					$selected = ($jo->idjo == $idjo) ? ' selected="selected"' : "";
+
+    					echo '<option value="'.$jo->idjo.'" '.$selected.'>'.$jo->NoJO.'</option>';
+    				}
+    				?>
+    			</select>
         </div>
 	    <div class="form-group">
             <label for="double">Total <?php echo form_error('Total') ?></label>

@@ -58,9 +58,9 @@
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $_33_invoice->NoInvoice ?></td>
-			<td><?php echo $_33_invoice->TglInvoice ?></td>
-			<td><?php echo $_33_invoice->idjo ?></td>
-			<td><?php echo $_33_invoice->Total ?></td>
+			<td><?php echo date_format(date_create($_33_invoice->TglInvoice), 'd-m-Y') ?></td>
+			<td><?php echo $_33_invoice->NoJO ?></td>
+			<td align="right"><?php echo number_format($_33_invoice->Total) ?></td>
 			<!-- <td><?php echo $_33_invoice->created_at ?></td>
 			<td><?php echo $_33_invoice->updated_at ?></td> -->
 			<td style="text-align:center" width="200px">

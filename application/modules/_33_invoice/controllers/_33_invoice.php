@@ -71,6 +71,8 @@ class _33_invoice extends CI_Controller
 
     public function create()
     {
+        $this->load->model('_30_jo/_30_jo_model');
+        $jo = $this->_30_jo_model->get_all();
         $data = array(
             'button' => 'Create',
             'action' => site_url('_33_invoice/create_action'),
@@ -81,6 +83,7 @@ class _33_invoice extends CI_Controller
 	    'Total' => set_value('Total'),
 	    // 'created_at' => set_value('created_at'),
 	    // 'updated_at' => set_value('updated_at'),
+        'jo_data' => $jo,
 	);
         // $this->load->view('_33_invoice/t33_invoice_form', $data);
         $data['_view'] = '_33_invoice/t33_invoice_form';
@@ -97,7 +100,8 @@ class _33_invoice extends CI_Controller
         } else {
             $data = array(
 		'NoInvoice' => $this->input->post('NoInvoice',TRUE),
-		'TglInvoice' => $this->input->post('TglInvoice',TRUE),
+		// 'TglInvoice' => $this->input->post('TglInvoice',TRUE),
+        'TglInvoice' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglInvoice', true)))),
 		'idjo' => $this->input->post('idjo',TRUE),
 		'Total' => $this->input->post('Total',TRUE),
 		// 'created_at' => $this->input->post('created_at',TRUE),
@@ -136,16 +140,19 @@ class _33_invoice extends CI_Controller
         $row = $this->_33_invoice_model->get_by_id($id);
 
         if ($row) {
+            $this->load->model('_30_jo/_30_jo_model');
+            $jo = $this->_30_jo_model->get_all();
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('_33_invoice/update_action'),
 		'idinvoice' => set_value('idinvoice', $row->idinvoice),
 		'NoInvoice' => set_value('NoInvoice', $row->NoInvoice),
-		'TglInvoice' => set_value('TglInvoice', $row->TglInvoice),
+		'TglInvoice' => set_value('TglInvoice', date_format(date_create($row->TglInvoice), 'd-m-Y')),
 		'idjo' => set_value('idjo', $row->idjo),
 		'Total' => set_value('Total', $row->Total),
 		// 'created_at' => set_value('created_at', $row->created_at),
 		// 'updated_at' => set_value('updated_at', $row->updated_at),
+        'jo_data' => $jo,
 	    );
         /**
          * ambil data dari tabel detail
@@ -177,7 +184,8 @@ class _33_invoice extends CI_Controller
         } else {
             $data = array(
 		'NoInvoice' => $this->input->post('NoInvoice',TRUE),
-		'TglInvoice' => $this->input->post('TglInvoice',TRUE),
+		// 'TglInvoice' => $this->input->post('TglInvoice',TRUE),
+        'TglInvoice' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglInvoice', true)))),
 		'idjo' => $this->input->post('idjo',TRUE),
 		'Total' => $this->input->post('Total',TRUE),
 		// 'created_at' => $this->input->post('created_at',TRUE),

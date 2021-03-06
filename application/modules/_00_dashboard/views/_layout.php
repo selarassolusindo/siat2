@@ -825,6 +825,19 @@
         <!-- <script src="<?php echo base_url(); ?>assets/adminlte/plugins/select2/js/select2.min.js"></script> -->
 
         <script>
+            $(function () {
+                //Date range picker
+                $('#reservation').daterangepicker()
+            })
+            $(function () {
+                //Date range picker
+                $('#reservationdate').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                })
+            })
+        </script>
+
+        <script>
         $(function () {
             $('.btn').addClass('btn-sm')
             $('.table').addClass('table-sm')
