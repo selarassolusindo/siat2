@@ -70,13 +70,29 @@
 				?>
 			</select>
         </div>
-	    <div class="form-group">
+        <div class="form-group">
             <label for="int">Armada <?php echo form_error('idarmada') ?></label>
-            <input type="text" class="form-control" name="idarmada" id="idarmada" placeholder="Idarmada" value="<?php echo $idarmada; ?>" />
+            <select name="idarmada" class="form-control">
+				<option value="">Armada</option>
+				<?php
+				foreach($armadaData as $data) {
+					$selected = ($data->idarmada == $idarmada) ? ' selected="selected"' : "";
+					echo '<option value="'.$data->idarmada.'" '.$selected.'>'.$data->Merk.' - '.$data->Tipe.'</option>';
+				}
+				?>
+			</select>
         </div>
 	    <div class="form-group">
             <label for="int">Ekor <?php echo form_error('idekor') ?></label>
-            <input type="text" class="form-control" name="idekor" id="idekor" placeholder="Idekor" value="<?php echo $idekor; ?>" />
+            <select name="idekor" class="form-control">
+				<option value="">Ekor</option>
+				<?php
+				foreach($ekorData as $data) {
+					$selected = ($data->idekor == $idekor) ? ' selected="selected"' : "";
+					echo '<option value="'.$data->idekor.'" '.$selected.'>'.$data->Kode.'</option>';
+				}
+				?>
+			</select>
         </div>
 	    <div class="form-group">
             <label for="int">Driver <?php echo form_error('iddriver') ?></label>
