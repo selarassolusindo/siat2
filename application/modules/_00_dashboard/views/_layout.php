@@ -220,6 +220,7 @@
                                     case '_13_satuan':
                                     case '_14_bank':
                                     case '_15_driver':
+                                    case '_16_ekor':
                                     case 'input-tanggal-saldo-awal':
                                         echo 'menu-open';
                                         break;
@@ -276,6 +277,13 @@
                                         <a href="<?php echo site_url('_08_armada'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_08_armada') ? 'active' : ''; ?>">
                                             <i class="fas fa-truck-moving nav-icon"></i>
                                             <p>Armada</p>
+                                        </a>
+                                    </li>
+                                    <!-- ekor -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_16_ekor'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_16_ekor') ? 'active' : ''; ?>">
+                                            <i class="fas fa-truck-moving nav-icon"></i>
+                                            <p>Ekor</p>
                                         </a>
                                     </li>
                                     <!-- stock spare part -->

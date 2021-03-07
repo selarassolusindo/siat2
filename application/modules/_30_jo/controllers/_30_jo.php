@@ -61,6 +61,12 @@ class _30_jo extends CI_Controller
 		'idarmada' => $row->idarmada,
 		'idekor' => $row->idekor,
 		'iddriver' => $row->iddriver,
+        'NamaCustomer' => $row->NamaCustomer,
+        'NamaShipper' => $row->NamaShipper,
+        'NamaLokasi' => $row->NamaLokasi,
+        'NamaArmada' => $row->NamaArmada,
+        'NamaEkor' => $row->NamaEkor,
+        'NamaDriver' => $row->NamaDriver,
 		// 'created_at' => $row->created_at,
 		// 'updated_at' => $row->updated_at,
 	    );
