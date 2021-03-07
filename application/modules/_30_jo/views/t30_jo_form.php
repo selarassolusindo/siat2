@@ -53,9 +53,18 @@
 				?>
 			</select>
         </div>
-	    <div class="form-group">
+	    <!-- <div class="form-group">
             <label for="date">Tgl. Muat/Bongkar <?php echo form_error('TglMB') ?></label>
             <input type="text" class="form-control" name="TglMB" id="TglMB" placeholder="TglMB" value="<?php echo $TglMB; ?>" />
+        </div> -->
+        <div class="form-group">
+            <label for="date">Tgl. Muat/Bongkar <?php echo form_error('TglMB') ?></label>
+            <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <input placeholder="Tgl. Muat/Bongkar" type="text" name="TglMB" value="<?php echo $TglMB; ?>" class="form-control datetimepicker-input" data-target="#reservationdate2"/>
+            </div>
         </div>
 	    <div class="form-group">
             <label for="int">Lokasi Muat/Bongkar <?php echo form_error('idlokasi') ?></label>

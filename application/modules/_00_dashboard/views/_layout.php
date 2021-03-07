@@ -835,14 +835,21 @@
         <script>
             $(function () {
                 //Date range picker
-                $('#reservation').daterangepicker()
-            })
-            $(function () {
-                //Date range picker
+                $('#reservation').daterangepicker();
                 $('#reservationdate').datetimepicker({
                     format: 'DD-MM-YYYY'
-                })
+                });
+                $('#reservation2').daterangepicker();
+                $('#reservationdate2').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
             })
+            // $(function () {
+            //     //Date range picker
+            //     $('#reservationdate').datetimepicker({
+            //         format: 'DD-MM-YYYY'
+            //     })
+            // })
         </script>
 
         <script>
