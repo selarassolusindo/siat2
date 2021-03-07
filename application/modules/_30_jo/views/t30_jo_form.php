@@ -37,10 +37,6 @@
 				?>
 			</select>
         </div>
-	    <!-- <div class="form-group">
-            <label for="int">Shipper <?php echo form_error('idshipper') ?></label>
-            <input type="text" class="form-control" name="idshipper" id="idshipper" placeholder="Idshipper" value="<?php echo $idshipper; ?>" />
-        </div> -->
         <div class="form-group">
             <label for="int">Shipper <?php echo form_error('idshipper') ?></label>
             <select name="idshipper" class="form-control">
@@ -53,10 +49,6 @@
 				?>
 			</select>
         </div>
-	    <!-- <div class="form-group">
-            <label for="date">Tgl. Muat/Bongkar <?php echo form_error('TglMB') ?></label>
-            <input type="text" class="form-control" name="TglMB" id="TglMB" placeholder="TglMB" value="<?php echo $TglMB; ?>" />
-        </div> -->
         <div class="form-group">
             <label for="date">Tgl. Muat/Bongkar <?php echo form_error('TglMB') ?></label>
             <div class="input-group date" id="reservationdate2" data-target-input="nearest">
@@ -66,9 +58,17 @@
                 <input placeholder="Tgl. Muat/Bongkar" type="text" name="TglMB" value="<?php echo $TglMB; ?>" class="form-control datetimepicker-input" data-target="#reservationdate2"/>
             </div>
         </div>
-	    <div class="form-group">
+        <div class="form-group">
             <label for="int">Lokasi Muat/Bongkar <?php echo form_error('idlokasi') ?></label>
-            <input type="text" class="form-control" name="idlokasi" id="idlokasi" placeholder="Idlokasi" value="<?php echo $idlokasi; ?>" />
+            <select name="idlokasi" class="form-control">
+				<option value="">Lokasi Muat/Bongkar</option>
+				<?php
+				foreach($lokasiData as $data) {
+					$selected = ($data->idlokasi == $idlokasi) ? ' selected="selected"' : "";
+					echo '<option value="'.$data->idlokasi.'" '.$selected.'>'.$data->Nama.'</option>';
+				}
+				?>
+			</select>
         </div>
 	    <div class="form-group">
             <label for="int">Armada <?php echo form_error('idarmada') ?></label>
