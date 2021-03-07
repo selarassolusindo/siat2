@@ -34,8 +34,6 @@
                 </table>
             </td>
         </tr>
-	    <!-- <tr><td>Created At</td><td><?php echo $created_at; ?></td></tr>
-	    <tr><td>Updated At</td><td><?php echo $updated_at; ?></td></tr> -->
 	    <tr><td></td><td><a href="<?php echo site_url('_33_invoice') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         <!-- </body>

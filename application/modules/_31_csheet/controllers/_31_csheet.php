@@ -60,6 +60,19 @@ class _31_csheet extends CI_Controller
 		// 'created_at' => $row->created_at,
 		// 'updated_at' => $row->updated_at,
 	    );
+
+        /**
+         * ambil data dari tabel detail
+         */
+        $data['detail'] =
+            $this->db
+                ->select('t32_csheetd.*, Nama')
+                ->from('t32_csheetd')
+                ->where('idcsheet', $id)
+                ->join('t11_cost', 't32_csheetd.idcost = t11_cost.idcost')
+                ->get()->result()
+                ;
+
             // $this->load->view('_31_csheet/t31_csheet_read', $data);
             $data['_view'] = '_31_csheet/t31_csheet_read';
             $data['_caption'] = 'Cost Sheet';
