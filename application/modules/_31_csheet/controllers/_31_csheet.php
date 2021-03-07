@@ -163,7 +163,7 @@ class _31_csheet extends CI_Controller
                 'action' => site_url('_31_csheet/update_action'),
         		'idcsheet' => set_value('idcsheet', $row->idcsheet),
         		'NoCSheet' => set_value('NoCSheet', $row->NoCSheet),
-        		'TglCSheet' => set_value('TglCSheet', $row->TglCSheet),
+        		'TglCSheet' => set_value('TglCSheet', date_format(date_create($row->TglCSheet), 'd-m-Y')),
         		'idjo' => set_value('idjo', $row->idjo),
         		'Total' => set_value('Total', $row->Total),
                 'jo_data' => $jo,
@@ -199,7 +199,7 @@ class _31_csheet extends CI_Controller
         } else {
             $data = array(
         		'NoCSheet' => $this->input->post('NoCSheet',TRUE),
-        		'TglCSheet' => $this->input->post('TglCSheet',TRUE),
+                'TglCSheet' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglCSheet', true)))),
         		'idjo' => $this->input->post('idjo',TRUE),
         		'Total' => $this->input->post('Total',TRUE),
             );
@@ -277,7 +277,7 @@ class _31_csheet extends CI_Controller
     	$this->form_validation->set_rules('NoCSheet', 'nocsheet', 'trim|required');
     	$this->form_validation->set_rules('TglCSheet', 'tglcsheet', 'trim|required');
     	$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
-    	$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
+    	$this->form_validation->set_rules('Total', 'total', 'trim|required');
     	$this->form_validation->set_rules('idcsheet', 'idcsheet', 'trim');
     	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
