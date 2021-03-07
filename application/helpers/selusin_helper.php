@@ -27,6 +27,32 @@ function getNewKode($prefix, $fieldName, $tableName)
 }
 
 /**
+ * buat nomor jo baru
+ * JO0001
+ */
+function getNewJO($prefix, $fieldName, $tableName)
+{
+    $sNextKode = "";
+    $sLastKode = "";
+    $CI =& get_instance();
+    $CI->db->order_by($fieldName, 'desc');
+    $CI->db->limit(1);
+    $row = $CI->db->get($tableName)->row();
+    if ($row) {
+        $value = $row->$fieldName;
+        $sLastKode = intval(substr($value, 2, 4));
+        $sLastKode = intval($sLastKode) + 1;
+        $sNextKode = $prefix . sprintf('%04s', $sLastKode);
+        if (strlen($sNextKode) > 6) {
+            $sNextKode = $prefix . "9999";
+        }
+    } else {
+        $sNextKode = $prefix . "0001";
+    }
+    return $sNextKode;
+}
+
+/**
  * buat nomor cost sheet baru
  * CST0001
  */

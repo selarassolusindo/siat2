@@ -39,8 +39,7 @@ class _30_jo extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-        );
-        // $this->load->view('_30_jo/t30_jo_list', $data);
+            );
         $data['_view'] = '_30_jo/t30_jo_list';
         $data['_caption'] = 'Job Order';
         $this->load->view('_00_dashboard/_layout', $data);
@@ -51,26 +50,24 @@ class _30_jo extends CI_Controller
         $row = $this->_30_jo_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'idjo' => $row->idjo,
-		'NoJO' => $row->NoJO,
-		'TglJO' => $row->TglJO,
-		'idcustomer' => $row->idcustomer,
-		'idshipper' => $row->idshipper,
-		'TglMB' => $row->TglMB,
-		'idlokasi' => $row->idlokasi,
-		'idarmada' => $row->idarmada,
-		'idekor' => $row->idekor,
-		'iddriver' => $row->iddriver,
-        'NamaCustomer' => $row->NamaCustomer,
-        'NamaShipper' => $row->NamaShipper,
-        'NamaLokasi' => $row->NamaLokasi,
-        'NamaArmada' => $row->NamaArmada,
-        'NamaEkor' => $row->NamaEkor,
-        'NamaDriver' => $row->NamaDriver,
-		// 'created_at' => $row->created_at,
-		// 'updated_at' => $row->updated_at,
-	    );
-            // $this->load->view('_30_jo/t30_jo_read', $data);
+        		'idjo' => $row->idjo,
+        		'NoJO' => $row->NoJO,
+        		'TglJO' => $row->TglJO,
+        		'idcustomer' => $row->idcustomer,
+        		'idshipper' => $row->idshipper,
+        		'TglMB' => $row->TglMB,
+        		'idlokasi' => $row->idlokasi,
+        		'idarmada' => $row->idarmada,
+        		'idekor' => $row->idekor,
+        		'iddriver' => $row->iddriver,
+                'NamaCustomer' => $row->NamaCustomer,
+                'NamaShipper' => $row->NamaShipper,
+                'NamaLokasi' => $row->NamaLokasi,
+                'NamaArmada' => $row->NamaArmada,
+                'NamaEkor' => $row->NamaEkor,
+                'NamaDriver' => $row->NamaDriver,
+        	    );
+
             $data['_view'] = '_30_jo/t30_jo_read';
             $data['_caption'] = 'Job Order';
             $this->load->view('_00_dashboard/_layout', $data);
@@ -82,23 +79,38 @@ class _30_jo extends CI_Controller
 
     public function create()
     {
+        $this->load->model('_05_customer/_05_customer_model');
+        $customer = $this->_05_customer_model->get_all();
+        $this->load->model('_06_shipper/_06_shipper_model');
+        $shipper = $this->_06_shipper_model->get_all();
+        $this->load->model('_12_lokasi/_12_lokasi_model');
+        $lokasi = $this->_12_lokasi_model->get_all();
+        $this->load->model('_08_armada/_08_armada_model');
+        $armada = $this->_08_armada_model->get_all();
+        $this->load->model('_16_ekor/_16_ekor_model');
+        $ekor = $this->_16_ekor_model->get_all();
+        $this->load->model('_15_driver/_15_driver_model');
+        $driver = $this->_15_driver_model->get_all();
         $data = array(
             'button' => 'Create',
             'action' => site_url('_30_jo/create_action'),
-	    'idjo' => set_value('idjo'),
-	    'NoJO' => set_value('NoJO'),
-	    'TglJO' => set_value('TglJO'),
-	    'idcustomer' => set_value('idcustomer'),
-	    'idshipper' => set_value('idshipper'),
-	    'TglMB' => set_value('TglMB'),
-	    'idlokasi' => set_value('idlokasi'),
-	    'idarmada' => set_value('idarmada'),
-	    'idekor' => set_value('idekor'),
-	    'iddriver' => set_value('iddriver'),
-	    // 'created_at' => set_value('created_at'),
-	    // 'updated_at' => set_value('updated_at'),
-	);
-        // $this->load->view('_30_jo/t30_jo_form', $data);
+    	    'idjo' => set_value('idjo'),
+    	    'NoJO' => set_value('NoJO', getNewJO('JO', 'NoJO', 't30_jo')),
+    	    'TglJO' => set_value('TglJO'),
+    	    'idcustomer' => set_value('idcustomer'),
+    	    'idshipper' => set_value('idshipper'),
+    	    'TglMB' => set_value('TglMB'),
+    	    'idlokasi' => set_value('idlokasi'),
+    	    'idarmada' => set_value('idarmada'),
+    	    'idekor' => set_value('idekor'),
+    	    'iddriver' => set_value('iddriver'),
+            'customerData' => $customer,
+            'shipperData' => $shipper,
+            'lokasiData' => $lokasi,
+            'armadaData' => $armada,
+            'ekorData' => $ekor,
+            'driverData' => $driver,
+            );
         $data['_view'] = '_30_jo/t30_jo_form';
         $data['_caption'] = 'Job Order';
         $this->load->view('_00_dashboard/_layout', $data);

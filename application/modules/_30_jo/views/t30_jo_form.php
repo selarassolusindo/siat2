@@ -16,17 +16,42 @@
             <label for="varchar">No. JO <?php echo form_error('NoJO') ?></label>
             <input type="text" class="form-control" name="NoJO" id="NoJO" placeholder="NoJO" value="<?php echo $NoJO; ?>" />
         </div>
-	    <div class="form-group">
+        <div class="form-group">
             <label for="date">Tgl. JO <?php echo form_error('TglJO') ?></label>
-            <input type="text" class="form-control" name="TglJO" id="TglJO" placeholder="TglJO" value="<?php echo $TglJO; ?>" />
+            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <input placeholder="Tgl. JO" type="text" name="TglJO" value="<?php echo $TglJO; ?>" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+            </div>
         </div>
-	    <div class="form-group">
+        <div class="form-group">
             <label for="int">Customer <?php echo form_error('idcustomer') ?></label>
-            <input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="Idcustomer" value="<?php echo $idcustomer; ?>" />
+            <select name="idcustomer" class="form-control">
+				<option value="">Customer</option>
+				<?php
+				foreach($customerData as $data) {
+					$selected = ($data->idcustomer == $idcustomer) ? ' selected="selected"' : "";
+					echo '<option value="'.$data->idcustomer.'" '.$selected.'>'.$data->Nama.'</option>';
+				}
+				?>
+			</select>
         </div>
-	    <div class="form-group">
+	    <!-- <div class="form-group">
             <label for="int">Shipper <?php echo form_error('idshipper') ?></label>
             <input type="text" class="form-control" name="idshipper" id="idshipper" placeholder="Idshipper" value="<?php echo $idshipper; ?>" />
+        </div> -->
+        <div class="form-group">
+            <label for="int">Shipper <?php echo form_error('idshipper') ?></label>
+            <select name="idshipper" class="form-control">
+				<option value="">Shipper</option>
+				<?php
+				foreach($shipperData as $data) {
+					$selected = ($data->idshipper == $idshipper) ? ' selected="selected"' : "";
+					echo '<option value="'.$data->idshipper.'" '.$selected.'>'.$data->Nama.'</option>';
+				}
+				?>
+			</select>
         </div>
 	    <div class="form-group">
             <label for="date">Tgl. Muat/Bongkar <?php echo form_error('TglMB') ?></label>
@@ -48,14 +73,6 @@
             <label for="int">Driver <?php echo form_error('iddriver') ?></label>
             <input type="text" class="form-control" name="iddriver" id="iddriver" placeholder="Iddriver" value="<?php echo $iddriver; ?>" />
         </div>
-	    <!-- <div class="form-group">
-            <label for="timestamp">Created At <?php echo form_error('created_at') ?></label>
-            <input type="text" class="form-control" name="created_at" id="created_at" placeholder="Created At" value="<?php echo $created_at; ?>" />
-        </div>
-	    <div class="form-group">
-            <label for="timestamp">Updated At <?php echo form_error('updated_at') ?></label>
-            <input type="text" class="form-control" name="updated_at" id="updated_at" placeholder="Updated At" value="<?php echo $updated_at; ?>" />
-        </div> -->
 	    <input type="hidden" name="idjo" value="<?php echo $idjo; ?>" />
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 	    <a href="<?php echo site_url('_30_jo') ?>" class="btn btn-default">Cancel</a>
