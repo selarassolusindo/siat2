@@ -14,7 +14,7 @@
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
             <label for="varchar">No. Invoice <?php echo form_error('NoInvoice') ?></label>
-            <input type="text" class="form-control" name="NoInvoice" id="NoInvoice" placeholder="NoInvoice" value="<?php echo $NoInvoice; ?>" />
+            <input type="text" class="form-control" name="NoInvoice" id="NoInvoice" placeholder="No. Invoice" value="<?php echo $NoInvoice; ?>" />
         </div>
 	    <div class="form-group">
             <label for="date">Tgl. <?php echo form_error('TglInvoice') ?></label>
@@ -22,7 +22,7 @@
                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                 </div>
-                <input type="text" name="TglInvoice" value="<?php echo $TglInvoice; ?>" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                <input placeholder="Tgl. Invoice" type="text" name="TglInvoice" value="<?php echo $TglInvoice; ?>" class="form-control datetimepicker-input" data-target="#reservationdate"/>
             </div>
         </div>
 	    <div class="form-group">

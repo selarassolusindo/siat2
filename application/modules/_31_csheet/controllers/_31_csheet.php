@@ -51,29 +51,26 @@ class _31_csheet extends CI_Controller
         $row = $this->_31_csheet_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'idcsheet' => $row->idcsheet,
-		'NoCSheet' => $row->NoCSheet,
-		'TglCSheet' => $row->TglCSheet,
-		'idjo' => $row->idjo,
-		'Total' => $row->Total,
-        'NoJO' => $row->NoJO,
-		// 'created_at' => $row->created_at,
-		// 'updated_at' => $row->updated_at,
-	    );
+        		'idcsheet' => $row->idcsheet,
+        		'NoCSheet' => $row->NoCSheet,
+        		'TglCSheet' => $row->TglCSheet,
+        		'idjo' => $row->idjo,
+        		'Total' => $row->Total,
+                'NoJO' => $row->NoJO,
+                );
 
-        /**
-         * ambil data dari tabel detail
-         */
-        $data['detail'] =
-            $this->db
-                ->select('t32_csheetd.*, Nama')
-                ->from('t32_csheetd')
-                ->where('idcsheet', $id)
-                ->join('t11_cost', 't32_csheetd.idcost = t11_cost.idcost')
-                ->get()->result()
-                ;
+            /**
+             * ambil data dari tabel detail
+             */
+            $data['detail'] =
+                $this->db
+                    ->select('t32_csheetd.*, Nama')
+                    ->from('t32_csheetd')
+                    ->where('idcsheet', $id)
+                    ->join('t11_cost', 't32_csheetd.idcost = t11_cost.idcost')
+                    ->get()->result()
+                    ;
 
-            // $this->load->view('_31_csheet/t31_csheet_read', $data);
             $data['_view'] = '_31_csheet/t31_csheet_read';
             $data['_caption'] = 'Cost Sheet';
             $this->load->view('_00_dashboard/_layout', $data);
@@ -85,18 +82,18 @@ class _31_csheet extends CI_Controller
 
     public function create()
     {
+        $this->load->model('_30_jo/_30_jo_model');
+        $jo = $this->_30_jo_model->get_all();
         $data = array(
             'button' => 'Create',
             'action' => site_url('_31_csheet/create_action'),
-	    'idcsheet' => set_value('idcsheet'),
-	    'NoCSheet' => set_value('NoCSheet'),
-	    'TglCSheet' => set_value('TglCSheet'),
-	    'idjo' => set_value('idjo'),
-	    'Total' => set_value('Total'),
-	    // 'created_at' => set_value('created_at'),
-	    // 'updated_at' => set_value('updated_at'),
-	);
-        // $this->load->view('_31_csheet/t31_csheet_form', $data);
+    	    'idcsheet' => set_value('idcsheet'),
+    	    'NoCSheet' => set_value('NoCSheet', getNewCSheet('CST', 'NoCSheet', 't31_csheet')),
+    	    'TglCSheet' => set_value('TglCSheet'),
+    	    'idjo' => set_value('idjo'),
+    	    'Total' => set_value('Total', 0),
+            'jo_data' => $jo,
+            );
         $data['_view'] = '_31_csheet/t31_csheet_form';
         $data['_caption'] = 'Cost Sheet';
         $this->load->view('_00_dashboard/_layout', $data);

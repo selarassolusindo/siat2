@@ -11,38 +11,45 @@
     </head>
     <body>
         <h2 style="margin-top:0px">T31_csheet <?php echo $button ?></h2> -->
-
-        <!-- <script src="<?php echo base_url(); ?>assets/adminlte/plugins/select2/js/select2.min.js"></script> -->
-
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
             <label for="varchar">No. Cost Sheet <?php echo form_error('NoCSheet') ?></label>
-            <input type="text" class="form-control" name="NoCSheet" id="NoCSheet" placeholder="NoCSheet" value="<?php echo $NoCSheet; ?>" />
+            <input type="text" class="form-control" name="NoCSheet" id="NoCSheet" placeholder="No. Cost Sheet" value="<?php echo $NoCSheet; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="date">Tgl. Cost Sheet <?php echo form_error('TglCSheet') ?></label>
-            <input type="text" class="form-control" name="TglCSheet" id="TglCSheet" placeholder="TglCSheet" value="<?php echo $TglCSheet; ?>" />
+            <label for="date">Tgl. <?php echo form_error('TglCSheet') ?></label>
+            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <input placeholder="Tgl. Cost Sheet" type="text" name="TglCSheet" value="<?php echo $TglCSheet; ?>" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+            </div>
         </div>
-	    <div class="form-group">
+        <div class="form-group">
             <label for="int">No. JO <?php echo form_error('idjo') ?></label>
-            <input type="text" class="form-control" name="idjo" id="idjo" placeholder="Idjo" value="<?php echo $idjo; ?>" />
+            <select name="idjo" class="form-control">
+				<option value="">No. JO</option>
+				<?php
+				foreach($jo_data as $jo) {
+					$selected = ($jo->idjo == $idjo) ? ' selected="selected"' : "";
+					echo '<option value="'.$jo->idjo.'" '.$selected.'>'.$jo->NoJO.'</option>';
+				}
+				?>
+			</select>
         </div>
 	    <div class="form-group">
             <label for="double">Total <?php echo form_error('Total') ?></label>
-            <input type="text" class="form-control" name="Total" id="Total" placeholder="Total" value="<?php echo $Total; ?>" />
+            <input type="text" class="form-control" name="Total" id="Total" placeholder="Total" value="<?php echo number_format($Total); ?>" readonly="readonly" />
         </div>
 
         <div class="form-group">
-            <label for="double">Detail</label>
-
-            <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Detail</a></p>
-
+            <label for="double">Cost</label>
+            <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Cost</a></p>
             <div id="tmp">
             <?php if ($this->uri->segment(2) == 'update') { ?>
                 <?php foreach ($detail as $key => $d) { ?>
         		    <div class="row mb-2" id="<?= $key ?>">
             		  	<div class="col">
-            		  		<!-- <input type="text" name="idcost[]" class="form-control" placeholder="Cost" value="<?= $d->idcost ?>" required> -->
                             <select class="form-control cost" name="idcost[]" required>
                                 <option value="<?= $d->idcost ?>" selected="selected"><?= $d->Nama ?></option>
                             </select>
@@ -82,13 +89,12 @@
                     delay : 250,
                     processResults: function (data) {
                         $.each(data.items, function(i, o) { data.items[i].text = o.Nama; });
-
                         return {
                             results: data.items
                         };
                     },
-
-                }
+                },
+                placeholder : 'Cost',
             });
             </script>
         </div>
@@ -124,14 +130,13 @@
                     delay : 250,
                     processResults: function (data) {
                         $.each(data.items, function(i, o) { data.items[i].text = o.Nama; });
-
                         return {
                             results: data.items
                         };
                     }
-                }
+                },
+                placeholder : 'Cost',
             });
-
     	};
 
     	function hapus(index){
