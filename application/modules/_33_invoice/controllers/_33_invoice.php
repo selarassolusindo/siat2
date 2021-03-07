@@ -90,7 +90,7 @@ class _33_invoice extends CI_Controller
     	    'NoInvoice' => set_value('NoInvoice', getNewInvoice('INV', 'NoInvoice', 't33_invoice')),
     	    'TglInvoice' => set_value('TglInvoice'),
     	    'idjo' => set_value('idjo'),
-    	    'Total' => set_value('Total'),
+    	    'Total' => set_value('Total', 0),
             'jo_data' => $jo,
             );
         $data['_view'] = '_33_invoice/t33_invoice_form';

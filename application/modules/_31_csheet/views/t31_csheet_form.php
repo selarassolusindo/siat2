@@ -16,29 +16,21 @@
 
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
-            <label for="varchar">NoCSheet <?php echo form_error('NoCSheet') ?></label>
+            <label for="varchar">No. Cost Sheet <?php echo form_error('NoCSheet') ?></label>
             <input type="text" class="form-control" name="NoCSheet" id="NoCSheet" placeholder="NoCSheet" value="<?php echo $NoCSheet; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="date">TglCSheet <?php echo form_error('TglCSheet') ?></label>
+            <label for="date">Tgl. Cost Sheet <?php echo form_error('TglCSheet') ?></label>
             <input type="text" class="form-control" name="TglCSheet" id="TglCSheet" placeholder="TglCSheet" value="<?php echo $TglCSheet; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="int">Idjo <?php echo form_error('idjo') ?></label>
+            <label for="int">No. JO <?php echo form_error('idjo') ?></label>
             <input type="text" class="form-control" name="idjo" id="idjo" placeholder="Idjo" value="<?php echo $idjo; ?>" />
         </div>
 	    <div class="form-group">
             <label for="double">Total <?php echo form_error('Total') ?></label>
             <input type="text" class="form-control" name="Total" id="Total" placeholder="Total" value="<?php echo $Total; ?>" />
         </div>
-	    <!-- <div class="form-group">
-            <label for="timestamp">Created At <?php echo form_error('created_at') ?></label>
-            <input type="text" class="form-control" name="created_at" id="created_at" placeholder="Created At" value="<?php echo $created_at; ?>" />
-        </div>
-	    <div class="form-group">
-            <label for="timestamp">Updated At <?php echo form_error('updated_at') ?></label>
-            <input type="text" class="form-control" name="updated_at" id="updated_at" placeholder="Updated At" value="<?php echo $updated_at; ?>" />
-        </div> -->
 
         <div class="form-group">
             <label for="double">Detail</label>
