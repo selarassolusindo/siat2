@@ -143,7 +143,7 @@ class _33_invoice extends CI_Controller
             $data = array(
         		'Total' => $totalJumlah
                 );
-            $this->_33_invoice_model->update($this->input->post('idinvoice', TRUE), $data);
+            $this->_33_invoice_model->update($insert_id, $data);
 
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_33_invoice'));

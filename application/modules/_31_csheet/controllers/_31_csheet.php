@@ -108,11 +108,9 @@ class _31_csheet extends CI_Controller
         } else {
             $data = array(
         		'NoCSheet' => $this->input->post('NoCSheet',TRUE),
-        		'TglCSheet' => $this->input->post('TglCSheet',TRUE),
+        		'TglCSheet' => date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('TglCSheet', true)))),
         		'idjo' => $this->input->post('idjo',TRUE),
         		'Total' => $this->input->post('Total',TRUE),
-        		// 'created_at' => $this->input->post('created_at',TRUE),
-        		// 'updated_at' => $this->input->post('updated_at',TRUE),
     	    );
 
             /**
@@ -128,6 +126,7 @@ class _31_csheet extends CI_Controller
             /**
              * simpan data ke tabel detail
              */
+            $totalJumlah = 0;
             $data = $this->input->post();
             foreach ($data['idcost'] as $key => $item) {
                 $detail = [
@@ -135,8 +134,17 @@ class _31_csheet extends CI_Controller
                     'idcost' => $item,
                     'Jumlah' => $data['jumlah'][$key]
                 ];
+                $totalJumlah += $data['jumlah'][$key];
                 $this->db->insert('t32_csheetd', $detail);
             }
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            $data = array(
+        		'Total' => $totalJumlah
+                );
+            $this->_31_csheet_model->update($insert_id, $data);
 
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_31_csheet'));
@@ -148,6 +156,8 @@ class _31_csheet extends CI_Controller
         $row = $this->_31_csheet_model->get_by_id($id);
 
         if ($row) {
+            $this->load->model('_30_jo/_30_jo_model');
+            $jo = $this->_30_jo_model->get_all();
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('_31_csheet/update_action'),
@@ -156,8 +166,7 @@ class _31_csheet extends CI_Controller
         		'TglCSheet' => set_value('TglCSheet', $row->TglCSheet),
         		'idjo' => set_value('idjo', $row->idjo),
         		'Total' => set_value('Total', $row->Total),
-        		// 'created_at' => set_value('created_at', $row->created_at),
-        		// 'updated_at' => set_value('updated_at', $row->updated_at),
+                'jo_data' => $jo,
             );
 
             /**
@@ -171,7 +180,7 @@ class _31_csheet extends CI_Controller
                     ->join('t11_cost', 't32_csheetd.idcost = t11_cost.idcost')
                     ->get()->result()
                     ;
-            // $this->load->view('_31_csheet/t31_csheet_form', $data);
+
             $data['_view'] = '_31_csheet/t31_csheet_form';
             $data['_caption'] = 'Cost Sheet';
             $this->load->view('_00_dashboard/_layout', $data);
@@ -193,8 +202,6 @@ class _31_csheet extends CI_Controller
         		'TglCSheet' => $this->input->post('TglCSheet',TRUE),
         		'idjo' => $this->input->post('idjo',TRUE),
         		'Total' => $this->input->post('Total',TRUE),
-        		// 'created_at' => $this->input->post('created_at',TRUE),
-        		// 'updated_at' => $this->input->post('updated_at',TRUE),
             );
 
             /**
@@ -216,15 +223,25 @@ class _31_csheet extends CI_Controller
             /**
              * simpan data di tabel detail
              */
-             $data = $this->input->post();
-             foreach ($data['idcost'] as $key => $item) {
+            $totalJumlah = 0;
+            $data = $this->input->post();
+            foreach ($data['idcost'] as $key => $item) {
   				$detail = [
   					'idcsheet' => $id,
   					'idcost' => $item,
   					'Jumlah' => $data['jumlah'][$key]
   				];
+                $totalJumlah += $data['jumlah'][$key];
   				$this->db->insert('t32_csheetd',$detail);
   			}
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            $data = array(
+                'Total' => $totalJumlah
+                );
+            $this->_31_csheet_model->update($this->input->post('idcsheet', TRUE), $data);
 
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_31_csheet'));
@@ -257,15 +274,12 @@ class _31_csheet extends CI_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('NoCSheet', 'nocsheet', 'trim|required');
-	$this->form_validation->set_rules('TglCSheet', 'tglcsheet', 'trim|required');
-	$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
-	$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
-	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
-
-	$this->form_validation->set_rules('idcsheet', 'idcsheet', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    	$this->form_validation->set_rules('NoCSheet', 'nocsheet', 'trim|required');
+    	$this->form_validation->set_rules('TglCSheet', 'tglcsheet', 'trim|required');
+    	$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
+    	$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
+    	$this->form_validation->set_rules('idcsheet', 'idcsheet', 'trim');
+    	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -290,26 +304,26 @@ class _31_csheet extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "NoCSheet");
-	xlsWriteLabel($tablehead, $kolomhead++, "TglCSheet");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idjo");
-	xlsWriteLabel($tablehead, $kolomhead++, "Total");
-	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
-	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
+    	xlsWriteLabel($tablehead, $kolomhead++, "NoCSheet");
+    	xlsWriteLabel($tablehead, $kolomhead++, "TglCSheet");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Idjo");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Total");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
+    	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
 
-	foreach ($this->_31_csheet_model->get_all() as $data) {
+    	foreach ($this->_31_csheet_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->NoCSheet);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->TglCSheet);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idjo);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->Total);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->NoCSheet);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->TglCSheet);
+    	    xlsWriteNumber($tablebody, $kolombody++, $data->idjo);
+    	    xlsWriteNumber($tablebody, $kolombody++, $data->Total);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
+    	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
 
-	    $tablebody++;
+    	    $tablebody++;
             $nourut++;
         }
 
