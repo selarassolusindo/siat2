@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 07, 2021 at 06:09 PM
+-- Generation Time: Apr 19, 2021 at 12:30 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -805,6 +805,30 @@ INSERT INTO `t34_invoiced` (`idinvoiced`, `idinvoice`, `idservice`, `Jumlah`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t44_menus`
+--
+
+CREATE TABLE `t44_menus` (
+  `idmenu` int(11) NOT NULL,
+  `Menu` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t45_users_menus`
+--
+
+CREATE TABLE `t45_users_menus` (
+  `idusersmenus` int(11) NOT NULL,
+  `idusers` int(11) UNSIGNED NOT NULL,
+  `idmenus` int(11) NOT NULL,
+  `rights` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t46_users`
 --
 
@@ -835,7 +859,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1615106977, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1618781448, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$vPbQth0idvyMbrURrM.YDOuncIuLAzjrawwCiiz031bz0WRxLMfcu', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1613305305, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1027,6 +1051,20 @@ ALTER TABLE `t34_invoiced`
   ADD PRIMARY KEY (`idinvoiced`);
 
 --
+-- Indexes for table `t44_menus`
+--
+ALTER TABLE `t44_menus`
+  ADD PRIMARY KEY (`idmenu`);
+
+--
+-- Indexes for table `t45_users_menus`
+--
+ALTER TABLE `t45_users_menus`
+  ADD PRIMARY KEY (`idusersmenus`),
+  ADD UNIQUE KEY `users_menus` (`idusers`,`idmenus`),
+  ADD KEY `idmenus` (`idmenus`);
+
+--
 -- Indexes for table `t46_users`
 --
 ALTER TABLE `t46_users`
@@ -1188,6 +1226,18 @@ ALTER TABLE `t34_invoiced`
   MODIFY `idinvoiced` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
+-- AUTO_INCREMENT for table `t44_menus`
+--
+ALTER TABLE `t44_menus`
+  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t45_users_menus`
+--
+ALTER TABLE `t45_users_menus`
+  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `t46_users`
 --
 ALTER TABLE `t46_users`
@@ -1209,11 +1259,18 @@ ALTER TABLE `t48_users_groups`
 -- AUTO_INCREMENT for table `t49_login_attempts`
 --
 ALTER TABLE `t49_login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `t45_users_menus`
+--
+ALTER TABLE `t45_users_menus`
+  ADD CONSTRAINT `t45_users_menus_ibfk_1` FOREIGN KEY (`idusers`) REFERENCES `t46_users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `t45_users_menus_ibfk_2` FOREIGN KEY (`idmenus`) REFERENCES `t44_menus` (`idmenu`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `t48_users_groups`
