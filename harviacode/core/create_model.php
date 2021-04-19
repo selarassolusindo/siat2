@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $string = "<?php
 
@@ -18,13 +18,13 @@ class " . $m . " extends CI_Model
     }";
 
 if ($jenis_tabel <> 'reguler_table') {
-    
+
 $column_all = array();
 foreach ($all as $row) {
     $column_all[] = $row['column_name'];
 }
 $columnall = implode(',', $column_all);
-    
+
 $string .="\n\n    // datatables
     function json() {
         \$this->datatables->select('".$columnall."');
@@ -49,16 +49,16 @@ $string .="\n\n    // get all
         \$this->db->where(\$this->id, \$id);
         return \$this->db->get(\$this->table)->row();
     }
-    
+
     // get total rows
     function total_rows(\$q = NULL) {
         \$this->db->like('$pk', \$q);";
 
 foreach ($non_pk as $row) {
-    $string .= "\n\t\$this->db->or_like('" . $row['column_name'] ."', \$q);";
-}    
+    $string .= "\n\t\t\$this->db->or_like('" . $row['column_name'] ."', \$q);";
+}
 
-$string .= "\n\t\$this->db->from(\$this->table);
+$string .= "\n\t\t\$this->db->from(\$this->table);
         return \$this->db->count_all_results();
     }
 
@@ -68,10 +68,10 @@ $string .= "\n\t\$this->db->from(\$this->table);
         \$this->db->like('$pk', \$q);";
 
 foreach ($non_pk as $row) {
-    $string .= "\n\t\$this->db->or_like('" . $row['column_name'] ."', \$q);";
-}    
+    $string .= "\n\t\t\$this->db->or_like('" . $row['column_name'] ."', \$q);";
+}
 
-$string .= "\n\t\$this->db->limit(\$limit, \$start);
+$string .= "\n\t\t\$this->db->limit(\$limit, \$start);
         return \$this->db->get(\$this->table)->result();
     }
 

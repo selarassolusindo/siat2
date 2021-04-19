@@ -246,7 +246,7 @@
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('user-management'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'user-management' ? 'active' : ''; ?>">
                                             <i class="fas fa-user-friends nav-icon"></i>
-                                            <p>User Management</p>
+                                            <p>User</p>
                                         </a>
                                     </li>
                                     <div class="dropdown-divider"></div>

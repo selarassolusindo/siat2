@@ -16,23 +16,23 @@ class " . $c . " extends CI_Controller
 if ($jenis_tabel <> 'reguler_table') {
     $string .= "        \n\t\$this->load->library('datatables');";
 }
-        
+
 $string .= "
     }";
 
 if ($jenis_tabel == 'reguler_table') {
-    
+
 $string .= "\n\n    public function index()
     {
         \$q = urldecode(\$this->input->get('q', TRUE));
         \$start = intval(\$this->input->get('start'));
-        
+
         if (\$q <> '') {
-            \$config['base_url'] = base_url() . '$c_url/index.html?q=' . urlencode(\$q);
-            \$config['first_url'] = base_url() . '$c_url/index.html?q=' . urlencode(\$q);
+            \$config['base_url'] = base_url() . '$c_url?q=' . urlencode(\$q);
+            \$config['first_url'] = base_url() . '$c_url?q=' . urlencode(\$q);
         } else {
-            \$config['base_url'] = base_url() . '$c_url/index.html';
-            \$config['first_url'] = base_url() . '$c_url/index.html';
+            \$config['base_url'] = base_url() . '$c_url';
+            \$config['first_url'] = base_url() . '$c_url';
         }
 
         \$config['per_page'] = 10;
@@ -54,28 +54,28 @@ $string .= "\n\n    public function index()
     }";
 
 } else {
-    
+
 $string .="\n\n    public function index()
     {
         \$this->load->view('$c_url/$v_list');
-    } 
-    
+    }
+
     public function json() {
         header('Content-Type: application/json');
         echo \$this->" . $m . "->json();
     }";
 
 }
-    
-$string .= "\n\n    public function read(\$id) 
+
+$string .= "\n\n    public function read(\$id)
     {
         \$row = \$this->" . $m . "->get_by_id(\$id);
         if (\$row) {
             \$data = array(";
 foreach ($all as $row) {
-    $string .= "\n\t\t'" . $row['column_name'] . "' => \$row->" . $row['column_name'] . ",";
+    $string .= "\n\t\t\t\t'" . $row['column_name'] . "' => \$row->" . $row['column_name'] . ",";
 }
-$string .= "\n\t    );
+$string .= "\n\t\t\t);
             \$this->load->view('$c_url/$v_read', \$data);
         } else {
             \$this->session->set_flashdata('message', 'Record Not Found');
@@ -83,19 +83,19 @@ $string .= "\n\t    );
         }
     }
 
-    public function create() 
+    public function create()
     {
         \$data = array(
-            'button' => 'Create',
+            'button' => 'Simpan',
             'action' => site_url('$c_url/create_action'),";
 foreach ($all as $row) {
-    $string .= "\n\t    '" . $row['column_name'] . "' => set_value('" . $row['column_name'] . "'),";
+    $string .= "\n\t\t\t'" . $row['column_name'] . "' => set_value('" . $row['column_name'] . "'),";
 }
-$string .= "\n\t);
+$string .= "\n\t\t);
         \$this->load->view('$c_url/$v_form', \$data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         \$this->_rules();
 
@@ -104,36 +104,35 @@ $string .= "\n\t);
         } else {
             \$data = array(";
 foreach ($non_pk as $row) {
-    $string .= "\n\t\t'" . $row['column_name'] . "' => \$this->input->post('" . $row['column_name'] . "',TRUE),";
+    $string .= "\n\t\t\t\t'" . $row['column_name'] . "' => \$this->input->post('" . $row['column_name'] . "',TRUE),";
 }
-$string .= "\n\t    );
-
+$string .= "\n\t\t\t);
             \$this->".$m."->insert(\$data);
             \$this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('$c_url'));
         }
     }
-    
-    public function update(\$id) 
+
+    public function update(\$id)
     {
         \$row = \$this->".$m."->get_by_id(\$id);
 
         if (\$row) {
             \$data = array(
-                'button' => 'Update',
+                'button' => 'Simpan',
                 'action' => site_url('$c_url/update_action'),";
 foreach ($all as $row) {
-    $string .= "\n\t\t'" . $row['column_name'] . "' => set_value('" . $row['column_name'] . "', \$row->". $row['column_name']."),";
+    $string .= "\n\t\t\t\t'" . $row['column_name'] . "' => set_value('" . $row['column_name'] . "', \$row->". $row['column_name']."),";
 }
-$string .= "\n\t    );
+$string .= "\n\t\t\t);
             \$this->load->view('$c_url/$v_form', \$data);
         } else {
             \$this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('$c_url'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         \$this->_rules();
 
@@ -142,17 +141,16 @@ $string .= "\n\t    );
         } else {
             \$data = array(";
 foreach ($non_pk as $row) {
-    $string .= "\n\t\t'" . $row['column_name'] . "' => \$this->input->post('" . $row['column_name'] . "',TRUE),";
-}    
-$string .= "\n\t    );
-
+    $string .= "\n\t\t\t\t'" . $row['column_name'] . "' => \$this->input->post('" . $row['column_name'] . "',TRUE),";
+}
+$string .= "\n\t\t\t);
             \$this->".$m."->update(\$this->input->post('$pk', TRUE), \$data);
             \$this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('$c_url'));
         }
     }
-    
-    public function delete(\$id) 
+
+    public function delete(\$id)
     {
         \$row = \$this->".$m."->get_by_id(\$id);
 
@@ -166,14 +164,14 @@ $string .= "\n\t    );
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {";
 foreach ($non_pk as $row) {
     $int = $row3['data_type'] == 'int' || $row['data_type'] == 'double' || $row['data_type'] == 'decimal' ? '|numeric' : '';
-    $string .= "\n\t\$this->form_validation->set_rules('".$row['column_name']."', '".  strtolower(label($row['column_name']))."', 'trim|required$int');";
-}    
-$string .= "\n\n\t\$this->form_validation->set_rules('$pk', '$pk', 'trim');";
-$string .= "\n\t\$this->form_validation->set_error_delimiters('<span class=\"text-danger\">', '</span>');
+    $string .= "\n\t\t\$this->form_validation->set_rules('".$row['column_name']."', '".  strtolower(label($row['column_name']))."', 'trim|required$int');";
+}
+$string .= "\n\t\t\$this->form_validation->set_rules('$pk', '$pk', 'trim');";
+$string .= "\n\t\t\$this->form_validation->set_error_delimiters('<span class=\"text-danger\">', '</span>');
     }";
 
 if ($export_excel == '1') {
@@ -194,29 +192,25 @@ if ($export_excel == '1') {
         header(\"Content-Type: application/download\");
         header(\"Content-Disposition: attachment;filename=\" . \$namaFile . \"\");
         header(\"Content-Transfer-Encoding: binary \");
-
         xlsBOF();
-
         \$kolomhead = 0;
         xlsWriteLabel(\$tablehead, \$kolomhead++, \"No\");";
 foreach ($non_pk as $row) {
         $column_name = label($row['column_name']);
-        $string .= "\n\txlsWriteLabel(\$tablehead, \$kolomhead++, \"$column_name\");";
+        $string .= "\n\t\txlsWriteLabel(\$tablehead, \$kolomhead++, \"$column_name\");";
 }
-$string .= "\n\n\tforeach (\$this->" . $m . "->get_all() as \$data) {
+$string .= "\n\t\tforeach (\$this->" . $m . "->get_all() as \$data) {
             \$kolombody = 0;
-
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber(\$tablebody, \$kolombody++, \$nourut);";
 foreach ($non_pk as $row) {
         $column_name = $row['column_name'];
         $xlsWrite = $row['data_type'] == 'int' || $row['data_type'] == 'double' || $row['data_type'] == 'decimal' ? 'xlsWriteNumber' : 'xlsWriteLabel';
-        $string .= "\n\t    " . $xlsWrite . "(\$tablebody, \$kolombody++, \$data->$column_name);";
+        $string .= "\n\t\t\t" . $xlsWrite . "(\$tablebody, \$kolombody++, \$data->$column_name);";
 }
-$string .= "\n\n\t    \$tablebody++;
+$string .= "\n\t\t\t\$tablebody++;
             \$nourut++;
         }
-
         xlsEOF();
         exit();
     }";
@@ -227,12 +221,10 @@ if ($export_word == '1') {
     {
         header(\"Content-type: application/vnd.ms-word\");
         header(\"Content-Disposition: attachment;Filename=$table_name.doc\");
-
         \$data = array(
             '" . $table_name . "_data' => \$this->" . $m . "->get_all(),
             'start' => 0
         );
-        
         \$this->load->view('" . $c_url ."/". $v_doc . "',\$data);
     }";
 }
@@ -244,13 +236,13 @@ if ($export_pdf == '1') {
             '" . $table_name . "_data' => \$this->" . $m . "->get_all(),
             'start' => 0
         );
-        
+
         ini_set('memory_limit', '32M');
         \$html = \$this->load->view('" . $c_url ."/". $v_pdf . "', \$data, true);
         \$this->load->library('pdf');
         \$pdf = \$this->pdf->load();
         \$pdf->WriteHTML(\$html);
-        \$pdf->Output('" . $table_name . ".pdf', 'D'); 
+        \$pdf->Output('" . $table_name . ".pdf', 'D');
     }";
 }
 
