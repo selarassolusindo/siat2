@@ -8,7 +8,7 @@ class _44_menus_model extends CI_Model
 
     public $table = 't44_menus';
     public $id = 'idmenus';
-    public $order = 'DESC';
+    public $order = 'ASC';
 
     function __construct()
     {
