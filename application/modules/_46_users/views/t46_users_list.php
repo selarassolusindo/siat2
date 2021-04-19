@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T46_users List</h2>
+        <h2 style="margin-top:0px">T46_users List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('_46_users/create'),'Tambah', 'class="btn btn-primary"'); ?>
@@ -44,9 +44,9 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th class="text-right">No.</th>
-				<th>Ip Address</th>
+				<!-- <th>Ip Address</th> -->
 				<th>Username</th>
-				<th>Password</th>
+				<!-- <th>Password</th>
 				<th>Email</th>
 				<th>Activation Selector</th>
 				<th>Activation Code</th>
@@ -57,19 +57,19 @@
 				<th>Remember Code</th>
 				<th>Created On</th>
 				<th>Last Login</th>
-				<th>Active</th>
+				<th>Active</th> -->
 				<th>First Name</th>
-				<th>Last Name</th>
+				<!-- <th>Last Name</th>
 				<th>Company</th>
-				<th>Phone</th>
+				<th>Phone</th> -->
 				<th class="text-center">Proses</th>
             </tr>
 			<?php foreach ($_46_users_data as $_46_users) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
-				<td><?php echo $_46_users->ip_address ?></td>
+				<!-- <td><?php echo $_46_users->ip_address ?></td> -->
 				<td><?php echo $_46_users->username ?></td>
-				<td><?php echo $_46_users->password ?></td>
+				<!-- <td><?php echo $_46_users->password ?></td>
 				<td><?php echo $_46_users->email ?></td>
 				<td><?php echo $_46_users->activation_selector ?></td>
 				<td><?php echo $_46_users->activation_code ?></td>
@@ -80,18 +80,18 @@
 				<td><?php echo $_46_users->remember_code ?></td>
 				<td><?php echo $_46_users->created_on ?></td>
 				<td><?php echo $_46_users->last_login ?></td>
-				<td><?php echo $_46_users->active ?></td>
+				<td><?php echo $_46_users->active ?></td> -->
 				<td><?php echo $_46_users->first_name ?></td>
-				<td><?php echo $_46_users->last_name ?></td>
+				<!-- <td><?php echo $_46_users->last_name ?></td>
 				<td><?php echo $_46_users->company ?></td>
-				<td><?php echo $_46_users->phone ?></td>
+				<td><?php echo $_46_users->phone ?></td> -->
 				<td style="text-align:center" width="200px">
-				<?php 
-				//echo anchor(site_url('_46_users/read/'.$_46_users->id),'Read'); 
-				//echo ' | '; 
-				echo anchor(site_url('_46_users/update/'.$_46_users->id),'Ubah'); 
-				echo ' | '; 
-				echo anchor(site_url('_46_users/delete/'.$_46_users->id),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"'); 
+				<?php
+				//echo anchor(site_url('_46_users/read/'.$_46_users->id),'Read');
+				//echo ' | ';
+				echo anchor(site_url('_46_users/update/'.$_46_users->id),'Ubah');
+				echo ' | ';
+				echo anchor(site_url('_46_users/delete/'.$_46_users->id),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
 				?>
 				</td>
 			</tr>
@@ -107,5 +107,5 @@
                 <?php echo $pagination ?>
             </div>
         </div>
-    </body>
-</html>
+    <!-- </body>
+</html> -->

@@ -206,6 +206,7 @@
                                 switch ($this->uri->segment(1)) {
                                     case '_01_company':
                                     case 'user-management':
+                                    case '_46_users':
                                     case '_02_akun':
                                     case '_03_saldoawal':
                                     case '_04_tglsaldoawal':
@@ -245,6 +246,13 @@
                                     <!-- user management -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('user-management'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'user-management' ? 'active' : ''; ?>">
+                                            <i class="fas fa-user-friends nav-icon"></i>
+                                            <p>User-old</p>
+                                        </a>
+                                    </li>
+                                    <!-- user management -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_46_users'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_46_users' ? 'active' : ''; ?>">
                                             <i class="fas fa-user-friends nav-icon"></i>
                                             <p>User</p>
                                         </a>

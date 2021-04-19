@@ -40,7 +40,10 @@ class _46_users extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $this->load->view('_46_users/t46_users_list', $data);
+        // $this->load->view('_46_users/t46_users_list', $data);
+        $data['_view'] = '_46_users/t46_users_list';
+        $data['_caption'] = 'Users';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function read($id)
@@ -100,7 +103,10 @@ class _46_users extends CI_Controller
 			'company' => set_value('company'),
 			'phone' => set_value('phone'),
 		);
-        $this->load->view('_46_users/t46_users_form', $data);
+        // $this->load->view('_46_users/t46_users_form', $data);
+        $data['_view'] = '_46_users/t46_users_form';
+        $data['_caption'] = 'Users';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function create_action()
@@ -164,7 +170,10 @@ class _46_users extends CI_Controller
 				'company' => set_value('company', $row->company),
 				'phone' => set_value('phone', $row->phone),
 			);
-            $this->load->view('_46_users/t46_users_form', $data);
+            // $this->load->view('_46_users/t46_users_form', $data);
+            $data['_view'] = '_46_users/t46_users_form';
+            $data['_caption'] = 'Users';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_46_users'));
