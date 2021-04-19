@@ -16,19 +16,23 @@
         </style>
     </head>
     <body>
-        <h2>T44_menus List</h2>
+        <h2>T45_users_menus List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Menu</th>
+		<th>Idusers</th>
+		<th>Idmenus</th>
+		<th>Rights</th>
 		
             </tr><?php
-            foreach ($_44_menus_data as $_44_menus)
+            foreach ($_45_users_menus_data as $_45_users_menus)
             {
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $_44_menus->Menu ?></td>	
+		      <td><?php echo $_45_users_menus->idusers ?></td>
+		      <td><?php echo $_45_users_menus->idmenus ?></td>
+		      <td><?php echo $_45_users_menus->rights ?></td>	
                 </tr>
                 <?php
             }

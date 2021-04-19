@@ -56,12 +56,12 @@
 	// define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
     switch ($_SERVER["HTTP_HOST"]) {
 	case "localhost":
-		$env = "production";
+		$env = "development";
         define('DBPREFIX', 'db');
 		break;
 
 	case "siat2.selusin.online":
-		$env = "testing";
+		$env = "production";
         define('DBPREFIX', 'u473805576');
 		break;
 
@@ -82,7 +82,8 @@
 switch (ENVIRONMENT)
 {
 	case 'development':
-		error_reporting(-1);
+		// error_reporting(-1);
+        error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 		ini_set('display_errors', 1);
 	break;
 

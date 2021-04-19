@@ -10,10 +10,12 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T44_menus Read</h2>
+        <h2 style="margin-top:0px">T45_users_menus Read</h2>
         <table class="table">
-	    <tr><td>Menu</td><td><?php echo $Menu; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('_44_menus') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td>Idusers</td><td><?php echo $idusers; ?></td></tr>
+	    <tr><td>Idmenus</td><td><?php echo $idmenus; ?></td></tr>
+	    <tr><td>Rights</td><td><?php echo $rights; ?></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('_45_users_menus') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>
 </html>
