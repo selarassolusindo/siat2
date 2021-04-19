@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2021 at 01:32 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.15
+-- Generation Time: Apr 20, 2021 at 03:59 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -819,11 +819,9 @@ CREATE TABLE `t44_menus` (
 
 INSERT INTO `t44_menus` (`idmenus`, `Menus`) VALUES
 (1, 'SETUP'),
-(2, 'SETUP - COMPANY'),
-(3, 'SETUP - USER'),
-(4, 'SETUP - CUSTOMER'),
-(5, 'SETUP - SHIPPER'),
-(6, 'SETUP - VENDOR');
+(2, 'SETUP - Company'),
+(3, 'SETUP - User'),
+(4, 'SETUP - Customer');
 
 -- --------------------------------------------------------
 
@@ -843,7 +841,14 @@ CREATE TABLE `t45_users_menus` (
 --
 
 INSERT INTO `t45_users_menus` (`idusersmenus`, `idusers`, `idmenus`, `rights`) VALUES
-(1, 1, 1, 7);
+(1, 1, 1, 7),
+(2, 2, 1, 7),
+(3, 1, 2, 7),
+(4, 2, 2, 7),
+(5, 1, 3, 7),
+(6, 2, 3, 7),
+(7, 1, 4, 7),
+(8, 2, 4, 7);
 
 -- --------------------------------------------------------
 
@@ -878,8 +883,8 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1618812377, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
-(2, '::1', 'adi', '$2y$10$vPbQth0idvyMbrURrM.YDOuncIuLAzjrawwCiiz031bz0WRxLMfcu', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1613305305, 1, 'Adi', NULL, NULL, NULL);
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1618833765, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1618837450, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -921,8 +926,9 @@ CREATE TABLE `t48_users_groups` (
 INSERT INTO `t48_users_groups` (`id`, `user_id`, `group_id`) VALUES
 (3, 1, 1),
 (4, 1, 2),
-(10, 2, 2),
-(11, 2, 3);
+(14, 2, 1),
+(15, 2, 2),
+(16, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -1248,13 +1254,13 @@ ALTER TABLE `t34_invoiced`
 -- AUTO_INCREMENT for table `t44_menus`
 --
 ALTER TABLE `t44_menus`
-  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `t45_users_menus`
 --
 ALTER TABLE `t45_users_menus`
-  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `t46_users`
@@ -1272,7 +1278,7 @@ ALTER TABLE `t47_groups`
 -- AUTO_INCREMENT for table `t48_users_groups`
 --
 ALTER TABLE `t48_users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `t49_login_attempts`
