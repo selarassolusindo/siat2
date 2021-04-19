@@ -10,7 +10,7 @@
 		<th><?php echo lang('index_uname_th');?></th>
 		<!-- <th><?php echo lang('index_lname_th');?></th> -->
 		<!-- <th><?php echo lang('index_email_th');?></th> -->
-		<th><?php echo lang('index_groups_th');?></th>
+		<!-- <th><?php echo lang('index_groups_th');?></th> -->
 		<th><?php echo lang('index_status_th');?></th>
 		<th><?php echo lang('index_action_th');?></th>
 	</tr>
@@ -20,15 +20,16 @@
 				<td><?php echo htmlspecialchars($user->username, ENT_QUOTES, 'UTF-8');?></td>
         <!-- <td><?php echo htmlspecialchars($user->last_name, ENT_QUOTES, 'UTF-8');?></td> -->
         <!-- <td><?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8');?></td> -->
-			<td>
+			<!-- <td>
 				<?php foreach ($user->groups as $group):?>
 					<?php echo anchor("edit-group/".$group->id, htmlspecialchars($group->name, ENT_QUOTES, 'UTF-8')) ;?><br />
                 <?php endforeach?>
-			</td>
+			</td> -->
 			<td><?php echo ($user->active) ? anchor("deactivate/".$user->id, lang('index_active_link')) : anchor("activate/". $user->id, lang('index_inactive_link'));?></td>
 			<td><?php echo anchor("edit-user/".$user->id, 'Edit') ;?></td>
 		</tr>
 	<?php endforeach;?>
 </table>
 
-<p><?php echo anchor('create-user', lang('index_create_user_link'))?> | <?php echo anchor('create-group', lang('index_create_group_link'))?></p>
+<!-- <p><?php echo anchor('create-user', lang('index_create_user_link'))?> | <?php echo anchor('create-group', lang('index_create_group_link'))?></p> -->
+<p><?php echo anchor('create-user', lang('index_create_user_link'))?></p>

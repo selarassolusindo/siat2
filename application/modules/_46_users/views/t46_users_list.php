@@ -58,7 +58,7 @@
 				<th>Created On</th>
 				<th>Last Login</th>
 				<th>Active</th> -->
-				<th>First Name</th>
+				<th>Name</th>
 				<!-- <th>Last Name</th>
 				<th>Company</th>
 				<th>Phone</th> -->
