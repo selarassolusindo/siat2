@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 20, 2021 at 03:59 AM
+-- Generation Time: Apr 29, 2021 at 04:38 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -818,7 +818,6 @@ CREATE TABLE `t44_menus` (
 --
 
 INSERT INTO `t44_menus` (`idmenus`, `Menus`) VALUES
-(1, 'SETUP'),
 (2, 'SETUP - Company'),
 (3, 'SETUP - User'),
 (4, 'SETUP - Customer');
@@ -841,13 +840,11 @@ CREATE TABLE `t45_users_menus` (
 --
 
 INSERT INTO `t45_users_menus` (`idusersmenus`, `idusers`, `idmenus`, `rights`) VALUES
-(1, 1, 1, 7),
-(2, 2, 1, 7),
-(3, 1, 2, 7),
+(3, 1, 2, 2),
 (4, 2, 2, 7),
 (5, 1, 3, 7),
 (6, 2, 3, 7),
-(7, 1, 4, 7),
+(7, 1, 4, 2),
 (8, 2, 4, 7);
 
 -- --------------------------------------------------------
@@ -883,7 +880,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1618833765, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1619630621, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1618837450, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1284,7 +1281,7 @@ ALTER TABLE `t48_users_groups`
 -- AUTO_INCREMENT for table `t49_login_attempts`
 --
 ALTER TABLE `t49_login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

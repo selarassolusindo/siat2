@@ -206,7 +206,9 @@
                                 switch ($this->uri->segment(1)) {
                                     case '_01_company':
                                     case 'user-management':
-                                    // case '_46_users':
+                                    case 'create-user':
+                                    case 'edit-user':
+                                    case '_45_users_menus':
                                     case '_02_akun':
                                     case '_03_saldoawal':
                                     case '_04_tglsaldoawal':
@@ -230,7 +232,37 @@
                                 }
                                 ?>
                             ">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link
+                                    <?php
+                                    switch ($this->uri->segment(1)) {
+                                        case '_01_company':
+                                        case 'user-management':
+                                        case 'create-user':
+                                        case 'edit-user':
+                                        case '_45_users_menus':
+                                        case '_02_akun':
+                                        case '_03_saldoawal':
+                                        case '_04_tglsaldoawal':
+                                        case '_05_customer':
+                                        case '_06_shipper':
+                                        case '_07_vendor':
+                                        case '_08_armada':
+                                        case '_09_sparepart':
+                                        case '_10_service':
+                                        case '_11_cost':
+                                        case '_12_lokasi':
+                                        case '_13_satuan':
+                                        case '_14_bank':
+                                        case '_15_driver':
+                                        case '_16_ekor':
+                                        case 'input-tanggal-saldo-awal':
+                                            echo 'active';
+                                            break;
+                                        default:
+                                            echo '';
+                                    }
+                                    ?>
+                                ">
                                     <i class="fab fa-buffer nav-icon"></i>
                                     <p>SETUP<i class="right fas fa-angle-left"></i></p>
                                 </a>
@@ -245,7 +277,7 @@
                                     </li>
                                     <!-- user management -->
                                     <li class="nav-item">
-                                        <a href="<?php echo site_url('user-management'); ?>" class="nav-link <?php echo $this->uri->segment(1) == 'user-management' ? 'active' : ''; ?>">
+                                        <a href="<?php echo site_url('user-management'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'user-management' or $this->uri->segment(1) == 'create-user' or $this->uri->segment(1) == 'edit-user' or $this->uri->segment(1) == '_45_users_menus') ? 'active' : ''; ?>">
                                             <i class="fas fa-user-friends nav-icon"></i>
                                             <p>User</p>
                                         </a>
