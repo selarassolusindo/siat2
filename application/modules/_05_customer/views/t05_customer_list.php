@@ -13,7 +13,9 @@
         <h2 style="margin-top:0px">T05_customer List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
+                <?php if ($hakAkses['tambah']) { ?>
                 <?php echo anchor(site_url('_05_customer/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php } ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -69,11 +71,17 @@
 			<td><?php echo $_05_customer->updated_at ?></td> -->
 			<td style="text-align:center" width="200px">
 				<?php
-				echo anchor(site_url('_05_customer/read/'.$_05_customer->idcustomer),'Read');
-				echo ' | ';
+				// echo anchor(site_url('_05_customer/read/'.$_05_customer->idcustomer),'Read');
+				// echo ' | ';
+                if ($hakAkses['ubah']) {
 				echo anchor(site_url('_05_customer/update/'.$_05_customer->idcustomer),'Update');
-				echo ' | ';
+                if ($hakAkses['hapus']) {
+                echo ' | ';
+                }
+                }
+                if ($hakAkses['hapus']) {
 				echo anchor(site_url('_05_customer/delete/'.$_05_customer->idcustomer),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+                }
 				?>
 			</td>
 		</tr>

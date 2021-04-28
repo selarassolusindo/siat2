@@ -70,6 +70,56 @@ class _45_users_menus_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    // get all where id = $id
+    function getAllById($id)
+    {
+        $this->db->order_by('idmenus', 'asc');
+        $this->db->where('idusers', $id);
+        $this->db->select($this->table.'.*');
+        $this->db->select('users.first_name, users.username');
+        $this->db->select('menus.Menus');
+        $this->db->from($this->table);
+        $this->db->join('t46_users users', 'users.id = ' . $this->table . '.idusers');
+        $this->db->join('t44_menus menus', 'menus.idmenus = ' . $this->table . '.idmenus');
+        return $this->db->get()->result();
+    }
+
+    /**
+     * get hak akses berdasarkan idusers = user_id dan idmenus
+     */
+    function getHakAkses($idmenus) {
+        $this->db->where('idusers', $this->session->userdata('user_id'));
+        $this->db->where('idmenus', $idmenus);
+        $row = $this->db->get($this->table)->row();
+        $hakAkses = array('tambah' => false, 'ubah' => false, 'hapus' => false);
+        if ($row) {
+            switch ($row->rights) {
+                case 1:
+                    $hakAkses = array('tambah' => true, 'ubah' => false, 'hapus' => false);
+                    break;
+                case 2:
+                    $hakAkses = array('tambah' => false, 'ubah' => true, 'hapus' => false);
+                    break;
+                case 3:
+                    $hakAkses = array('tambah' => true, 'ubah' => true, 'hapus' => false);
+                    break;
+                case 4:
+                    $hakAkses = array('tambah' => false, 'ubah' => false, 'hapus' => true);
+                    break;
+                case 5:
+                    $hakAkses = array('tambah' => true, 'ubah' => false, 'hapus' => true);
+                    break;
+                case 6:
+                    $hakAkses = array('tambah' => false, 'ubah' => true, 'hapus' => true);
+                    break;
+                case 7:
+                    $hakAkses = array('tambah' => true, 'ubah' => true, 'hapus' => true);
+                    break;
+            }
+        }
+        return $hakAkses;
+    }
+
 }
 
 /* End of file _45_users_menus_model.php */

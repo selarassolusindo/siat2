@@ -26,7 +26,13 @@
                 <?php endforeach?>
 			</td> -->
 			<td><?php echo ($user->active) ? anchor("deactivate/".$user->id, lang('index_active_link')) : anchor("activate/". $user->id, lang('index_inactive_link'));?></td>
-			<td><?php echo anchor("edit-user/".$user->id, 'Edit') ;?></td>
+			<td>
+                <?php echo anchor("edit-user/".$user->id, 'Edit') ;?>
+                <?php
+                echo ' | ';
+                echo anchor(site_url('_45_users_menus/update/'.$user->id),'Hak Akses');
+                ?>
+            </td>
 		</tr>
 	<?php endforeach;?>
 </table>

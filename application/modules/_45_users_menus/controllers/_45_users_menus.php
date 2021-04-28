@@ -40,7 +40,10 @@ class _45_users_menus extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $this->load->view('_45_users_menus/t45_users_menus_list', $data);
+        // $this->load->view('_45_users_menus/t45_users_menus_list', $data);
+        $data['_view'] = '_45_users_menus/t45_users_menus_list';
+        $data['_caption'] = 'DATA USERS';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function read($id)
@@ -70,7 +73,10 @@ class _45_users_menus extends CI_Controller
 			'idmenus' => set_value('idmenus'),
 			'rights' => set_value('rights'),
 		);
-        $this->load->view('_45_users_menus/t45_users_menus_form', $data);
+        // $this->load->view('_45_users_menus/t45_users_menus_form', $data);
+        $data['_view'] = '_45_users_menus/t45_users_menus_form';
+        $data['_caption'] = 'DATA USERS';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function create_action()
@@ -91,7 +97,7 @@ class _45_users_menus extends CI_Controller
         }
     }
 
-    public function update($id)
+    public function update_ori($id)
     {
         $row = $this->_45_users_menus_model->get_by_id($id);
 
@@ -111,7 +117,7 @@ class _45_users_menus extends CI_Controller
         }
     }
 
-    public function update_action()
+    public function update_action_ori()
     {
         $this->_rules();
 
@@ -198,6 +204,49 @@ class _45_users_menus extends CI_Controller
             'start' => 0
         );
         $this->load->view('_45_users_menus/t45_users_menus_doc',$data);
+    }
+
+    public function update($id)
+    {
+        // $row = $this->_45_users_menus_model->get_by_id($id);
+        $dataUsers = $this->_45_users_menus_model->getAllById($id);
+
+        if ($dataUsers) {
+            $data = array(
+                'button' => 'Simpan',
+                'action' => site_url('_45_users_menus/update_action'),
+				// 'idusersmenus' => set_value('idusersmenus', $row->idusersmenus),
+				// 'idusers' => set_value('idusers', $row->idusers),
+				// 'idmenus' => set_value('idmenus', $row->idmenus),
+				// 'rights' => set_value('rights', $row->rights),
+                'dataUsers' => $dataUsers,
+			);
+            // $this->load->view('_45_users_menus/t45_users_menus_form', $data);
+            $data['_view'] = '_45_users_menus/t45_users_menus_form';
+            $data['_caption'] = 'Users - Hak Akses';
+            $this->load->view('_00_dashboard/_layout', $data);
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('user-management'));
+        }
+    }
+
+    public function update_action()
+    {
+        $data = $this->input->post();
+        foreach($data['idusersmenus'] as $key => $value) {
+            $idusersmenus = $value;
+            $rights =
+                $this->input->post('_1_'.$value, true)
+                + $this->input->post('_2_'.$value, true)
+                + $this->input->post('_4_'.$value, true);
+            $detail = array(
+                'rights' => $rights,
+            );
+            $this->_45_users_menus_model->update($value, $detail);
+        }
+        $this->session->set_flashdata('message', 'Update Record Success');
+        redirect(site_url('user-management'));
     }
 
 }

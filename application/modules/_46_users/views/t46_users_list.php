@@ -88,8 +88,7 @@
 				<td style="text-align:center" width="200px">
 				<?php
 				//echo anchor(site_url('_46_users/read/'.$_46_users->id),'Read');
-				//echo ' | ';
-				echo anchor(site_url('_46_users/update/'.$_46_users->id),'Ubah');
+                echo anchor(site_url('_46_users/update/'.$_46_users->id),'Ubah');
 				echo ' | ';
 				echo anchor(site_url('_46_users/delete/'.$_46_users->id),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
 				?>

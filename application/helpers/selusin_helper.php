@@ -103,3 +103,24 @@ function getNewInvoice($prefix, $fieldName, $tableName)
     }
     return $sNextKode;
 }
+
+/**
+ * pre var
+ */
+function pre($data) {
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
+}
+
+/**
+ * check hak akses
+ */
+function checkHakAkses($hakAkses, $idmenus) {
+    $idusers = $this->session->userdata('user_id');
+    switch ($hakAkses) {
+        case 'tambah':
+            
+    }
+    return true;
+}
