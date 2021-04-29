@@ -22,10 +22,9 @@
                 <th>No</th>
 		<th>Kode</th>
 		<th>Nama</th>
-		<th>NamaRekening</th>
-		<th>Cabang</th>
 		<th>NomorRekening</th>
-		<th>JenisRekening</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_14_bank_data as $_14_bank)
@@ -35,10 +34,9 @@
 		      <td><?php echo ++$start ?></td>
 		      <td><?php echo $_14_bank->Kode ?></td>
 		      <td><?php echo $_14_bank->Nama ?></td>
-		      <td><?php echo $_14_bank->NamaRekening ?></td>
-		      <td><?php echo $_14_bank->Cabang ?></td>
 		      <td><?php echo $_14_bank->NomorRekening ?></td>
-		      <td><?php echo $_14_bank->JenisRekening ?></td>	
+		      <td><?php echo $_14_bank->created_at ?></td>
+		      <td><?php echo $_14_bank->updated_at ?></td>	
                 </tr>
                 <?php
             }
