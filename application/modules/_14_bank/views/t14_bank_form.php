@@ -36,6 +36,15 @@
             	<label for="varchar">JENIS REKENING <?php echo form_error('JenisRekening') ?></label>
             	<input type="text" class="form-control" name="JenisRekening" id="JenisRekening" placeholder="JENIS REKENING" value="<?php echo $JenisRekening; ?>" />
         	</div>
+            <div class="form-group">
+            	<label for="varchar">AKUN <?php echo form_error('Akun') ?></label>
+            	<!-- <input type="text" class="form-control" name="JenisRekening" id="JenisRekening" placeholder="JENIS REKENING" value="<?php echo $JenisRekening; ?>" /> -->
+                <select class="form-control" name="Akun">
+                    <?php foreach($dataAkun as $d) { ?>
+                        <option value="<?php echo $d->idakun ?>" <?php echo $d->idakun == $Akun ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                    <?php } ?>
+                </select>
+        	</div>
 			<input type="hidden" name="idbank" value="<?php echo $idbank; ?>" />
 			<button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 			<a href="<?php echo site_url('_14_bank') ?>" class="btn btn-secondary">Batal</a>

@@ -11,6 +11,7 @@ class _14_bank extends CI_Controller
         $this->load->model('_14_bank_model');
         $this->load->library('form_validation');
         $this->load->model('_45_users_menus/_45_users_menus_model');
+        $this->load->model('_02_akun/_02_akun_model');
     }
 
     public function index()
@@ -70,6 +71,7 @@ class _14_bank extends CI_Controller
 
     public function create()
     {
+        $dataAkun = $this->_02_akun_model->get_all(); //echo pre($dataAkun); exit;
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('_14_bank/create_action'),
@@ -80,6 +82,8 @@ class _14_bank extends CI_Controller
 			'Cabang' => set_value('Cabang'),
 			'NomorRekening' => set_value('NomorRekening'),
 			'JenisRekening' => set_value('JenisRekening'),
+            'Akun' => set_value('Akun'),
+            'dataAkun' => $dataAkun,
 		);
         // $this->load->view('_14_bank/t14_bank_form', $data);
         $data['_view'] = '_14_bank/t14_bank_form';
@@ -101,6 +105,7 @@ class _14_bank extends CI_Controller
 				'Cabang' => $this->input->post('Cabang',TRUE),
 				'NomorRekening' => $this->input->post('NomorRekening',TRUE),
 				'JenisRekening' => $this->input->post('JenisRekening',TRUE),
+                'Akun' => $this->input->post('Akun',TRUE),
 			);
             $this->_14_bank_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -113,6 +118,7 @@ class _14_bank extends CI_Controller
         $row = $this->_14_bank_model->get_by_id($id);
 
         if ($row) {
+            $dataAkun = $this->_02_akun_model->get_all(); //echo pre($dataAkun); exit;
             $data = array(
                 'button' => 'Simpan',
                 'action' => site_url('_14_bank/update_action'),
@@ -123,6 +129,8 @@ class _14_bank extends CI_Controller
 				'Cabang' => set_value('Cabang', $row->Cabang),
 				'NomorRekening' => set_value('NomorRekening', $row->NomorRekening),
 				'JenisRekening' => set_value('JenisRekening', $row->JenisRekening),
+                'Akun' => set_value('JenisRekening', $row->Akun),
+                'dataAkun' => $dataAkun,
 			);
             // $this->load->view('_14_bank/t14_bank_form', $data);
             $data['_view'] = '_14_bank/t14_bank_form';
@@ -148,6 +156,7 @@ class _14_bank extends CI_Controller
 				'Cabang' => $this->input->post('Cabang',TRUE),
 				'NomorRekening' => $this->input->post('NomorRekening',TRUE),
 				'JenisRekening' => $this->input->post('JenisRekening',TRUE),
+                'Akun' => $this->input->post('Akun',TRUE),
 			);
             $this->_14_bank_model->update($this->input->post('idbank', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -177,6 +186,7 @@ class _14_bank extends CI_Controller
 		$this->form_validation->set_rules('Cabang', 'cabang', 'trim|required');
 		$this->form_validation->set_rules('NomorRekening', 'nomorrekening', 'trim|required');
 		$this->form_validation->set_rules('JenisRekening', 'jenisrekening', 'trim|required');
+        $this->form_validation->set_rules('Akun', 'akun', 'trim|required');
 		$this->form_validation->set_rules('idbank', 'idbank', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
@@ -207,6 +217,7 @@ class _14_bank extends CI_Controller
 		xlsWriteLabel($tablehead, $kolomhead++, "Cabang");
 		xlsWriteLabel($tablehead, $kolomhead++, "NomorRekening");
 		xlsWriteLabel($tablehead, $kolomhead++, "JenisRekening");
+        xlsWriteLabel($tablehead, $kolomhead++, "Akun");
 		foreach ($this->_14_bank_model->get_all() as $data) {
             $kolombody = 0;
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
@@ -217,6 +228,7 @@ class _14_bank extends CI_Controller
 			xlsWriteLabel($tablebody, $kolombody++, $data->Cabang);
 			xlsWriteLabel($tablebody, $kolombody++, $data->NomorRekening);
 			xlsWriteLabel($tablebody, $kolombody++, $data->JenisRekening);
+            xlsWriteLabel($tablebody, $kolombody++, $data->Akun);
 			$tablebody++;
             $nourut++;
         }

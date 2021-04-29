@@ -52,6 +52,7 @@
 				<th>CABANG</th>
 				<th>NOMOR REKENING</th>
 				<th>JENIS REKENING</th>
+                <th>AKUN</th>
 				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($_14_bank_data as $_14_bank) { ?>
@@ -63,6 +64,7 @@
 				<td><?php echo $_14_bank->Cabang ?></td>
 				<td><?php echo $_14_bank->NomorRekening ?></td>
 				<td><?php echo $_14_bank->JenisRekening ?></td>
+                <td><?php echo $_14_bank->NamaAkun ?></td>
 				<td style="text-align:center" width="200px">
 				<?php
 				//echo anchor(site_url('_14_bank/read/'.$_14_bank->idbank),'Read');

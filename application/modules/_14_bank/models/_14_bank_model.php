@@ -9,6 +9,7 @@ class _14_bank_model extends CI_Model
     public $table = 't14_bank';
     public $id = 'idbank';
     public $order = 'ASC';
+    public $join = 't02_akun';
 
     function __construct()
     {
@@ -19,41 +20,52 @@ class _14_bank_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama as NamaAkun');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idakun = ' . $this->table . '.Akun', 'left');
+        return $this->db->get()->result();
     }
 
     // get data by id
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama as NamaAkun');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idakun = ' . $this->table . '.Akun', 'left');
+        return $this->db->get()->row();
     }
 
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('idbank', $q);
-		$this->db->or_like('Kode', $q);
-		$this->db->or_like('Nama', $q);
+		$this->db->like($this->table.'.Nama', $q);
 		$this->db->or_like('NamaRekening', $q);
 		$this->db->or_like('Cabang', $q);
 		$this->db->or_like('NomorRekening', $q);
 		$this->db->or_like('JenisRekening', $q);
-		$this->db->from($this->table);
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama as NamaAkun');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idakun = ' . $this->table . '.Akun', 'left');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('idbank', $q);
-		$this->db->or_like('Kode', $q);
-		$this->db->or_like('Nama', $q);
+		$this->db->like($this->table.'.Nama', $q);
 		$this->db->or_like('NamaRekening', $q);
 		$this->db->or_like('Cabang', $q);
 		$this->db->or_like('NomorRekening', $q);
 		$this->db->or_like('JenisRekening', $q);
 		$this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama as NamaAkun');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idakun = ' . $this->table . '.Akun', 'left');
+        return $this->db->get()->result();
     }
 
     // insert data
