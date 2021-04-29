@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2021 at 12:36 AM
+-- Generation Time: Apr 30, 2021 at 02:04 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -604,9 +604,15 @@ CREATE TABLE `t13_satuan` (
   `idsatuan` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Tipe` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t13_satuan`
+--
+
+INSERT INTO `t13_satuan` (`idsatuan`, `Kode`, `Nama`, `Tipe`) VALUES
+(1, 'K1', 'Dokumen', 'Lembar');
 
 -- --------------------------------------------------------
 
@@ -633,18 +639,17 @@ CREATE TABLE `t15_driver` (
   `iddriver` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
+  `Alamat` text NOT NULL,
   `HP` varchar(50) NOT NULL,
-  `KTP` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `KTP` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `t15_driver`
 --
 
-INSERT INTO `t15_driver` (`iddriver`, `Kode`, `Nama`, `HP`, `KTP`, `created_at`, `updated_at`) VALUES
-(1, 'DR001', 'Driver Sip', '0816500678', '3515112412740001', '2021-03-07 09:44:26', '2021-03-07 09:44:26');
+INSERT INTO `t15_driver` (`iddriver`, `Kode`, `Nama`, `Alamat`, `HP`, `KTP`) VALUES
+(1, 'K1', 'Dodo', 'Perumtas 3 N5 - 7', '089679920200', '3515112412740001');
 
 -- --------------------------------------------------------
 
@@ -654,17 +659,19 @@ INSERT INTO `t15_driver` (`iddriver`, `Kode`, `Nama`, `HP`, `KTP`, `created_at`,
 
 CREATE TABLE `t16_ekor` (
   `idekor` int(11) NOT NULL,
-  `Kode` varchar(10) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Kode` varchar(5) NOT NULL,
+  `Merk` varchar(50) NOT NULL,
+  `Tipe` enum('Panjang','Pendek') NOT NULL,
+  `TglBeli` date NOT NULL,
+  `TglKir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `t16_ekor`
 --
 
-INSERT INTO `t16_ekor` (`idekor`, `Kode`, `created_at`, `updated_at`) VALUES
-(1, 'EK0001', '2021-03-07 10:25:09', '2021-03-07 10:25:09');
+INSERT INTO `t16_ekor` (`idekor`, `Kode`, `Merk`, `Tipe`, `TglBeli`, `TglKir`) VALUES
+(1, 'K1', 'Hino', 'Panjang', '2021-02-01', '2022-03-01');
 
 -- --------------------------------------------------------
 
@@ -1234,7 +1241,7 @@ ALTER TABLE `t12_lokasi`
 -- AUTO_INCREMENT for table `t13_satuan`
 --
 ALTER TABLE `t13_satuan`
-  MODIFY `idsatuan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idsatuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t14_bank`
