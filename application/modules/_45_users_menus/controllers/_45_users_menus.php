@@ -42,7 +42,7 @@ class _45_users_menus extends CI_Controller
         );
         // $this->load->view('_45_users_menus/t45_users_menus_list', $data);
         $data['_view'] = '_45_users_menus/t45_users_menus_list';
-        $data['_caption'] = 'DATA USERS';
+        $data['_caption'] = 'Users - Menus';
         $this->load->view('_00_dashboard/_layout', $data);
     }
 
@@ -75,7 +75,7 @@ class _45_users_menus extends CI_Controller
 		);
         // $this->load->view('_45_users_menus/t45_users_menus_form', $data);
         $data['_view'] = '_45_users_menus/t45_users_menus_form';
-        $data['_caption'] = 'DATA USERS';
+        $data['_caption'] = 'Users - Menus';
         $this->load->view('_00_dashboard/_layout', $data);
     }
 
@@ -110,7 +110,10 @@ class _45_users_menus extends CI_Controller
 				'idmenus' => set_value('idmenus', $row->idmenus),
 				'rights' => set_value('rights', $row->rights),
 			);
-            $this->load->view('_45_users_menus/t45_users_menus_form', $data);
+            // $this->load->view('_45_users_menus/t45_users_menus_form', $data);
+            $data['_view'] = '_45_users_menus/t45_users_menus_form';
+            $data['_caption'] = 'Users - Menus';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_45_users_menus'));
