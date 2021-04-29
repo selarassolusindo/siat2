@@ -53,7 +53,7 @@
 		<th>No. Mesin</th>
 		<th>Jatuh Tempo Pajak</th>
 		<th>Jatuh Tempo KIR</th>
-		<th>Kode Ekor</th>
+		<th>Tgl. Beli</th>
 		<!-- <th>Created At</th>
 		<th>Updated At</th> -->
 		<th>Action</th>
@@ -70,15 +70,16 @@
 			<td><?php echo $_08_armada->Nopol ?></td>
 			<td><?php echo $_08_armada->Norangka ?></td>
 			<td><?php echo $_08_armada->Nomesin ?></td>
-			<td><?php echo $_08_armada->JatuhTempoPajak ?></td>
-			<td><?php echo $_08_armada->JatuhTempoKir ?></td>
-			<td><?php echo $_08_armada->KodeEkor ?></td>
+			<td><?php echo dateIndo($_08_armada->JatuhTempoPajak) ?></td>
+			<td><?php echo dateIndo($_08_armada->JatuhTempoKir) ?></td>
+            <td><?php echo dateIndo($_08_armada->TglBeli) ?></td>
+			<!-- <td><?php echo $_08_armada->KodeEkor ?></td> -->
 			<!-- <td><?php echo $_08_armada->created_at ?></td>
 			<td><?php echo $_08_armada->updated_at ?></td> -->
 			<td style="text-align:center" width="200px">
 				<?php
-				echo anchor(site_url('_08_armada/read/'.$_08_armada->idarmada),'Read');
-				echo ' | ';
+				// echo anchor(site_url('_08_armada/read/'.$_08_armada->idarmada),'Read');
+				// echo ' | ';
 				echo anchor(site_url('_08_armada/update/'.$_08_armada->idarmada),'Update');
 				echo ' | ';
 				echo anchor(site_url('_08_armada/delete/'.$_08_armada->idarmada),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
@@ -91,9 +92,9 @@
         </table>
         <div class="row">
             <div class="col-md-6">
-                <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-		<?php echo anchor(site_url('_08_armada/excel'), 'Excel', 'class="btn btn-primary"'); ?>
-		<?php echo anchor(site_url('_08_armada/word'), 'Word', 'class="btn btn-primary"'); ?>
+                <!-- <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a> -->
+		<!-- <?php echo anchor(site_url('_08_armada/excel'), 'Excel', 'class="btn btn-primary"'); ?> -->
+		<!-- <?php echo anchor(site_url('_08_armada/word'), 'Word', 'class="btn btn-primary"'); ?> -->
 	    </div>
             <div class="col-md-6 text-right">
                 <?php echo $pagination ?>

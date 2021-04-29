@@ -120,7 +120,17 @@ function checkHakAkses($hakAkses, $idmenus) {
     $idusers = $this->session->userdata('user_id');
     switch ($hakAkses) {
         case 'tambah':
-            
+
     }
     return true;
+}
+
+function dateIndo($value)
+{
+    return date_format(date_create($value), 'd-m-Y');
+}
+
+function dateMysql($value)
+{
+    return date('Y-m-d', strtotime(str_replace('/', '-', $value)));
 }

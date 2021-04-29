@@ -81,7 +81,8 @@ class _08_armada extends CI_Controller
             'button' => 'Create',
             'action' => site_url('_08_armada/create_action'),
 	    'idarmada' => set_value('idarmada'),
-	    'Kode' => set_value('Kode', getNewKode('AR', 'Kode', 't08_armada')),
+	    // 'Kode' => set_value('Kode', getNewKode('AR', 'Kode', 't08_armada')),
+        'Kode' => set_value('Kode'),
 	    'Merk' => set_value('Merk'),
 	    'Tipe' => set_value('Tipe'),
 	    'TahunPembuatan' => set_value('TahunPembuatan'),
@@ -90,7 +91,8 @@ class _08_armada extends CI_Controller
 	    'Nomesin' => set_value('Nomesin'),
 	    'JatuhTempoPajak' => set_value('JatuhTempoPajak'),
 	    'JatuhTempoKir' => set_value('JatuhTempoKir'),
-	    'KodeEkor' => set_value('KodeEkor'),
+        'TglBeli' => set_value('TglBeli'),
+	    // 'KodeEkor' => set_value('KodeEkor'),
 	    // 'created_at' => set_value('created_at'),
 	    // 'updated_at' => set_value('updated_at'),
 	);
@@ -115,9 +117,10 @@ class _08_armada extends CI_Controller
 		'Nopol' => $this->input->post('Nopol',TRUE),
 		'Norangka' => $this->input->post('Norangka',TRUE),
 		'Nomesin' => $this->input->post('Nomesin',TRUE),
-		'JatuhTempoPajak' => $this->input->post('JatuhTempoPajak',TRUE),
-		'JatuhTempoKir' => $this->input->post('JatuhTempoKir',TRUE),
-		'KodeEkor' => $this->input->post('KodeEkor',TRUE),
+		'JatuhTempoPajak' => dateMysql($this->input->post('JatuhTempoPajak',TRUE)),
+		'JatuhTempoKir' => dateMysql($this->input->post('JatuhTempoKir',TRUE)),
+        'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
+		// 'KodeEkor' => $this->input->post('KodeEkor',TRUE),
 		// 'created_at' => $this->input->post('created_at',TRUE),
 		// 'updated_at' => $this->input->post('updated_at',TRUE),
 	    );
@@ -144,9 +147,10 @@ class _08_armada extends CI_Controller
 		'Nopol' => set_value('Nopol', $row->Nopol),
 		'Norangka' => set_value('Norangka', $row->Norangka),
 		'Nomesin' => set_value('Nomesin', $row->Nomesin),
-		'JatuhTempoPajak' => set_value('JatuhTempoPajak', $row->JatuhTempoPajak),
-		'JatuhTempoKir' => set_value('JatuhTempoKir', $row->JatuhTempoKir),
-		'KodeEkor' => set_value('KodeEkor', $row->KodeEkor),
+		'JatuhTempoPajak' => set_value('JatuhTempoPajak', dateIndo($row->JatuhTempoPajak)),
+		'JatuhTempoKir' => set_value('JatuhTempoKir', dateIndo($row->JatuhTempoKir)),
+        'TglBeli' => set_value('TglBeli', dateIndo($row->TglBeli)),
+		// 'KodeEkor' => set_value('KodeEkor', $row->KodeEkor),
 		// 'created_at' => set_value('created_at', $row->created_at),
 		// 'updated_at' => set_value('updated_at', $row->updated_at),
 	    );
@@ -175,9 +179,10 @@ class _08_armada extends CI_Controller
 		'Nopol' => $this->input->post('Nopol',TRUE),
 		'Norangka' => $this->input->post('Norangka',TRUE),
 		'Nomesin' => $this->input->post('Nomesin',TRUE),
-		'JatuhTempoPajak' => $this->input->post('JatuhTempoPajak',TRUE),
-		'JatuhTempoKir' => $this->input->post('JatuhTempoKir',TRUE),
-		'KodeEkor' => $this->input->post('KodeEkor',TRUE),
+        'JatuhTempoPajak' => dateMysql($this->input->post('JatuhTempoPajak',TRUE)),
+		'JatuhTempoKir' => dateMysql($this->input->post('JatuhTempoKir',TRUE)),
+        'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
+		// 'KodeEkor' => $this->input->post('KodeEkor',TRUE),
 		// 'created_at' => $this->input->post('created_at',TRUE),
 		// 'updated_at' => $this->input->post('updated_at',TRUE),
 	    );
@@ -213,7 +218,8 @@ class _08_armada extends CI_Controller
 	$this->form_validation->set_rules('Nomesin', 'nomesin', 'trim|required');
 	$this->form_validation->set_rules('JatuhTempoPajak', 'jatuhtempopajak', 'trim|required');
 	$this->form_validation->set_rules('JatuhTempoKir', 'jatuhtempokir', 'trim|required');
-	$this->form_validation->set_rules('KodeEkor', 'kodeekor', 'trim|required');
+    $this->form_validation->set_rules('TglBeli', 'tglbeli', 'trim|required');
+	// $this->form_validation->set_rules('KodeEkor', 'kodeekor', 'trim|required');
 	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
 	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
 

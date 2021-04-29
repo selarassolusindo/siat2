@@ -40,17 +40,35 @@
             <label for="varchar">No. Mesin <?php echo form_error('Nomesin') ?></label>
             <input type="text" class="form-control" name="Nomesin" id="Nomesin" placeholder="Nomesin" value="<?php echo $Nomesin; ?>" />
         </div>
-	    <div class="form-group">
+	    <div class="form-group col-2">
             <label for="date">Jatuh Tempo Pajak <?php echo form_error('JatuhTempoPajak') ?></label>
-            <input type="text" class="form-control" name="JatuhTempoPajak" id="JatuhTempoPajak" placeholder="JatuhTempoPajak" value="<?php echo $JatuhTempoPajak; ?>" />
+            <!-- <input type="text" class="form-control" name="JatuhTempoPajak" id="JatuhTempoPajak" placeholder="JatuhTempoPajak" value="<?php echo $JatuhTempoPajak; ?>" /> -->
+            <div class="input-group date" id="JatuhTempoPajak" data-target-input="nearest">
+                <div class="input-group-append" data-target="#JatuhTempoPajak" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <input placeholder="Jatuh Tempo Pajak" type="text" name="JatuhTempoPajak" value="<?php echo $JatuhTempoPajak; ?>" class="form-control datetimepicker-input" data-target="#JatuhTempoPajak"/>
+            </div>
         </div>
-	    <div class="form-group">
+	    <div class="form-group col-2">
             <label for="date">Jatuh Tempo KIR <?php echo form_error('JatuhTempoKir') ?></label>
-            <input type="text" class="form-control" name="JatuhTempoKir" id="JatuhTempoKir" placeholder="JatuhTempoKir" value="<?php echo $JatuhTempoKir; ?>" />
+            <!-- <input type="text" class="form-control" name="JatuhTempoKir" id="JatuhTempoKir" placeholder="JatuhTempoKir" value="<?php echo $JatuhTempoKir; ?>" /> -->
+            <div class="input-group date" id="JatuhTempoKir" data-target-input="nearest">
+                <div class="input-group-append" data-target="#JatuhTempoKir" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <input placeholder="Jatuh Tempo Kir" type="text" name="JatuhTempoKir" value="<?php echo $JatuhTempoKir; ?>" class="form-control datetimepicker-input" data-target="#JatuhTempoKir"/>
+            </div>
         </div>
-	    <div class="form-group">
-            <label for="varchar">Kode Ekor <?php echo form_error('KodeEkor') ?></label>
-            <input type="text" class="form-control" name="KodeEkor" id="KodeEkor" placeholder="KodeEkor" value="<?php echo $KodeEkor; ?>" />
+	    <div class="form-group col-2">
+            <label for="varchar">Tgl. Beli <?php echo form_error('TglBeli') ?></label>
+            <!-- <input type="text" class="form-control" name="TglBeli" id="TglBeli" placeholder="Tgl. Beli" value="<?php echo $TglBeli; ?>" /> -->
+            <div class="input-group date" id="TglBeli" data-target-input="nearest">
+                <div class="input-group-append" data-target="#TglBeli" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+                <input placeholder="Tgl. Beli" type="text" name="TglBeli" value="<?php echo $TglBeli; ?>" class="form-control datetimepicker-input" data-target="#TglBeli"/>
+            </div>
         </div>
 	    <!-- <div class="form-group">
             <label for="timestamp">Created At <?php echo form_error('created_at') ?></label>
@@ -64,5 +82,20 @@
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 	    <a href="<?php echo site_url('_08_armada') ?>" class="btn btn-default">Cancel</a>
 	</form>
+
+    <script>
+        $(document).ready(function () {
+            //Date range picker
+            $('#JatuhTempoPajak').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#JatuhTempoKir').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#TglBeli').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+        })
+    </script>
     <!-- </body>
 </html> -->
