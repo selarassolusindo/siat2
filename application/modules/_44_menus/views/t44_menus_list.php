@@ -67,9 +67,9 @@
         </table>
         <div class="row">
             <div class="col-md-6">
-                <a href="#" class="btn btn-primary">Total Data : <?php echo $total_rows ?></a>
+                <!-- <a href="#" class="btn btn-primary">Total Data : <?php echo $total_rows ?></a>
 				<?php echo anchor(site_url('_44_menus/excel'), 'Excel', 'class="btn btn-primary"'); ?>
-				<?php echo anchor(site_url('_44_menus/word'), 'Word', 'class="btn btn-primary"'); ?>
+				<?php echo anchor(site_url('_44_menus/word'), 'Word', 'class="btn btn-primary"'); ?> -->
 			</div>
             <div class="col-md-6 text-right">
                 <?php echo $pagination ?>

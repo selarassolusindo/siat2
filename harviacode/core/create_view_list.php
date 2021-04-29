@@ -80,10 +80,10 @@ if ($export_excel == '1') {
     $string .= "\n\t\t\t\t<?php echo anchor(site_url('".$c_url."/excel'), 'Excel', 'class=\"btn btn-primary\"'); ?>";
 }
 if ($export_word == '1') {
-    $string .= "\n\t\t\t\t<?php echo anchor(site_url('".$c_url."/word'), 'Word', 'class=\"btn btn-primary\"'); ?>";
+    $string .= "\n\t\t\t\t<?php echo anchor(site_url('".$c_url."/word'), 'Word', 'class=\"btn btn-primary\"'); ?> -->";
 }
 if ($export_pdf == '1') {
-    $string .= "\n\t\t\t\t<?php echo anchor(site_url('".$c_url."/pdf'), 'PDF', 'class=\"btn btn-primary\"'); ?> -->";
+    $string .= "\n\t\t\t\t<?php echo anchor(site_url('".$c_url."/pdf'), 'PDF', 'class=\"btn btn-primary\"'); ?>";
 }
 $string .= "\n\t\t\t</div>
             <div class=\"col-md-6 text-right\">

@@ -22,9 +22,10 @@
                 <th>No</th>
 		<th>Kode</th>
 		<th>Nama</th>
-		<th>Alamat</th>
 		<th>HP</th>
 		<th>KTP</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_15_driver_data as $_15_driver)
@@ -34,9 +35,10 @@
 		      <td><?php echo ++$start ?></td>
 		      <td><?php echo $_15_driver->Kode ?></td>
 		      <td><?php echo $_15_driver->Nama ?></td>
-		      <td><?php echo $_15_driver->Alamat ?></td>
 		      <td><?php echo $_15_driver->HP ?></td>
-		      <td><?php echo $_15_driver->KTP ?></td>	
+		      <td><?php echo $_15_driver->KTP ?></td>
+		      <td><?php echo $_15_driver->created_at ?></td>
+		      <td><?php echo $_15_driver->updated_at ?></td>	
                 </tr>
                 <?php
             }

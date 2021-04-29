@@ -28,7 +28,7 @@ class _44_menus extends CI_Controller
             $config['first_url'] = base_url() . '_44_menus';
         }
 
-        $config['per_page'] = 10;
+        $config['per_page'] = 100;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->_44_menus_model->total_rows($q);
         $_44_menus = $this->_44_menus_model->get_limit_data($config['per_page'], $start, $q);
