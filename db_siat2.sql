@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2021 at 04:38 AM
+-- Generation Time: Apr 30, 2021 at 12:36 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -496,7 +496,8 @@ CREATE TABLE `t08_armada` (
   `Nomesin` varchar(50) NOT NULL,
   `JatuhTempoPajak` date NOT NULL,
   `JatuhTempoKir` date NOT NULL,
-  `KodeEkor` varchar(25) NOT NULL,
+  `TglBeli` date NOT NULL,
+  `KodeEkor` varchar(25) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -505,8 +506,8 @@ CREATE TABLE `t08_armada` (
 -- Dumping data for table `t08_armada`
 --
 
-INSERT INTO `t08_armada` (`idarmada`, `Kode`, `Merk`, `Tipe`, `TahunPembuatan`, `Nopol`, `Norangka`, `Nomesin`, `JatuhTempoPajak`, `JatuhTempoKir`, `KodeEkor`, `created_at`, `updated_at`) VALUES
-(1, 'AR001', 'Fuso', 'Tipe1', '2021', 'L 1234 LL', 'L1234L1234', 'L12345L12345', '2021-12-31', '2021-12-31', 'EKOR0001', '2021-03-07 09:43:52', '2021-03-07 09:43:52');
+INSERT INTO `t08_armada` (`idarmada`, `Kode`, `Merk`, `Tipe`, `TahunPembuatan`, `Nopol`, `Norangka`, `Nomesin`, `JatuhTempoPajak`, `JatuhTempoKir`, `TglBeli`, `KodeEkor`, `created_at`, `updated_at`) VALUES
+(1, 'A1', 'Fuso', 'T1', '2020', 'L 1156 RM', '351511', '241274', '2022-02-09', '2022-07-06', '2010-09-02', NULL, '2021-04-29 16:50:01', '2021-04-29 17:27:21');
 
 -- --------------------------------------------------------
 
@@ -818,9 +819,21 @@ CREATE TABLE `t44_menus` (
 --
 
 INSERT INTO `t44_menus` (`idmenus`, `Menus`) VALUES
-(2, 'SETUP - Company'),
-(3, 'SETUP - User'),
-(4, 'SETUP - Customer');
+(5, 'SETUP - Customer'),
+(6, 'SETUP - Shipper'),
+(7, 'SETUP - Vendor'),
+(8, 'SETUP - Armada'),
+(9, 'SETUP - Ekor'),
+(10, 'SETUP - Spare Part'),
+(11, 'SETUP - Service'),
+(12, 'SETUP - Cost'),
+(13, 'SETUP - Lokasi'),
+(14, 'SETUP - Satuan'),
+(15, 'SETUP - Bank'),
+(16, 'SETUP - Driver'),
+(17, 'SETUP - Chart of Account'),
+(18, 'SETUP - Saldo Awal'),
+(19, 'SETUP - Tgl. Input Saldo Awal');
 
 -- --------------------------------------------------------
 
@@ -840,12 +853,36 @@ CREATE TABLE `t45_users_menus` (
 --
 
 INSERT INTO `t45_users_menus` (`idusersmenus`, `idusers`, `idmenus`, `rights`) VALUES
-(3, 1, 2, 2),
-(4, 2, 2, 7),
-(5, 1, 3, 7),
-(6, 2, 3, 7),
-(7, 1, 4, 2),
-(8, 2, 4, 7);
+(9, 1, 5, 7),
+(10, 2, 5, 7),
+(11, 1, 6, 7),
+(12, 2, 6, 7),
+(13, 1, 7, 7),
+(14, 2, 7, 7),
+(15, 1, 8, 7),
+(16, 2, 8, 7),
+(17, 1, 9, 7),
+(18, 2, 9, 7),
+(19, 1, 10, 7),
+(20, 2, 10, 7),
+(21, 1, 11, 7),
+(22, 2, 11, 7),
+(23, 1, 12, 7),
+(24, 2, 12, 7),
+(25, 1, 13, 7),
+(26, 2, 13, 7),
+(27, 1, 14, 7),
+(28, 2, 14, 7),
+(29, 1, 15, 7),
+(30, 2, 15, 7),
+(31, 1, 16, 7),
+(32, 2, 16, 7),
+(33, 1, 17, 7),
+(34, 2, 17, 7),
+(35, 1, 18, 7),
+(36, 2, 18, 7),
+(37, 1, 19, 7),
+(38, 2, 19, 7);
 
 -- --------------------------------------------------------
 
@@ -880,8 +917,8 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1619630621, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
-(2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1618837450, 1, 'Adi', NULL, NULL, NULL);
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1619714033, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1251,19 +1288,19 @@ ALTER TABLE `t34_invoiced`
 -- AUTO_INCREMENT for table `t44_menus`
 --
 ALTER TABLE `t44_menus`
-  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `t45_users_menus`
 --
 ALTER TABLE `t45_users_menus`
-  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `t46_users`
 --
 ALTER TABLE `t46_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t47_groups`
@@ -1275,7 +1312,7 @@ ALTER TABLE `t47_groups`
 -- AUTO_INCREMENT for table `t48_users_groups`
 --
 ALTER TABLE `t48_users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `t49_login_attempts`
