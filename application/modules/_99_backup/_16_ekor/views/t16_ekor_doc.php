@@ -16,23 +16,23 @@
         </style>
     </head>
     <body>
-        <h2>T13_satuan List</h2>
+        <h2>T16_ekor List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
 		<th>Kode</th>
-		<th>Nama</th>
-		<th>Tipe</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
-            foreach ($_13_satuan_data as $_13_satuan)
+            foreach ($_16_ekor_data as $_16_ekor)
             {
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $_13_satuan->Kode ?></td>
-		      <td><?php echo $_13_satuan->Nama ?></td>
-		      <td><?php echo $_13_satuan->Tipe ?></td>	
+		      <td><?php echo $_16_ekor->Kode ?></td>
+		      <td><?php echo $_16_ekor->created_at ?></td>
+		      <td><?php echo $_16_ekor->updated_at ?></td>	
                 </tr>
                 <?php
             }

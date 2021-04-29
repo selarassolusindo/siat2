@@ -10,7 +10,6 @@ class _16_ekor extends CI_Controller
         parent::__construct();
         $this->load->model('_16_ekor_model');
         $this->load->library('form_validation');
-        $this->load->model('_45_users_menus/_45_users_menus_model');
     }
 
     public function index()
@@ -19,11 +18,11 @@ class _16_ekor extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . '_16_ekor?q=' . urlencode($q);
-            $config['first_url'] = base_url() . '_16_ekor?q=' . urlencode($q);
+            $config['base_url'] = base_url() . '_16_ekor/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . '_16_ekor/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . '_16_ekor';
-            $config['first_url'] = base_url() . '_16_ekor';
+            $config['base_url'] = base_url() . '_16_ekor/index.html';
+            $config['first_url'] = base_url() . '_16_ekor/index.html';
         }
 
         $config['per_page'] = 10;
@@ -40,7 +39,6 @@ class _16_ekor extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-            'hakAkses' => $this->_45_users_menus_model->getHakAkses(9),
         );
         // $this->load->view('_16_ekor/t16_ekor_list', $data);
         $data['_view'] = '_16_ekor/t16_ekor_list';
@@ -53,14 +51,15 @@ class _16_ekor extends CI_Controller
         $row = $this->_16_ekor_model->get_by_id($id);
         if ($row) {
             $data = array(
-				'idekor' => $row->idekor,
-				'Kode' => $row->Kode,
-				'Merk' => $row->Merk,
-				'Tipe' => $row->Tipe,
-				'TglBeli' => $row->TglBeli,
-				'TglKir' => $row->TglKir,
-			);
-            $this->load->view('_16_ekor/t16_ekor_read', $data);
+		'idekor' => $row->idekor,
+		'Kode' => $row->Kode,
+		// 'created_at' => $row->created_at,
+		// 'updated_at' => $row->updated_at,
+	    );
+            // $this->load->view('_16_ekor/t16_ekor_read', $data);
+            $data['_view'] = '_16_ekor/t16_ekor_read';
+            $data['_caption'] = 'Ekor';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_16_ekor'));
@@ -70,15 +69,13 @@ class _16_ekor extends CI_Controller
     public function create()
     {
         $data = array(
-            'button' => 'Simpan',
+            'button' => 'Create',
             'action' => site_url('_16_ekor/create_action'),
-			'idekor' => set_value('idekor'),
-			'Kode' => set_value('Kode'),
-			'Merk' => set_value('Merk'),
-			'Tipe' => set_value('Tipe'),
-			'TglBeli' => set_value('TglBeli'),
-			'TglKir' => set_value('TglKir'),
-		);
+	    'idekor' => set_value('idekor'),
+	    'Kode' => set_value('Kode'),
+	    // 'created_at' => set_value('created_at'),
+	    // 'updated_at' => set_value('updated_at'),
+	);
         // $this->load->view('_16_ekor/t16_ekor_form', $data);
         $data['_view'] = '_16_ekor/t16_ekor_form';
         $data['_caption'] = 'Ekor';
@@ -93,12 +90,11 @@ class _16_ekor extends CI_Controller
             $this->create();
         } else {
             $data = array(
-				'Kode' => $this->input->post('Kode',TRUE),
-				'Merk' => $this->input->post('Merk',TRUE),
-				'Tipe' => $this->input->post('Tipe',TRUE),
-				'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
-				'TglKir' => dateMysql($this->input->post('TglKir',TRUE)),
-			);
+		'Kode' => $this->input->post('Kode',TRUE),
+		// 'created_at' => $this->input->post('created_at',TRUE),
+		// 'updated_at' => $this->input->post('updated_at',TRUE),
+	    );
+
             $this->_16_ekor_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_16_ekor'));
@@ -111,15 +107,13 @@ class _16_ekor extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Simpan',
+                'button' => 'Update',
                 'action' => site_url('_16_ekor/update_action'),
-				'idekor' => set_value('idekor', $row->idekor),
-				'Kode' => set_value('Kode', $row->Kode),
-				'Merk' => set_value('Merk', $row->Merk),
-				'Tipe' => set_value('Tipe', $row->Tipe),
-				'TglBeli' => set_value('TglBeli', dateIndo($row->TglBeli)),
-				'TglKir' => set_value('TglKir', dateIndo($row->TglKir)),
-			);
+		'idekor' => set_value('idekor', $row->idekor),
+		'Kode' => set_value('Kode', $row->Kode),
+		// 'created_at' => set_value('created_at', $row->created_at),
+		// 'updated_at' => set_value('updated_at', $row->updated_at),
+	    );
             // $this->load->view('_16_ekor/t16_ekor_form', $data);
             $data['_view'] = '_16_ekor/t16_ekor_form';
             $data['_caption'] = 'Ekor';
@@ -138,12 +132,11 @@ class _16_ekor extends CI_Controller
             $this->update($this->input->post('idekor', TRUE));
         } else {
             $data = array(
-				'Kode' => $this->input->post('Kode',TRUE),
-				'Merk' => $this->input->post('Merk',TRUE),
-				'Tipe' => $this->input->post('Tipe',TRUE),
-                'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
-				'TglKir' => dateMysql($this->input->post('TglKir',TRUE)),
-			);
+		'Kode' => $this->input->post('Kode',TRUE),
+		// 'created_at' => $this->input->post('created_at',TRUE),
+		// 'updated_at' => $this->input->post('updated_at',TRUE),
+	    );
+
             $this->_16_ekor_model->update($this->input->post('idekor', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_16_ekor'));
@@ -166,13 +159,12 @@ class _16_ekor extends CI_Controller
 
     public function _rules()
     {
-		$this->form_validation->set_rules('Kode', 'kode', 'trim|required');
-		$this->form_validation->set_rules('Merk', 'merk', 'trim|required');
-		$this->form_validation->set_rules('Tipe', 'tipe', 'trim|required');
-		$this->form_validation->set_rules('TglBeli', 'tglbeli', 'trim|required');
-		$this->form_validation->set_rules('TglKir', 'tglkir', 'trim|required');
-		$this->form_validation->set_rules('idekor', 'idekor', 'trim');
-		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+	$this->form_validation->set_rules('Kode', 'kode', 'trim|required');
+	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+
+	$this->form_validation->set_rules('idekor', 'idekor', 'trim');
+	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -192,26 +184,28 @@ class _16_ekor extends CI_Controller
         header("Content-Type: application/download");
         header("Content-Disposition: attachment;filename=" . $namaFile . "");
         header("Content-Transfer-Encoding: binary ");
+
         xlsBOF();
+
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-		xlsWriteLabel($tablehead, $kolomhead++, "Kode");
-		xlsWriteLabel($tablehead, $kolomhead++, "Merk");
-		xlsWriteLabel($tablehead, $kolomhead++, "Tipe");
-		xlsWriteLabel($tablehead, $kolomhead++, "TglBeli");
-		xlsWriteLabel($tablehead, $kolomhead++, "TglKir");
-		foreach ($this->_16_ekor_model->get_all() as $data) {
+	xlsWriteLabel($tablehead, $kolomhead++, "Kode");
+	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
+	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
+
+	foreach ($this->_16_ekor_model->get_all() as $data) {
             $kolombody = 0;
+
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Kode);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Merk);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Tipe);
-			xlsWriteLabel($tablebody, $kolombody++, $data->TglBeli);
-			xlsWriteLabel($tablebody, $kolombody++, $data->TglKir);
-			$tablebody++;
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Kode);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
+
+	    $tablebody++;
             $nourut++;
         }
+
         xlsEOF();
         exit();
     }
@@ -220,10 +214,12 @@ class _16_ekor extends CI_Controller
     {
         header("Content-type: application/vnd.ms-word");
         header("Content-Disposition: attachment;Filename=t16_ekor.doc");
+
         $data = array(
             't16_ekor_data' => $this->_16_ekor_model->get_all(),
             'start' => 0
         );
+
         $this->load->view('_16_ekor/t16_ekor_doc',$data);
     }
 
@@ -232,5 +228,5 @@ class _16_ekor extends CI_Controller
 /* End of file _16_ekor.php */
 /* Location: ./application/controllers/_16_ekor.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-04-30 00:49:00 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-03-07 17:16:38 */
 /* http://harviacode.com */

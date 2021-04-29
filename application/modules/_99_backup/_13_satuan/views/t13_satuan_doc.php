@@ -22,7 +22,8 @@
                 <th>No</th>
 		<th>Kode</th>
 		<th>Nama</th>
-		<th>Tipe</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_13_satuan_data as $_13_satuan)
@@ -32,7 +33,8 @@
 		      <td><?php echo ++$start ?></td>
 		      <td><?php echo $_13_satuan->Kode ?></td>
 		      <td><?php echo $_13_satuan->Nama ?></td>
-		      <td><?php echo $_13_satuan->Tipe ?></td>	
+		      <td><?php echo $_13_satuan->created_at ?></td>
+		      <td><?php echo $_13_satuan->updated_at ?></td>	
                 </tr>
                 <?php
             }

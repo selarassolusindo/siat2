@@ -21,8 +21,10 @@
             <tr>
                 <th>No</th>
 		<th>Kode</th>
-		<th>Created At</th>
-		<th>Updated At</th>
+		<th>Merk</th>
+		<th>Tipe</th>
+		<th>TglBeli</th>
+		<th>TglKir</th>
 		
             </tr><?php
             foreach ($_16_ekor_data as $_16_ekor)
@@ -31,8 +33,10 @@
                 <tr>
 		      <td><?php echo ++$start ?></td>
 		      <td><?php echo $_16_ekor->Kode ?></td>
-		      <td><?php echo $_16_ekor->created_at ?></td>
-		      <td><?php echo $_16_ekor->updated_at ?></td>	
+		      <td><?php echo $_16_ekor->Merk ?></td>
+		      <td><?php echo $_16_ekor->Tipe ?></td>
+		      <td><?php echo $_16_ekor->TglBeli ?></td>
+		      <td><?php echo $_16_ekor->TglKir ?></td>	
                 </tr>
                 <?php
             }

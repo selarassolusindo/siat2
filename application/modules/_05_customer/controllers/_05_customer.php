@@ -10,9 +10,7 @@ class _05_customer extends CI_Controller
         parent::__construct();
         $this->load->model('_05_customer_model');
         $this->load->library('form_validation');
-
         $this->load->model('_45_users_menus/_45_users_menus_model');
-
     }
 
     public function index()
