@@ -40,7 +40,7 @@ class _14_bank extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-            'hakAkses' => $this->_45_users_menus_model->getHakAkses(4),
+            'hakAkses' => $this->_45_users_menus_model->getHakAkses(15),
         );
         // $this->load->view('_14_bank/t14_bank_list', $data);
         $data['_view'] = '_14_bank/t14_bank_list';
