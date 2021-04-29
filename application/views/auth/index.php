@@ -30,6 +30,8 @@
                 <?php echo anchor("edit-user/".$user->id, 'Edit') ;?>
                 <?php
                 echo ' | ';
+                echo anchor(site_url('auth/delete_user/'.$user->id),'Delete', 'onclick="javascript: return confirm(\'Are You Sure ?\')"');
+                echo ' | ';
                 echo anchor(site_url('_45_users_menus/update/'.$user->id),'Hak Akses');
                 ?>
             </td>

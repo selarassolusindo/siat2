@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T44_menus List</h2>
+        <h2 style="margin-top:0px">T44_menus List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('_44_menus/create'),'Tambah', 'class="btn btn-primary"'); ?>
@@ -52,12 +52,12 @@
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
 				<td><?php echo $_44_menus->Menus ?></td>
 				<td style="text-align:center" width="200px">
-				<?php 
-				//echo anchor(site_url('_44_menus/read/'.$_44_menus->idmenus),'Read'); 
-				//echo ' | '; 
-				echo anchor(site_url('_44_menus/update/'.$_44_menus->idmenus),'Ubah'); 
-				echo ' | '; 
-				echo anchor(site_url('_44_menus/delete/'.$_44_menus->idmenus),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"'); 
+				<?php
+				//echo anchor(site_url('_44_menus/read/'.$_44_menus->idmenus),'Read');
+				//echo ' | ';
+				echo anchor(site_url('_44_menus/update/'.$_44_menus->idmenus),'Ubah');
+				echo ' | ';
+				echo anchor(site_url('_44_menus/delete/'.$_44_menus->idmenus),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
 				?>
 				</td>
 			</tr>
@@ -73,5 +73,5 @@
                 <?php echo $pagination ?>
             </div>
         </div>
-    </body>
-</html>
+    <!-- </body>
+</html> -->

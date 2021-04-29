@@ -43,7 +43,10 @@ class _44_menus extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $this->load->view('_44_menus/t44_menus_list', $data);
+        // $this->load->view('_44_menus/t44_menus_list', $data);
+        $data['_view'] = '_44_menus/t44_menus_list';
+        $data['_caption'] = 'Menu';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function read($id)
@@ -69,7 +72,10 @@ class _44_menus extends CI_Controller
 			'idmenus' => set_value('idmenus'),
 			'Menus' => set_value('Menus'),
 		);
-        $this->load->view('_44_menus/t44_menus_form', $data);
+        // $this->load->view('_44_menus/t44_menus_form', $data);
+        $data['_view'] = '_44_menus/t44_menus_form';
+        $data['_caption'] = 'Menu';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function create_action()
@@ -126,7 +132,10 @@ class _44_menus extends CI_Controller
 				'idmenus' => set_value('idmenus', $row->idmenus),
 				'Menus' => set_value('Menus', $row->Menus),
 			);
-            $this->load->view('_44_menus/t44_menus_form', $data);
+            // $this->load->view('_44_menus/t44_menus_form', $data);
+            $data['_view'] = '_44_menus/t44_menus_form';
+            $data['_caption'] = 'Menu';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_44_menus'));

@@ -592,6 +592,14 @@ class Auth extends CI_Controller
 		redirect('/', 'refresh');
 	}
 
+    public function delete_user($id)
+    {
+        if ($this->ion_auth->delete_user($id)) {
+
+        }
+        redirect('auth/logout', 'refresh');
+    }
+
 	/**
 	 * Edit a user
 	 *

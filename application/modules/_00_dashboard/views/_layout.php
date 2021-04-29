@@ -208,6 +208,7 @@
                                     case 'user-management':
                                     case 'create-user':
                                     case 'edit-user':
+                                    case '_44_menus':
                                     case '_45_users_menus':
                                     case '_02_akun':
                                     case '_03_saldoawal':
@@ -239,6 +240,7 @@
                                         case 'user-management':
                                         case 'create-user':
                                         case 'edit-user':
+                                        case '_44_menus':
                                         case '_45_users_menus':
                                         case '_02_akun':
                                         case '_03_saldoawal':
@@ -282,6 +284,17 @@
                                             <p>User</p>
                                         </a>
                                     </li>
+
+                                    <?php if ($this->session->userdata('user_id') == 1) { ?>
+                                    <!-- menu management -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_44_menus'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_44_menus') ? 'active' : ''; ?>">
+                                            <i class="fas fa-user-friends nav-icon"></i>
+                                            <p>Menu</p>
+                                        </a>
+                                    </li>
+                                    <?php } ?>
+
                                     <!-- user management -->
                                     <!-- <li class="nav-item">
                                         <a href="<?php echo site_url('_46_users'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_46_users' ? 'active' : ''; ?>">
