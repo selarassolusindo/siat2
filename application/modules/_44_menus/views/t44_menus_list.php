@@ -44,12 +44,14 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th class="text-right">No.</th>
+                <th>ID</th>
 				<th>Menus</th>
 				<th class="text-center">Proses</th>
             </tr>
 			<?php foreach ($_44_menus_data as $_44_menus) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
+                <td><?php echo $_44_menus->idmenus ?></td>
 				<td><?php echo $_44_menus->Menus ?></td>
 				<td style="text-align:center" width="200px">
 				<?php
