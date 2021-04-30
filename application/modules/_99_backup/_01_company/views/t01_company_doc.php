@@ -23,6 +23,9 @@
 		<th>Nama</th>
 		<th>Alamat</th>
 		<th>Kota</th>
+		<th>Group Kode</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_01_company_data as $_01_company)
@@ -32,7 +35,10 @@
 		      <td><?php echo ++$start ?></td>
 		      <td><?php echo $_01_company->Nama ?></td>
 		      <td><?php echo $_01_company->Alamat ?></td>
-		      <td><?php echo $_01_company->Kota ?></td>	
+		      <td><?php echo $_01_company->Kota ?></td>
+		      <td><?php echo $_01_company->Group_Kode ?></td>
+		      <td><?php echo $_01_company->created_at ?></td>
+		      <td><?php echo $_01_company->updated_at ?></td>	
                 </tr>
                 <?php
             }

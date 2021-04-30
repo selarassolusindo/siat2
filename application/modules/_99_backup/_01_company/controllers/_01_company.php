@@ -18,11 +18,11 @@ class _01_company extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . '_01_company?q=' . urlencode($q);
-            $config['first_url'] = base_url() . '_01_company?q=' . urlencode($q);
+            $config['base_url'] = base_url() . '_01_company/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . '_01_company/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . '_01_company';
-            $config['first_url'] = base_url() . '_01_company';
+            $config['base_url'] = base_url() . '_01_company/index.html';
+            $config['first_url'] = base_url() . '_01_company/index.html';
         }
 
         $config['per_page'] = 10;
@@ -51,12 +51,18 @@ class _01_company extends CI_Controller
         $row = $this->_01_company_model->get_by_id($id);
         if ($row) {
             $data = array(
-				'idcompany' => $row->idcompany,
-				'Nama' => $row->Nama,
-				'Alamat' => $row->Alamat,
-				'Kota' => $row->Kota,
-			);
-            $this->load->view('_01_company/t01_company_read', $data);
+		'idcompany' => $row->idcompany,
+		'Nama' => $row->Nama,
+		'Alamat' => $row->Alamat,
+		'Kota' => $row->Kota,
+		'Group_Kode' => $row->Group_Kode,
+		// 'created_at' => $row->created_at,
+		// 'updated_at' => $row->updated_at,
+	    );
+            // $this->load->view('_01_company/t01_company_read', $data);
+            $data['_view'] = '_01_company/t01_company_read';
+            $data['_caption'] = 'Company';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_01_company'));
@@ -66,13 +72,16 @@ class _01_company extends CI_Controller
     public function create()
     {
         $data = array(
-            'button' => 'Simpan',
+            'button' => 'Create',
             'action' => site_url('_01_company/create_action'),
-			'idcompany' => set_value('idcompany'),
-			'Nama' => set_value('Nama'),
-			'Alamat' => set_value('Alamat'),
-			'Kota' => set_value('Kota'),
-		);
+	    'idcompany' => set_value('idcompany'),
+	    'Nama' => set_value('Nama'),
+	    'Alamat' => set_value('Alamat'),
+	    'Kota' => set_value('Kota'),
+	    'Group_Kode' => set_value('Group_Kode'),
+	    // 'created_at' => set_value('created_at'),
+	    // 'updated_at' => set_value('updated_at'),
+	);
         // $this->load->view('_01_company/t01_company_form', $data);
         $data['_view'] = '_01_company/t01_company_form';
         $data['_caption'] = 'Company';
@@ -87,10 +96,14 @@ class _01_company extends CI_Controller
             $this->create();
         } else {
             $data = array(
-				'Nama' => $this->input->post('Nama',TRUE),
-				'Alamat' => $this->input->post('Alamat',TRUE),
-				'Kota' => $this->input->post('Kota',TRUE),
-			);
+		'Nama' => $this->input->post('Nama',TRUE),
+		'Alamat' => $this->input->post('Alamat',TRUE),
+		'Kota' => $this->input->post('Kota',TRUE),
+		'Group_Kode' => $this->input->post('Group_Kode',TRUE),
+		// 'created_at' => $this->input->post('created_at',TRUE),
+		// 'updated_at' => $this->input->post('updated_at',TRUE),
+	    );
+
             $this->_01_company_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_01_company'));
@@ -103,13 +116,16 @@ class _01_company extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Simpan',
+                'button' => 'Update',
                 'action' => site_url('_01_company/update_action'),
-				'idcompany' => set_value('idcompany', $row->idcompany),
-				'Nama' => set_value('Nama', $row->Nama),
-				'Alamat' => set_value('Alamat', $row->Alamat),
-				'Kota' => set_value('Kota', $row->Kota),
-			);
+		'idcompany' => set_value('idcompany', $row->idcompany),
+		'Nama' => set_value('Nama', $row->Nama),
+		'Alamat' => set_value('Alamat', $row->Alamat),
+		'Kota' => set_value('Kota', $row->Kota),
+		'Group_Kode' => set_value('Group_Kode', $row->Group_Kode),
+		// 'created_at' => set_value('created_at', $row->created_at),
+		// 'updated_at' => set_value('updated_at', $row->updated_at),
+	    );
             // $this->load->view('_01_company/t01_company_form', $data);
             $data['_view'] = '_01_company/t01_company_form';
             $data['_caption'] = 'Company';
@@ -128,10 +144,14 @@ class _01_company extends CI_Controller
             $this->update($this->input->post('idcompany', TRUE));
         } else {
             $data = array(
-				'Nama' => $this->input->post('Nama',TRUE),
-				'Alamat' => $this->input->post('Alamat',TRUE),
-				'Kota' => $this->input->post('Kota',TRUE),
-			);
+		'Nama' => $this->input->post('Nama',TRUE),
+		'Alamat' => $this->input->post('Alamat',TRUE),
+		'Kota' => $this->input->post('Kota',TRUE),
+		'Group_Kode' => $this->input->post('Group_Kode',TRUE),
+		// 'created_at' => $this->input->post('created_at',TRUE),
+		// 'updated_at' => $this->input->post('updated_at',TRUE),
+	    );
+
             $this->_01_company_model->update($this->input->post('idcompany', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_01_company'));
@@ -154,11 +174,15 @@ class _01_company extends CI_Controller
 
     public function _rules()
     {
-		$this->form_validation->set_rules('Nama', 'nama', 'trim|required');
-		$this->form_validation->set_rules('Alamat', 'alamat', 'trim|required');
-		$this->form_validation->set_rules('Kota', 'kota', 'trim|required');
-		$this->form_validation->set_rules('idcompany', 'idcompany', 'trim');
-		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+	$this->form_validation->set_rules('Nama', 'nama', 'trim|required');
+	$this->form_validation->set_rules('Alamat', 'alamat', 'trim|required');
+	$this->form_validation->set_rules('Kota', 'kota', 'trim|required');
+	$this->form_validation->set_rules('Group_Kode', 'group kode', 'trim|required');
+	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+
+	$this->form_validation->set_rules('idcompany', 'idcompany', 'trim');
+	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -178,22 +202,34 @@ class _01_company extends CI_Controller
         header("Content-Type: application/download");
         header("Content-Disposition: attachment;filename=" . $namaFile . "");
         header("Content-Transfer-Encoding: binary ");
+
         xlsBOF();
+
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-		xlsWriteLabel($tablehead, $kolomhead++, "Nama");
-		xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
-		xlsWriteLabel($tablehead, $kolomhead++, "Kota");
-		foreach ($this->_01_company_model->get_all() as $data) {
+	xlsWriteLabel($tablehead, $kolomhead++, "Nama");
+	xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kota");
+	xlsWriteLabel($tablehead, $kolomhead++, "Group Kode");
+	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
+	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
+
+	foreach ($this->_01_company_model->get_all() as $data) {
             $kolombody = 0;
+
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Nama);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Alamat);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Kota);
-			$tablebody++;
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Nama);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Alamat);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Kota);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Group_Kode);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
+
+	    $tablebody++;
             $nourut++;
         }
+
         xlsEOF();
         exit();
     }
@@ -202,10 +238,12 @@ class _01_company extends CI_Controller
     {
         header("Content-type: application/vnd.ms-word");
         header("Content-Disposition: attachment;Filename=t01_company.doc");
+
         $data = array(
             't01_company_data' => $this->_01_company_model->get_all(),
             'start' => 0
         );
+
         $this->load->view('_01_company/t01_company_doc',$data);
     }
 
@@ -214,5 +252,5 @@ class _01_company extends CI_Controller
 /* End of file _01_company.php */
 /* Location: ./application/controllers/_01_company.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-04-30 04:15:45 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-02-14 19:58:09 */
 /* http://harviacode.com */
