@@ -26,6 +26,8 @@
 		<th>Telepon</th>
 		<th>Alamat</th>
 		<th>Kota</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_06_shipper_data as $_06_shipper)
@@ -38,7 +40,9 @@
 		      <td><?php echo $_06_shipper->ContactPerson ?></td>
 		      <td><?php echo $_06_shipper->Telepon ?></td>
 		      <td><?php echo $_06_shipper->Alamat ?></td>
-		      <td><?php echo $_06_shipper->Kota ?></td>	
+		      <td><?php echo $_06_shipper->Kota ?></td>
+		      <td><?php echo $_06_shipper->created_at ?></td>
+		      <td><?php echo $_06_shipper->updated_at ?></td>	
                 </tr>
                 <?php
             }

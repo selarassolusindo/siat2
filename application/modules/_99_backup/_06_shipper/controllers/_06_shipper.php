@@ -18,11 +18,11 @@ class _06_shipper extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . '_06_shipper?q=' . urlencode($q);
-            $config['first_url'] = base_url() . '_06_shipper?q=' . urlencode($q);
+            $config['base_url'] = base_url() . '_06_shipper/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . '_06_shipper/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . '_06_shipper';
-            $config['first_url'] = base_url() . '_06_shipper';
+            $config['base_url'] = base_url() . '_06_shipper/index.html';
+            $config['first_url'] = base_url() . '_06_shipper/index.html';
         }
 
         $config['per_page'] = 10;
@@ -51,15 +51,20 @@ class _06_shipper extends CI_Controller
         $row = $this->_06_shipper_model->get_by_id($id);
         if ($row) {
             $data = array(
-				'idshipper' => $row->idshipper,
-				'Kode' => $row->Kode,
-				'Nama' => $row->Nama,
-				'ContactPerson' => $row->ContactPerson,
-				'Telepon' => $row->Telepon,
-				'Alamat' => $row->Alamat,
-				'Kota' => $row->Kota,
-			);
-            $this->load->view('_06_shipper/t06_shipper_read', $data);
+		'idshipper' => $row->idshipper,
+		'Kode' => $row->Kode,
+		'Nama' => $row->Nama,
+		'ContactPerson' => $row->ContactPerson,
+		'Telepon' => $row->Telepon,
+		'Alamat' => $row->Alamat,
+		'Kota' => $row->Kota,
+		// 'created_at' => $row->created_at,
+		// 'updated_at' => $row->updated_at,
+	    );
+            // $this->load->view('_06_shipper/t06_shipper_read', $data);
+            $data['_view'] = '_06_shipper/t06_shipper_read';
+            $data['_caption'] = 'Shipper';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_06_shipper'));
@@ -69,16 +74,18 @@ class _06_shipper extends CI_Controller
     public function create()
     {
         $data = array(
-            'button' => 'Simpan',
+            'button' => 'Create',
             'action' => site_url('_06_shipper/create_action'),
-			'idshipper' => set_value('idshipper'),
-			'Kode' => set_value('Kode'),
-			'Nama' => set_value('Nama'),
-			'ContactPerson' => set_value('ContactPerson'),
-			'Telepon' => set_value('Telepon'),
-			'Alamat' => set_value('Alamat'),
-			'Kota' => set_value('Kota'),
-		);
+	    'idshipper' => set_value('idshipper'),
+	    'Kode' => set_value('Kode', getNewKode('SH', 'Kode', 't06_shipper')),
+	    'Nama' => set_value('Nama'),
+	    'ContactPerson' => set_value('ContactPerson'),
+	    'Telepon' => set_value('Telepon'),
+	    'Alamat' => set_value('Alamat'),
+	    'Kota' => set_value('Kota'),
+	    // 'created_at' => set_value('created_at'),
+	    // 'updated_at' => set_value('updated_at'),
+	);
         // $this->load->view('_06_shipper/t06_shipper_form', $data);
         $data['_view'] = '_06_shipper/t06_shipper_form';
         $data['_caption'] = 'Shipper';
@@ -93,13 +100,16 @@ class _06_shipper extends CI_Controller
             $this->create();
         } else {
             $data = array(
-				'Kode' => $this->input->post('Kode',TRUE),
-				'Nama' => $this->input->post('Nama',TRUE),
-				'ContactPerson' => $this->input->post('ContactPerson',TRUE),
-				'Telepon' => $this->input->post('Telepon',TRUE),
-				'Alamat' => $this->input->post('Alamat',TRUE),
-				'Kota' => $this->input->post('Kota',TRUE),
-			);
+		'Kode' => $this->input->post('Kode',TRUE),
+		'Nama' => $this->input->post('Nama',TRUE),
+		'ContactPerson' => $this->input->post('ContactPerson',TRUE),
+		'Telepon' => $this->input->post('Telepon',TRUE),
+		'Alamat' => $this->input->post('Alamat',TRUE),
+		'Kota' => $this->input->post('Kota',TRUE),
+		// 'created_at' => $this->input->post('created_at',TRUE),
+		// 'updated_at' => $this->input->post('updated_at',TRUE),
+	    );
+
             $this->_06_shipper_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_06_shipper'));
@@ -112,16 +122,18 @@ class _06_shipper extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Simpan',
+                'button' => 'Update',
                 'action' => site_url('_06_shipper/update_action'),
-				'idshipper' => set_value('idshipper', $row->idshipper),
-				'Kode' => set_value('Kode', $row->Kode),
-				'Nama' => set_value('Nama', $row->Nama),
-				'ContactPerson' => set_value('ContactPerson', $row->ContactPerson),
-				'Telepon' => set_value('Telepon', $row->Telepon),
-				'Alamat' => set_value('Alamat', $row->Alamat),
-				'Kota' => set_value('Kota', $row->Kota),
-			);
+		'idshipper' => set_value('idshipper', $row->idshipper),
+		'Kode' => set_value('Kode', $row->Kode),
+		'Nama' => set_value('Nama', $row->Nama),
+		'ContactPerson' => set_value('ContactPerson', $row->ContactPerson),
+		'Telepon' => set_value('Telepon', $row->Telepon),
+		'Alamat' => set_value('Alamat', $row->Alamat),
+		'Kota' => set_value('Kota', $row->Kota),
+		// 'created_at' => set_value('created_at', $row->created_at),
+		// 'updated_at' => set_value('updated_at', $row->updated_at),
+	    );
             // $this->load->view('_06_shipper/t06_shipper_form', $data);
             $data['_view'] = '_06_shipper/t06_shipper_form';
             $data['_caption'] = 'Shipper';
@@ -140,13 +152,16 @@ class _06_shipper extends CI_Controller
             $this->update($this->input->post('idshipper', TRUE));
         } else {
             $data = array(
-				'Kode' => $this->input->post('Kode',TRUE),
-				'Nama' => $this->input->post('Nama',TRUE),
-				'ContactPerson' => $this->input->post('ContactPerson',TRUE),
-				'Telepon' => $this->input->post('Telepon',TRUE),
-				'Alamat' => $this->input->post('Alamat',TRUE),
-				'Kota' => $this->input->post('Kota',TRUE),
-			);
+		'Kode' => $this->input->post('Kode',TRUE),
+		'Nama' => $this->input->post('Nama',TRUE),
+		'ContactPerson' => $this->input->post('ContactPerson',TRUE),
+		'Telepon' => $this->input->post('Telepon',TRUE),
+		'Alamat' => $this->input->post('Alamat',TRUE),
+		'Kota' => $this->input->post('Kota',TRUE),
+		// 'created_at' => $this->input->post('created_at',TRUE),
+		// 'updated_at' => $this->input->post('updated_at',TRUE),
+	    );
+
             $this->_06_shipper_model->update($this->input->post('idshipper', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_06_shipper'));
@@ -169,14 +184,17 @@ class _06_shipper extends CI_Controller
 
     public function _rules()
     {
-		$this->form_validation->set_rules('Kode', 'kode', 'trim|required');
-		$this->form_validation->set_rules('Nama', 'nama', 'trim|required');
-		$this->form_validation->set_rules('ContactPerson', 'contactperson', 'trim|required');
-		$this->form_validation->set_rules('Telepon', 'telepon', 'trim|required');
-		$this->form_validation->set_rules('Alamat', 'alamat', 'trim|required');
-		$this->form_validation->set_rules('Kota', 'kota', 'trim|required');
-		$this->form_validation->set_rules('idshipper', 'idshipper', 'trim');
-		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+	$this->form_validation->set_rules('Kode', 'kode', 'trim|required');
+	$this->form_validation->set_rules('Nama', 'nama', 'trim|required');
+	$this->form_validation->set_rules('ContactPerson', 'contactperson', 'trim|required');
+	$this->form_validation->set_rules('Telepon', 'telepon', 'trim|required');
+	$this->form_validation->set_rules('Alamat', 'alamat', 'trim|required');
+	$this->form_validation->set_rules('Kota', 'kota', 'trim|required');
+	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+
+	$this->form_validation->set_rules('idshipper', 'idshipper', 'trim');
+	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -196,28 +214,38 @@ class _06_shipper extends CI_Controller
         header("Content-Type: application/download");
         header("Content-Disposition: attachment;filename=" . $namaFile . "");
         header("Content-Transfer-Encoding: binary ");
+
         xlsBOF();
+
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-		xlsWriteLabel($tablehead, $kolomhead++, "Kode");
-		xlsWriteLabel($tablehead, $kolomhead++, "Nama");
-		xlsWriteLabel($tablehead, $kolomhead++, "ContactPerson");
-		xlsWriteLabel($tablehead, $kolomhead++, "Telepon");
-		xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
-		xlsWriteLabel($tablehead, $kolomhead++, "Kota");
-		foreach ($this->_06_shipper_model->get_all() as $data) {
+	xlsWriteLabel($tablehead, $kolomhead++, "Kode");
+	xlsWriteLabel($tablehead, $kolomhead++, "Nama");
+	xlsWriteLabel($tablehead, $kolomhead++, "ContactPerson");
+	xlsWriteLabel($tablehead, $kolomhead++, "Telepon");
+	xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kota");
+	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
+	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
+
+	foreach ($this->_06_shipper_model->get_all() as $data) {
             $kolombody = 0;
+
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Kode);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Nama);
-			xlsWriteLabel($tablebody, $kolombody++, $data->ContactPerson);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Telepon);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Alamat);
-			xlsWriteLabel($tablebody, $kolombody++, $data->Kota);
-			$tablebody++;
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Kode);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Nama);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->ContactPerson);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Telepon);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Alamat);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->Kota);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
+
+	    $tablebody++;
             $nourut++;
         }
+
         xlsEOF();
         exit();
     }
@@ -226,10 +254,12 @@ class _06_shipper extends CI_Controller
     {
         header("Content-type: application/vnd.ms-word");
         header("Content-Disposition: attachment;Filename=t06_shipper.doc");
+
         $data = array(
             't06_shipper_data' => $this->_06_shipper_model->get_all(),
             'start' => 0
         );
+
         $this->load->view('_06_shipper/t06_shipper_doc',$data);
     }
 
@@ -238,5 +268,5 @@ class _06_shipper extends CI_Controller
 /* End of file _06_shipper.php */
 /* Location: ./application/controllers/_06_shipper.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-05-04 02:41:37 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-02-17 19:37:34 */
 /* http://harviacode.com */

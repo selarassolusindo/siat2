@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T05_customer List</h2>
+        <h2 style="margin-top:0px">T05_customer List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('_05_customer/create'),'Tambah', 'class="btn btn-primary"'); ?>
@@ -46,7 +46,7 @@
                 <th class="text-right">NO.</th>
 				<th>KODE</th>
 				<th>NAMA</th>
-				<th>CONTACTPERSON</th>
+				<th>CONTACT PERSON</th>
 				<th>TELEPON</th>
 				<th>ALAMAT</th>
 				<th>KOTA</th>
@@ -62,12 +62,12 @@
 				<td><?php echo $_05_customer->Alamat ?></td>
 				<td><?php echo $_05_customer->Kota ?></td>
 				<td style="text-align:center" width="200px">
-				<?php 
-				//echo anchor(site_url('_05_customer/read/'.$_05_customer->idcustomer),'Read'); 
-				//echo ' | '; 
-				echo anchor(site_url('_05_customer/update/'.$_05_customer->idcustomer),'Ubah'); 
-				echo ' | '; 
-				echo anchor(site_url('_05_customer/delete/'.$_05_customer->idcustomer),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"'); 
+				<?php
+				//echo anchor(site_url('_05_customer/read/'.$_05_customer->idcustomer),'Read');
+				//echo ' | ';
+				echo anchor(site_url('_05_customer/update/'.$_05_customer->idcustomer),'Ubah');
+				echo ' | ';
+				echo anchor(site_url('_05_customer/delete/'.$_05_customer->idcustomer),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
 				?>
 				</td>
 			</tr>
@@ -83,5 +83,5 @@
                 <?php echo $pagination ?>
             </div>
         </div>
-    </body>
-</html>
+    <!-- </body>
+</html> -->

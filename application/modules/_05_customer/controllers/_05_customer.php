@@ -122,7 +122,10 @@ class _05_customer extends CI_Controller
 				'Alamat' => set_value('Alamat', $row->Alamat),
 				'Kota' => set_value('Kota', $row->Kota),
 			);
-            $this->load->view('_05_customer/t05_customer_form', $data);
+            // $this->load->view('_05_customer/t05_customer_form', $data);
+            $data['_view'] = '_05_customer/t05_customer_form';
+            $data['_caption'] = 'Customer';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_05_customer'));
