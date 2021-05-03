@@ -39,7 +39,7 @@
                 </div>
         	</div>
 			<div class="form-group col-2">
-            	<label for="date">TGL. JATUH TEMPO KIR <?php echo form_error('TglKir') ?></label>
+            	<label for="date">JATUH TEMPO KIR <?php echo form_error('TglKir') ?></label>
             	<!-- <input type="text" class="form-control" name="TglKir" id="TglKir" placeholder="TGL. JATUH TEMPO KIR" value="<?php echo $TglKir; ?>" /> -->
                 <div class="input-group date" id="TglKir" data-target-input="nearest">
                     <div class="input-group-append" data-target="#TglKir" data-toggle="datetimepicker">

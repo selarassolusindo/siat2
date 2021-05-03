@@ -50,7 +50,7 @@
 				<th>MERK</th>
 				<th>TIPE</th>
 				<th>TGL. BELI</th>
-				<th>TGL. JATUH TEMPO KIR</th>
+				<th>JATUH TEMPO KIR</th>
 				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($_16_ekor_data as $_16_ekor) { ?>
