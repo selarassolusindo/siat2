@@ -10,8 +10,6 @@ class _08_armada extends CI_Controller
         parent::__construct();
         $this->load->model('_08_armada_model');
         $this->load->library('form_validation');
-
-        $this->load->model('_45_users_menus/_45_users_menus_model');
     }
 
     public function index()
@@ -20,11 +18,11 @@ class _08_armada extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . '_08_armada/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . '_08_armada/index.html?q=' . urlencode($q);
+            $config['base_url'] = base_url() . '_08_armada?q=' . urlencode($q);
+            $config['first_url'] = base_url() . '_08_armada?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . '_08_armada/index.html';
-            $config['first_url'] = base_url() . '_08_armada/index.html';
+            $config['base_url'] = base_url() . '_08_armada';
+            $config['first_url'] = base_url() . '_08_armada';
         }
 
         $config['per_page'] = 10;
@@ -41,7 +39,6 @@ class _08_armada extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-            'hakAkses' => $this->_45_users_menus_model->getHakAkses(8),
         );
         // $this->load->view('_08_armada/t08_armada_list', $data);
         $data['_view'] = '_08_armada/t08_armada_list';
@@ -54,24 +51,19 @@ class _08_armada extends CI_Controller
         $row = $this->_08_armada_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'idarmada' => $row->idarmada,
-		'Kode' => $row->Kode,
-		'Merk' => $row->Merk,
-		'Tipe' => $row->Tipe,
-		'TahunPembuatan' => $row->TahunPembuatan,
-		'Nopol' => $row->Nopol,
-		'Norangka' => $row->Norangka,
-		'Nomesin' => $row->Nomesin,
-		'JatuhTempoPajak' => $row->JatuhTempoPajak,
-		'JatuhTempoKir' => $row->JatuhTempoKir,
-		'KodeEkor' => $row->KodeEkor,
-		// 'created_at' => $row->created_at,
-		// 'updated_at' => $row->updated_at,
-	    );
-            // $this->load->view('_08_armada/t08_armada_read', $data);
-            $data['_view'] = '_08_armada/t08_armada_read';
-            $data['_caption'] = 'Armada';
-            $this->load->view('_00_dashboard/_layout', $data);
+				'idarmada' => $row->idarmada,
+				'Kode' => $row->Kode,
+				'Merk' => $row->Merk,
+				'Tipe' => $row->Tipe,
+				'TahunPembuatan' => $row->TahunPembuatan,
+				'NoPol' => $row->NoPol,
+				'NomorRangka' => $row->NomorRangka,
+				'NomorMesin' => $row->NomorMesin,
+				'TglBeli' => $row->TglBeli,
+				'JatuhTempoPajak' => $row->JatuhTempoPajak,
+				'JatuhTempoKir' => $row->JatuhTempoKir,
+			);
+            $this->load->view('_08_armada/t08_armada_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_08_armada'));
@@ -81,24 +73,20 @@ class _08_armada extends CI_Controller
     public function create()
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Simpan',
             'action' => site_url('_08_armada/create_action'),
-	    'idarmada' => set_value('idarmada'),
-	    // 'Kode' => set_value('Kode', getNewKode('AR', 'Kode', 't08_armada')),
-        'Kode' => set_value('Kode'),
-	    'Merk' => set_value('Merk'),
-	    'Tipe' => set_value('Tipe'),
-	    'TahunPembuatan' => set_value('TahunPembuatan'),
-	    'Nopol' => set_value('Nopol'),
-	    'Norangka' => set_value('Norangka'),
-	    'Nomesin' => set_value('Nomesin'),
-	    'JatuhTempoPajak' => set_value('JatuhTempoPajak'),
-	    'JatuhTempoKir' => set_value('JatuhTempoKir'),
-        'TglBeli' => set_value('TglBeli'),
-	    // 'KodeEkor' => set_value('KodeEkor'),
-	    // 'created_at' => set_value('created_at'),
-	    // 'updated_at' => set_value('updated_at'),
-	);
+			'idarmada' => set_value('idarmada'),
+			'Kode' => set_value('Kode'),
+			'Merk' => set_value('Merk'),
+			'Tipe' => set_value('Tipe'),
+			'TahunPembuatan' => set_value('TahunPembuatan'),
+			'NoPol' => set_value('NoPol'),
+			'NomorRangka' => set_value('NomorRangka'),
+			'NomorMesin' => set_value('NomorMesin'),
+			'TglBeli' => set_value('TglBeli'),
+			'JatuhTempoPajak' => set_value('JatuhTempoPajak'),
+			'JatuhTempoKir' => set_value('JatuhTempoKir'),
+		);
         // $this->load->view('_08_armada/t08_armada_form', $data);
         $data['_view'] = '_08_armada/t08_armada_form';
         $data['_caption'] = 'Armada';
@@ -113,21 +101,17 @@ class _08_armada extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'Kode' => $this->input->post('Kode',TRUE),
-		'Merk' => $this->input->post('Merk',TRUE),
-		'Tipe' => $this->input->post('Tipe',TRUE),
-		'TahunPembuatan' => $this->input->post('TahunPembuatan',TRUE),
-		'Nopol' => $this->input->post('Nopol',TRUE),
-		'Norangka' => $this->input->post('Norangka',TRUE),
-		'Nomesin' => $this->input->post('Nomesin',TRUE),
-		'JatuhTempoPajak' => dateMysql($this->input->post('JatuhTempoPajak',TRUE)),
-		'JatuhTempoKir' => dateMysql($this->input->post('JatuhTempoKir',TRUE)),
-        'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
-		// 'KodeEkor' => $this->input->post('KodeEkor',TRUE),
-		// 'created_at' => $this->input->post('created_at',TRUE),
-		// 'updated_at' => $this->input->post('updated_at',TRUE),
-	    );
-
+				'Kode' => $this->input->post('Kode',TRUE),
+				'Merk' => $this->input->post('Merk',TRUE),
+				'Tipe' => $this->input->post('Tipe',TRUE),
+				'TahunPembuatan' => $this->input->post('TahunPembuatan',TRUE),
+				'NoPol' => $this->input->post('NoPol',TRUE),
+				'NomorRangka' => $this->input->post('NomorRangka',TRUE),
+				'NomorMesin' => $this->input->post('NomorMesin',TRUE),
+				'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
+				'JatuhTempoPajak' => dateMysql($this->input->post('JatuhTempoPajak',TRUE)),
+				'JatuhTempoKir' => dateMysql($this->input->post('JatuhTempoKir',TRUE)),
+			);
             $this->_08_armada_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_08_armada'));
@@ -140,23 +124,20 @@ class _08_armada extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Simpan',
                 'action' => site_url('_08_armada/update_action'),
-		'idarmada' => set_value('idarmada', $row->idarmada),
-		'Kode' => set_value('Kode', $row->Kode),
-		'Merk' => set_value('Merk', $row->Merk),
-		'Tipe' => set_value('Tipe', $row->Tipe),
-		'TahunPembuatan' => set_value('TahunPembuatan', $row->TahunPembuatan),
-		'Nopol' => set_value('Nopol', $row->Nopol),
-		'Norangka' => set_value('Norangka', $row->Norangka),
-		'Nomesin' => set_value('Nomesin', $row->Nomesin),
-		'JatuhTempoPajak' => set_value('JatuhTempoPajak', dateIndo($row->JatuhTempoPajak)),
-		'JatuhTempoKir' => set_value('JatuhTempoKir', dateIndo($row->JatuhTempoKir)),
-        'TglBeli' => set_value('TglBeli', dateIndo($row->TglBeli)),
-		// 'KodeEkor' => set_value('KodeEkor', $row->KodeEkor),
-		// 'created_at' => set_value('created_at', $row->created_at),
-		// 'updated_at' => set_value('updated_at', $row->updated_at),
-	    );
+				'idarmada' => set_value('idarmada', $row->idarmada),
+				'Kode' => set_value('Kode', $row->Kode),
+				'Merk' => set_value('Merk', $row->Merk),
+				'Tipe' => set_value('Tipe', $row->Tipe),
+				'TahunPembuatan' => set_value('TahunPembuatan', $row->TahunPembuatan),
+				'NoPol' => set_value('NoPol', $row->NoPol),
+				'NomorRangka' => set_value('NomorRangka', $row->NomorRangka),
+				'NomorMesin' => set_value('NomorMesin', $row->NomorMesin),
+				'TglBeli' => set_value('TglBeli', dateIndo($row->TglBeli)),
+				'JatuhTempoPajak' => set_value('JatuhTempoPajak', dateIndo($row->JatuhTempoPajak)),
+				'JatuhTempoKir' => set_value('JatuhTempoKir', dateIndo($row->JatuhTempoKir)),
+			);
             // $this->load->view('_08_armada/t08_armada_form', $data);
             $data['_view'] = '_08_armada/t08_armada_form';
             $data['_caption'] = 'Armada';
@@ -175,21 +156,17 @@ class _08_armada extends CI_Controller
             $this->update($this->input->post('idarmada', TRUE));
         } else {
             $data = array(
-		'Kode' => $this->input->post('Kode',TRUE),
-		'Merk' => $this->input->post('Merk',TRUE),
-		'Tipe' => $this->input->post('Tipe',TRUE),
-		'TahunPembuatan' => $this->input->post('TahunPembuatan',TRUE),
-		'Nopol' => $this->input->post('Nopol',TRUE),
-		'Norangka' => $this->input->post('Norangka',TRUE),
-		'Nomesin' => $this->input->post('Nomesin',TRUE),
-        'JatuhTempoPajak' => dateMysql($this->input->post('JatuhTempoPajak',TRUE)),
-		'JatuhTempoKir' => dateMysql($this->input->post('JatuhTempoKir',TRUE)),
-        'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
-		// 'KodeEkor' => $this->input->post('KodeEkor',TRUE),
-		// 'created_at' => $this->input->post('created_at',TRUE),
-		// 'updated_at' => $this->input->post('updated_at',TRUE),
-	    );
-
+				'Kode' => $this->input->post('Kode',TRUE),
+				'Merk' => $this->input->post('Merk',TRUE),
+				'Tipe' => $this->input->post('Tipe',TRUE),
+				'TahunPembuatan' => $this->input->post('TahunPembuatan',TRUE),
+				'NoPol' => $this->input->post('NoPol',TRUE),
+				'NomorRangka' => $this->input->post('NomorRangka',TRUE),
+				'NomorMesin' => $this->input->post('NomorMesin',TRUE),
+				'TglBeli' => dateMysql($this->input->post('TglBeli',TRUE)),
+				'JatuhTempoPajak' => dateMysql($this->input->post('JatuhTempoPajak',TRUE)),
+				'JatuhTempoKir' => dateMysql($this->input->post('JatuhTempoKir',TRUE)),
+			);
             $this->_08_armada_model->update($this->input->post('idarmada', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_08_armada'));
@@ -212,22 +189,18 @@ class _08_armada extends CI_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('Kode', 'kode', 'trim|required');
-	$this->form_validation->set_rules('Merk', 'merk', 'trim|required');
-	$this->form_validation->set_rules('Tipe', 'tipe', 'trim|required');
-	$this->form_validation->set_rules('TahunPembuatan', 'tahunpembuatan', 'trim|required');
-	$this->form_validation->set_rules('Nopol', 'nopol', 'trim|required');
-	$this->form_validation->set_rules('Norangka', 'norangka', 'trim|required');
-	$this->form_validation->set_rules('Nomesin', 'nomesin', 'trim|required');
-	$this->form_validation->set_rules('JatuhTempoPajak', 'jatuhtempopajak', 'trim|required');
-	$this->form_validation->set_rules('JatuhTempoKir', 'jatuhtempokir', 'trim|required');
-    $this->form_validation->set_rules('TglBeli', 'tglbeli', 'trim|required');
-	// $this->form_validation->set_rules('KodeEkor', 'kodeekor', 'trim|required');
-	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
-
-	$this->form_validation->set_rules('idarmada', 'idarmada', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+		$this->form_validation->set_rules('Kode', 'kode', 'trim|required');
+		$this->form_validation->set_rules('Merk', 'merk', 'trim|required');
+		$this->form_validation->set_rules('Tipe', 'tipe', 'trim|required');
+		$this->form_validation->set_rules('TahunPembuatan', 'tahunpembuatan', 'trim|required');
+		$this->form_validation->set_rules('NoPol', 'nopol', 'trim|required');
+		$this->form_validation->set_rules('NomorRangka', 'nomorrangka', 'trim|required');
+		$this->form_validation->set_rules('NomorMesin', 'nomormesin', 'trim|required');
+		$this->form_validation->set_rules('TglBeli', 'tglbeli', 'trim|required');
+		$this->form_validation->set_rules('JatuhTempoPajak', 'jatuhtempopajak', 'trim|required');
+		$this->form_validation->set_rules('JatuhTempoKir', 'jatuhtempokir', 'trim|required');
+		$this->form_validation->set_rules('idarmada', 'idarmada', 'trim');
+		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -247,46 +220,36 @@ class _08_armada extends CI_Controller
         header("Content-Type: application/download");
         header("Content-Disposition: attachment;filename=" . $namaFile . "");
         header("Content-Transfer-Encoding: binary ");
-
         xlsBOF();
-
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kode");
-	xlsWriteLabel($tablehead, $kolomhead++, "Merk");
-	xlsWriteLabel($tablehead, $kolomhead++, "Tipe");
-	xlsWriteLabel($tablehead, $kolomhead++, "TahunPembuatan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nopol");
-	xlsWriteLabel($tablehead, $kolomhead++, "Norangka");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nomesin");
-	xlsWriteLabel($tablehead, $kolomhead++, "JatuhTempoPajak");
-	xlsWriteLabel($tablehead, $kolomhead++, "JatuhTempoKir");
-	xlsWriteLabel($tablehead, $kolomhead++, "KodeEkor");
-	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
-	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
-
-	foreach ($this->_08_armada_model->get_all() as $data) {
+		xlsWriteLabel($tablehead, $kolomhead++, "Kode");
+		xlsWriteLabel($tablehead, $kolomhead++, "Merk");
+		xlsWriteLabel($tablehead, $kolomhead++, "Tipe");
+		xlsWriteLabel($tablehead, $kolomhead++, "TahunPembuatan");
+		xlsWriteLabel($tablehead, $kolomhead++, "NoPol");
+		xlsWriteLabel($tablehead, $kolomhead++, "NomorRangka");
+		xlsWriteLabel($tablehead, $kolomhead++, "NomorMesin");
+		xlsWriteLabel($tablehead, $kolomhead++, "TglBeli");
+		xlsWriteLabel($tablehead, $kolomhead++, "JatuhTempoPajak");
+		xlsWriteLabel($tablehead, $kolomhead++, "JatuhTempoKir");
+		foreach ($this->_08_armada_model->get_all() as $data) {
             $kolombody = 0;
-
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->Kode);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->Merk);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->Tipe);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->TahunPembuatan);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->Nopol);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->Norangka);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->Nomesin);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->JatuhTempoPajak);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->JatuhTempoKir);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->KodeEkor);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
-
-	    $tablebody++;
+			xlsWriteLabel($tablebody, $kolombody++, $data->Kode);
+			xlsWriteLabel($tablebody, $kolombody++, $data->Merk);
+			xlsWriteLabel($tablebody, $kolombody++, $data->Tipe);
+			xlsWriteLabel($tablebody, $kolombody++, $data->TahunPembuatan);
+			xlsWriteLabel($tablebody, $kolombody++, $data->NoPol);
+			xlsWriteLabel($tablebody, $kolombody++, $data->NomorRangka);
+			xlsWriteLabel($tablebody, $kolombody++, $data->NomorMesin);
+			xlsWriteLabel($tablebody, $kolombody++, $data->TglBeli);
+			xlsWriteLabel($tablebody, $kolombody++, $data->JatuhTempoPajak);
+			xlsWriteLabel($tablebody, $kolombody++, $data->JatuhTempoKir);
+			$tablebody++;
             $nourut++;
         }
-
         xlsEOF();
         exit();
     }
@@ -295,12 +258,10 @@ class _08_armada extends CI_Controller
     {
         header("Content-type: application/vnd.ms-word");
         header("Content-Disposition: attachment;Filename=t08_armada.doc");
-
         $data = array(
             't08_armada_data' => $this->_08_armada_model->get_all(),
             'start' => 0
         );
-
         $this->load->view('_08_armada/t08_armada_doc',$data);
     }
 
@@ -309,5 +270,5 @@ class _08_armada extends CI_Controller
 /* End of file _08_armada.php */
 /* Location: ./application/controllers/_08_armada.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-02-18 22:13:06 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-05-04 03:31:37 */
 /* http://harviacode.com */

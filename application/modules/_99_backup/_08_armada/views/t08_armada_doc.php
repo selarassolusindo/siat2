@@ -24,12 +24,14 @@
 		<th>Merk</th>
 		<th>Tipe</th>
 		<th>TahunPembuatan</th>
-		<th>NoPol</th>
-		<th>NomorRangka</th>
-		<th>NomorMesin</th>
-		<th>TglBeli</th>
+		<th>Nopol</th>
+		<th>Norangka</th>
+		<th>Nomesin</th>
 		<th>JatuhTempoPajak</th>
 		<th>JatuhTempoKir</th>
+		<th>KodeEkor</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_08_armada_data as $_08_armada)
@@ -41,12 +43,14 @@
 		      <td><?php echo $_08_armada->Merk ?></td>
 		      <td><?php echo $_08_armada->Tipe ?></td>
 		      <td><?php echo $_08_armada->TahunPembuatan ?></td>
-		      <td><?php echo $_08_armada->NoPol ?></td>
-		      <td><?php echo $_08_armada->NomorRangka ?></td>
-		      <td><?php echo $_08_armada->NomorMesin ?></td>
-		      <td><?php echo $_08_armada->TglBeli ?></td>
+		      <td><?php echo $_08_armada->Nopol ?></td>
+		      <td><?php echo $_08_armada->Norangka ?></td>
+		      <td><?php echo $_08_armada->Nomesin ?></td>
 		      <td><?php echo $_08_armada->JatuhTempoPajak ?></td>
-		      <td><?php echo $_08_armada->JatuhTempoKir ?></td>	
+		      <td><?php echo $_08_armada->JatuhTempoKir ?></td>
+		      <td><?php echo $_08_armada->KodeEkor ?></td>
+		      <td><?php echo $_08_armada->created_at ?></td>
+		      <td><?php echo $_08_armada->updated_at ?></td>	
                 </tr>
                 <?php
             }
