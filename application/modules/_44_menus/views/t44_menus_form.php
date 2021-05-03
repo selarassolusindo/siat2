@@ -13,7 +13,7 @@
         <h2 style="margin-top:0px">T44_menus <?php echo $button ?></h2> -->
         <form action="<?php echo $action; ?>" method="post">
 			<div class="form-group">
-            	<label for="varchar">Menus <?php echo form_error('Menus') ?></label>
+            	<label for="varchar">MENU / MODUL <?php echo form_error('Menus') ?></label>
             	<input type="text" class="form-control" name="Menus" id="Menus" placeholder="Menus" value="<?php echo $Menus; ?>" />
         	</div>
 			<input type="hidden" name="idmenus" value="<?php echo $idmenus; ?>" />

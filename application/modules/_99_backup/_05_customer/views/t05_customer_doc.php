@@ -26,6 +26,8 @@
 		<th>Telepon</th>
 		<th>Alamat</th>
 		<th>Kota</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_05_customer_data as $_05_customer)
@@ -38,7 +40,9 @@
 		      <td><?php echo $_05_customer->ContactPerson ?></td>
 		      <td><?php echo $_05_customer->Telepon ?></td>
 		      <td><?php echo $_05_customer->Alamat ?></td>
-		      <td><?php echo $_05_customer->Kota ?></td>	
+		      <td><?php echo $_05_customer->Kota ?></td>
+		      <td><?php echo $_05_customer->created_at ?></td>
+		      <td><?php echo $_05_customer->updated_at ?></td>	
                 </tr>
                 <?php
             }

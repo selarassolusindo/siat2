@@ -43,10 +43,10 @@
         </div>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
-                <th class="text-right">No.</th>
-                <th>ID</th>
-				<th>Menus</th>
-				<th class="text-center">Proses</th>
+                <th class="text-right">NO.</th>
+                <th>ID MENU</th>
+				<th>MENU / MODUL</th>
+				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($_44_menus_data as $_44_menus) { ?>
             <tr>
