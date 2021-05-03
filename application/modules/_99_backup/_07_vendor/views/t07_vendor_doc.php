@@ -26,6 +26,8 @@
 		<th>Telepon</th>
 		<th>Alamat</th>
 		<th>Kota</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_07_vendor_data as $_07_vendor)
@@ -38,7 +40,9 @@
 		      <td><?php echo $_07_vendor->ContactPerson ?></td>
 		      <td><?php echo $_07_vendor->Telepon ?></td>
 		      <td><?php echo $_07_vendor->Alamat ?></td>
-		      <td><?php echo $_07_vendor->Kota ?></td>	
+		      <td><?php echo $_07_vendor->Kota ?></td>
+		      <td><?php echo $_07_vendor->created_at ?></td>
+		      <td><?php echo $_07_vendor->updated_at ?></td>	
                 </tr>
                 <?php
             }
