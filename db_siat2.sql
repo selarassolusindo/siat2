@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 04, 2021 at 01:52 AM
+-- Generation Time: May 04, 2021 at 02:54 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -417,13 +417,6 @@ CREATE TABLE `t05_customer` (
   `Kota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `t05_customer`
---
-
-INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`) VALUES
-(1, 'CS001', 'Cus1', 'Con1', 'Tel1', 'Ala1', 'Kot1');
-
 -- --------------------------------------------------------
 
 --
@@ -437,17 +430,8 @@ CREATE TABLE `t06_shipper` (
   `ContactPerson` varchar(50) NOT NULL,
   `Telepon` varchar(25) NOT NULL,
   `Alamat` varchar(50) NOT NULL,
-  `Kota` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Kota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t06_shipper`
---
-
-INSERT INTO `t06_shipper` (`idshipper`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
-(1, 'SH001', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 12:43:47', '2021-02-20 15:00:50');
 
 -- --------------------------------------------------------
 
@@ -462,17 +446,8 @@ CREATE TABLE `t07_vendor` (
   `ContactPerson` varchar(50) NOT NULL,
   `Telepon` varchar(25) NOT NULL,
   `Alamat` varchar(50) NOT NULL,
-  `Kota` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Kota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t07_vendor`
---
-
-INSERT INTO `t07_vendor` (`idvendor`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
-(1, 'VN001', 'Nam1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-02-17 13:47:47', '2021-02-20 15:07:00');
 
 -- --------------------------------------------------------
 
@@ -928,7 +903,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1619795162, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620070500, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1197,19 +1172,19 @@ ALTER TABLE `t04_tglsaldoawal`
 -- AUTO_INCREMENT for table `t05_customer`
 --
 ALTER TABLE `t05_customer`
-  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t06_shipper`
 --
 ALTER TABLE `t06_shipper`
-  MODIFY `idshipper` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idshipper` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t07_vendor`
 --
 ALTER TABLE `t07_vendor`
-  MODIFY `idvendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idvendor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t08_armada`
