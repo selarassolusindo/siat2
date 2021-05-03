@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2021 at 02:04 AM
+-- Generation Time: May 04, 2021 at 01:52 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -31,18 +31,15 @@ CREATE TABLE `t01_company` (
   `idcompany` int(11) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `Alamat` varchar(50) NOT NULL,
-  `Kota` varchar(50) NOT NULL,
-  `Group_Kode` varchar(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Kota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `t01_company`
 --
 
-INSERT INTO `t01_company` (`idcompany`, `Nama`, `Alamat`, `Kota`, `Group_Kode`, `created_at`, `updated_at`) VALUES
-(1, 'PT LTS', 'Andhika Plaza', 'Surabaya', 'LTS', '2021-01-02 11:39:38', '2021-02-14 14:33:33');
+INSERT INTO `t01_company` (`idcompany`, `Nama`, `Alamat`, `Kota`) VALUES
+(1, 'PT LTS', 'Andhika Plaza', 'Surabaya');
 
 -- --------------------------------------------------------
 
@@ -417,17 +414,15 @@ CREATE TABLE `t05_customer` (
   `ContactPerson` varchar(50) NOT NULL,
   `Telepon` varchar(25) NOT NULL,
   `Alamat` varchar(50) NOT NULL,
-  `Kota` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Kota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `t05_customer`
 --
 
-INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`, `created_at`, `updated_at`) VALUES
-(1, 'CS001', 'Cus1', 'Con1', 'Tel1', 'Ala1', 'Kot1', '2021-01-03 15:38:53', '2021-02-20 14:40:09');
+INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`) VALUES
+(1, 'CS001', 'Cus1', 'Con1', 'Tel1', 'Ala1', 'Kot1');
 
 -- --------------------------------------------------------
 
@@ -624,10 +619,19 @@ CREATE TABLE `t14_bank` (
   `idbank` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
+  `NamaRekening` varchar(50) NOT NULL,
+  `Cabang` varchar(50) NOT NULL,
   `NomorRekening` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `JenisRekening` varchar(50) NOT NULL,
+  `Akun` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t14_bank`
+--
+
+INSERT INTO `t14_bank` (`idbank`, `Kode`, `Nama`, `NamaRekening`, `Cabang`, `NomorRekening`, `JenisRekening`, `Akun`) VALUES
+(1, 'K1', 'BCA DODO', 'DODO ANANTO', 'RUNGKUT', '8220437753', 'RUPIAH', 21);
 
 -- --------------------------------------------------------
 
@@ -924,7 +928,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1619714033, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1619795162, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1247,7 +1251,7 @@ ALTER TABLE `t13_satuan`
 -- AUTO_INCREMENT for table `t14_bank`
 --
 ALTER TABLE `t14_bank`
-  MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t15_driver`
