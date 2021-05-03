@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 04, 2021 at 02:54 AM
+-- Generation Time: May 04, 2021 at 03:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -461,23 +461,13 @@ CREATE TABLE `t08_armada` (
   `Merk` varchar(50) NOT NULL,
   `Tipe` varchar(25) NOT NULL,
   `TahunPembuatan` varchar(4) NOT NULL,
-  `Nopol` varchar(15) NOT NULL,
-  `Norangka` varchar(50) NOT NULL,
-  `Nomesin` varchar(50) NOT NULL,
-  `JatuhTempoPajak` date NOT NULL,
-  `JatuhTempoKir` date NOT NULL,
+  `NoPol` varchar(15) NOT NULL,
+  `NomorRangka` varchar(50) NOT NULL,
+  `NomorMesin` varchar(50) NOT NULL,
   `TglBeli` date NOT NULL,
-  `KodeEkor` varchar(25) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `JatuhTempoPajak` date NOT NULL,
+  `JatuhTempoKir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t08_armada`
---
-
-INSERT INTO `t08_armada` (`idarmada`, `Kode`, `Merk`, `Tipe`, `TahunPembuatan`, `Nopol`, `Norangka`, `Nomesin`, `JatuhTempoPajak`, `JatuhTempoKir`, `TglBeli`, `KodeEkor`, `created_at`, `updated_at`) VALUES
-(1, 'A1', 'Fuso', 'T1', '2020', 'L 1156 RM', '351511', '241274', '2022-02-09', '2022-07-06', '2010-09-02', NULL, '2021-04-29 16:50:01', '2021-04-29 17:27:21');
 
 -- --------------------------------------------------------
 
@@ -1190,7 +1180,7 @@ ALTER TABLE `t07_vendor`
 -- AUTO_INCREMENT for table `t08_armada`
 --
 ALTER TABLE `t08_armada`
-  MODIFY `idarmada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idarmada` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t09_sparepart`
