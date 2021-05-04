@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 04, 2021 at 03:59 AM
+-- Generation Time: May 05, 2021 at 03:43 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -480,9 +480,7 @@ CREATE TABLE `t09_sparepart` (
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
   `Merk` varchar(50) NOT NULL,
-  `Tipe` varchar(25) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Tipe` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -494,19 +492,8 @@ CREATE TABLE `t09_sparepart` (
 CREATE TABLE `t10_service` (
   `idservice` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
-  `Nama` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Nama` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t10_service`
---
-
-INSERT INTO `t10_service` (`idservice`, `Kode`, `Nama`, `created_at`, `updated_at`) VALUES
-(1, 'SR001', 'Sewa Pelabuhan', '2021-02-28 14:04:50', '2021-02-28 14:04:50'),
-(2, 'SR002', 'Sewa Armada', '2021-02-28 14:04:58', '2021-02-28 14:04:58'),
-(3, 'SR003', 'Sewa Container', '2021-02-28 14:05:15', '2021-02-28 14:05:15');
 
 -- --------------------------------------------------------
 
@@ -518,19 +505,8 @@ CREATE TABLE `t11_cost` (
   `idcost` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL,
-  `idakun` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Akun` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t11_cost`
---
-
-INSERT INTO `t11_cost` (`idcost`, `Kode`, `Nama`, `idakun`, `created_at`, `updated_at`) VALUES
-(1, 'CT001', 'Solar', 170, '2021-02-23 13:29:32', '2021-02-23 13:29:32'),
-(2, 'CT002', 'Oli', 171, '2021-02-23 13:29:49', '2021-02-23 13:29:49'),
-(3, 'CT003', 'Sangu Sopir', 172, '2021-02-23 13:30:12', '2021-02-23 13:30:12');
 
 -- --------------------------------------------------------
 
@@ -541,18 +517,8 @@ INSERT INTO `t11_cost` (`idcost`, `Kode`, `Nama`, `idakun`, `created_at`, `updat
 CREATE TABLE `t12_lokasi` (
   `idlokasi` int(11) NOT NULL,
   `Kode` varchar(5) NOT NULL,
-  `Nama` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Nama` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t12_lokasi`
---
-
-INSERT INTO `t12_lokasi` (`idlokasi`, `Kode`, `Nama`, `created_at`, `updated_at`) VALUES
-(1, 'LK001', 'Surabaya', '2021-02-20 10:57:31', '2021-02-20 10:57:51'),
-(2, 'LK002', 'Malang', '2021-03-07 10:26:12', '2021-03-07 10:26:12');
 
 -- --------------------------------------------------------
 
@@ -566,13 +532,6 @@ CREATE TABLE `t13_satuan` (
   `Nama` varchar(50) NOT NULL,
   `Tipe` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t13_satuan`
---
-
-INSERT INTO `t13_satuan` (`idsatuan`, `Kode`, `Nama`, `Tipe`) VALUES
-(1, 'K1', 'Dokumen', 'Lembar');
 
 -- --------------------------------------------------------
 
@@ -591,13 +550,6 @@ CREATE TABLE `t14_bank` (
   `Akun` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `t14_bank`
---
-
-INSERT INTO `t14_bank` (`idbank`, `Kode`, `Nama`, `NamaRekening`, `Cabang`, `NomorRekening`, `JenisRekening`, `Akun`) VALUES
-(1, 'K1', 'BCA DODO', 'DODO ANANTO', 'RUNGKUT', '8220437753', 'RUPIAH', 21);
-
 -- --------------------------------------------------------
 
 --
@@ -613,13 +565,6 @@ CREATE TABLE `t15_driver` (
   `KTP` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `t15_driver`
---
-
-INSERT INTO `t15_driver` (`iddriver`, `Kode`, `Nama`, `Alamat`, `HP`, `KTP`) VALUES
-(1, 'K1', 'Dodo', 'Perumtas 3 N5 - 7', '089679920200', '3515112412740001');
-
 -- --------------------------------------------------------
 
 --
@@ -634,13 +579,6 @@ CREATE TABLE `t16_ekor` (
   `TglBeli` date NOT NULL,
   `TglKir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t16_ekor`
---
-
-INSERT INTO `t16_ekor` (`idekor`, `Kode`, `Merk`, `Tipe`, `TglBeli`, `TglKir`) VALUES
-(1, 'K1', 'Hino', 'Panjang', '2021-02-01', '2022-03-01');
 
 -- --------------------------------------------------------
 
@@ -893,7 +831,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620070500, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620149332, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1192,43 +1130,43 @@ ALTER TABLE `t09_sparepart`
 -- AUTO_INCREMENT for table `t10_service`
 --
 ALTER TABLE `t10_service`
-  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t11_cost`
 --
 ALTER TABLE `t11_cost`
-  MODIFY `idcost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idcost` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t12_lokasi`
 --
 ALTER TABLE `t12_lokasi`
-  MODIFY `idlokasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idlokasi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t13_satuan`
 --
 ALTER TABLE `t13_satuan`
-  MODIFY `idsatuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idsatuan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t14_bank`
 --
 ALTER TABLE `t14_bank`
-  MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t15_driver`
 --
 ALTER TABLE `t15_driver`
-  MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t16_ekor`
 --
 ALTER TABLE `t16_ekor`
-  MODIFY `idekor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idekor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t30_jo`
