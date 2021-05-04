@@ -10,6 +10,7 @@ class _08_armada extends CI_Controller
         parent::__construct();
         $this->load->model('_08_armada_model');
         $this->load->library('form_validation');
+        $this->load->model('_45_users_menus/_45_users_menus_model');
     }
 
     public function index()
@@ -39,6 +40,7 @@ class _08_armada extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'hakAkses' => $this->_45_users_menus_model->getHakAkses(8),
         );
         // $this->load->view('_08_armada/t08_armada_list', $data);
         $data['_view'] = '_08_armada/t08_armada_list';

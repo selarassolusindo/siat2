@@ -13,7 +13,9 @@
         <h2 style="margin-top:0px">T07_vendor List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
+                <?php if ($hakAkses['tambah']) { ?>
                 <?php echo anchor(site_url('_07_vendor/create'),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php } ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -65,9 +67,15 @@
 				<?php
 				//echo anchor(site_url('_07_vendor/read/'.$_07_vendor->idvendor),'Read');
 				//echo ' | ';
+                if ($hakAkses['ubah']) {
 				echo anchor(site_url('_07_vendor/update/'.$_07_vendor->idvendor),'Ubah');
+                if ($hakAkses['hapus']) {
 				echo ' | ';
+                }
+                }
+                if ($hakAkses['hapus']) {
 				echo anchor(site_url('_07_vendor/delete/'.$_07_vendor->idvendor),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
+                }
 				?>
 				</td>
 			</tr>

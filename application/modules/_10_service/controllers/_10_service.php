@@ -10,6 +10,7 @@ class _10_service extends CI_Controller
         parent::__construct();
         $this->load->model('_10_service_model');
         $this->load->library('form_validation');
+        $this->load->model('_45_users_menus/_45_users_menus_model');
     }
 
     public function index()
@@ -39,6 +40,7 @@ class _10_service extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'hakAkses' => $this->_45_users_menus_model->getHakAkses(11),
         );
         // $this->load->view('_10_service/t10_service_list', $data);
         $data['_view'] = '_10_service/t10_service_list';

@@ -10,6 +10,7 @@ class _05_customer extends CI_Controller
         parent::__construct();
         $this->load->model('_05_customer_model');
         $this->load->library('form_validation');
+        $this->load->model('_45_users_menus/_45_users_menus_model');
     }
 
     public function index()
@@ -39,6 +40,7 @@ class _05_customer extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'hakAkses' => $this->_45_users_menus_model->getHakAkses(5),
         );
         // $this->load->view('_05_customer/t05_customer_list', $data);
         $data['_view'] = '_05_customer/t05_customer_list';

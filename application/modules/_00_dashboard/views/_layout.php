@@ -289,7 +289,7 @@
                                     <!-- menu management -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_44_menus'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == '_44_menus') ? 'active' : ''; ?>">
-                                            <i class="fas fa-user-friends nav-icon"></i>
+                                            <i class="far fa-circle nav-icon"></i>
                                             <p>Menu</p>
                                         </a>
                                     </li>

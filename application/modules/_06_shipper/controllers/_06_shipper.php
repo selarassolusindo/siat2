@@ -10,6 +10,7 @@ class _06_shipper extends CI_Controller
         parent::__construct();
         $this->load->model('_06_shipper_model');
         $this->load->library('form_validation');
+        $this->load->model('_45_users_menus/_45_users_menus_model');
     }
 
     public function index()
@@ -39,6 +40,7 @@ class _06_shipper extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'hakAkses' => $this->_45_users_menus_model->getHakAkses(6),
         );
         // $this->load->view('_06_shipper/t06_shipper_list', $data);
         $data['_view'] = '_06_shipper/t06_shipper_list';

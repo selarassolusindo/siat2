@@ -13,7 +13,9 @@
         <h2 style="margin-top:0px">T10_service List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
+                <?php if ($hakAkses['tambah']) { ?>
                 <?php echo anchor(site_url('_10_service/create'),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php } ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -57,9 +59,15 @@
 				<?php
 				//echo anchor(site_url('_10_service/read/'.$_10_service->idservice),'Read');
 				//echo ' | ';
+                if ($hakAkses['ubah']) {
 				echo anchor(site_url('_10_service/update/'.$_10_service->idservice),'Ubah');
+                if ($hakAkses['hapus']) {
 				echo ' | ';
+                }
+                }
+                if ($hakAkses['hapus']) {
 				echo anchor(site_url('_10_service/delete/'.$_10_service->idservice),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
+                }
 				?>
 				</td>
 			</tr>

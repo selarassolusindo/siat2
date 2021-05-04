@@ -13,7 +13,9 @@
         <h2 style="margin-top:0px">T08_armada List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
+                <?php if ($hakAkses['tambah']) { ?>
                 <?php echo anchor(site_url('_08_armada/create'),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php } ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -73,9 +75,15 @@
 				<?php
 				//echo anchor(site_url('_08_armada/read/'.$_08_armada->idarmada),'Read');
 				//echo ' | ';
+                if ($hakAkses['ubah']) {
 				echo anchor(site_url('_08_armada/update/'.$_08_armada->idarmada),'Ubah');
+                if ($hakAkses['hapus']) {
 				echo ' | ';
+                }
+                }
+                if ($hakAkses['hapus']) {
 				echo anchor(site_url('_08_armada/delete/'.$_08_armada->idarmada),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
+                }
 				?>
 				</td>
 			</tr>
