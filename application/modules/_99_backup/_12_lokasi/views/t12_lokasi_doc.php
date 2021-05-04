@@ -22,6 +22,8 @@
                 <th>No</th>
 		<th>Kode</th>
 		<th>Nama</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_12_lokasi_data as $_12_lokasi)
@@ -30,7 +32,9 @@
                 <tr>
 		      <td><?php echo ++$start ?></td>
 		      <td><?php echo $_12_lokasi->Kode ?></td>
-		      <td><?php echo $_12_lokasi->Nama ?></td>	
+		      <td><?php echo $_12_lokasi->Nama ?></td>
+		      <td><?php echo $_12_lokasi->created_at ?></td>
+		      <td><?php echo $_12_lokasi->updated_at ?></td>	
                 </tr>
                 <?php
             }
