@@ -40,7 +40,10 @@ class _09_sparepart extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $this->load->view('_09_sparepart/t09_sparepart_list', $data);
+        // $this->load->view('_09_sparepart/t09_sparepart_list', $data);
+        $data['_view'] = '_09_sparepart/t09_sparepart_list';
+        $data['_caption'] = 'Spare Part';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function read($id)
@@ -72,7 +75,10 @@ class _09_sparepart extends CI_Controller
 			'Merk' => set_value('Merk'),
 			'Tipe' => set_value('Tipe'),
 		);
-        $this->load->view('_09_sparepart/t09_sparepart_form', $data);
+        // $this->load->view('_09_sparepart/t09_sparepart_form', $data);
+        $data['_view'] = '_09_sparepart/t09_sparepart_form';
+        $data['_caption'] = 'Spare Part';
+        $this->load->view('_00_dashboard/_layout', $data);
     }
 
     public function create_action()
@@ -108,7 +114,10 @@ class _09_sparepart extends CI_Controller
 				'Merk' => set_value('Merk', $row->Merk),
 				'Tipe' => set_value('Tipe', $row->Tipe),
 			);
-            $this->load->view('_09_sparepart/t09_sparepart_form', $data);
+            // $this->load->view('_09_sparepart/t09_sparepart_form', $data);
+            $data['_view'] = '_09_sparepart/t09_sparepart_form';
+            $data['_caption'] = 'Spare Part';
+            $this->load->view('_00_dashboard/_layout', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_09_sparepart'));

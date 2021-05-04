@@ -22,6 +22,8 @@
                 <th>No</th>
 		<th>Kode</th>
 		<th>Nama</th>
+		<th>Created At</th>
+		<th>Updated At</th>
 		
             </tr><?php
             foreach ($_10_service_data as $_10_service)
@@ -30,7 +32,9 @@
                 <tr>
 		      <td><?php echo ++$start ?></td>
 		      <td><?php echo $_10_service->Kode ?></td>
-		      <td><?php echo $_10_service->Nama ?></td>	
+		      <td><?php echo $_10_service->Nama ?></td>
+		      <td><?php echo $_10_service->created_at ?></td>
+		      <td><?php echo $_10_service->updated_at ?></td>	
                 </tr>
                 <?php
             }

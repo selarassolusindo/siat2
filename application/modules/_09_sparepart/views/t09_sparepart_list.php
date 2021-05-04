@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T09_sparepart List</h2>
+        <h2 style="margin-top:0px">T09_sparepart List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('_09_sparepart/create'),'Tambah', 'class="btn btn-primary"'); ?>
@@ -58,12 +58,12 @@
 				<td><?php echo $_09_sparepart->Merk ?></td>
 				<td><?php echo $_09_sparepart->Tipe ?></td>
 				<td style="text-align:center" width="200px">
-				<?php 
-				//echo anchor(site_url('_09_sparepart/read/'.$_09_sparepart->idsparepart),'Read'); 
-				//echo ' | '; 
-				echo anchor(site_url('_09_sparepart/update/'.$_09_sparepart->idsparepart),'Ubah'); 
-				echo ' | '; 
-				echo anchor(site_url('_09_sparepart/delete/'.$_09_sparepart->idsparepart),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"'); 
+				<?php
+				//echo anchor(site_url('_09_sparepart/read/'.$_09_sparepart->idsparepart),'Read');
+				//echo ' | ';
+				echo anchor(site_url('_09_sparepart/update/'.$_09_sparepart->idsparepart),'Ubah');
+				echo ' | ';
+				echo anchor(site_url('_09_sparepart/delete/'.$_09_sparepart->idsparepart),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
 				?>
 				</td>
 			</tr>
@@ -79,5 +79,5 @@
                 <?php echo $pagination ?>
             </div>
         </div>
-    </body>
-</html>
+    <!-- </body>
+</html> -->
