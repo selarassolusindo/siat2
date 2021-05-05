@@ -8,7 +8,7 @@ class _30_jo_model extends CI_Model
 
     public $table = 't30_jo';
     public $id = 'idjo';
-    public $order = 'DESC';
+    public $order = 'ASC';
 
     function __construct()
     {
@@ -26,40 +26,23 @@ class _30_jo_model extends CI_Model
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        $this->db->select($this->table . ".*,
-            t05_customer.Nama as NamaCustomer,
-            t06_shipper.Nama as NamaShipper,
-            t12_lokasi.Nama as NamaLokasi,
-            concat(t08_armada.Kode, ' - ', t08_armada.Kode) as NamaArmada,
-            t15_driver.Nama as NamaDriver,
-            t16_ekor.Kode as NamaEkor
-            ");
-        $this->db->from($this->table);
-        $this->db->join('t05_customer', 't05_customer.idcustomer = '.$this->table.'.idcustomer');
-        $this->db->join('t06_shipper', 't06_shipper.idshipper = '.$this->table.'.idshipper');
-        $this->db->join('t12_lokasi', 't12_lokasi.idlokasi = '.$this->table.'.idlokasi');
-        $this->db->join('t08_armada', 't08_armada.idarmada = '.$this->table.'.idarmada');
-        $this->db->join('t15_driver', 't15_driver.iddriver = '.$this->table.'.iddriver');
-        $this->db->join('t16_ekor', 't16_ekor.idekor = '.$this->table.'.idekor');
-        // return $this->db->get($this->table)->row();
-        return $this->db->get()->row();
+        return $this->db->get($this->table)->row();
     }
 
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('idjo', $q);
-	$this->db->or_like('NoJO', $q);
-	$this->db->or_like('TglJO', $q);
-	$this->db->or_like('idcustomer', $q);
-	$this->db->or_like('idshipper', $q);
-	$this->db->or_like('TglMB', $q);
-	$this->db->or_like('idlokasi', $q);
-	$this->db->or_like('idarmada', $q);
-	$this->db->or_like('idekor', $q);
-	$this->db->or_like('iddriver', $q);
-	$this->db->or_like('created_at', $q);
-	$this->db->or_like('updated_at', $q);
-	$this->db->from($this->table);
+		$this->db->or_like('NoJO', $q);
+		$this->db->or_like('TglJO', $q);
+		$this->db->or_like('idcustomer', $q);
+		$this->db->or_like('idshipper', $q);
+		$this->db->or_like('TglMB', $q);
+		$this->db->or_like('idlokasi', $q);
+		$this->db->or_like('idarmada', $q);
+		$this->db->or_like('iddriver', $q);
+		$this->db->or_like('created_at', $q);
+		$this->db->or_like('updated_at', $q);
+		$this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
@@ -67,35 +50,18 @@ class _30_jo_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('idjo', $q);
-    	$this->db->or_like('NoJO', $q);
-    	$this->db->or_like('TglJO', $q);
-    	$this->db->or_like($this->table.'.idcustomer', $q);
-    	$this->db->or_like($this->table.'.idshipper', $q);
-    	$this->db->or_like('TglMB', $q);
-    	$this->db->or_like($this->table.'.idlokasi', $q);
-    	$this->db->or_like($this->table.'.idarmada', $q);
-    	$this->db->or_like($this->table.'.idekor', $q);
-    	$this->db->or_like($this->table.'.iddriver', $q);
-        $this->db->or_like('t12_lokasi.Nama', $q);
-    	$this->db->limit($limit, $start);
-        $this->db->select($this->table . ".*,
-            t05_customer.Nama as NamaCustomer,
-            t06_shipper.Nama as NamaShipper,
-            t12_lokasi.Nama as NamaLokasi,
-            concat(t08_armada.Kode, ' - ', t08_armada.Kode) as NamaArmada,
-            t15_driver.Nama as NamaDriver,
-            t16_ekor.Kode as NamaEkor
-            ");
-        $this->db->from($this->table);
-        $this->db->join('t05_customer', 't05_customer.idcustomer = '.$this->table.'.idcustomer');
-        $this->db->join('t06_shipper', 't06_shipper.idshipper = '.$this->table.'.idshipper');
-        $this->db->join('t12_lokasi', 't12_lokasi.idlokasi = '.$this->table.'.idlokasi');
-        $this->db->join('t08_armada', 't08_armada.idarmada = '.$this->table.'.idarmada');
-        $this->db->join('t15_driver', 't15_driver.iddriver = '.$this->table.'.iddriver');
-        $this->db->join('t16_ekor', 't16_ekor.idekor = '.$this->table.'.idekor');
-        // echo $this->db->get_compiled_select();
-        // return $this->db->get($this->table)->result();
-        return $this->db->get()->result();
+		$this->db->or_like('NoJO', $q);
+		$this->db->or_like('TglJO', $q);
+		$this->db->or_like('idcustomer', $q);
+		$this->db->or_like('idshipper', $q);
+		$this->db->or_like('TglMB', $q);
+		$this->db->or_like('idlokasi', $q);
+		$this->db->or_like('idarmada', $q);
+		$this->db->or_like('iddriver', $q);
+		$this->db->or_like('created_at', $q);
+		$this->db->or_like('updated_at', $q);
+		$this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
     }
 
     // insert data
@@ -123,5 +89,5 @@ class _30_jo_model extends CI_Model
 /* End of file _30_jo_model.php */
 /* Location: ./application/models/_30_jo_model.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-02-21 09:24:01 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-05-05 14:38:06 */
 /* http://harviacode.com */

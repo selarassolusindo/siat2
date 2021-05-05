@@ -10,6 +10,7 @@ class _30_jo extends CI_Controller
         parent::__construct();
         $this->load->model('_30_jo_model');
         $this->load->library('form_validation');
+        $this->load->model('_45_users_menus/_45_users_menus_model');
     }
 
     public function index()
@@ -18,11 +19,11 @@ class _30_jo extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . '_30_jo/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . '_30_jo/index.html?q=' . urlencode($q);
+            $config['base_url'] = base_url() . '_30_jo?q=' . urlencode($q);
+            $config['first_url'] = base_url() . '_30_jo?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . '_30_jo/index.html';
-            $config['first_url'] = base_url() . '_30_jo/index.html';
+            $config['base_url'] = base_url() . '_30_jo';
+            $config['first_url'] = base_url() . '_30_jo';
         }
 
         $config['per_page'] = 10;
@@ -39,7 +40,9 @@ class _30_jo extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-            );
+            'hakAkses' => $this->_45_users_menus_model->getHakAkses(20),
+        );
+        // $this->load->view('_30_jo/t30_jo_list', $data);
         $data['_view'] = '_30_jo/t30_jo_list';
         $data['_caption'] = 'Job Order';
         $this->load->view('_00_dashboard/_layout', $data);
@@ -50,27 +53,19 @@ class _30_jo extends CI_Controller
         $row = $this->_30_jo_model->get_by_id($id);
         if ($row) {
             $data = array(
-        		'idjo' => $row->idjo,
-        		'NoJO' => $row->NoJO,
-        		'TglJO' => $row->TglJO,
-        		'idcustomer' => $row->idcustomer,
-        		'idshipper' => $row->idshipper,
-        		'TglMB' => $row->TglMB,
-        		'idlokasi' => $row->idlokasi,
-        		'idarmada' => $row->idarmada,
-        		'idekor' => $row->idekor,
-        		'iddriver' => $row->iddriver,
-                'NamaCustomer' => $row->NamaCustomer,
-                'NamaShipper' => $row->NamaShipper,
-                'NamaLokasi' => $row->NamaLokasi,
-                'NamaArmada' => $row->NamaArmada,
-                'NamaEkor' => $row->NamaEkor,
-                'NamaDriver' => $row->NamaDriver,
-        	    );
-
-            $data['_view'] = '_30_jo/t30_jo_read';
-            $data['_caption'] = 'Job Order';
-            $this->load->view('_00_dashboard/_layout', $data);
+				'idjo' => $row->idjo,
+				'NoJO' => $row->NoJO,
+				'TglJO' => $row->TglJO,
+				'idcustomer' => $row->idcustomer,
+				'idshipper' => $row->idshipper,
+				'TglMB' => $row->TglMB,
+				'idlokasi' => $row->idlokasi,
+				'idarmada' => $row->idarmada,
+				'iddriver' => $row->iddriver,
+				'created_at' => $row->created_at,
+				'updated_at' => $row->updated_at,
+			);
+            $this->load->view('_30_jo/t30_jo_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('_30_jo'));
@@ -79,38 +74,22 @@ class _30_jo extends CI_Controller
 
     public function create()
     {
-        $this->load->model('_05_customer/_05_customer_model');
-        $customer = $this->_05_customer_model->get_all();
-        $this->load->model('_06_shipper/_06_shipper_model');
-        $shipper = $this->_06_shipper_model->get_all();
-        $this->load->model('_12_lokasi/_12_lokasi_model');
-        $lokasi = $this->_12_lokasi_model->get_all();
-        $this->load->model('_08_armada/_08_armada_model');
-        $armada = $this->_08_armada_model->get_all();
-        $this->load->model('_16_ekor/_16_ekor_model');
-        $ekor = $this->_16_ekor_model->get_all();
-        $this->load->model('_15_driver/_15_driver_model');
-        $driver = $this->_15_driver_model->get_all();
         $data = array(
-            'button' => 'Create',
+            'button' => 'Simpan',
             'action' => site_url('_30_jo/create_action'),
-    	    'idjo' => set_value('idjo'),
-    	    'NoJO' => set_value('NoJO', getNewJO('JO', 'NoJO', 't30_jo')),
-    	    'TglJO' => set_value('TglJO'),
-    	    'idcustomer' => set_value('idcustomer'),
-    	    'idshipper' => set_value('idshipper'),
-    	    'TglMB' => set_value('TglMB'),
-    	    'idlokasi' => set_value('idlokasi'),
-    	    'idarmada' => set_value('idarmada'),
-    	    'idekor' => set_value('idekor'),
-    	    'iddriver' => set_value('iddriver'),
-            'customerData' => $customer,
-            'shipperData' => $shipper,
-            'lokasiData' => $lokasi,
-            'armadaData' => $armada,
-            'ekorData' => $ekor,
-            'driverData' => $driver,
-            );
+			'idjo' => set_value('idjo'),
+			'NoJO' => set_value('NoJO'),
+			'TglJO' => set_value('TglJO'),
+			'idcustomer' => set_value('idcustomer'),
+			'idshipper' => set_value('idshipper'),
+			'TglMB' => set_value('TglMB'),
+			'idlokasi' => set_value('idlokasi'),
+			'idarmada' => set_value('idarmada'),
+			'iddriver' => set_value('iddriver'),
+			'created_at' => set_value('created_at'),
+			'updated_at' => set_value('updated_at'),
+		);
+        // $this->load->view('_30_jo/t30_jo_form', $data);
         $data['_view'] = '_30_jo/t30_jo_form';
         $data['_caption'] = 'Job Order';
         $this->load->view('_00_dashboard/_layout', $data);
@@ -124,19 +103,17 @@ class _30_jo extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'NoJO' => $this->input->post('NoJO',TRUE),
-		'TglJO' => $this->input->post('TglJO',TRUE),
-		'idcustomer' => $this->input->post('idcustomer',TRUE),
-		'idshipper' => $this->input->post('idshipper',TRUE),
-		'TglMB' => $this->input->post('TglMB',TRUE),
-		'idlokasi' => $this->input->post('idlokasi',TRUE),
-		'idarmada' => $this->input->post('idarmada',TRUE),
-		'idekor' => $this->input->post('idekor',TRUE),
-		'iddriver' => $this->input->post('iddriver',TRUE),
-		// 'created_at' => $this->input->post('created_at',TRUE),
-		// 'updated_at' => $this->input->post('updated_at',TRUE),
-	    );
-
+				'NoJO' => $this->input->post('NoJO',TRUE),
+				'TglJO' => $this->input->post('TglJO',TRUE),
+				'idcustomer' => $this->input->post('idcustomer',TRUE),
+				'idshipper' => $this->input->post('idshipper',TRUE),
+				'TglMB' => $this->input->post('TglMB',TRUE),
+				'idlokasi' => $this->input->post('idlokasi',TRUE),
+				'idarmada' => $this->input->post('idarmada',TRUE),
+				'iddriver' => $this->input->post('iddriver',TRUE),
+				'created_at' => $this->input->post('created_at',TRUE),
+				'updated_at' => $this->input->post('updated_at',TRUE),
+			);
             $this->_30_jo_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_30_jo'));
@@ -149,21 +126,20 @@ class _30_jo extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Simpan',
                 'action' => site_url('_30_jo/update_action'),
-		'idjo' => set_value('idjo', $row->idjo),
-		'NoJO' => set_value('NoJO', $row->NoJO),
-		'TglJO' => set_value('TglJO', $row->TglJO),
-		'idcustomer' => set_value('idcustomer', $row->idcustomer),
-		'idshipper' => set_value('idshipper', $row->idshipper),
-		'TglMB' => set_value('TglMB', $row->TglMB),
-		'idlokasi' => set_value('idlokasi', $row->idlokasi),
-		'idarmada' => set_value('idarmada', $row->idarmada),
-		'idekor' => set_value('idekor', $row->idekor),
-		'iddriver' => set_value('iddriver', $row->iddriver),
-		// 'created_at' => set_value('created_at', $row->created_at),
-		// 'updated_at' => set_value('updated_at', $row->updated_at),
-	    );
+				'idjo' => set_value('idjo', $row->idjo),
+				'NoJO' => set_value('NoJO', $row->NoJO),
+				'TglJO' => set_value('TglJO', $row->TglJO),
+				'idcustomer' => set_value('idcustomer', $row->idcustomer),
+				'idshipper' => set_value('idshipper', $row->idshipper),
+				'TglMB' => set_value('TglMB', $row->TglMB),
+				'idlokasi' => set_value('idlokasi', $row->idlokasi),
+				'idarmada' => set_value('idarmada', $row->idarmada),
+				'iddriver' => set_value('iddriver', $row->iddriver),
+				'created_at' => set_value('created_at', $row->created_at),
+				'updated_at' => set_value('updated_at', $row->updated_at),
+			);
             // $this->load->view('_30_jo/t30_jo_form', $data);
             $data['_view'] = '_30_jo/t30_jo_form';
             $data['_caption'] = 'Job Order';
@@ -182,19 +158,17 @@ class _30_jo extends CI_Controller
             $this->update($this->input->post('idjo', TRUE));
         } else {
             $data = array(
-		'NoJO' => $this->input->post('NoJO',TRUE),
-		'TglJO' => $this->input->post('TglJO',TRUE),
-		'idcustomer' => $this->input->post('idcustomer',TRUE),
-		'idshipper' => $this->input->post('idshipper',TRUE),
-		'TglMB' => $this->input->post('TglMB',TRUE),
-		'idlokasi' => $this->input->post('idlokasi',TRUE),
-		'idarmada' => $this->input->post('idarmada',TRUE),
-		'idekor' => $this->input->post('idekor',TRUE),
-		'iddriver' => $this->input->post('iddriver',TRUE),
-		// 'created_at' => $this->input->post('created_at',TRUE),
-		// 'updated_at' => $this->input->post('updated_at',TRUE),
-	    );
-
+				'NoJO' => $this->input->post('NoJO',TRUE),
+				'TglJO' => $this->input->post('TglJO',TRUE),
+				'idcustomer' => $this->input->post('idcustomer',TRUE),
+				'idshipper' => $this->input->post('idshipper',TRUE),
+				'TglMB' => $this->input->post('TglMB',TRUE),
+				'idlokasi' => $this->input->post('idlokasi',TRUE),
+				'idarmada' => $this->input->post('idarmada',TRUE),
+				'iddriver' => $this->input->post('iddriver',TRUE),
+				'created_at' => $this->input->post('created_at',TRUE),
+				'updated_at' => $this->input->post('updated_at',TRUE),
+			);
             $this->_30_jo_model->update($this->input->post('idjo', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_30_jo'));
@@ -217,20 +191,18 @@ class _30_jo extends CI_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('NoJO', 'nojo', 'trim|required');
-	$this->form_validation->set_rules('TglJO', 'tgljo', 'trim|required');
-	$this->form_validation->set_rules('idcustomer', 'idcustomer', 'trim|required');
-	$this->form_validation->set_rules('idshipper', 'idshipper', 'trim|required');
-	$this->form_validation->set_rules('TglMB', 'tglmb', 'trim|required');
-	$this->form_validation->set_rules('idlokasi', 'idlokasi', 'trim|required');
-	$this->form_validation->set_rules('idarmada', 'idarmada', 'trim|required');
-	$this->form_validation->set_rules('idekor', 'idekor', 'trim|required');
-	$this->form_validation->set_rules('iddriver', 'iddriver', 'trim|required');
-	// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-	// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
-
-	$this->form_validation->set_rules('idjo', 'idjo', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+		$this->form_validation->set_rules('NoJO', 'nojo', 'trim|required');
+		$this->form_validation->set_rules('TglJO', 'tgljo', 'trim|required');
+		$this->form_validation->set_rules('idcustomer', 'idcustomer', 'trim|required');
+		$this->form_validation->set_rules('idshipper', 'idshipper', 'trim|required');
+		$this->form_validation->set_rules('TglMB', 'tglmb', 'trim|required');
+		$this->form_validation->set_rules('idlokasi', 'idlokasi', 'trim|required');
+		$this->form_validation->set_rules('idarmada', 'idarmada', 'trim|required');
+		$this->form_validation->set_rules('iddriver', 'iddriver', 'trim|required');
+		$this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+		$this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+		$this->form_validation->set_rules('idjo', 'idjo', 'trim');
+		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -250,44 +222,36 @@ class _30_jo extends CI_Controller
         header("Content-Type: application/download");
         header("Content-Disposition: attachment;filename=" . $namaFile . "");
         header("Content-Transfer-Encoding: binary ");
-
         xlsBOF();
-
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "NoJO");
-	xlsWriteLabel($tablehead, $kolomhead++, "TglJO");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idcustomer");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idshipper");
-	xlsWriteLabel($tablehead, $kolomhead++, "TglMB");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idlokasi");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idarmada");
-	xlsWriteLabel($tablehead, $kolomhead++, "Idekor");
-	xlsWriteLabel($tablehead, $kolomhead++, "Iddriver");
-	xlsWriteLabel($tablehead, $kolomhead++, "Created At");
-	xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
-
-	foreach ($this->_30_jo_model->get_all() as $data) {
+		xlsWriteLabel($tablehead, $kolomhead++, "NoJO");
+		xlsWriteLabel($tablehead, $kolomhead++, "TglJO");
+		xlsWriteLabel($tablehead, $kolomhead++, "Idcustomer");
+		xlsWriteLabel($tablehead, $kolomhead++, "Idshipper");
+		xlsWriteLabel($tablehead, $kolomhead++, "TglMB");
+		xlsWriteLabel($tablehead, $kolomhead++, "Idlokasi");
+		xlsWriteLabel($tablehead, $kolomhead++, "Idarmada");
+		xlsWriteLabel($tablehead, $kolomhead++, "Iddriver");
+		xlsWriteLabel($tablehead, $kolomhead++, "Created At");
+		xlsWriteLabel($tablehead, $kolomhead++, "Updated At");
+		foreach ($this->_30_jo_model->get_all() as $data) {
             $kolombody = 0;
-
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->NoJO);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->TglJO);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idcustomer);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idshipper);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->TglMB);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idlokasi);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idarmada);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->idekor);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->iddriver);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
-
-	    $tablebody++;
+			xlsWriteLabel($tablebody, $kolombody++, $data->NoJO);
+			xlsWriteLabel($tablebody, $kolombody++, $data->TglJO);
+			xlsWriteNumber($tablebody, $kolombody++, $data->idcustomer);
+			xlsWriteNumber($tablebody, $kolombody++, $data->idshipper);
+			xlsWriteLabel($tablebody, $kolombody++, $data->TglMB);
+			xlsWriteNumber($tablebody, $kolombody++, $data->idlokasi);
+			xlsWriteNumber($tablebody, $kolombody++, $data->idarmada);
+			xlsWriteNumber($tablebody, $kolombody++, $data->iddriver);
+			xlsWriteLabel($tablebody, $kolombody++, $data->created_at);
+			xlsWriteLabel($tablebody, $kolombody++, $data->updated_at);
+			$tablebody++;
             $nourut++;
         }
-
         xlsEOF();
         exit();
     }
@@ -296,12 +260,10 @@ class _30_jo extends CI_Controller
     {
         header("Content-type: application/vnd.ms-word");
         header("Content-Disposition: attachment;Filename=t30_jo.doc");
-
         $data = array(
             't30_jo_data' => $this->_30_jo_model->get_all(),
             'start' => 0
         );
-
         $this->load->view('_30_jo/t30_jo_doc',$data);
     }
 
@@ -310,5 +272,5 @@ class _30_jo extends CI_Controller
 /* End of file _30_jo.php */
 /* Location: ./application/controllers/_30_jo.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-02-21 09:24:01 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-05-05 14:38:06 */
 /* http://harviacode.com */
