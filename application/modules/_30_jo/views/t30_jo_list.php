@@ -46,31 +46,31 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th class="text-right">NO.</th>
-				<th>NOJO</th>
-				<th>TGLJO</th>
-				<th>IDCUSTOMER</th>
-				<th>IDSHIPPER</th>
-				<th>TGLMB</th>
-				<th>IDLOKASI</th>
-				<th>IDARMADA</th>
-				<th>IDDRIVER</th>
-				<th>CREATED AT</th>
-				<th>UPDATED AT</th>
+				<th>NO. JO</th>
+				<th>TGL. JO</th>
+				<th>CUSTOMER</th>
+				<th>SHIPPER</th>
+				<th>TGL. MUAT/BONGKAR</th>
+				<th>LOKASI</th>
+				<th>ARMADA</th>
+				<th>DRIVER</th>
+				<!-- <th>CREATED AT</th> -->
+				<!-- <th>UPDATED AT</th> -->
 				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($_30_jo_data as $_30_jo) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
 				<td><?php echo $_30_jo->NoJO ?></td>
-				<td><?php echo $_30_jo->TglJO ?></td>
-				<td><?php echo $_30_jo->idcustomer ?></td>
-				<td><?php echo $_30_jo->idshipper ?></td>
-				<td><?php echo $_30_jo->TglMB ?></td>
-				<td><?php echo $_30_jo->idlokasi ?></td>
-				<td><?php echo $_30_jo->idarmada ?></td>
-				<td><?php echo $_30_jo->iddriver ?></td>
-				<td><?php echo $_30_jo->created_at ?></td>
-				<td><?php echo $_30_jo->updated_at ?></td>
+				<td><?php echo dateIndo($_30_jo->TglJO) ?></td>
+				<td><?php echo $_30_jo->NamaCustomer ?></td>
+				<td><?php echo $_30_jo->NamaShipper ?></td>
+				<td><?php echo dateIndo($_30_jo->TglMB) ?></td>
+				<td><?php echo $_30_jo->NamaLokasi ?></td>
+				<td><?php echo $_30_jo->NamaArmada ?></td>
+				<td><?php echo $_30_jo->NamaDriver ?></td>
+				<!-- <td><?php echo $_30_jo->created_at ?></td> -->
+				<!-- <td><?php echo $_30_jo->updated_at ?></td> -->
 				<td style="text-align:center" width="200px">
 				<?php
 				//echo anchor(site_url('_30_jo/read/'.$_30_jo->idjo),'Read');

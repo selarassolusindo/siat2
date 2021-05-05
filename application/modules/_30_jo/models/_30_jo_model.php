@@ -31,37 +31,63 @@ class _30_jo_model extends CI_Model
 
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('idjo', $q);
-		$this->db->or_like('NoJO', $q);
+        $this->db->order_by($this->id, $this->order);
+        $this->db->like('NoJO', $q);
 		$this->db->or_like('TglJO', $q);
-		$this->db->or_like('idcustomer', $q);
-		$this->db->or_like('idshipper', $q);
 		$this->db->or_like('TglMB', $q);
-		$this->db->or_like('idlokasi', $q);
-		$this->db->or_like('idarmada', $q);
-		$this->db->or_like('iddriver', $q);
-		$this->db->or_like('created_at', $q);
-		$this->db->or_like('updated_at', $q);
-		$this->db->from($this->table);
+        $this->db->or_like('customer.Nama', $q);
+        $this->db->or_like('shipper.Nama', $q);
+        $this->db->or_like('lokasi.Nama', $q);
+        $this->db->or_like('armada.Merk', $q);
+        $this->db->or_like('armada.NoPol', $q);
+        $this->db->or_like('driver.Nama', $q);
+		$this->db->select(
+            $this->table.'.*,
+            customer.Nama as NamaCustomer,
+            shipper.Nama as NamaShipper,
+            lokasi.Nama as NamaLokasi,
+            concat(armada.Merk, \' - \', armada.NoPol) as NamaArmada,
+            driver.Nama as NamaDriver
+            '
+        );
+        $this->db->from($this->table);
+        $this->db->join('t05_customer customer', 'customer.idcustomer = '.$this->table.'.idcustomer', 'left');
+        $this->db->join('t06_shipper shipper', 'shipper.idshipper = '.$this->table.'.idshipper', 'left');
+        $this->db->join('t12_lokasi lokasi', 'lokasi.idlokasi = '.$this->table.'.idlokasi', 'left');
+        $this->db->join('t08_armada armada', 'armada.idarmada = '.$this->table.'.idarmada', 'left');
+        $this->db->join('t15_driver driver', 'driver.iddriver = '.$this->table.'.iddriver', 'left');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('idjo', $q);
-		$this->db->or_like('NoJO', $q);
+        $this->db->like('NoJO', $q);
 		$this->db->or_like('TglJO', $q);
-		$this->db->or_like('idcustomer', $q);
-		$this->db->or_like('idshipper', $q);
 		$this->db->or_like('TglMB', $q);
-		$this->db->or_like('idlokasi', $q);
-		$this->db->or_like('idarmada', $q);
-		$this->db->or_like('iddriver', $q);
-		$this->db->or_like('created_at', $q);
-		$this->db->or_like('updated_at', $q);
+        $this->db->or_like('customer.Nama', $q);
+        $this->db->or_like('shipper.Nama', $q);
+        $this->db->or_like('lokasi.Nama', $q);
+        $this->db->or_like('armada.Merk', $q);
+        $this->db->or_like('armada.NoPol', $q);
+        $this->db->or_like('driver.Nama', $q);
+		$this->db->select(
+            $this->table.'.*,
+            customer.Nama as NamaCustomer,
+            shipper.Nama as NamaShipper,
+            lokasi.Nama as NamaLokasi,
+            concat(armada.Merk, \' - \', armada.NoPol) as NamaArmada,
+            driver.Nama as NamaDriver
+            '
+        );
+        $this->db->from($this->table);
+        $this->db->join('t05_customer customer', 'customer.idcustomer = '.$this->table.'.idcustomer', 'left');
+        $this->db->join('t06_shipper shipper', 'shipper.idshipper = '.$this->table.'.idshipper', 'left');
+        $this->db->join('t12_lokasi lokasi', 'lokasi.idlokasi = '.$this->table.'.idlokasi', 'left');
+        $this->db->join('t08_armada armada', 'armada.idarmada = '.$this->table.'.idarmada', 'left');
+        $this->db->join('t15_driver driver', 'driver.iddriver = '.$this->table.'.iddriver', 'left');
 		$this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+        return $this->db->get()->result();
     }
 
     // insert data

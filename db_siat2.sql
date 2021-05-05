@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 05, 2021 at 03:43 AM
+-- Generation Time: May 06, 2021 at 05:31 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -417,6 +417,13 @@ CREATE TABLE `t05_customer` (
   `Kota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `t05_customer`
+--
+
+INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`) VALUES
+(1, 'KCUS1', 'NCUS1', 'CP1', 'T1', 'A1', 'K1');
+
 -- --------------------------------------------------------
 
 --
@@ -432,6 +439,13 @@ CREATE TABLE `t06_shipper` (
   `Alamat` varchar(50) NOT NULL,
   `Kota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t06_shipper`
+--
+
+INSERT INTO `t06_shipper` (`idshipper`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`) VALUES
+(1, 'KS1', 'NSHIP1', 'CP1', 'T1', 'A1', 'K1');
 
 -- --------------------------------------------------------
 
@@ -468,6 +482,13 @@ CREATE TABLE `t08_armada` (
   `JatuhTempoPajak` date NOT NULL,
   `JatuhTempoKir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t08_armada`
+--
+
+INSERT INTO `t08_armada` (`idarmada`, `Kode`, `Merk`, `Tipe`, `TahunPembuatan`, `NoPol`, `NomorRangka`, `NomorMesin`, `TglBeli`, `JatuhTempoPajak`, `JatuhTempoKir`) VALUES
+(1, 'HN', 'HINO', 'HINO-X1', '2020', 'L 96 T', '12131415', '23242526', '2021-05-05', '2022-05-04', '2022-05-04');
 
 -- --------------------------------------------------------
 
@@ -520,6 +541,14 @@ CREATE TABLE `t12_lokasi` (
   `Nama` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `t12_lokasi`
+--
+
+INSERT INTO `t12_lokasi` (`idlokasi`, `Kode`, `Nama`) VALUES
+(1, 'MLG', 'MALANG'),
+(2, 'SBY', 'SURABAYA');
+
 -- --------------------------------------------------------
 
 --
@@ -565,6 +594,13 @@ CREATE TABLE `t15_driver` (
   `KTP` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `t15_driver`
+--
+
+INSERT INTO `t15_driver` (`iddriver`, `Kode`, `Nama`, `Alamat`, `HP`, `KTP`) VALUES
+(1, 'DR1', 'NICK', 'SBY', '111222333', '222333444');
+
 -- --------------------------------------------------------
 
 --
@@ -595,7 +631,6 @@ CREATE TABLE `t30_jo` (
   `TglMB` date NOT NULL,
   `idlokasi` int(11) NOT NULL,
   `idarmada` int(11) NOT NULL,
-  `idekor` int(11) NOT NULL,
   `iddriver` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -605,9 +640,9 @@ CREATE TABLE `t30_jo` (
 -- Dumping data for table `t30_jo`
 --
 
-INSERT INTO `t30_jo` (`idjo`, `NoJO`, `TglJO`, `idcustomer`, `idshipper`, `TglMB`, `idlokasi`, `idarmada`, `idekor`, `iddriver`, `created_at`, `updated_at`) VALUES
-(1, 'JO0001', '2021-03-06', 1, 1, '2021-03-06', 1, 1, 1, 1, '2021-03-06 06:08:21', '2021-03-06 06:08:21'),
-(2, 'JO0002', '2021-03-07', 1, 1, '2021-03-08', 2, 1, 1, 1, '2021-03-07 10:25:55', '2021-03-07 10:26:28');
+INSERT INTO `t30_jo` (`idjo`, `NoJO`, `TglJO`, `idcustomer`, `idshipper`, `TglMB`, `idlokasi`, `idarmada`, `iddriver`, `created_at`, `updated_at`) VALUES
+(1, 'JO0001', '2021-03-06', 1, 1, '2021-03-06', 1, 1, 1, '2021-03-06 06:08:21', '2021-03-06 06:08:21'),
+(2, 'JO0002', '2021-03-07', 1, 1, '2021-03-08', 2, 1, 1, '2021-03-07 10:25:55', '2021-03-07 10:26:28');
 
 -- --------------------------------------------------------
 
@@ -747,7 +782,8 @@ INSERT INTO `t44_menus` (`idmenus`, `Menus`) VALUES
 (16, 'SETUP - Driver'),
 (17, 'SETUP - Chart of Account'),
 (18, 'SETUP - Saldo Awal'),
-(19, 'SETUP - Tgl. Input Saldo Awal');
+(19, 'SETUP - Tgl. Input Saldo Awal'),
+(20, 'TRANSAKSI - Job Order');
 
 -- --------------------------------------------------------
 
@@ -796,7 +832,9 @@ INSERT INTO `t45_users_menus` (`idusersmenus`, `idusers`, `idmenus`, `rights`) V
 (35, 1, 18, 7),
 (36, 2, 18, 7),
 (37, 1, 19, 7),
-(38, 2, 19, 7);
+(38, 2, 19, 7),
+(39, 1, 20, 7),
+(40, 2, 20, 7);
 
 -- --------------------------------------------------------
 
@@ -831,7 +869,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620149332, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620253666, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1100,13 +1138,13 @@ ALTER TABLE `t04_tglsaldoawal`
 -- AUTO_INCREMENT for table `t05_customer`
 --
 ALTER TABLE `t05_customer`
-  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t06_shipper`
 --
 ALTER TABLE `t06_shipper`
-  MODIFY `idshipper` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idshipper` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t07_vendor`
@@ -1118,7 +1156,7 @@ ALTER TABLE `t07_vendor`
 -- AUTO_INCREMENT for table `t08_armada`
 --
 ALTER TABLE `t08_armada`
-  MODIFY `idarmada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idarmada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t09_sparepart`
@@ -1142,7 +1180,7 @@ ALTER TABLE `t11_cost`
 -- AUTO_INCREMENT for table `t12_lokasi`
 --
 ALTER TABLE `t12_lokasi`
-  MODIFY `idlokasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idlokasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t13_satuan`
@@ -1160,7 +1198,7 @@ ALTER TABLE `t14_bank`
 -- AUTO_INCREMENT for table `t15_driver`
 --
 ALTER TABLE `t15_driver`
-  MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t16_ekor`
@@ -1202,13 +1240,13 @@ ALTER TABLE `t34_invoiced`
 -- AUTO_INCREMENT for table `t44_menus`
 --
 ALTER TABLE `t44_menus`
-  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `t45_users_menus`
 --
 ALTER TABLE `t45_users_menus`
-  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `t46_users`
