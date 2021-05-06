@@ -95,6 +95,9 @@
 
                 <script type="text/javascript">
 
+                /**
+                 * calculate qty * harga
+                 */
                 function calculate(index = 0) {
                     var qty = document.getElementById("qty["+index+"]");
                     var harga = document.getElementById("harga["+index+"]");
