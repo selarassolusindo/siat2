@@ -31,29 +31,28 @@ class _31_csheet_model extends CI_Model
 
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('idcsheet', $q);
-		$this->db->or_like('NoCSheet', $q);
+        $this->db->like('NoCSheet', $q);
 		$this->db->or_like('TglCSheet', $q);
-		$this->db->or_like('idjo', $q);
-		$this->db->or_like('Total', $q);
-		$this->db->or_like('created_at', $q);
-		$this->db->or_like('updated_at', $q);
-		$this->db->from($this->table);
+        $this->db->or_like('jo.NoJO', $q);
+        $this->db->select($this->table . '.*');
+        $this->db->select('jo.NoJO');
+        $this->db->from($this->table);
+        $this->db->join('t30_jo jo', 'jo.idjo = ' . $this->table . '.idjo', 'left');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('idcsheet', $q);
-		$this->db->or_like('NoCSheet', $q);
+		$this->db->like('NoCSheet', $q);
 		$this->db->or_like('TglCSheet', $q);
-		$this->db->or_like('idjo', $q);
-		$this->db->or_like('Total', $q);
-		$this->db->or_like('created_at', $q);
-		$this->db->or_like('updated_at', $q);
+        $this->db->or_like('jo.NoJO', $q);
 		$this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+        $this->db->select($this->table . '.*');
+        $this->db->select('jo.NoJO');
+        $this->db->from($this->table);
+        $this->db->join('t30_jo jo', 'jo.idjo = ' . $this->table . '.idjo', 'left');
+        return $this->db->get()->result();
     }
 
     // insert data

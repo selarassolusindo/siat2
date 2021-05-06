@@ -46,23 +46,23 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th class="text-right">NO.</th>
-				<th>NOCSHEET</th>
-				<th>TGLCSHEET</th>
-				<th>IDJO</th>
-				<th>TOTAL</th>
-				<th>CREATED AT</th>
-				<th>UPDATED AT</th>
+				<th>NO. COST SHEET</th>
+				<th>TGL. COST SHEET</th>
+				<th>NO. JO</th>
+				<th class="text-right">TOTAL COST SHEET</th>
+				<!-- <th>CREATED AT</th> -->
+				<!-- <th>UPDATED AT</th> -->
 				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($_31_csheet_data as $_31_csheet) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
 				<td><?php echo $_31_csheet->NoCSheet ?></td>
-				<td><?php echo $_31_csheet->TglCSheet ?></td>
-				<td><?php echo $_31_csheet->idjo ?></td>
-				<td><?php echo $_31_csheet->Total ?></td>
-				<td><?php echo $_31_csheet->created_at ?></td>
-				<td><?php echo $_31_csheet->updated_at ?></td>
+				<td><?php echo dateIndo($_31_csheet->TglCSheet) ?></td>
+				<td><?php echo $_31_csheet->NoJO ?></td>
+				<td class="text-right"><?php echo number_format($_31_csheet->Total) ?></td>
+				<!-- <td><?php echo $_31_csheet->created_at ?></td> -->
+				<!-- <td><?php echo $_31_csheet->updated_at ?></td> -->
 				<td style="text-align:center" width="200px">
 				<?php
 				//echo anchor(site_url('_31_csheet/read/'.$_31_csheet->idcsheet),'Read');

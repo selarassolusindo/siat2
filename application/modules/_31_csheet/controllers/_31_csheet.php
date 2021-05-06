@@ -11,6 +11,9 @@ class _31_csheet extends CI_Controller
         $this->load->model('_31_csheet_model');
         $this->load->library('form_validation');
         $this->load->model('_45_users_menus/_45_users_menus_model');
+        $this->load->model('_30_jo/_30_jo_model');
+        $this->load->model('_11_cost/_11_cost_model');
+        $this->load->model('_13_satuan/_13_satuan_model');
     }
 
     public function index()
@@ -70,16 +73,22 @@ class _31_csheet extends CI_Controller
 
     public function create()
     {
+        $dataJO = $this->_30_jo_model->get_all();
+        $dataCost = $this->_11_cost_model->get_all();
+        $dataSatuan = $this->_13_satuan_model->get_all();
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('_31_csheet/create_action'),
 			'idcsheet' => set_value('idcsheet'),
 			'NoCSheet' => set_value('NoCSheet'),
-			'TglCSheet' => set_value('TglCSheet'),
+			'TglCSheet' => set_value('TglCSheet', date('d-m-Y')),
 			'idjo' => set_value('idjo'),
 			'Total' => set_value('Total'),
-			'created_at' => set_value('created_at'),
-			'updated_at' => set_value('updated_at'),
+			// 'created_at' => set_value('created_at'),
+			// 'updated_at' => set_value('updated_at'),
+            'dataJO' => $dataJO,
+            'dataCost' => $dataCost,
+            'dataSatuan' => $dataSatuan,
 		);
         // $this->load->view('_31_csheet/t31_csheet_form', $data);
         $data['_view'] = '_31_csheet/t31_csheet_form';
