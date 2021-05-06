@@ -28,11 +28,21 @@
         	</div>
 			<div class="form-group">
             	<label for="int">CUSTOMER <?php echo form_error('idcustomer') ?></label>
-            	<input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="IDCUSTOMER" value="<?php echo $idcustomer; ?>" />
+            	<!-- <input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="IDCUSTOMER" value="<?php echo $idcustomer; ?>" /> -->
+                <select class="form-control" name="idcustomer">
+                    <?php foreach($dataCustomer as $d) { ?>
+                        <option value="<?php echo $d->idcustomer ?>" <?php echo $d->idcustomer == $idcustomer ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                    <?php } ?>
+                </select>
         	</div>
 			<div class="form-group">
             	<label for="int">SHIPPER <?php echo form_error('idshipper') ?></label>
-            	<input type="text" class="form-control" name="idshipper" id="idshipper" placeholder="IDSHIPPER" value="<?php echo $idshipper; ?>" />
+            	<!-- <input type="text" class="form-control" name="idshipper" id="idshipper" placeholder="IDSHIPPER" value="<?php echo $idshipper; ?>" /> -->
+                <select class="form-control" name="idshipper">
+                    <?php foreach($dataShipper as $d) { ?>
+                        <option value="<?php echo $d->idshipper ?>" <?php echo $d->idshipper == $idshipper ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                    <?php } ?>
+                </select>
         	</div>
 			<div class="form-group col-2 p-0">
             	<label for="date">TGL. MUAT/BONGKAR <?php echo form_error('TglMB') ?></label>
@@ -46,15 +56,30 @@
         	</div>
 			<div class="form-group">
             	<label for="int">LOKASI <?php echo form_error('idlokasi') ?></label>
-            	<input type="text" class="form-control" name="idlokasi" id="idlokasi" placeholder="IDLOKASI" value="<?php echo $idlokasi; ?>" />
+            	<!-- <input type="text" class="form-control" name="idlokasi" id="idlokasi" placeholder="IDLOKASI" value="<?php echo $idlokasi; ?>" /> -->
+                <select class="form-control" name="idlokasi">
+                    <?php foreach($dataLokasi as $d) { ?>
+                        <option value="<?php echo $d->idlokasi ?>" <?php echo $d->idlokasi == $idlokasi ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                    <?php } ?>
+                </select>
         	</div>
 			<div class="form-group">
             	<label for="int">ARMADA <?php echo form_error('idarmada') ?></label>
-            	<input type="text" class="form-control" name="idarmada" id="idarmada" placeholder="IDARMADA" value="<?php echo $idarmada; ?>" />
+            	<!-- <input type="text" class="form-control" name="idarmada" id="idarmada" placeholder="IDARMADA" value="<?php echo $idarmada; ?>" /> -->
+                <select class="form-control" name="idarmada">
+                    <?php foreach($dataArmada as $d) { ?>
+                        <option value="<?php echo $d->idarmada ?>" <?php echo $d->idarmada == $idarmada ? "selected" : "" ?>><?php echo $d->Merk . ' - ' . $d->NoPol ?></option>
+                    <?php } ?>
+                </select>
         	</div>
 			<div class="form-group">
             	<label for="int">DRIVER <?php echo form_error('iddriver') ?></label>
-            	<input type="text" class="form-control" name="iddriver" id="iddriver" placeholder="IDDRIVER" value="<?php echo $iddriver; ?>" />
+            	<!-- <input type="text" class="form-control" name="iddriver" id="iddriver" placeholder="IDDRIVER" value="<?php echo $iddriver; ?>" /> -->
+                <select class="form-control" name="iddriver">
+                    <?php foreach($dataDriver as $d) { ?>
+                        <option value="<?php echo $d->iddriver ?>" <?php echo $d->iddriver == $iddriver ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                    <?php } ?>
+                </select>
         	</div>
 			<!-- <div class="form-group">
             	<label for="timestamp">CREATED AT <?php //echo form_error('created_at') ?></label>

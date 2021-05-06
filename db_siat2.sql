@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 06, 2021 at 05:31 AM
+-- Generation Time: May 06, 2021 at 10:03 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -641,8 +641,9 @@ CREATE TABLE `t30_jo` (
 --
 
 INSERT INTO `t30_jo` (`idjo`, `NoJO`, `TglJO`, `idcustomer`, `idshipper`, `TglMB`, `idlokasi`, `idarmada`, `iddriver`, `created_at`, `updated_at`) VALUES
-(1, 'JO0001', '2021-03-06', 1, 1, '2021-03-06', 1, 1, 1, '2021-03-06 06:08:21', '2021-03-06 06:08:21'),
-(2, 'JO0002', '2021-03-07', 1, 1, '2021-03-08', 2, 1, 1, '2021-03-07 10:25:55', '2021-03-07 10:26:28');
+(1, '2104003', '2021-03-06', 1, 1, '2021-03-07', 1, 1, 1, '2021-03-06 06:08:21', '2021-05-06 14:58:06'),
+(2, '2104004', '2021-03-07', 1, 1, '2021-03-08', 2, 1, 1, '2021-03-07 10:25:55', '2021-05-06 13:15:09'),
+(3, '2105001', '2021-05-06', 1, 1, '2021-05-06', 1, 1, 1, '2021-05-06 14:58:18', '2021-05-06 14:58:18');
 
 -- --------------------------------------------------------
 
@@ -869,7 +870,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620253666, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620306459, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1210,7 +1211,7 @@ ALTER TABLE `t16_ekor`
 -- AUTO_INCREMENT for table `t30_jo`
 --
 ALTER TABLE `t30_jo`
-  MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t31_csheet`

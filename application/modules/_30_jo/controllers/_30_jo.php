@@ -11,6 +11,11 @@ class _30_jo extends CI_Controller
         $this->load->model('_30_jo_model');
         $this->load->library('form_validation');
         $this->load->model('_45_users_menus/_45_users_menus_model');
+        $this->load->model('_05_customer/_05_customer_model');
+        $this->load->model('_06_shipper/_06_shipper_model');
+        $this->load->model('_12_lokasi/_12_lokasi_model');
+        $this->load->model('_08_armada/_08_armada_model');
+        $this->load->model('_15_driver/_15_driver_model');
     }
 
     public function index()
@@ -74,6 +79,11 @@ class _30_jo extends CI_Controller
 
     public function create()
     {
+        $dataCustomer = $this->_05_customer_model->get_all();
+        $dataShipper = $this->_06_shipper_model->get_all();
+        $dataLokasi = $this->_12_lokasi_model->get_all();
+        $dataArmada = $this->_08_armada_model->get_all();
+        $dataDriver = $this->_15_driver_model->get_all();
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('_30_jo/create_action'),
@@ -88,6 +98,11 @@ class _30_jo extends CI_Controller
 			'iddriver' => set_value('iddriver'),
 			'created_at' => set_value('created_at'),
 			'updated_at' => set_value('updated_at'),
+            'dataCustomer' => $dataCustomer,
+            'dataShipper' => $dataShipper,
+            'dataLokasi' => $dataLokasi,
+            'dataArmada' => $dataArmada,
+            'dataDriver' => $dataDriver,
 		);
         // $this->load->view('_30_jo/t30_jo_form', $data);
         $data['_view'] = '_30_jo/t30_jo_form';
@@ -104,15 +119,15 @@ class _30_jo extends CI_Controller
         } else {
             $data = array(
 				'NoJO' => $this->input->post('NoJO',TRUE),
-				'TglJO' => $this->input->post('TglJO',TRUE),
+				'TglJO' => dateMysql($this->input->post('TglJO',TRUE)),
 				'idcustomer' => $this->input->post('idcustomer',TRUE),
 				'idshipper' => $this->input->post('idshipper',TRUE),
-				'TglMB' => $this->input->post('TglMB',TRUE),
+				'TglMB' => dateMysql($this->input->post('TglMB',TRUE)),
 				'idlokasi' => $this->input->post('idlokasi',TRUE),
 				'idarmada' => $this->input->post('idarmada',TRUE),
 				'iddriver' => $this->input->post('iddriver',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
+				// 'created_at' => $this->input->post('created_at',TRUE),
+				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_30_jo_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -125,20 +140,30 @@ class _30_jo extends CI_Controller
         $row = $this->_30_jo_model->get_by_id($id);
 
         if ($row) {
+            $dataCustomer = $this->_05_customer_model->get_all();
+            $dataShipper = $this->_06_shipper_model->get_all();
+            $dataLokasi = $this->_12_lokasi_model->get_all();
+            $dataArmada = $this->_08_armada_model->get_all();
+            $dataDriver = $this->_15_driver_model->get_all();
             $data = array(
                 'button' => 'Simpan',
                 'action' => site_url('_30_jo/update_action'),
 				'idjo' => set_value('idjo', $row->idjo),
 				'NoJO' => set_value('NoJO', $row->NoJO),
-				'TglJO' => set_value('TglJO', $row->TglJO),
+				'TglJO' => set_value('TglJO', dateIndo($row->TglJO)),
 				'idcustomer' => set_value('idcustomer', $row->idcustomer),
 				'idshipper' => set_value('idshipper', $row->idshipper),
-				'TglMB' => set_value('TglMB', $row->TglMB),
+				'TglMB' => set_value('TglMB', dateIndo($row->TglMB)),
 				'idlokasi' => set_value('idlokasi', $row->idlokasi),
 				'idarmada' => set_value('idarmada', $row->idarmada),
 				'iddriver' => set_value('iddriver', $row->iddriver),
-				'created_at' => set_value('created_at', $row->created_at),
-				'updated_at' => set_value('updated_at', $row->updated_at),
+				// 'created_at' => set_value('created_at', $row->created_at),
+				// 'updated_at' => set_value('updated_at', $row->updated_at),
+                'dataCustomer' => $dataCustomer,
+                'dataShipper' => $dataShipper,
+                'dataLokasi' => $dataLokasi,
+                'dataArmada' => $dataArmada,
+                'dataDriver' => $dataDriver,
 			);
             // $this->load->view('_30_jo/t30_jo_form', $data);
             $data['_view'] = '_30_jo/t30_jo_form';
@@ -159,15 +184,15 @@ class _30_jo extends CI_Controller
         } else {
             $data = array(
 				'NoJO' => $this->input->post('NoJO',TRUE),
-				'TglJO' => $this->input->post('TglJO',TRUE),
+				'TglJO' => dateMysql($this->input->post('TglJO',TRUE)),
 				'idcustomer' => $this->input->post('idcustomer',TRUE),
 				'idshipper' => $this->input->post('idshipper',TRUE),
-				'TglMB' => $this->input->post('TglMB',TRUE),
+				'TglMB' => dateMysql($this->input->post('TglMB',TRUE)),
 				'idlokasi' => $this->input->post('idlokasi',TRUE),
 				'idarmada' => $this->input->post('idarmada',TRUE),
 				'iddriver' => $this->input->post('iddriver',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
+				// 'created_at' => $this->input->post('created_at',TRUE),
+				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_30_jo_model->update($this->input->post('idjo', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -199,8 +224,8 @@ class _30_jo extends CI_Controller
 		$this->form_validation->set_rules('idlokasi', 'idlokasi', 'trim|required');
 		$this->form_validation->set_rules('idarmada', 'idarmada', 'trim|required');
 		$this->form_validation->set_rules('iddriver', 'iddriver', 'trim|required');
-		$this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-		$this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+		// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+		// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
 		$this->form_validation->set_rules('idjo', 'idjo', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
