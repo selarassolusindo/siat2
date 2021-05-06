@@ -78,7 +78,7 @@ class _30_jo extends CI_Controller
             'button' => 'Simpan',
             'action' => site_url('_30_jo/create_action'),
 			'idjo' => set_value('idjo'),
-			'NoJO' => set_value('NoJO'),
+			'NoJO' => set_value('NoJO', $this->_30_jo_model->getNewJO()),
 			'TglJO' => set_value('TglJO'),
 			'idcustomer' => set_value('idcustomer'),
 			'idshipper' => set_value('idshipper'),

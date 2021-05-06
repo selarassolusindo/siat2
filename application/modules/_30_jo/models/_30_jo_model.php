@@ -110,6 +110,40 @@ class _30_jo_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    /**
+     * buat nomor jo baru
+     * JO0001
+     */
+    function getNewJO()
+    {
+        $sNextKode = "";
+        $sLastKode = "";
+
+        $prefix = date('ym');
+        $sNextKode = $prefix . "001";
+
+        $this->db->order_by('NoJO', 'desc');
+        $this->db->limit(1);
+        $row = $this->db->get($this->table)->row();
+        if ($row) {
+
+            $value = $row->NoJO;
+
+            if ($prefix == substr($value, 0, 4)) {
+                /**
+                 * masih pada bulan yang sama
+                 */
+                $sLastKode = intval(substr($value, 4, 3));
+                $sLastKode = intval($sLastKode) + 1;
+                $sNextKode = $prefix . sprintf('%03s', $sLastKode);
+                if (strlen($sNextKode) > 7) {
+                    $sNextKode = $prefix . "999";
+                }
+            }
+        }
+        return $sNextKode;
+    }
+
 }
 
 /* End of file _30_jo_model.php */
