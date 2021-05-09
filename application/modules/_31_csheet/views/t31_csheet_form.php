@@ -11,7 +11,11 @@
     </head>
     <body>
         <h2 style="margin-top:0px">T31_csheet <?php //echo $button ?></h2> -->
+        <script type="text/javascript">
+            var i = 0;
+        </script>
         <form action="<?php echo $action; ?>" method="post">
+            <input type="hidden" name="totalHidden" id="totalHidden">
 			<div class="form-group">
             	<label for="varchar">NO. COST SHEET <?php echo form_error('NoCSheet') ?></label>
             	<input type="text" class="form-control" name="NoCSheet" id="NoCSheet" placeholder="NO. COST SHEET" value="<?php echo $NoCSheet; ?>" />
@@ -41,15 +45,34 @@
                 <!-- <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Cost</a></p> -->
                 <div id="tmp">
                 <?php if ($this->uri->segment(2) == 'update') { ?>
-                    <?php foreach ($detail as $key => $d) { ?>
+                    <?php foreach ($detail as $key => $dtl) { ?>
+                        <script type="text/javascript">
+                            ++i;
+                        </script>
             		    <div class="row mb-2" id="<?= $key ?>">
                 		  	<div class="col">
-                                <select class="form-control cost" name="idcost[]" required>
-                                    <option value="<?= $d->idcost ?>" selected="selected"><?= $d->Nama ?></option>
+                                <select class="form-control" name="idcost[]" required>
+                                    <?php foreach($dataCost as $d) { ?>
+                                        <option value="<?php echo $d->idcost ?>" <?php echo $d->idcost == $dtl->idcost ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                                    <?php } ?>
                                 </select>
                 		  	</div>
+                            <div class="col">
+                  		  		<input type="number" value="<?php echo $dtl->Qty ?>" name="qty[]" id="qty[<?php echo $key ?>]" class="form-control" placeholder="QTY." required onblur="calculate(<?php echo $key ?>)" onkeyup="calculate(<?php echo $key ?>)">
+                  		  	</div>
+                            <div class="col">
+                  		  		<!-- <input type="number" name="satuan[]" class="form-control" placeholder="SATUAN" required> -->
+                                <select class="form-control" name="idsatuan[]" placeholder="SATUAN" required>
+                                    <?php foreach($dataSatuan as $d) { ?>
+                                        <option value="<?php echo $d->idsatuan ?>" <?php echo $d->idsatuan == $dtl->idsatuan ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                                    <?php } ?>
+                                </select>
+                  		  	</div>
+                            <div class="col">
+                  		  		<input type="number" value="<?php echo $dtl->Harga ?>" name="harga[]" id="harga[<?php echo $key ?>]" class="form-control" placeholder="HARGA" required onblur="calculate(<?php echo $key ?>)" onkeyup="calculate(<?php echo $key ?>)">
+                  		  	</div>
                 		  	<div class="col">
-                		  		<input type="number" name="jumlah[]" class="form-control" placeholder="Jumlah" value="<?= $d->Jumlah ?>" required>
+                		  		<input type="number" value="<?php echo $dtl->Jumlah ?>" name="jumlah[]" id="jumlah[<?php echo $key ?>]" class="form-control" placeholder="Jumlah" required>
                 		  	</div>
                 		  	<div class="col">
                                 <?php // if($key > 0) { ?>
@@ -95,6 +118,8 @@
 
                 <script type="text/javascript">
 
+
+
                 /**
                  * calculate qty * harga
                  */
@@ -103,7 +128,10 @@
                     var harga = document.getElementById("harga["+index+"]");
 
                     var jumlah = document.getElementById("jumlah["+index+"]");
-                    jumlah.value = parseFloat(qty.value) * parseFloat(harga.value);
+
+                    if (qty != null && harga != null && jumlah != null) {
+                        jumlah.value = parseFloat(qty.value) * parseFloat(harga.value);
+                    }
 
                     var total2 = 0;
                     for (var j = 0; j <= i; j++) {
@@ -118,9 +146,16 @@
 
                     var total = document.getElementById('Total');
                     total.value = total2;
+
+                    var totalHidden = document.getElementById('totalHidden');
+                    totalHidden.value = total2;
+
+                    if (!isNaN(total2)) {
+                        // alert(totalHidden.value);
+                    };
                 }
 
-                var i = 0;
+
             	function tambah()
                 {
             		++i;
@@ -163,6 +198,7 @@
                 function hapus(index)
                 {
             		$('#'+index).remove();
+                    //--i;
                     calculate();
             	}
                 </script>

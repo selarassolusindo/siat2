@@ -103,15 +103,51 @@ class _31_csheet extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+
+            /**
+             * insert data ke table code sheet master
+             */
             $data = array(
 				'NoCSheet' => $this->input->post('NoCSheet',TRUE),
-				'TglCSheet' => $this->input->post('TglCSheet',TRUE),
+				'TglCSheet' => dateMysql($this->input->post('TglCSheet',TRUE)),
 				'idjo' => $this->input->post('idjo',TRUE),
 				'Total' => $this->input->post('Total',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
+                // 'created_at' => $this->input->post('created_at',TRUE),
+				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_31_csheet_model->insert($data);
+
+            /**
+             * ambil data id-master terbaru
+             */
+            $insert_id = $this->db->insert_id();
+
+            /**
+             * simpan data ke tabel detail
+             */
+            $totalJumlah = 0;
+            $data = $this->input->post();
+            foreach ($data['idcost'] as $key => $item) {
+                $detail = [
+                    'idcsheet' => $insert_id,
+                    'idcost' => $item,
+                    'Qty' => $data['qty'][$key],
+                    'idsatuan' => $data['idsatuan'][$key],
+                    'Harga' => $data['harga'][$key],
+                    'Jumlah' => $data['jumlah'][$key],
+                ];
+                $totalJumlah += $data['jumlah'][$key];
+                $this->db->insert('t32_csheetd', $detail);
+            }
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            $data = array(
+        		'Total' => $totalJumlah
+                );
+            $this->_31_csheet_model->update($insert_id, $data);
+
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_31_csheet'));
         }
@@ -122,17 +158,42 @@ class _31_csheet extends CI_Controller
         $row = $this->_31_csheet_model->get_by_id($id);
 
         if ($row) {
+
+            /**
+             * ambil data untuk combo
+             */
+            $dataJO = $this->_30_jo_model->get_all();
+            $dataCost = $this->_11_cost_model->get_all();
+            $dataSatuan = $this->_13_satuan_model->get_all();
+
             $data = array(
                 'button' => 'Simpan',
                 'action' => site_url('_31_csheet/update_action'),
 				'idcsheet' => set_value('idcsheet', $row->idcsheet),
 				'NoCSheet' => set_value('NoCSheet', $row->NoCSheet),
-				'TglCSheet' => set_value('TglCSheet', $row->TglCSheet),
+				'TglCSheet' => set_value('TglCSheet', dateIndo($row->TglCSheet)),
 				'idjo' => set_value('idjo', $row->idjo),
 				'Total' => set_value('Total', $row->Total),
-				'created_at' => set_value('created_at', $row->created_at),
-				'updated_at' => set_value('updated_at', $row->updated_at),
+				// 'created_at' => set_value('created_at', $row->created_at),
+				// 'updated_at' => set_value('updated_at', $row->updated_at),
+                'dataJO' => $dataJO,
+                'dataCost' => $dataCost,
+                'dataSatuan' => $dataSatuan,
 			);
+
+            /**
+             * ambil data dari tabel detail
+             */
+            $data['detail'] =
+                $this->db
+                    ->select('t32_csheetd.*, cost.Nama as costNama, satuan.Nama as satuanNama')
+                    ->from('t32_csheetd')
+                    ->where('idcsheet', $id)
+                    ->join('t11_cost cost', 't32_csheetd.idcost = cost.idcost', 'left')
+                    ->join('t13_satuan satuan', 't32_csheetd.idsatuan = satuan.idsatuan', 'left')
+                    ->get()->result()
+                    ;
+
             // $this->load->view('_31_csheet/t31_csheet_form', $data);
             $data['_view'] = '_31_csheet/t31_csheet_form';
             $data['_caption'] = 'Cost Sheet';
@@ -152,13 +213,49 @@ class _31_csheet extends CI_Controller
         } else {
             $data = array(
 				'NoCSheet' => $this->input->post('NoCSheet',TRUE),
-				'TglCSheet' => $this->input->post('TglCSheet',TRUE),
+				'TglCSheet' => dateMysql($this->input->post('TglCSheet',TRUE)),
 				'idjo' => $this->input->post('idjo',TRUE),
 				'Total' => $this->input->post('Total',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_31_csheet_model->update($this->input->post('idcsheet', TRUE), $data);
+
+            /**
+             * simpan id data yang akan diupdate dari tabel master
+             */
+            $idcsheet = $this->input->post('idcsheet', TRUE);
+
+            /**
+             * hapus dulu data lama di tabel detail
+             */
+            $this->db->where('idcsheet', $idcsheet);
+			$this->db->delete('t32_csheetd');
+
+            /**
+             * simpan data ke tabel detail
+             */
+            $totalJumlah = 0;
+            $data = $this->input->post();
+            foreach ($data['idcost'] as $key => $item) {
+                $detail = [
+                    'idcsheet' => $idcsheet,
+                    'idcost' => $item,
+                    'Qty' => $data['qty'][$key],
+                    'idsatuan' => $data['idsatuan'][$key],
+                    'Harga' => $data['harga'][$key],
+                    'Jumlah' => $data['jumlah'][$key],
+                ];
+                $totalJumlah += $data['jumlah'][$key];
+                $this->db->insert('t32_csheetd', $detail);
+            }
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            $data = array(
+        		'Total' => $totalJumlah
+                );
+            $this->_31_csheet_model->update($insert_id, $data);
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_31_csheet'));
         }
@@ -169,7 +266,17 @@ class _31_csheet extends CI_Controller
         $row = $this->_31_csheet_model->get_by_id($id);
 
         if ($row) {
+            /**
+             * hapus data di tabel master
+             */
             $this->_31_csheet_model->delete($id);
+
+            /**
+             * hapus data di tabel detail
+             */
+            $this->db->where('idcsheet', $id);
+     		$this->db->delete('t32_csheetd');
+
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('_31_csheet'));
         } else {
@@ -184,8 +291,8 @@ class _31_csheet extends CI_Controller
 		$this->form_validation->set_rules('TglCSheet', 'tglcsheet', 'trim|required');
 		$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
 		$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
-		$this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-		$this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+		// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+		// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
 		$this->form_validation->set_rules('idcsheet', 'idcsheet', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
