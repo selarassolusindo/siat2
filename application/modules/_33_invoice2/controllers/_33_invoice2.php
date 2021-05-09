@@ -81,15 +81,39 @@ class _33_invoice2 extends CI_Controller
          * ambil data JO untuk combo
          */
         $dataJO = $this->_30_jo_model->getDataByIdCustomer($idcustomer);
+        $rowJO = $this->_30_jo_model->get_by_id($idjo);
+        $noJO = "";
+        if ($rowJO) {
+            $noJO = $rowJO->NoJO;
+        }
 
         /**
          * check data nomor invoice berdasarkan JO, apabila sudah pernah ada maka ditambahi kode setelah huruf A
          * apabila belum pernah ada invoice dengan JO yang terpilih maka diberi kode huruf A
          */
         $row = $this->_33_invoice2_model->getDataByIdJO($idjo);
+        /**
+         * $row akan menghasilkan data apabila sudah pernah ada data invoice dengan no jo terpilih
+         * bila sudah pernah ada, maka nomor invoice adalah nomor JO ditambah B, begitu seterusnya
+         * bila belum pernah ada, maka nomor invoice adalah nomor JO ditambah A
+         */
+
+        /**
+         * menentukan kode suffix untuk nomor invoice
+         */
+        $nextSuffix = "A";
         if ($row) {
-            $suffix = "";
+            $nextSuffix = chr(ord(substr($row->NoInvoice, -1)) + 1);
         }
+
+        /**
+         * last minute
+         */
+        $noInvoice = "";
+        if ($noJO != "") {
+            $noInvoice = $noJO . $nextSuffix;
+        }
+
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('_33_invoice2/create_action'),
@@ -103,6 +127,7 @@ class _33_invoice2 extends CI_Controller
             'dataCustomer' => $dataCustomer,
             'idcustomer' => $idcustomer,
             'dataJO' => $dataJO,
+            'nextSuffix' => $nextSuffix,
 		);
         // $this->load->view('_33_invoice2/t33_invoice_form', $data);
         $data['_view'] = '_33_invoice2/t33_invoice_form';
@@ -119,11 +144,11 @@ class _33_invoice2 extends CI_Controller
         } else {
             $data = array(
 				'NoInvoice' => $this->input->post('NoInvoice',TRUE),
-				'TglInvoice' => $this->input->post('TglInvoice',TRUE),
+				'TglInvoice' => dateMysql($this->input->post('TglInvoice',TRUE)),
 				'idjo' => $this->input->post('idjo',TRUE),
 				'Total' => $this->input->post('Total',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
+				// 'created_at' => $this->input->post('created_at',TRUE),
+				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_33_invoice2_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -198,8 +223,8 @@ class _33_invoice2 extends CI_Controller
 		$this->form_validation->set_rules('TglInvoice', 'tglinvoice', 'trim|required');
 		$this->form_validation->set_rules('idjo', 'idjo', 'trim|required');
 		$this->form_validation->set_rules('Total', 'total', 'trim|required|numeric');
-		$this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-		$this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+		// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+		// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
 		$this->form_validation->set_rules('idinvoice', 'idinvoice', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }

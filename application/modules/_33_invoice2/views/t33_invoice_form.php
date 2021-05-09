@@ -55,9 +55,15 @@
             	<label for="varchar">NO. INVOICE <?php echo form_error('NoInvoice') ?></label>
             	<input type="text" class="form-control" name="NoInvoice" id="NoInvoice" placeholder="NO. INVOICE" value="<?php echo $NoInvoice; ?>" />
         	</div>
-			<div class="form-group">
+			<div class="form-group col-2 p-0">
             	<label for="date">TGL. INVOICE <?php echo form_error('TglInvoice') ?></label>
-            	<input type="text" class="form-control" name="TglInvoice" id="TglInvoice" placeholder="TGL. INVOICE" value="<?php echo $TglInvoice; ?>" />
+            	<!-- <input type="text" class="form-control" name="TglInvoice" id="TglInvoice" placeholder="TGL. INVOICE" value="<?php echo $TglInvoice; ?>" /> -->
+                <div class="input-group date" id="TglInvoice" data-target-input="nearest">
+                    <div class="input-group-append" data-target="#TglInvoice" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <input placeholder="TGL. INVOICE" type="text" name="TglInvoice" value="<?php echo $TglInvoice; ?>" class="form-control datetimepicker-input" data-target="#TglInvoice"/>
+                </div>
         	</div>
 			<!-- <div class="form-group">
             	<label for="int">IDJO <?php echo form_error('idjo') ?></label>
@@ -79,5 +85,14 @@
 			<button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 			<a href="<?php echo site_url('_33_invoice2') ?>" class="btn btn-secondary">Batal</a>
 		</form>
+
+        <script>
+            $(document).ready(function () {
+                //Date range picker
+                $('#TglInvoice').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+            })
+        </script>
     <!-- </body>
 </html> -->

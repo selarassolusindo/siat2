@@ -61,7 +61,7 @@
                 <td><?php echo $_33_invoice2->customerNama ?></td>
                 <td><?php echo $_33_invoice2->NoJO ?></td>
 				<td><?php echo $_33_invoice2->NoInvoice ?></td>
-				<td><?php echo $_33_invoice2->TglInvoice ?></td>
+				<td><?php echo dateIndo($_33_invoice2->TglInvoice) ?></td>
 				<td class="text-right"><?php echo number_format($_33_invoice2->Total) ?></td>
 				<!-- <td><?php //echo $_33_invoice2->created_at ?></td> -->
 				<!-- <td><?php //echo $_33_invoice2->updated_at ?></td> -->
