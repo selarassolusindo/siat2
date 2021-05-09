@@ -422,6 +422,7 @@
                                     case '_30_jo':
                                     case '_31_csheet':
                                     case '_33_invoice':
+                                    case '_33_invoice2':
                                     // case 'user-management':
                                     // case 'customer':
                                     // case 'shipper':
@@ -441,7 +442,20 @@
                                 ?>
                             ">
 
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link
+                                    <?php
+                                    switch ($this->uri->segment(1)) {
+                                        case '_30_jo':
+                                        case '_31_csheet':
+                                        case '_33_invoice':
+                                        case '_33_invoice2':
+                                            echo 'active';
+                                            break;
+                                        default:
+                                            echo '';
+                                    }
+                                    ?>
+                                ">
                                     <i class="fas fa-calculator nav-icon"></i>
                                     <p>TRANSAKSI<i class="right fas fa-angle-left"></i></p>
                                 </a>
@@ -466,6 +480,13 @@
                                         <a href="<?php echo site_url('_33_invoice'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_33_invoice' ? 'active' : ''; ?>">
                                             <i class="fas fa-file-invoice nav-icon"></i>
                                             <p>Invoice</p>
+                                        </a>
+                                    </li>
+                                    <!-- Invoice2 -->
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url('_33_invoice2'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_33_invoice2' ? 'active' : ''; ?>">
+                                            <i class="fas fa-file-invoice nav-icon"></i>
+                                            <p>Invoice #2</p>
                                         </a>
                                     </li>
                                     <div class="dropdown-divider"></div>
