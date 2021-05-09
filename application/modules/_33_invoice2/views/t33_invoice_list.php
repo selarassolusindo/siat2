@@ -14,7 +14,7 @@
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php if ($hakAkses['tambah']) { ?>
-                <?php echo anchor(site_url('_33_invoice2/pilihCustomer'),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('_33_invoice2/create/0/0'),'Tambah', 'class="btn btn-primary"'); ?>
                 <?php } ?>
             </div>
             <div class="col-md-4 text-center">

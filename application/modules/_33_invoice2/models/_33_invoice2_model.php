@@ -81,6 +81,14 @@ class _33_invoice2_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function getDataByIdJO($idjo)
+    {
+        $this->db->where('idjo', $idjo);
+        $this->db->order_by($this->id, 'desc');
+        return $this->db->get($this->table)->row();
+    }
+
+
 }
 
 /* End of file _33_invoice2_model.php */

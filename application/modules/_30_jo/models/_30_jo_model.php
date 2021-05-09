@@ -144,6 +144,12 @@ class _30_jo_model extends CI_Model
         return $sNextKode;
     }
 
+    function getDataByIdCustomer($idcustomer)
+    {
+        $this->db->where('idcustomer', $idcustomer);
+        return $this->db->get($this->table)->result();
+    }
+
 }
 
 /* End of file _30_jo_model.php */

@@ -12,6 +12,7 @@ class _33_invoice2 extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('_45_users_menus/_45_users_menus_model');
         $this->load->model('_05_customer/_05_customer_model');
+        $this->load->model('_30_jo/_30_jo_model');
     }
 
     public function index()
@@ -69,20 +70,39 @@ class _33_invoice2 extends CI_Controller
         }
     }
 
-    public function create()
+    public function create($idcustomer, $idjo)
     {
+        /**
+         * ambil data customer untuk combo
+         */
         $dataCustomer = $this->_05_customer_model->get_all();
+
+        /**
+         * ambil data JO untuk combo
+         */
+        $dataJO = $this->_30_jo_model->getDataByIdCustomer($idcustomer);
+
+        /**
+         * check data nomor invoice berdasarkan JO, apabila sudah pernah ada maka ditambahi kode setelah huruf A
+         * apabila belum pernah ada invoice dengan JO yang terpilih maka diberi kode huruf A
+         */
+        $row = $this->_33_invoice2_model->getDataByIdJO($idjo);
+        if ($row) {
+            $suffix = "";
+        }
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('_33_invoice2/create_action'),
 			'idinvoice' => set_value('idinvoice'),
-			'NoInvoice' => set_value('NoInvoice'),
+			'NoInvoice' => set_value('NoInvoice', $noInvoice),
 			'TglInvoice' => set_value('TglInvoice'),
-			'idjo' => set_value('idjo'),
+			'idjo' => set_value('idjo', $idjo),
 			'Total' => set_value('Total'),
 			// 'created_at' => set_value('created_at'),
 			// 'updated_at' => set_value('updated_at'),
             'dataCustomer' => $dataCustomer,
+            'idcustomer' => $idcustomer,
+            'dataJO' => $dataJO,
 		);
         // $this->load->view('_33_invoice2/t33_invoice_form', $data);
         $data['_view'] = '_33_invoice2/t33_invoice_form';
@@ -236,25 +256,6 @@ class _33_invoice2 extends CI_Controller
             'start' => 0
         );
         $this->load->view('_33_invoice2/t33_invoice_doc',$data);
-    }
-
-    public function pilihCustomer()
-    {
-        $data = array(
-            'button' => 'Proses',
-            'action' => site_url('_33_invoice2/_action'),
-			'idinvoice' => set_value('idinvoice'),
-			'NoInvoice' => set_value('NoInvoice'),
-			'TglInvoice' => set_value('TglInvoice'),
-			'idjo' => set_value('idjo'),
-			'Total' => set_value('Total'),
-			'created_at' => set_value('created_at'),
-			'updated_at' => set_value('updated_at'),
-		);
-        // $this->load->view('_33_invoice2/t33_invoice_form', $data);
-        $data['_view'] = '_33_invoice2/t33_invoice_form';
-        $data['_caption'] = 'Invoice';
-        $this->load->view('_00_dashboard/_layout', $data);
     }
 
 }
