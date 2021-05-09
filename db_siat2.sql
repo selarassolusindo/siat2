@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 06, 2021 at 10:03 PM
+-- Generation Time: May 09, 2021 at 10:52 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -529,6 +529,13 @@ CREATE TABLE `t11_cost` (
   `Akun` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `t11_cost`
+--
+
+INSERT INTO `t11_cost` (`idcost`, `Kode`, `Nama`, `Akun`) VALUES
+(1, 'K1', 'Sangu Sopir', 252);
+
 -- --------------------------------------------------------
 
 --
@@ -561,6 +568,14 @@ CREATE TABLE `t13_satuan` (
   `Nama` varchar(50) NOT NULL,
   `Tipe` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t13_satuan`
+--
+
+INSERT INTO `t13_satuan` (`idsatuan`, `Kode`, `Nama`, `Tipe`) VALUES
+(1, 'K1', 'ea', 'ea'),
+(2, 'K2', 'Hari', 'Hari');
 
 -- --------------------------------------------------------
 
@@ -666,11 +681,7 @@ CREATE TABLE `t31_csheet` (
 --
 
 INSERT INTO `t31_csheet` (`idcsheet`, `NoCSheet`, `TglCSheet`, `idjo`, `Total`, `created_at`, `updated_at`) VALUES
-(1, 'CST0001', '2021-02-28', 1, 10000, '2021-02-28 08:23:38', '2021-03-07 01:24:28'),
-(2, 'CST0002', '2021-03-07', 1, 700000, '2021-03-07 08:56:55', '2021-03-07 09:23:00'),
-(3, 'CST0003', '2021-03-07', 1, 50, '2021-03-07 08:59:49', '2021-03-07 09:23:08'),
-(4, 'CST0004', '2021-03-07', 1, 27, '2021-03-07 09:08:04', '2021-03-07 09:23:13'),
-(5, 'CST0005', '2021-03-07', 1, 48, '2021-03-07 09:10:27', '2021-03-07 09:10:27');
+(1, 'N1', '2021-05-09', 1, 230000, '2021-05-09 15:32:18', '2021-05-09 15:32:44');
 
 -- --------------------------------------------------------
 
@@ -682,6 +693,9 @@ CREATE TABLE `t32_csheetd` (
   `idcsheetd` int(11) NOT NULL,
   `idcsheet` int(11) NOT NULL,
   `idcost` int(11) NOT NULL,
+  `Qty` decimal(5,2) NOT NULL,
+  `idsatuan` int(11) NOT NULL,
+  `Harga` double NOT NULL,
   `Jumlah` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -691,17 +705,8 @@ CREATE TABLE `t32_csheetd` (
 -- Dumping data for table `t32_csheetd`
 --
 
-INSERT INTO `t32_csheetd` (`idcsheetd`, `idcsheet`, `idcost`, `Jumlah`, `created_at`, `updated_at`) VALUES
-(4, 1, 3, 2, '2021-02-28 08:30:15', '2021-02-28 08:30:15'),
-(11, 5, 1, 15, '2021-03-07 09:10:27', '2021-03-07 09:10:27'),
-(12, 5, 2, 16, '2021-03-07 09:10:27', '2021-03-07 09:10:27'),
-(13, 5, 3, 17, '2021-03-07 09:10:27', '2021-03-07 09:10:27'),
-(18, 2, 1, 200000, '2021-03-07 09:23:00', '2021-03-07 09:23:00'),
-(19, 2, 2, 500000, '2021-03-07 09:23:00', '2021-03-07 09:23:00'),
-(20, 3, 3, 20, '2021-03-07 09:23:08', '2021-03-07 09:23:08'),
-(21, 3, 2, 30, '2021-03-07 09:23:08', '2021-03-07 09:23:08'),
-(22, 4, 1, 13, '2021-03-07 09:23:13', '2021-03-07 09:23:13'),
-(23, 4, 2, 14, '2021-03-07 09:23:13', '2021-03-07 09:23:13');
+INSERT INTO `t32_csheetd` (`idcsheetd`, `idcsheet`, `idcost`, `Qty`, `idsatuan`, `Harga`, `Jumlah`, `created_at`, `updated_at`) VALUES
+(5, 1, 1, '2.00', 2, 115000, 230000, '2021-05-09 15:32:44', '2021-05-09 15:32:44');
 
 -- --------------------------------------------------------
 
@@ -784,7 +789,8 @@ INSERT INTO `t44_menus` (`idmenus`, `Menus`) VALUES
 (17, 'SETUP - Chart of Account'),
 (18, 'SETUP - Saldo Awal'),
 (19, 'SETUP - Tgl. Input Saldo Awal'),
-(20, 'TRANSAKSI - Job Order');
+(20, 'TRANSAKSI - Job Order'),
+(21, 'TRANSAKSI - Cost Sheet');
 
 -- --------------------------------------------------------
 
@@ -835,7 +841,9 @@ INSERT INTO `t45_users_menus` (`idusersmenus`, `idusers`, `idmenus`, `rights`) V
 (37, 1, 19, 7),
 (38, 2, 19, 7),
 (39, 1, 20, 7),
-(40, 2, 20, 7);
+(40, 2, 20, 7),
+(41, 1, 21, 7),
+(42, 2, 21, 7);
 
 -- --------------------------------------------------------
 
@@ -870,7 +878,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620306459, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620569094, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1175,7 +1183,7 @@ ALTER TABLE `t10_service`
 -- AUTO_INCREMENT for table `t11_cost`
 --
 ALTER TABLE `t11_cost`
-  MODIFY `idcost` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t12_lokasi`
@@ -1187,7 +1195,7 @@ ALTER TABLE `t12_lokasi`
 -- AUTO_INCREMENT for table `t13_satuan`
 --
 ALTER TABLE `t13_satuan`
-  MODIFY `idsatuan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idsatuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t14_bank`
@@ -1217,13 +1225,13 @@ ALTER TABLE `t30_jo`
 -- AUTO_INCREMENT for table `t31_csheet`
 --
 ALTER TABLE `t31_csheet`
-  MODIFY `idcsheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idcsheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t32_csheetd`
 --
 ALTER TABLE `t32_csheetd`
-  MODIFY `idcsheetd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idcsheetd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `t33_invoice`
@@ -1241,13 +1249,13 @@ ALTER TABLE `t34_invoiced`
 -- AUTO_INCREMENT for table `t44_menus`
 --
 ALTER TABLE `t44_menus`
-  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `t45_users_menus`
 --
 ALTER TABLE `t45_users_menus`
-  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `t46_users`
