@@ -476,17 +476,17 @@
                                         </a>
                                     </li>
                                     <!-- Invoice -->
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="<?php echo site_url('_33_invoice'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_33_invoice' ? 'active' : ''; ?>">
                                             <i class="fas fa-file-invoice nav-icon"></i>
                                             <p>Invoice</p>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <!-- Invoice2 -->
                                     <li class="nav-item">
                                         <a href="<?php echo site_url('_33_invoice2'); ?>" class="nav-link <?php echo $this->uri->segment(1) == '_33_invoice2' ? 'active' : ''; ?>">
                                             <i class="fas fa-file-invoice nav-icon"></i>
-                                            <p>Invoice #2</p>
+                                            <p>Invoice</p>
                                         </a>
                                     </li>
                                     <div class="dropdown-divider"></div>

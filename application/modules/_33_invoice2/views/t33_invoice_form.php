@@ -75,14 +75,35 @@
 
             <!-- detail invoice -->
             <div class="form-group">
-                <label for="double">SERVICE</label>
+                <!-- <label for="double">SERVICE</label> -->
                 <!-- <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Cost</a></p> -->
                 <div id="tmp">
+                    <div class="row mb-2">
+                        <div class="col text-center font-weight-bold">
+                            SERVICE
+                        </div>
+                        <div class="col text-center font-weight-bold">
+                            QTY.
+                        </div>
+                        <div class="col text-center font-weight-bold">
+                            SATUAN
+                        </div>
+                        <div class="col text-center font-weight-bold">
+                            HARGA
+                        </div>
+                        <div class="col text-center font-weight-bold">
+                            JUMLAH
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div>
                 <?php if ($this->uri->segment(2) == 'update') { ?>
                     <?php foreach ($detail as $key => $dtl) { ?>
                         <script type="text/javascript">
                             ++i;
                         </script>
+
             		    <div class="row mb-2" id="<?= $key ?>">
                 		  	<div class="col">
                                 <select class="form-control" name="idservice[]" required>
@@ -92,7 +113,7 @@
                                 </select>
                 		  	</div>
                             <div class="col">
-                  		  		<input type="number" value="<?php echo $dtl->Qty ?>" name="qty[]" id="qty[<?php echo $key ?>]" class="form-control" placeholder="QTY." required onblur="calculate(<?php echo $key ?>)" onkeyup="calculate(<?php echo $key ?>)">
+                  		  		<input type="number" value="<?php echo $dtl->Qty ?>" name="qty[]" id="qty[<?php echo $key ?>]" class="form-control text-right" placeholder="QTY." required onblur="calculate(<?php echo $key ?>)" onkeyup="calculate(<?php echo $key ?>)">
                   		  	</div>
                             <div class="col">
                   		  		<!-- <input type="number" name="satuan[]" class="form-control" placeholder="SATUAN" required> -->
@@ -103,10 +124,10 @@
                                 </select>
                   		  	</div>
                             <div class="col">
-                  		  		<input type="number" value="<?php echo $dtl->Harga ?>" name="harga[]" id="harga[<?php echo $key ?>]" class="form-control" placeholder="HARGA" required onblur="calculate(<?php echo $key ?>)" onkeyup="calculate(<?php echo $key ?>)">
+                  		  		<input type="number" value="<?php echo $dtl->Harga ?>" name="harga[]" id="harga[<?php echo $key ?>]" class="form-control text-right" placeholder="HARGA" required onblur="calculate(<?php echo $key ?>)" onkeyup="calculate(<?php echo $key ?>)">
                   		  	</div>
                 		  	<div class="col">
-                		  		<input type="number" value="<?php echo $dtl->Jumlah ?>" name="jumlah[]" id="jumlah[<?php echo $key ?>]" class="form-control" placeholder="Jumlah" required readonly>
+                		  		<input type="number" value="<?php echo $dtl->Jumlah ?>" name="jumlah[]" id="jumlah[<?php echo $key ?>]" class="form-control text-right" placeholder="Jumlah" required readonly>
                 		  	</div>
                 		  	<div class="col">
                                 <?php // if($key > 0) { ?>
@@ -126,7 +147,7 @@
                             </select>
               		  	</div>
                         <div class="col">
-              		  		<input type="number" name="qty[]" id="qty[0]" class="form-control" placeholder="QTY." required onblur="calculate(0)" onkeyup="calculate(0)">
+              		  		<input type="number" name="qty[]" id="qty[0]" class="form-control text-right" placeholder="QTY." required onblur="calculate(0)" onkeyup="calculate(0)">
               		  	</div>
                         <div class="col">
               		  		<!-- <input type="number" name="satuan[]" class="form-control" placeholder="SATUAN" required> -->
@@ -137,10 +158,10 @@
                             </select>
               		  	</div>
                         <div class="col">
-              		  		<input type="number" name="harga[]" id="harga[0]" class="form-control" placeholder="HARGA" required onblur="calculate(0)" onkeyup="calculate(0)">
+              		  		<input type="number" name="harga[]" id="harga[0]" class="form-control text-right" placeholder="HARGA" required onblur="calculate(0)" onkeyup="calculate(0)">
               		  	</div>
               		  	<div class="col">
-              		  		<input type="number" name="jumlah[]" id="jumlah[0]" class="form-control" placeholder="JUMLAH" required readonly>
+              		  		<input type="number" name="jumlah[]" id="jumlah[0]" class="form-control text-right" placeholder="JUMLAH" readonly>
               		  	</div>
               		  	<div class="col">
 
@@ -148,7 +169,7 @@
           		    </div>
                 <?php } ?>
                 </div>
-                <a href="#" onclick="tambah()" class="btn btn-primary mb-2">TAMBAH SERVICE</a>
+                <a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Service</a>
 
                 <script type="text/javascript">
                 /**
@@ -157,7 +178,6 @@
                 function calculate(index = 0) {
                     var qty = document.getElementById("qty["+index+"]");
                     var harga = document.getElementById("harga["+index+"]");
-
                     var jumlah = document.getElementById("jumlah["+index+"]");
 
                     if (qty != null && harga != null && jumlah != null) {
@@ -177,6 +197,14 @@
 
                     var total = document.getElementById('Total');
                     total.value = total2;
+
+                    var ppnpersen = document.getElementById('PPNpersen');
+                    var ppnnilai = document.getElementById('PPNnilai');
+
+                    ppnnilai.value = total2 * (parseFloat(ppnpersen.value) / 100);
+
+                    var grandtotal = document.getElementById('GrandTotal');
+                    grandtotal.value = parseFloat(ppnnilai.value) + total2;
 
                     // var totalHidden = document.getElementById('totalHidden');
                     // totalHidden.value = total2;
@@ -202,7 +230,7 @@
                                 </select>
                   		  	</div>
                             <div class="col">
-                  		  		<input type="number" name="qty[]" id="qty[`+i+`]" class="form-control form-control-sm" placeholder="QTY." required onblur="calculate(`+i+`)" onkeyup="calculate(`+i+`)">
+                  		  		<input type="number" name="qty[]" id="qty[`+i+`]" class="form-control form-control-sm text-right" placeholder="QTY." required onblur="calculate(`+i+`)" onkeyup="calculate(`+i+`)">
                   		  	</div>
                             <div class="col">
                   		  		<!-- <input type="number" name="satuan[]" class="form-control" placeholder="SATUAN" required> -->
@@ -213,10 +241,10 @@
                                 </select>
                   		  	</div>
                             <div class="col">
-                  		  		<input type="number" name="harga[]" id="harga[`+i+`]" class="form-control form-control-sm" placeholder="HARGA" required onblur="calculate(`+i+`)" onkeyup="calculate(`+i+`)">
+                  		  		<input type="number" name="harga[]" id="harga[`+i+`]" class="form-control form-control-sm text-right" placeholder="HARGA" required onblur="calculate(`+i+`)" onkeyup="calculate(`+i+`)">
                   		  	</div>
                   		  	<div class="col">
-                  		  		<input type="number" name="jumlah[]" id="jumlah[`+i+`]" class="form-control form-control-sm" placeholder="JUMLAH" required readonly>
+                  		  		<input type="number" name="jumlah[]" id="jumlah[`+i+`]" class="form-control form-control-sm text-right" placeholder="JUMLAH" required readonly>
                   		  	</div>
                             <div class="col">
                     		      <a href="#" onclick="hapus(`+i+`)" class="text-danger">Hapus</a>
@@ -236,10 +264,75 @@
             </div>
             <!-- /detail invoice -->
 
-			<div class="form-group">
+			<!-- <div class="form-group">
             	<label for="double">TOTAL INVOICE<?php echo form_error('Total') ?></label>
             	<input type="text" class="form-control" name="Total" id="Total" placeholder="TOTAL" value="<?php echo $Total; ?>" />
-        	</div>
+        	</div> -->
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col text-right font-weight-bold">
+                        TOTAL
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control text-right" name="Total" id="Total" placeholder="TOTAL" value="<?php echo $Total; ?>" readonly />
+                    </div>
+                    <div class="col">
+
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col text-right font-weight-bold">
+                        PPN (%)
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control text-right" name="PPNpersen" id="PPNpersen" placeholder="PPN" value="<?php echo $PPNpersen; ?>" onkeyup="calculate()" />
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control text-right" name="PPNnilai" id="PPNnilai" placeholder="" value="<?php echo $PPNnilai; ?>" readonly />
+                    </div>
+                    <div class="col">
+
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control text-right" name="GrandTotal" id="GrandTotal" placeholder="GRAND TOTAL" value="<?php echo $GrandTotal; ?>" readonly />
+                    </div>
+                    <div class="col">
+
+                    </div>
+                </div>
+            </div>
+
 			<!-- <div class="form-group">
             	<label for="timestamp">CREATED AT <?php echo form_error('created_at') ?></label>
             	<input type="text" class="form-control" name="created_at" id="created_at" placeholder="CREATED AT" value="<?php echo $created_at; ?>" />

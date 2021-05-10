@@ -150,6 +150,12 @@ class _30_jo_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_by_id_result($id)
+    {
+        $this->db->where($this->id, $id);
+        return $this->db->get($this->table)->result();
+    }
+
 }
 
 /* End of file _30_jo_model.php */

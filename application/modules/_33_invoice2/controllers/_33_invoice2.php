@@ -135,6 +135,9 @@ class _33_invoice2 extends CI_Controller
 			'TglInvoice' => set_value('TglInvoice', date('d-m-Y')),
 			'idjo' => set_value('idjo', $idjo),
 			'Total' => set_value('Total'),
+            'PPNpersen' => set_value('PPNpersen'),
+            'PPNnilai' => set_value('PPNnilai'),
+            'GrandTotal' => set_value('GrandTotal'),
 			// 'created_at' => set_value('created_at'),
 			// 'updated_at' => set_value('updated_at'),
             'dataCustomer' => $dataCustomer,
@@ -161,6 +164,9 @@ class _33_invoice2 extends CI_Controller
 				'TglInvoice' => dateMysql($this->input->post('TglInvoice',TRUE)),
 				'idjo' => $this->input->post('idjo',TRUE),
 				'Total' => $this->input->post('Total',TRUE),
+                'PPNpersen' => $this->input->post('PPNpersen',TRUE),
+                'PPNnilai' => $this->input->post('PPNnilai',TRUE),
+                'GrandTotal' => $this->input->post('GrandTotal',TRUE),
 				// 'created_at' => $this->input->post('created_at',TRUE),
 				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
@@ -196,10 +202,10 @@ class _33_invoice2 extends CI_Controller
             /**
              * update total jumlah ke tabel master
              */
-            $data = array(
-        		'Total' => $totalJumlah
-                );
-            $this->_33_invoice2_model->update($idInvoice, $data);
+            // $data = array(
+        	// 	'Total' => $totalJumlah
+            //     );
+            // $this->_33_invoice2_model->update($idInvoice, $data);
 
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_33_invoice2'));
@@ -229,7 +235,9 @@ class _33_invoice2 extends CI_Controller
             /**
              * ambil data JO untuk combo
              */
-            $dataJO = $this->_30_jo_model->getDataByIdCustomer($idcustomer);
+            // $dataJO = $this->_30_jo_model->getDataByIdCustomer($idcustomer);
+            $dataJO = $this->_30_jo_model->get_by_id_result($row->idjo);
+            // echo pre($dataJO); exit;
 
             $data = array(
                 'button' => 'Simpan',
@@ -239,6 +247,9 @@ class _33_invoice2 extends CI_Controller
 				'TglInvoice' => set_value('TglInvoice', dateIndo($row->TglInvoice)),
 				'idjo' => set_value('idjo', $row->idjo),
 				'Total' => set_value('Total', $row->Total),
+                'PPNpersen' => set_value('Total', $row->PPNpersen),
+                'PPNnilai' => set_value('Total', $row->PPNnilai),
+                'GrandTotal' => set_value('Total', $row->GrandTotal),
 				// 'created_at' => set_value('created_at', $row->created_at),
 				// 'updated_at' => set_value('updated_at', $row->updated_at),
                 'dataCustomer' => $dataCustomer,
@@ -278,13 +289,57 @@ class _33_invoice2 extends CI_Controller
         } else {
             $data = array(
 				'NoInvoice' => $this->input->post('NoInvoice',TRUE),
-				'TglInvoice' => $this->input->post('TglInvoice',TRUE),
+				'TglInvoice' => dateMysql($this->input->post('TglInvoice',TRUE)),
 				'idjo' => $this->input->post('idjo',TRUE),
 				'Total' => $this->input->post('Total',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
+                'PPNpersen' => $this->input->post('PPNpersen',TRUE),
+                'PPNnilai' => $this->input->post('PPNnilai',TRUE),
+                'GrandTotal' => $this->input->post('GrandTotal',TRUE),
+				// 'created_at' => $this->input->post('created_at',TRUE),
+				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
+            /**
+             * update data di tabel master
+             */
             $this->_33_invoice2_model->update($this->input->post('idinvoice', TRUE), $data);
+
+            /**
+             * simpan id data yang akan diupdate dari tabel master
+             */
+            $idInvoice = $this->input->post('idinvoice', TRUE);
+
+            /**
+             * hapus dulu data lama di tabel detail
+             */
+            $this->db->where('idinvoice', $idInvoice);
+			$this->db->delete('t34_invoiced');
+
+            /**
+             * simpan data di tabel detail
+             */
+            $totalJumlah = 0;
+            $data = $this->input->post();
+            foreach ($data['idservice'] as $key => $item) {
+  				$detail = [
+  					'idinvoice' => $idInvoice,
+  					'idservice' => $item,
+                    'Qty' => $data['qty'][$key],
+                    'idsatuan' => $data['idsatuan'][$key],
+                    'Harga' => $data['harga'][$key],
+  					'Jumlah' => $data['jumlah'][$key]
+                    ];
+                $totalJumlah += $data['jumlah'][$key];
+  				$this->db->insert('t34_invoiced',$detail);
+  			}
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            // $data = array(
+        	// 	'Total' => $totalJumlah
+            //     );
+            // $this->_33_invoice2_model->update($idInvoice, $data);
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_33_invoice2'));
         }
@@ -295,7 +350,17 @@ class _33_invoice2 extends CI_Controller
         $row = $this->_33_invoice2_model->get_by_id($id);
 
         if ($row) {
+            /**
+             * hapus data di tabel master
+             */
             $this->_33_invoice2_model->delete($id);
+
+            /**
+             * hapus data di tabel detail
+             */
+            $this->db->where('idinvoice',$id);
+     		$this->db->delete('t34_invoiced');
+
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('_33_invoice2'));
         } else {

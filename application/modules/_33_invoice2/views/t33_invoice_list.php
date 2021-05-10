@@ -50,7 +50,10 @@
                 <th>NO. JO</th>
 				<th>NO. INVOICE</th>
 				<th>TGL. INVOICE</th>
-				<th class="text-right">TOTAL INVOICE</th>
+				<th class="text-right">TOTAL</th>
+                <th class="text-right">PPN (%)</th>
+                <th class="text-right">PPN</th>
+                <th class="text-right">GRAND TOTAL</th>
 				<!-- <th>CREATED AT</th> -->
 				<!-- <th>UPDATED AT</th> -->
 				<th class="text-center">PROSES</th>
@@ -63,6 +66,9 @@
 				<td><?php echo $_33_invoice2->NoInvoice ?></td>
 				<td><?php echo dateIndo($_33_invoice2->TglInvoice) ?></td>
 				<td class="text-right"><?php echo number_format($_33_invoice2->Total) ?></td>
+                <td class="text-right"><?php echo number_format($_33_invoice2->PPNpersen) ?></td>
+                <td class="text-right"><?php echo number_format($_33_invoice2->PPNnilai) ?></td>
+                <td class="text-right"><?php echo number_format($_33_invoice2->GrandTotal) ?></td>
 				<!-- <td><?php //echo $_33_invoice2->created_at ?></td> -->
 				<!-- <td><?php //echo $_33_invoice2->updated_at ?></td> -->
 				<td style="text-align:center" width="200px">
