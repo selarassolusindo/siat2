@@ -13,6 +13,8 @@ class _33_invoice2 extends CI_Controller
         $this->load->model('_45_users_menus/_45_users_menus_model');
         $this->load->model('_05_customer/_05_customer_model');
         $this->load->model('_30_jo/_30_jo_model');
+        $this->load->model('_13_satuan/_13_satuan_model');
+        $this->load->model('_10_service/_10_service_model');
     }
 
     public function index()
@@ -78,9 +80,20 @@ class _33_invoice2 extends CI_Controller
         $dataCustomer = $this->_05_customer_model->get_all();
 
         /**
+         * ambil data service untuk combo
+         */
+        $dataService = $this->_10_service_model->get_all();
+
+        /**
+         * ambil data satuan untuk combo
+         */
+        $dataSatuan = $this->_13_satuan_model->get_all();
+
+        /**
          * ambil data JO untuk combo
          */
         $dataJO = $this->_30_jo_model->getDataByIdCustomer($idcustomer);
+
         $rowJO = $this->_30_jo_model->get_by_id($idjo);
         $noJO = "";
         if ($rowJO) {
@@ -119,7 +132,7 @@ class _33_invoice2 extends CI_Controller
             'action' => site_url('_33_invoice2/create_action'),
 			'idinvoice' => set_value('idinvoice'),
 			'NoInvoice' => set_value('NoInvoice', $noInvoice),
-			'TglInvoice' => set_value('TglInvoice'),
+			'TglInvoice' => set_value('TglInvoice', date('d-m-Y')),
 			'idjo' => set_value('idjo', $idjo),
 			'Total' => set_value('Total'),
 			// 'created_at' => set_value('created_at'),
@@ -127,7 +140,8 @@ class _33_invoice2 extends CI_Controller
             'dataCustomer' => $dataCustomer,
             'idcustomer' => $idcustomer,
             'dataJO' => $dataJO,
-            'nextSuffix' => $nextSuffix,
+            'dataService' => $dataService,
+            'dataSatuan' => $dataSatuan,
 		);
         // $this->load->view('_33_invoice2/t33_invoice_form', $data);
         $data['_view'] = '_33_invoice2/t33_invoice_form';
@@ -150,7 +164,43 @@ class _33_invoice2 extends CI_Controller
 				// 'created_at' => $this->input->post('created_at',TRUE),
 				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
+
+            /**
+             * simpan ke tabel master
+             */
             $this->_33_invoice2_model->insert($data);
+
+            /**
+             * ambil id invoice terbaru
+             */
+            $idInvoice = $this->db->insert_id();
+
+            /**
+             * simpan data ke tabel detail
+             */
+            $totalJumlah = 0;
+            $data = $this->input->post();
+            foreach ($data['idservice'] as $key => $item) {
+                $detail = [
+                    'idinvoice' => $idInvoice,
+                    'idservice' => $item,
+                    'Qty' => $data['qty'][$key],
+                    'idsatuan' => $data['idsatuan'][$key],
+                    'Harga' => $data['harga'][$key],
+                    'Jumlah' => $data['jumlah'][$key],
+                ];
+                $totalJumlah += $data['jumlah'][$key];
+                $this->db->insert('t34_invoiced', $detail);
+            }
+
+            /**
+             * update total jumlah ke tabel master
+             */
+            $data = array(
+        		'Total' => $totalJumlah
+                );
+            $this->_33_invoice2_model->update($idInvoice, $data);
+
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_33_invoice2'));
         }
@@ -161,17 +211,54 @@ class _33_invoice2 extends CI_Controller
         $row = $this->_33_invoice2_model->get_by_id($id);
 
         if ($row) {
+            /**
+             * ambil data customer untuk combo
+             */
+            $dataCustomer = $this->_05_customer_model->get_all();
+
+            /**
+             * ambil data service untuk combo
+             */
+            $dataService = $this->_10_service_model->get_all();
+
+            /**
+             * ambil data satuan untuk combo
+             */
+            $dataSatuan = $this->_13_satuan_model->get_all();
+
+            /**
+             * ambil data JO untuk combo
+             */
+            $dataJO = $this->_30_jo_model->getDataByIdCustomer($idcustomer);
+
             $data = array(
                 'button' => 'Simpan',
                 'action' => site_url('_33_invoice2/update_action'),
 				'idinvoice' => set_value('idinvoice', $row->idinvoice),
 				'NoInvoice' => set_value('NoInvoice', $row->NoInvoice),
-				'TglInvoice' => set_value('TglInvoice', $row->TglInvoice),
+				'TglInvoice' => set_value('TglInvoice', dateIndo($row->TglInvoice)),
 				'idjo' => set_value('idjo', $row->idjo),
 				'Total' => set_value('Total', $row->Total),
-				'created_at' => set_value('created_at', $row->created_at),
-				'updated_at' => set_value('updated_at', $row->updated_at),
+				// 'created_at' => set_value('created_at', $row->created_at),
+				// 'updated_at' => set_value('updated_at', $row->updated_at),
+                'dataCustomer' => $dataCustomer,
+                'idcustomer' => $row->idcustomer,
+                'dataJO' => $dataJO,
+                'dataService' => $dataService,
+                'dataSatuan' => $dataSatuan,
 			);
+
+            /**
+             * ambil data dari tabel detail
+             */
+            $data['detail'] =
+                $this->db
+                    ->select('t34_invoiced.*')
+                    ->from('t34_invoiced')
+                    ->where('idinvoice', $id)
+                    ->get()->result()
+                    ;
+
             // $this->load->view('_33_invoice2/t33_invoice_form', $data);
             $data['_view'] = '_33_invoice2/t33_invoice_form';
             $data['_caption'] = 'Invoice';

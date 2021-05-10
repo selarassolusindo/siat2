@@ -26,7 +26,13 @@ class _33_invoice2_model extends CI_Model
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->from($this->table);
+        $this->db->select($this->table . '.*');
+        $this->db->select('customer.Nama as customerNama, customer.idcustomer');
+        $this->db->select('jo.NoJO');
+        $this->db->join('t30_jo jo', 'jo.idjo = ' . $this->table . '.idjo', 'left');
+        $this->db->join('t05_customer customer', 'customer.idcustomer = ' . 'jo.idcustomer', 'left');
+        return $this->db->get()->row();
     }
 
     // get total rows
@@ -37,7 +43,7 @@ class _33_invoice2_model extends CI_Model
 		$this->db->or_like('TglInvoice', $q);
 		$this->db->from($this->table);
         $this->db->select($this->table . '.*');
-        $this->db->select('customer.Nama as customerNama');
+        $this->db->select('customer.Nama as customerNama, customer.idcustomer');
         $this->db->select('jo.NoJO');
         $this->db->join('t30_jo jo', 'jo.idjo = ' . $this->table . '.idjo', 'left');
         $this->db->join('t05_customer customer', 'customer.idcustomer = ' . 'jo.idcustomer', 'left');
@@ -54,7 +60,7 @@ class _33_invoice2_model extends CI_Model
 		$this->db->limit($limit, $start);
         $this->db->from($this->table);
         $this->db->select($this->table . '.*');
-        $this->db->select('customer.Nama as customerNama');
+        $this->db->select('customer.Nama as customerNama, customer.idcustomer');
         $this->db->select('jo.NoJO');
         $this->db->join('t30_jo jo', 'jo.idjo = ' . $this->table . '.idjo', 'left');
         $this->db->join('t05_customer customer', 'customer.idcustomer = ' . 'jo.idcustomer', 'left');

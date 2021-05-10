@@ -117,9 +117,6 @@
                 <a href="#" onclick="tambah()" class="btn btn-primary mb-2">TAMBAH COST</a>
 
                 <script type="text/javascript">
-
-
-
                 /**
                  * calculate qty * harga
                  */

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 09, 2021 at 10:52 PM
+-- Generation Time: May 10, 2021 at 09:14 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -422,7 +422,8 @@ CREATE TABLE `t05_customer` (
 --
 
 INSERT INTO `t05_customer` (`idcustomer`, `Kode`, `Nama`, `ContactPerson`, `Telepon`, `Alamat`, `Kota`) VALUES
-(1, 'KCUS1', 'NCUS1', 'CP1', 'T1', 'A1', 'K1');
+(1, 'KCUS1', 'NCUS1', 'CP1', 'T1', 'A1', 'K1'),
+(2, 'K2', 'NCUS2', 'CP1', 'T1', 'A1', 'SURABAYA');
 
 -- --------------------------------------------------------
 
@@ -515,6 +516,14 @@ CREATE TABLE `t10_service` (
   `Kode` varchar(5) NOT NULL,
   `Nama` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t10_service`
+--
+
+INSERT INTO `t10_service` (`idservice`, `Kode`, `Nama`) VALUES
+(1, 'KODE1', 'Biaya Sewa Container'),
+(2, 'KODE2', 'Biaya Sewa Truck');
 
 -- --------------------------------------------------------
 
@@ -658,7 +667,8 @@ CREATE TABLE `t30_jo` (
 INSERT INTO `t30_jo` (`idjo`, `NoJO`, `TglJO`, `idcustomer`, `idshipper`, `TglMB`, `idlokasi`, `idarmada`, `iddriver`, `created_at`, `updated_at`) VALUES
 (1, '2104003', '2021-03-06', 1, 1, '2021-03-07', 1, 1, 1, '2021-03-06 06:08:21', '2021-05-06 14:58:06'),
 (2, '2104004', '2021-03-07', 1, 1, '2021-03-08', 2, 1, 1, '2021-03-07 10:25:55', '2021-05-06 13:15:09'),
-(3, '2105001', '2021-05-06', 1, 1, '2021-05-06', 1, 1, 1, '2021-05-06 14:58:18', '2021-05-06 14:58:18');
+(3, '2105001', '2021-05-06', 1, 1, '2021-05-06', 1, 1, 1, '2021-05-06 14:58:18', '2021-05-06 14:58:18'),
+(4, '2105002', '2021-05-10', 2, 1, '2021-05-10', 1, 1, 1, '2021-05-09 19:11:45', '2021-05-09 19:11:45');
 
 -- --------------------------------------------------------
 
@@ -693,7 +703,7 @@ CREATE TABLE `t32_csheetd` (
   `idcsheetd` int(11) NOT NULL,
   `idcsheet` int(11) NOT NULL,
   `idcost` int(11) NOT NULL,
-  `Qty` decimal(5,2) NOT NULL,
+  `Qty` double NOT NULL,
   `idsatuan` int(11) NOT NULL,
   `Harga` double NOT NULL,
   `Jumlah` double NOT NULL,
@@ -706,7 +716,7 @@ CREATE TABLE `t32_csheetd` (
 --
 
 INSERT INTO `t32_csheetd` (`idcsheetd`, `idcsheet`, `idcost`, `Qty`, `idsatuan`, `Harga`, `Jumlah`, `created_at`, `updated_at`) VALUES
-(5, 1, 1, '2.00', 2, 115000, 230000, '2021-05-09 15:32:44', '2021-05-09 15:32:44');
+(5, 1, 1, 2, 2, 115000, 230000, '2021-05-09 15:32:44', '2021-05-09 15:32:44');
 
 -- --------------------------------------------------------
 
@@ -729,8 +739,13 @@ CREATE TABLE `t33_invoice` (
 --
 
 INSERT INTO `t33_invoice` (`idinvoice`, `NoInvoice`, `TglInvoice`, `idjo`, `Total`, `created_at`, `updated_at`) VALUES
-(1, 'INV0001', '2021-03-06', 1, 77500, '2021-02-28 14:15:45', '2021-03-06 08:44:38'),
-(2, 'INV0002', '2021-03-07', 1, 33, '2021-03-07 09:06:44', '2021-03-07 09:09:29');
+(1, '2104003A', '2021-03-06', 1, 77500, '2021-02-28 14:15:45', '2021-05-09 20:32:19'),
+(2, '2104003B', '2021-03-07', 1, 33, '2021-03-07 09:06:44', '2021-05-09 20:32:26'),
+(3, '2105002A', '2021-05-10', 4, 0, '2021-05-09 20:43:23', '2021-05-09 20:43:23'),
+(4, '2105002B', '2021-05-10', 4, 1, '2021-05-09 20:44:12', '2021-05-09 20:44:12'),
+(5, '2105002C', '2021-05-10', 4, 2350000, '2021-05-10 09:48:34', '2021-05-10 09:48:34'),
+(6, '2105002D', '2021-05-10', 4, 2500000, '2021-05-10 10:12:34', '2021-05-10 10:12:34'),
+(7, '2105002E', '2021-05-10', 4, 855000, '2021-05-10 10:14:06', '2021-05-10 10:14:06');
 
 -- --------------------------------------------------------
 
@@ -742,7 +757,10 @@ CREATE TABLE `t34_invoiced` (
   `idinvoiced` int(11) NOT NULL,
   `idinvoice` int(11) NOT NULL,
   `idservice` int(11) NOT NULL,
-  `Jumlah` int(11) NOT NULL,
+  `Qty` double NOT NULL,
+  `idsatuan` int(11) NOT NULL,
+  `Harga` double NOT NULL,
+  `Jumlah` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -751,12 +769,16 @@ CREATE TABLE `t34_invoiced` (
 -- Dumping data for table `t34_invoiced`
 --
 
-INSERT INTO `t34_invoiced` (`idinvoiced`, `idinvoice`, `idservice`, `Jumlah`, `created_at`, `updated_at`) VALUES
-(21, 1, 2, 15000, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
-(22, 1, 3, 12500, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
-(23, 1, 1, 50000, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
-(26, 2, 1, 11, '2021-03-07 09:09:29', '2021-03-07 09:09:29'),
-(27, 2, 2, 22, '2021-03-07 09:09:29', '2021-03-07 09:09:29');
+INSERT INTO `t34_invoiced` (`idinvoiced`, `idinvoice`, `idservice`, `Qty`, `idsatuan`, `Harga`, `Jumlah`, `created_at`, `updated_at`) VALUES
+(21, 1, 2, 0, 0, 0, 15000, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
+(22, 1, 3, 0, 0, 0, 12500, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
+(23, 1, 1, 0, 0, 0, 50000, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
+(26, 2, 1, 0, 0, 0, 11, '2021-03-07 09:09:29', '2021-03-07 09:09:29'),
+(27, 2, 2, 0, 0, 0, 22, '2021-03-07 09:09:29', '2021-03-07 09:09:29'),
+(28, 6, 1, 3, 1, 300000, 900000, '2021-05-10 10:12:34', '2021-05-10 10:12:34'),
+(29, 6, 1, 4, 1, 400000, 1600000, '2021-05-10 10:12:34', '2021-05-10 10:12:34'),
+(30, 7, 1, 5, 1, 75000, 375000, '2021-05-10 10:14:06', '2021-05-10 10:14:06'),
+(31, 7, 1, 6, 1, 80000, 480000, '2021-05-10 10:14:06', '2021-05-10 10:14:06');
 
 -- --------------------------------------------------------
 
@@ -790,7 +812,8 @@ INSERT INTO `t44_menus` (`idmenus`, `Menus`) VALUES
 (18, 'SETUP - Saldo Awal'),
 (19, 'SETUP - Tgl. Input Saldo Awal'),
 (20, 'TRANSAKSI - Job Order'),
-(21, 'TRANSAKSI - Cost Sheet');
+(21, 'TRANSAKSI - Cost Sheet'),
+(22, 'TRANSAKSI - Invoice');
 
 -- --------------------------------------------------------
 
@@ -843,7 +866,9 @@ INSERT INTO `t45_users_menus` (`idusersmenus`, `idusers`, `idmenus`, `rights`) V
 (39, 1, 20, 7),
 (40, 2, 20, 7),
 (41, 1, 21, 7),
-(42, 2, 21, 7);
+(42, 2, 21, 7),
+(43, 1, 22, 7),
+(44, 2, 22, 7);
 
 -- --------------------------------------------------------
 
@@ -878,7 +903,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620569094, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1620638443, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1147,7 +1172,7 @@ ALTER TABLE `t04_tglsaldoawal`
 -- AUTO_INCREMENT for table `t05_customer`
 --
 ALTER TABLE `t05_customer`
-  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t06_shipper`
@@ -1177,7 +1202,7 @@ ALTER TABLE `t09_sparepart`
 -- AUTO_INCREMENT for table `t10_service`
 --
 ALTER TABLE `t10_service`
-  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idservice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t11_cost`
@@ -1219,7 +1244,7 @@ ALTER TABLE `t16_ekor`
 -- AUTO_INCREMENT for table `t30_jo`
 --
 ALTER TABLE `t30_jo`
-  MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `t31_csheet`
@@ -1237,25 +1262,25 @@ ALTER TABLE `t32_csheetd`
 -- AUTO_INCREMENT for table `t33_invoice`
 --
 ALTER TABLE `t33_invoice`
-  MODIFY `idinvoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idinvoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `t34_invoiced`
 --
 ALTER TABLE `t34_invoiced`
-  MODIFY `idinvoiced` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idinvoiced` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `t44_menus`
 --
 ALTER TABLE `t44_menus`
-  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `t45_users_menus`
 --
 ALTER TABLE `t45_users_menus`
-  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `idusersmenus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `t46_users`
