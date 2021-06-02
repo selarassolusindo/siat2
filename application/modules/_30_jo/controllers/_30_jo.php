@@ -77,7 +77,7 @@ class _30_jo extends CI_Controller
         }
     }
 
-    public function create()
+    public function create($tgl = null)
     {
         $dataCustomer = $this->_05_customer_model->get_all();
         $dataShipper = $this->_06_shipper_model->get_all();
@@ -88,7 +88,7 @@ class _30_jo extends CI_Controller
             'button' => 'Simpan',
             'action' => site_url('_30_jo/create_action'),
 			'idjo' => set_value('idjo'),
-			'NoJO' => set_value('NoJO', $this->_30_jo_model->getNewJO()),
+			'NoJO' => set_value('NoJO', $this->_30_jo_model->getNewJO($tgl)),
 			'TglJO' => set_value('TglJO', date('d-m-Y')),
 			'idcustomer' => set_value('idcustomer'),
 			'idshipper' => set_value('idshipper'),

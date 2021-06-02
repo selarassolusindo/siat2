@@ -20,7 +20,7 @@
                     <div class="input-group-append" data-target="#TglJO" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    <input placeholder="TGL. JO" type="text" name="TglJO" value="<?php echo $TglJO; ?>" class="form-control datetimepicker-input" data-target="#TglJO"/>
+                    <input placeholder="TGL. JO" type="text" name="TglJO" value="<?php echo $TglJO; ?>" class="form-control datetimepicker-input inputTglJO" data-target="#TglJO"/>
                 </div>
         	</div>
 
@@ -108,7 +108,21 @@
                 $('#TglMB').datetimepicker({
                     format: 'DD-MM-YYYY'
                 });
-            })
+                $('#TglJO').datetimepicker().on('dp.change', function (event) {
+                    alert('!!!');
+                });
+            });
+
+
         </script>
     <!-- </body>
 </html> -->
+
+<script type="text/javascript">
+    function newJO() {
+        // alert('1');
+        var tgl = document.getElementById("inputTglJO").value;
+        // alert(tgl);
+        window.location = "<?php echo site_url() ?>_30_jo/create/"+tgl;
+    }
+</script>

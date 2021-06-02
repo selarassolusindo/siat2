@@ -114,8 +114,10 @@ class _30_jo_model extends CI_Model
      * buat nomor jo baru
      * JO0001
      */
-    function getNewJO()
+    function getNewJO($date = null)
     {
+        // echo pre($date); exit;
+
         $sNextKode = "";
         $sLastKode = "";
 
