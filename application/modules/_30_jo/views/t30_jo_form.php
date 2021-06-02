@@ -12,11 +12,8 @@
     <body>
         <h2 style="margin-top:0px">T30_jo <?php //echo $button ?></h2> -->
         <form action="<?php echo $action; ?>" method="post">
-			<div class="form-group">
-            	<label for="varchar">NO. JO <?php echo form_error('NoJO') ?></label>
-            	<input type="text" class="form-control" name="NoJO" id="NoJO" placeholder="NOJO" value="<?php echo $NoJO; ?>" />
-        	</div>
-			<div class="form-group col-2 p-0">
+            <!-- tgl jo -->
+            <div class="form-group col-2 p-0">
             	<label for="date">TGL. JO <?php echo form_error('TglJO') ?></label>
             	<!-- <input type="text" class="form-control" name="TglJO" id="TglJO" placeholder="TGLJO" value="<?php echo $TglJO; ?>" /> -->
                 <div class="input-group date" id="TglJO" data-target-input="nearest">
@@ -26,6 +23,13 @@
                     <input placeholder="TGL. JO" type="text" name="TglJO" value="<?php echo $TglJO; ?>" class="form-control datetimepicker-input" data-target="#TglJO"/>
                 </div>
         	</div>
+
+            <!-- nomor jo -->
+			<div class="form-group">
+            	<label for="varchar">NO. JO <?php echo form_error('NoJO') ?></label>
+            	<input type="text" class="form-control" name="NoJO" id="NoJO" placeholder="NOJO" value="<?php echo $NoJO; ?>" />
+        	</div>
+
 			<div class="form-group">
             	<label for="int">CUSTOMER <?php echo form_error('idcustomer') ?></label>
             	<!-- <input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="IDCUSTOMER" value="<?php echo $idcustomer; ?>" /> -->
