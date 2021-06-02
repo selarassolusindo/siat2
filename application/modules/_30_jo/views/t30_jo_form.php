@@ -30,6 +30,7 @@
             	<input type="text" class="form-control" name="NoJO" id="NoJO" placeholder="NOJO" value="<?php echo $NoJO; ?>" />
         	</div>
 
+            <!-- customer -->
 			<div class="form-group">
             	<label for="int">CUSTOMER <?php echo form_error('idcustomer') ?></label>
             	<!-- <input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="IDCUSTOMER" value="<?php echo $idcustomer; ?>" /> -->
