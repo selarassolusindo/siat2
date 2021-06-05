@@ -123,8 +123,8 @@ class _30_jo_model extends CI_Model
         $sNextKode = "";
         $sLastKode = "";
 
-        $prefix = $date != null ? substr($date, -2) . substr($date, 3, 2) : date('ym'); // date('ym');
-        $sNextKode = $prefix . "001";
+        $prefix = $date != null ? substr($date, -2) . '.' . substr($date, 3, 2) . '.' : date('y.m.'); // date('ym');
+        $sNextKode = $prefix . "00001";
 
         // echo pre($prefix); exit;
 
@@ -135,15 +135,15 @@ class _30_jo_model extends CI_Model
 
             $value = $row->NoJO;
 
-            if ($prefix == substr($value, 0, 4)) {
+            if ($prefix == substr($value, 0, 6)) {
                 /**
                  * masih pada bulan yang sama
                  */
-                $sLastKode = intval(substr($value, 4, 3));
+                $sLastKode = intval(substr($value, 7, 5));
                 $sLastKode = intval($sLastKode) + 1;
-                $sNextKode = $prefix . sprintf('%03s', $sLastKode);
-                if (strlen($sNextKode) > 7) {
-                    $sNextKode = $prefix . "999";
+                $sNextKode = $prefix . sprintf('%05s', $sLastKode);
+                if (strlen($sNextKode) > 11) {
+                    $sNextKode = $prefix . "99999";
                 }
             }
         }
