@@ -26,6 +26,8 @@
 		<th>Idshipper</th>
 		<th>TglMB</th>
 		<th>Idlokasi</th>
+		<th>Idarmada</th>
+		<th>Iddriver</th>
 		<th>Created At</th>
 		<th>Updated At</th>
 		
@@ -41,6 +43,8 @@
 		      <td><?php echo $_30_jo->idshipper ?></td>
 		      <td><?php echo $_30_jo->TglMB ?></td>
 		      <td><?php echo $_30_jo->idlokasi ?></td>
+		      <td><?php echo $_30_jo->idarmada ?></td>
+		      <td><?php echo $_30_jo->iddriver ?></td>
 		      <td><?php echo $_30_jo->created_at ?></td>
 		      <td><?php echo $_30_jo->updated_at ?></td>	
                 </tr>

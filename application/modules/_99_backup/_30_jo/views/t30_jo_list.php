@@ -13,7 +13,9 @@
         <h2 style="margin-top:0px">T30_jo List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
+                <?php if ($hakAkses['tambah']) { ?>
                 <?php echo anchor(site_url('_30_jo/create'),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php } ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -44,12 +46,14 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th class="text-right">NO.</th>
-                <th>TGL.</th>
 				<th>NO. JO</th>
+				<th>TGL. JO</th>
 				<th>CUSTOMER</th>
 				<th>SHIPPER</th>
-				<th>TGL. MUAT</th>
+				<th>TGL. MUAT/BONGKAR</th>
 				<th>LOKASI</th>
+				<th>ARMADA</th>
+				<th>DRIVER</th>
 				<!-- <th>CREATED AT</th> -->
 				<!-- <th>UPDATED AT</th> -->
 				<th class="text-center">PROSES</th>
@@ -57,22 +61,30 @@
 			<?php foreach ($_30_jo_data as $_30_jo) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
-                <td><?php echo $_30_jo->TglJO ?></td>
 				<td><?php echo $_30_jo->NoJO ?></td>
-				<td><?php echo $_30_jo->idcustomer ?></td>
-				<td><?php echo $_30_jo->idshipper ?></td>
-				<td><?php echo $_30_jo->TglMB ?></td>
-				<td><?php echo $_30_jo->idlokasi ?></td>
+				<td><?php echo dateIndo($_30_jo->TglJO) ?></td>
+				<td><?php echo $_30_jo->NamaCustomer ?></td>
+				<td><?php echo $_30_jo->NamaShipper ?></td>
+				<td><?php echo dateIndo($_30_jo->TglMB) ?></td>
+				<td><?php echo $_30_jo->NamaLokasi ?></td>
+				<td><?php echo $_30_jo->NamaArmada ?></td>
+				<td><?php echo $_30_jo->NamaDriver ?></td>
 				<!-- <td><?php echo $_30_jo->created_at ?></td> -->
 				<!-- <td><?php echo $_30_jo->updated_at ?></td> -->
 				<td style="text-align:center" width="200px">
 				<?php
 				//echo anchor(site_url('_30_jo/read/'.$_30_jo->idjo),'Read');
 				//echo ' | ';
+                if ($hakAkses['ubah']) {
 				echo anchor(site_url('_30_jo/update/'.$_30_jo->idjo),'Ubah');
+                if ($hakAkses['hapus']) {
 				echo ' | ';
-				echo anchor(site_url('_30_jo/delete/'.$_30_jo->idjo),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
-				?>
+                }
+                }
+                if ($hakAkses['hapus']) {
+                echo anchor(site_url('_30_jo/delete/'.$_30_jo->idjo),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
+                }
+            	?>
 				</td>
 			</tr>
             <?php } ?>

@@ -18,6 +18,8 @@
 	    <tr><td>Idshipper</td><td><?php echo $idshipper; ?></td></tr>
 	    <tr><td>TglMB</td><td><?php echo $TglMB; ?></td></tr>
 	    <tr><td>Idlokasi</td><td><?php echo $idlokasi; ?></td></tr>
+	    <tr><td>Idarmada</td><td><?php echo $idarmada; ?></td></tr>
+	    <tr><td>Iddriver</td><td><?php echo $iddriver; ?></td></tr>
 	    <tr><td>Created At</td><td><?php echo $created_at; ?></td></tr>
 	    <tr><td>Updated At</td><td><?php echo $updated_at; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('_30_jo') ?>" class="btn btn-default">Cancel</a></td></tr>

@@ -16,33 +16,27 @@
         </style>
     </head>
     <body>
-        <h2>T30_jo List</h2>
+        <h2>T35_jod List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>NoJO</th>
-		<th>TglJO</th>
-		<th>Idcustomer</th>
-		<th>Idshipper</th>
-		<th>TglMB</th>
-		<th>Idlokasi</th>
+		<th>Idjo</th>
+		<th>Idarmada</th>
+		<th>No Cont</th>
 		<th>Created At</th>
 		<th>Updated At</th>
 		
             </tr><?php
-            foreach ($_30_jo_data as $_30_jo)
+            foreach ($_35_jod_data as $_35_jod)
             {
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $_30_jo->NoJO ?></td>
-		      <td><?php echo $_30_jo->TglJO ?></td>
-		      <td><?php echo $_30_jo->idcustomer ?></td>
-		      <td><?php echo $_30_jo->idshipper ?></td>
-		      <td><?php echo $_30_jo->TglMB ?></td>
-		      <td><?php echo $_30_jo->idlokasi ?></td>
-		      <td><?php echo $_30_jo->created_at ?></td>
-		      <td><?php echo $_30_jo->updated_at ?></td>	
+		      <td><?php echo $_35_jod->idjo ?></td>
+		      <td><?php echo $_35_jod->idarmada ?></td>
+		      <td><?php echo $_35_jod->no_cont ?></td>
+		      <td><?php echo $_35_jod->created_at ?></td>
+		      <td><?php echo $_35_jod->updated_at ?></td>	
                 </tr>
                 <?php
             }
