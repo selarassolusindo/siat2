@@ -89,7 +89,7 @@ class _30_jo extends CI_Controller
             'action' => site_url('_30_jo/create_action'),
 			'idjo' => set_value('idjo'),
 			'NoJO' => set_value('NoJO', $this->_30_jo_model->getNewJO($tgl)),
-			'TglJO' => set_value('TglJO', date('d-m-Y')),
+			'TglJO' => set_value('TglJO', $tgl != null ? $tgl : date('d-m-Y')),
 			'idcustomer' => set_value('idcustomer'),
 			'idshipper' => set_value('idshipper'),
 			'TglMB' => set_value('TglMB', date('d-m-Y')),

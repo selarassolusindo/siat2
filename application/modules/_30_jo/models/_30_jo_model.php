@@ -116,13 +116,17 @@ class _30_jo_model extends CI_Model
      */
     function getNewJO($date = null)
     {
-        // echo pre($date); exit;
+        if ($date != null) {
+            // echo pre(dateMysql($date)); exit;
+        }
 
         $sNextKode = "";
         $sLastKode = "";
 
-        $prefix = date('ym');
+        $prefix = $date != null ? substr($date, -2) . substr($date, 3, 2) : date('ym'); // date('ym');
         $sNextKode = $prefix . "001";
+
+        // echo pre($prefix); exit;
 
         $this->db->order_by('NoJO', 'desc');
         $this->db->limit(1);
