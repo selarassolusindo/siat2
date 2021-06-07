@@ -26,12 +26,16 @@ foreach ($all as $row) {
 $columnall = implode(',', $column_all);
 
 $string .="\n\n    // datatables
-    function json() {
+    function json(\$postData) {
         \$this->datatables->select('".$columnall."');
-        \$this->datatables->from('".$table_name."');
+        \$this->datatables->from('".$table_name."');";
+foreach ($all as $row) {
+    $string .= "\n\t\tif (\$postData['".$row['column_name']."'] != '') { \$this->datatables->like('".$row['column_name']."', \$postData['".$row['column_name']."']); }";
+}
+$string .= "
         //add this line for join
         //\$this->datatables->join('table2', '".$table_name.".field = table2.field');
-        \$this->datatables->add_column('action', anchor(site_url('".$c_url."/read/\$1'),'Read').\" | \".anchor(site_url('".$c_url."/update/\$1'),'Update').\" | \".anchor(site_url('".$c_url."/delete/\$1'),'Delete','onclick=\"javasciprt: return confirm(\\'Are You Sure ?\\')\"'), '$pk');
+        \$this->datatables->add_column('action', anchor(site_url('".$c_url."/update/\$1'),'Update').\" | \".anchor(site_url('".$c_url."/delete/\$1'),'Delete','onclick=\"javasciprt: return confirm(\\'Are You Sure ?\\')\"'), '$pk');
         return \$this->datatables->generate();
     }";
 }

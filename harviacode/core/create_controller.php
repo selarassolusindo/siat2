@@ -14,7 +14,7 @@ class " . $c . " extends CI_Controller
         \$this->load->library('form_validation');";
 
 if ($jenis_tabel <> 'reguler_table') {
-    $string .= "        \n\t\$this->load->library('datatables');";
+    $string .= "\n\t\t\$this->load->library('datatables');";
 }
 
 $string .= "
@@ -61,8 +61,10 @@ $string .="\n\n    public function index()
     }
 
     public function json() {
+        // POST data
+        \$postData = \$this->input->post();
         header('Content-Type: application/json');
-        echo \$this->" . $m . "->json();
+        echo \$this->" . $m . "->json(\$postData);
     }";
 
 }

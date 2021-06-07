@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T30_jo <?php //echo $button ?></h2>
+        <h2 style="margin-top:0px">T30_jo <?php //echo $button ?></h2> -->
         <form action="<?php echo $action; ?>" method="post">
 			<div class="form-group">
             	<label for="varchar">NOJO <?php echo form_error('NoJO') ?></label>
@@ -44,9 +44,9 @@
             	<label for="timestamp">UPDATED AT <?php echo form_error('updated_at') ?></label>
             	<input type="text" class="form-control" name="updated_at" id="updated_at" placeholder="UPDATED AT" value="<?php echo $updated_at; ?>" />
         	</div>
-			<input type="hidden" name="idjo" value="<?php echo $idjo; ?>" /> 
-			<button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
+			<input type="hidden" name="idjo" value="<?php echo $idjo; ?>" />
+			<button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 			<a href="<?php echo site_url('_30_jo') ?>" class="btn btn-secondary">Batal</a>
 		</form>
-    </body>
-</html>
+    <!-- </body>
+</html> -->

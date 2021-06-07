@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2021 at 05:48 AM
+-- Generation Time: Jun 07, 2021 at 07:00 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -654,8 +654,6 @@ CREATE TABLE `t30_jo` (
   `idshipper` int(11) NOT NULL,
   `TglMB` date NOT NULL,
   `idlokasi` int(11) NOT NULL,
-  `idarmada` int(11) NOT NULL,
-  `iddriver` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -664,11 +662,10 @@ CREATE TABLE `t30_jo` (
 -- Dumping data for table `t30_jo`
 --
 
-INSERT INTO `t30_jo` (`idjo`, `NoJO`, `TglJO`, `idcustomer`, `idshipper`, `TglMB`, `idlokasi`, `idarmada`, `iddriver`, `created_at`, `updated_at`) VALUES
-(1, '2104003', '2021-03-06', 1, 1, '2021-03-07', 1, 1, 1, '2021-03-06 06:08:21', '2021-05-06 14:58:06'),
-(2, '2104004', '2021-03-07', 1, 1, '2021-03-08', 2, 1, 1, '2021-03-07 10:25:55', '2021-05-06 13:15:09'),
-(3, '2105001', '2021-05-06', 1, 1, '2021-05-06', 1, 1, 1, '2021-05-06 14:58:18', '2021-05-06 14:58:18'),
-(4, '2105002', '2021-05-10', 2, 1, '2021-05-10', 1, 1, 1, '2021-05-09 19:11:45', '2021-05-09 19:11:45');
+INSERT INTO `t30_jo` (`idjo`, `NoJO`, `TglJO`, `idcustomer`, `idshipper`, `TglMB`, `idlokasi`, `created_at`, `updated_at`) VALUES
+(2, '21.05.00001', '2021-05-05', 2, 2, '2021-05-05', 2, '2021-05-04 17:00:00', '2021-05-04 17:00:00'),
+(3, '21.06.00002', '2021-06-05', 3, 3, '2021-06-05', 3, '2021-06-04 17:00:00', '2021-06-04 17:00:00'),
+(4, '21.06.00001', '2021-06-05', 1, 1, '2021-06-05', 1, '2021-06-04 17:00:00', '2021-06-04 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -685,13 +682,6 @@ CREATE TABLE `t31_csheet` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t31_csheet`
---
-
-INSERT INTO `t31_csheet` (`idcsheet`, `NoCSheet`, `TglCSheet`, `idjo`, `Total`, `created_at`, `updated_at`) VALUES
-(1, 'N1', '2021-05-09', 1, 230000, '2021-05-09 15:32:18', '2021-05-09 15:32:44');
 
 -- --------------------------------------------------------
 
@@ -710,13 +700,6 @@ CREATE TABLE `t32_csheetd` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t32_csheetd`
---
-
-INSERT INTO `t32_csheetd` (`idcsheetd`, `idcsheet`, `idcost`, `Qty`, `idsatuan`, `Harga`, `Jumlah`, `created_at`, `updated_at`) VALUES
-(5, 1, 1, 2, 2, 115000, 230000, '2021-05-09 15:32:44', '2021-05-09 15:32:44');
 
 -- --------------------------------------------------------
 
@@ -737,19 +720,6 @@ CREATE TABLE `t33_invoice` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `t33_invoice`
---
-
-INSERT INTO `t33_invoice` (`idinvoice`, `NoInvoice`, `TglInvoice`, `idjo`, `Total`, `PPNpersen`, `PPNnilai`, `GrandTotal`, `created_at`, `updated_at`) VALUES
-(1, '2104003A', '2021-03-06', 1, 77500, 0, 0, 0, '2021-02-28 14:15:45', '2021-05-09 20:32:19'),
-(2, '2104003B', '2021-03-07', 1, 33, 0, 0, 0, '2021-03-07 09:06:44', '2021-05-09 20:32:26'),
-(3, '2105002A', '2021-05-10', 4, 0, 0, 0, 0, '2021-05-09 20:43:23', '2021-05-09 20:43:23'),
-(4, '2105002B', '2021-05-10', 4, 1, 0, 0, 0, '2021-05-09 20:44:12', '2021-05-09 20:44:12'),
-(5, '2105002C', '2021-05-10', 4, 2350000, 0, 0, 0, '2021-05-10 09:48:34', '2021-05-10 09:48:34'),
-(6, '2105002D', '2021-05-10', 4, 2500000, 0, 0, 0, '2021-05-10 10:12:34', '2021-05-10 10:12:34'),
-(7, '2105002E', '2021-05-10', 4, 855000, 10, 85500, 940500, '2021-05-10 10:14:06', '2021-05-10 19:39:29');
-
 -- --------------------------------------------------------
 
 --
@@ -768,20 +738,20 @@ CREATE TABLE `t34_invoiced` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `t34_invoiced`
+-- Table structure for table `t35_jod`
 --
 
-INSERT INTO `t34_invoiced` (`idinvoiced`, `idinvoice`, `idservice`, `Qty`, `idsatuan`, `Harga`, `Jumlah`, `created_at`, `updated_at`) VALUES
-(21, 1, 2, 0, 0, 0, 15000, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
-(22, 1, 3, 0, 0, 0, 12500, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
-(23, 1, 1, 0, 0, 0, 50000, '2021-03-06 08:44:38', '2021-03-06 08:44:38'),
-(26, 2, 1, 0, 0, 0, 11, '2021-03-07 09:09:29', '2021-03-07 09:09:29'),
-(27, 2, 2, 0, 0, 0, 22, '2021-03-07 09:09:29', '2021-03-07 09:09:29'),
-(28, 6, 1, 3, 1, 300000, 900000, '2021-05-10 10:12:34', '2021-05-10 10:12:34'),
-(29, 6, 1, 4, 1, 400000, 1600000, '2021-05-10 10:12:34', '2021-05-10 10:12:34'),
-(34, 7, 1, 5, 1, 75000, 375000, '2021-05-10 19:39:29', '2021-05-10 19:39:29'),
-(35, 7, 1, 6, 1, 80000, 480000, '2021-05-10 19:39:29', '2021-05-10 19:39:29');
+CREATE TABLE `t35_jod` (
+  `idjod` int(11) NOT NULL,
+  `idjo` int(11) NOT NULL,
+  `idarmada` int(11) NOT NULL,
+  `no_cont` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -906,7 +876,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1622559790, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1622974571, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1099,6 +1069,12 @@ ALTER TABLE `t34_invoiced`
   ADD PRIMARY KEY (`idinvoiced`);
 
 --
+-- Indexes for table `t35_jod`
+--
+ALTER TABLE `t35_jod`
+  ADD PRIMARY KEY (`idjod`);
+
+--
 -- Indexes for table `t44_menus`
 --
 ALTER TABLE `t44_menus`
@@ -1253,25 +1229,31 @@ ALTER TABLE `t30_jo`
 -- AUTO_INCREMENT for table `t31_csheet`
 --
 ALTER TABLE `t31_csheet`
-  MODIFY `idcsheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcsheet` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t32_csheetd`
 --
 ALTER TABLE `t32_csheetd`
-  MODIFY `idcsheetd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idcsheetd` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t33_invoice`
 --
 ALTER TABLE `t33_invoice`
-  MODIFY `idinvoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idinvoice` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t34_invoiced`
 --
 ALTER TABLE `t34_invoiced`
-  MODIFY `idinvoiced` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idinvoiced` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t35_jod`
+--
+ALTER TABLE `t35_jod`
+  MODIFY `idjod` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t44_menus`
