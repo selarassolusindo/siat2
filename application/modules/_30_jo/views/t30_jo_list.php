@@ -47,12 +47,18 @@
             <thead>
                 <tr>
                     <th width="80px">No</th>
-					<th>NoJO</th>
-					<th>TglJO</th>
-					<th>Idcustomer</th>
-					<th>Idshipper</th>
-					<th>TglMB</th>
-					<th>Idlokasi</th>
+					<!-- <th>NoJO</th> -->
+					<!-- <th>TglJO</th> -->
+					<!-- <th>Idcustomer</th> -->
+					<!-- <th>Idshipper</th> -->
+					<!-- <th>TglMB</th> -->
+					<!-- <th>Idlokasi</th> -->
+                    <th><input size="5" type="text" name="NoJO" id="NoJO" placeholder="NoJO"></th>
+					<th><input size="5" type="text" name="TglJO" id="TglJO" placeholder="TglJO"></th>
+					<th><input size="5" type="text" name="Idcustomer" id="Idcustomer" placeholder="Idcustomer"></th>
+					<th><input size="5" type="text" name="Idshipper" id="Idshipper" placeholder="Idshipper"></th>
+					<th><input size="5" type="text" name="TglMB" id="TglMB" placeholder="TglMB"></th>
+					<th><input size="5" type="text" name="Idlokasi" id="Idlokasi" placeholder="Idlokasi"></th>
 					<!-- <th>Created At</th> -->
 					<!-- <th>Updated At</th> -->
 					<th>Action</th>
@@ -61,12 +67,12 @@
             <tfoot>
                 <tr>
                     <th> </th>
-					<th><input size="5" type="text" name="NoJO" id="NoJO" placeholder="NoJO"></th>
-					<th><input size="5" type="text" name="TglJO" id="TglJO" placeholder="TglJO"></th>
-					<th><input size="5" type="text" name="Idcustomer" id="Idcustomer" placeholder="Idcustomer"></th>
-					<th><input size="5" type="text" name="Idshipper" id="Idshipper" placeholder="Idshipper"></th>
-					<th><input size="5" type="text" name="TglMB" id="TglMB" placeholder="TglMB"></th>
-					<th><input size="5" type="text" name="Idlokasi" id="Idlokasi" placeholder="Idlokasi"></th>
+					<!-- <th><input size="5" type="text" name="NoJO" id="NoJO" placeholder="NoJO"></th> -->
+					<!-- <th><input size="5" type="text" name="TglJO" id="TglJO" placeholder="TglJO"></th> -->
+					<!-- <th><input size="5" type="text" name="Idcustomer" id="Idcustomer" placeholder="Idcustomer"></th> -->
+					<!-- <th><input size="5" type="text" name="Idshipper" id="Idshipper" placeholder="Idshipper"></th> -->
+					<!-- <th><input size="5" type="text" name="TglMB" id="TglMB" placeholder="TglMB"></th> -->
+					<!-- <th><input size="5" type="text" name="Idlokasi" id="Idlokasi" placeholder="Idlokasi"></th> -->
 					<!-- <th><input size="5" type="text" name="Created At" id="Created At" placeholder="Created At"></th> -->
 					<!-- <th><input size="5" type="text" name="Updated At" id="Updated At" placeholder="Updated At"></th> -->
                     <th> </th>
