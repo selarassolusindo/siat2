@@ -35,7 +35,7 @@ foreach ($all as $row) {
 $string .= "
         //add this line for join
         //\$this->datatables->join('table2', '".$table_name.".field = table2.field');
-        \$this->datatables->add_column('action', anchor(site_url('".$c_url."/update/\$1'),'Update').\" | \".anchor(site_url('".$c_url."/delete/\$1'),'Delete','onclick=\"javasciprt: return confirm(\\'Are You Sure ?\\')\"'), '$pk');
+        \$this->datatables->add_column('action', anchor(site_url('".$c_url."/update/\$1'),'Ubah').\" | \".anchor(site_url('".$c_url."/delete/\$1'),'Hapus','onclick=\"javascript: return confirm(\\'Are You Sure ?\\')\"'), '$pk');
         return \$this->datatables->generate();
     }";
 }

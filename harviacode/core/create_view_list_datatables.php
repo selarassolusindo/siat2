@@ -35,7 +35,7 @@ $string = "<!-- <!doctype html>
                 <!-- <h2 style=\"margin-top:0px\">".ucfirst($table_name)." List</h2> -->
             <!-- </div> -->
             <div class=\"col-md-4 text-left\">
-                <?php echo anchor(site_url('".$c_url."/create'), 'Create', 'class=\"btn btn-primary\"'); ?>";
+                <?php echo anchor(site_url('".$c_url."/create'), 'Tambah', 'class=\"btn btn-primary\"'); ?>";
 if ($export_excel == '1') {
     $string .= "\n\t\t\t\t<!-- <?php echo anchor(site_url('".$c_url."/excel'), 'Excel', 'class=\"btn btn-primary\"'); ?> -->";
 }
@@ -57,24 +57,25 @@ $string .= "\n\t\t\t</div>
                 <tr>
                     <th width=\"80px\">No</th>";
 foreach ($non_pk as $row) {
-    $string .= "\n\t\t\t\t\t<th>" . label($row['column_name']) . "</th>";
+    // $string .= "\n\t\t\t\t\t<th>" . label($row['column_name']) . "</th>";
+    $string .= "\n\t\t\t\t\t<th><input size=\"5\" type=\"text\" name=\"".$row['column_name']."\" id=\"".$row['column_name']."\" placeholder=\"".label($row['column_name'])."\"></th>";
 }
 $string .= "\n\t\t\t\t\t<th>Action</th>
                 </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th> </th>";
-foreach ($non_pk as $row) {
-    $string .= "\n\t\t\t\t\t<th><input size=\"5\" type=\"text\" name=\"".label($row['column_name'])."\" id=\"".label($row['column_name'])."\" placeholder=\"".label($row['column_name'])."\"></th>";
-}
-$string .= "
-                    <th> </th>
-                </tr>
-            </tfoot>";
+            </thead>";
+            // <tfoot>
+                // <tr>
+                    // <th> </th>";
+// foreach ($non_pk as $row) {
+    // $string .= "\n\t\t\t\t\t<th><input size=\"5\" type=\"text\" name=\"".label($row['column_name'])."\" id=\"".label($row['column_name'])."\" placeholder=\"".label($row['column_name'])."\"></th>";
+// }
+// $string .= "
+                    // <th> </th>
+                // </tr>
+            // </tfoot>";
 $column_non_pk = array();
 foreach ($non_pk as $row) {
-    $column_non_pk[] .= "{\"data\": \"".$row['column_name']."\"}";
+    $column_non_pk[] .= "\n\t\t\t\t\t\t{\"data\": \"".$row['column_name']."\"}";
 }
 $col_non_pk = implode(',', $column_non_pk);
 
@@ -87,12 +88,12 @@ $string .= "
             $(document).ready(function() {
 
                 // Setup - add a text input to each footer cell
-                $('#mytable tfoot th').each( function () {
-                    var title = $(this).text();
-                    if (title != ' ') {
-                        $(this).html( '<input size=\"5\" type=\"text\" name=\"'+title+'\" id=\"'+title+'\" placeholder=\"'+title+'\" />' );
-                    }
-                } );
+                // $('#mytable tfoot th').each( function () {
+                    // var title = $(this).text();
+                    // if (title != ' ') {
+                        // $(this).html( '<input size=\"5\" type=\"text\" name=\"'+title+'\" id=\"'+title+'\" placeholder=\"'+title+'\" />' );
+                    // }
+                // } );
 
                 $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
                 {
@@ -108,6 +109,7 @@ $string .= "
                 };
 
                 var t = $(\"#mytable\").DataTable({
+                    searching: false,
                     initComplete: function() {
                         var api = this.api();
                         $('#mytable_filter input')
@@ -126,7 +128,7 @@ $string .= "
                     ajax: {\"url\": \"".$c_url."/json\", \"type\": \"POST\", \"data\": function(data) {";
 foreach ($non_pk as $row) {
     $string .= "
-                        data." . label($row['column_name']) . " = $('#".label($row['column_name'])."').val();";
+                        data." . $row['column_name'] . " = $('#".$row['column_name']."').val();";
 }
 $string .= "
                         }
@@ -154,7 +156,7 @@ $string .= "
 
 foreach ($non_pk as $row) {
     $string .= "
-                $('#".label($row['column_name'])."').keyup(function() {t.draw();});";
+                $('#".$row['column_name']."').keyup(function() {t.draw();});";
 }
 
 $string .= "

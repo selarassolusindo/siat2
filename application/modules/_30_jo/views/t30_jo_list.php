@@ -33,7 +33,7 @@
                 <!-- <h2 style="margin-top:0px">T30_jo List</h2> -->
             <!-- </div> -->
             <div class="col-md-4 text-left">
-                <?php echo anchor(site_url('_30_jo/create'), 'Create', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('_30_jo/create'), 'Tambah', 'class="btn btn-primary"'); ?>
 				<!-- <?php echo anchor(site_url('_30_jo/excel'), 'Excel', 'class="btn btn-primary"'); ?> -->
 				<!-- <?php echo anchor(site_url('_30_jo/word'), 'Word', 'class="btn btn-primary"'); ?> -->
 			</div>
@@ -47,37 +47,15 @@
             <thead>
                 <tr>
                     <th width="80px">No</th>
-					<!-- <th>NoJO</th> -->
-					<!-- <th>TglJO</th> -->
-					<!-- <th>Idcustomer</th> -->
-					<!-- <th>Idshipper</th> -->
-					<!-- <th>TglMB</th> -->
-					<!-- <th>Idlokasi</th> -->
-                    <th><input size="5" type="text" name="NoJO" id="NoJO" placeholder="NoJO"></th>
-					<th><input size="5" type="text" name="TglJO" id="TglJO" placeholder="TglJO"></th>
-					<th><input size="5" type="text" name="Idcustomer" id="Idcustomer" placeholder="Idcustomer"></th>
-					<th><input size="5" type="text" name="Idshipper" id="Idshipper" placeholder="Idshipper"></th>
-					<th><input size="5" type="text" name="TglMB" id="TglMB" placeholder="TglMB"></th>
-					<th><input size="5" type="text" name="Idlokasi" id="Idlokasi" placeholder="Idlokasi"></th>
-					<!-- <th>Created At</th> -->
-					<!-- <th>Updated At</th> -->
+					<th><input size="5" type="text" name="NoJO" id="NoJO" placeholder="No. JO"></th>
+					<th><input size="5" type="text" name="TglJO" id="TglJO" placeholder="Tgl. JO"></th>
+					<th><input size="5" type="text" name="idcustomer" id="idcustomer" placeholder="Customer"></th>
+					<th><input size="5" type="text" name="idshipper" id="idshipper" placeholder="Shipper"></th>
+					<th><input size="5" type="text" name="TglMB" id="TglMB" placeholder="Tgl. Muat"></th>
+					<th><input size="5" type="text" name="idlokasi" id="idlokasi" placeholder="Lokasi"></th>
 					<th>Action</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th> </th>
-					<!-- <th><input size="5" type="text" name="NoJO" id="NoJO" placeholder="NoJO"></th> -->
-					<!-- <th><input size="5" type="text" name="TglJO" id="TglJO" placeholder="TglJO"></th> -->
-					<!-- <th><input size="5" type="text" name="Idcustomer" id="Idcustomer" placeholder="Idcustomer"></th> -->
-					<!-- <th><input size="5" type="text" name="Idshipper" id="Idshipper" placeholder="Idshipper"></th> -->
-					<!-- <th><input size="5" type="text" name="TglMB" id="TglMB" placeholder="TglMB"></th> -->
-					<!-- <th><input size="5" type="text" name="Idlokasi" id="Idlokasi" placeholder="Idlokasi"></th> -->
-					<!-- <th><input size="5" type="text" name="Created At" id="Created At" placeholder="Created At"></th> -->
-					<!-- <th><input size="5" type="text" name="Updated At" id="Updated At" placeholder="Updated At"></th> -->
-                    <th> </th>
-                </tr>
-            </tfoot>
         </table>
         <!-- <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script> -->
         <!-- <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script> -->
@@ -87,10 +65,10 @@
 
                 // Setup - add a text input to each footer cell
                 // $('#mytable tfoot th').each( function () {
-                //     var title = $(this).text();
-                //     if (title != ' ') {
-                //         $(this).html( '<input size="5" type="text" name="'+title+'" id="'+title+'" placeholder="'+title+'" />' );
-                //     }
+                    // var title = $(this).text();
+                    // if (title != ' ') {
+                        // $(this).html( '<input size="5" type="text" name="'+title+'" id="'+title+'" placeholder="'+title+'" />' );
+                    // }
                 // } );
 
                 $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
@@ -107,6 +85,7 @@
                 };
 
                 var t = $("#mytable").DataTable({
+                    searching: false,
                     initComplete: function() {
                         var api = this.api();
                         $('#mytable_filter input')
@@ -125,19 +104,23 @@
                     ajax: {"url": "_30_jo/json", "type": "POST", "data": function(data) {
                         data.NoJO = $('#NoJO').val();
                         data.TglJO = $('#TglJO').val();
-                        data.Idcustomer = $('#Idcustomer').val();
-                        data.Idshipper = $('#Idshipper').val();
+                        data.idcustomer = $('#idcustomer').val();
+                        data.idshipper = $('#idshipper').val();
                         data.TglMB = $('#TglMB').val();
-                        data.Idlokasi = $('#Idlokasi').val();
-                        // data.Created At = $('#Created At').val();
-                        // data.Updated At = $('#Updated At').val();
+                        data.idlokasi = $('#idlokasi').val();
                         }
                     },
                     columns: [
                         {
                             "data": "idjo",
                             "orderable": false
-                        },{"data": "NoJO"},{"data": "TglJO"},{"data": "idcustomer"},{"data": "idshipper"},{"data": "TglMB"},{"data": "idlokasi"},
+                        },
+						{"data": "NoJO"},
+						{"data": "TglJO"},
+						{"data": "customerNama"},
+						{"data": "shipperNama"},
+						{"data": "TglMB"},
+						{"data": "lokasiNama"},
                         {
                             "data" : "action",
                             "orderable": false,
@@ -155,12 +138,10 @@
                 });
                 $('#NoJO').keyup(function() {t.draw();});
                 $('#TglJO').keyup(function() {t.draw();});
-                $('#Idcustomer').keyup(function() {t.draw();});
-                $('#Idshipper').keyup(function() {t.draw();});
+                $('#idcustomer').keyup(function() {t.draw();});
+                $('#idshipper').keyup(function() {t.draw();});
                 $('#TglMB').keyup(function() {t.draw();});
-                $('#Idlokasi').keyup(function() {t.draw();});
-                // $('#Created At').keyup(function() {t.draw();});
-                // $('#Updated At').keyup(function() {t.draw();});
+                $('#idlokasi').keyup(function() {t.draw();});
             });
         </script>
     </body>

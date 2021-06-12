@@ -17,20 +17,22 @@ class _30_jo_model extends CI_Model
 
     // datatables
     function json($postData) {
-        $this->datatables->select('idjo,NoJO,TglJO,idcustomer,idshipper,TglMB,idlokasi,created_at,updated_at');
-        $this->datatables->from('t30_jo');
+        $this->datatables->select('idjo,NoJO,date_format(TglJO, "%d-%m-%Y") as TglJO,date_format(TglMB, "%d-%m-%Y") as TglMB,
+            customer.Nama as customerNama, shipper.Nama as shipperNama, lokasi.Nama as lokasiNama');
+        $this->datatables->from('t30_jo jo');
 		if ($postData['idjo'] != '') { $this->datatables->like('idjo', $postData['idjo']); }
 		if ($postData['NoJO'] != '') { $this->datatables->like('NoJO', $postData['NoJO']); }
-		if ($postData['TglJO'] != '') { $this->datatables->like('TglJO', $postData['TglJO']); }
-		if ($postData['idcustomer'] != '') { $this->datatables->like('idcustomer', $postData['idcustomer']); }
-		if ($postData['idshipper'] != '') { $this->datatables->like('idshipper', $postData['idshipper']); }
-		if ($postData['TglMB'] != '') { $this->datatables->like('TglMB', $postData['TglMB']); }
-		if ($postData['idlokasi'] != '') { $this->datatables->like('idlokasi', $postData['idlokasi']); }
-		if ($postData['created_at'] != '') { $this->datatables->like('created_at', $postData['created_at']); }
-		if ($postData['updated_at'] != '') { $this->datatables->like('updated_at', $postData['updated_at']); }
+		if ($postData['TglJO'] != '') { $this->datatables->like('date_format(TglJO, "%d-%m-%Y")', $postData['TglJO']); }
+		if ($postData['idcustomer'] != '') { $this->datatables->like('customer.Nama', $postData['idcustomer']); }
+		if ($postData['idshipper'] != '') { $this->datatables->like('shipper.Nama', $postData['idshipper']); }
+		if ($postData['TglMB'] != '') { $this->datatables->like('date_format(TglMB, "%d-%m-%Y")', $postData['TglMB']); }
+		if ($postData['idlokasi'] != '') { $this->datatables->like('lokasi.Nama', $postData['idlokasi']); }
+        $this->datatables->join('t05_customer customer', 'jo.idcustomer = customer.idcustomer', 'left');
+        $this->datatables->join('t06_shipper shipper', 'jo.idshipper = shipper.idshipper', 'left');
+        $this->datatables->join('t12_lokasi lokasi', 'jo.idlokasi = lokasi.idlokasi', 'left');
         //add this line for join
         //$this->datatables->join('table2', 't30_jo.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('_30_jo/update/$1'),'Update')." | ".anchor(site_url('_30_jo/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'idjo');
+        $this->datatables->add_column('action', anchor(site_url('_30_jo/update/$1'),'Ubah')." | ".anchor(site_url('_30_jo/delete/$1'),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"'), 'idjo');
         return $this->datatables->generate();
     }
 
