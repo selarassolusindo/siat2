@@ -11,6 +11,9 @@ class _30_jo extends CI_Controller
         $this->load->model('_30_jo_model');
         $this->load->library('form_validation');
 		$this->load->library('datatables');
+        $this->load->model('_05_customer/_05_customer_model');
+        $this->load->model('_06_shipper/_06_shipper_model');
+        $this->load->model('_12_lokasi/_12_lokasi_model');
     }
 
     public function index()
@@ -50,20 +53,24 @@ class _30_jo extends CI_Controller
         }
     }
 
-    public function create()
+    public function create($tgl = null)
     {
+        $dataCustomer = $this->_05_customer_model->get_all();
+        $dataShipper = $this->_06_shipper_model->get_all();
+        $dataLokasi = $this->_12_lokasi_model->get_all();
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('_30_jo/create_action'),
 			'idjo' => set_value('idjo'),
-			'NoJO' => set_value('NoJO'),
-			'TglJO' => set_value('TglJO'),
+			'NoJO' => set_value('NoJO', $this->_30_jo_model->getNewJO($tgl)),
+			'TglJO' => set_value('TglJO', $tgl != null ? $tgl : date('d-m-Y')),
 			'idcustomer' => set_value('idcustomer'),
 			'idshipper' => set_value('idshipper'),
-			'TglMB' => set_value('TglMB'),
+			'TglMB' => set_value('TglMB', date('d-m-Y')),
 			'idlokasi' => set_value('idlokasi'),
-			'created_at' => set_value('created_at'),
-			'updated_at' => set_value('updated_at'),
+            'dataCustomer' => $dataCustomer,
+            'dataShipper' => $dataShipper,
+            'dataLokasi' => $dataLokasi,
 		);
         // $this->load->view('_30_jo/t30_jo_form', $data);
         $data['_view'] = '_30_jo/t30_jo_form';
@@ -80,13 +87,13 @@ class _30_jo extends CI_Controller
         } else {
             $data = array(
 				'NoJO' => $this->input->post('NoJO',TRUE),
-				'TglJO' => $this->input->post('TglJO',TRUE),
+				'TglJO' => dateMysql($this->input->post('TglJO',TRUE)),
 				'idcustomer' => $this->input->post('idcustomer',TRUE),
 				'idshipper' => $this->input->post('idshipper',TRUE),
-				'TglMB' => $this->input->post('TglMB',TRUE),
+				'TglMB' => dateMysql($this->input->post('TglMB',TRUE)),
 				'idlokasi' => $this->input->post('idlokasi',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
+				// 'created_at' => $this->input->post('created_at',TRUE),
+				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_30_jo_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -167,8 +174,8 @@ class _30_jo extends CI_Controller
 		$this->form_validation->set_rules('idshipper', 'idshipper', 'trim|required');
 		$this->form_validation->set_rules('TglMB', 'tglmb', 'trim|required');
 		$this->form_validation->set_rules('idlokasi', 'idlokasi', 'trim|required');
-		$this->form_validation->set_rules('created_at', 'created at', 'trim|required');
-		$this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
+		// $this->form_validation->set_rules('created_at', 'created at', 'trim|required');
+		// $this->form_validation->set_rules('updated_at', 'updated at', 'trim|required');
 		$this->form_validation->set_rules('idjo', 'idjo', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }

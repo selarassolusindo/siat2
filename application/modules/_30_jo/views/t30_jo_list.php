@@ -39,7 +39,7 @@
 			</div>
         </div>
         <div class="col-md-4 text-center">
-            <div style="margin-top: 4px"  id="message">
+            <div style="margin-top: 4px" id="message">
                 <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
             </div>
         </div>

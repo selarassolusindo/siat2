@@ -101,6 +101,43 @@ class _30_jo_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function getNewJO($date = null)
+    {
+        if ($date != null) {
+            // echo pre(dateMysql($date)); exit;
+        }
+
+        $sNextKode = "";
+        $sLastKode = "";
+
+        $prefix = $date != null ? substr($date, -2) . '.' . substr($date, 3, 2) . '.' : date('y.m.'); // date('ym');
+        $sNextKode = $prefix . "00001";
+
+        // echo pre($prefix); exit;
+
+        $this->db->where('left(NoJO, 6) = ', $prefix);
+        $this->db->order_by('NoJO', 'desc');
+        $this->db->limit(1);
+        $row = $this->db->get($this->table)->row();
+        if ($row) {
+
+            $value = $row->NoJO;
+
+            if ($prefix == substr($value, 0, 6)) {
+                /**
+                 * masih pada bulan yang sama
+                 */
+                $sLastKode = intval(substr($value, 7, 5));
+                $sLastKode = intval($sLastKode) + 1;
+                $sNextKode = $prefix . sprintf('%05s', $sLastKode);
+                if (strlen($sNextKode) > 11) {
+                    $sNextKode = $prefix . "99999";
+                }
+            }
+        }
+        return $sNextKode;
+    }
+
 }
 
 /* End of file _30_jo_model.php */
