@@ -68,3 +68,4 @@ $route['change-password']   = 'auth/change_password';
 $route['select-company']    = 'auth/selectCompany';
 $route['cost']              = '_11_cost/getCost';
 $route['service']           = '_10_service/getService';
+$route['armada']            = '_08_armada/getArmada';

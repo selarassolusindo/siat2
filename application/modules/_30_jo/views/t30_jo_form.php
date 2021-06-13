@@ -11,6 +11,9 @@
     </head>
     <body>
         <h2 style="margin-top:0px">T30_jo <?php //echo $button ?></h2> -->
+        <script type="text/javascript">
+            var i = 0;
+        </script>
         <form action="<?php echo $action; ?>" method="post">
             <div class="row form-group">
                 <div class="col-2 ">
@@ -67,6 +70,106 @@
                     </select>
                 </div>
         	</div>
+
+            <!-- detail armada -->
+            <div class="form-group">
+                <!-- <label for="double">COST</label> -->
+                <!-- <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Cost</a></p> -->
+                <div id="tmp">
+                    <!-- <div class="row mb-2">
+                        <div class="col">
+                            <label for="">ARMADA</label>
+                        </div>
+                        <div class="col">
+                            <label for="">NO. CONTAINER</label>
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div> -->
+                <?php if ($this->uri->segment(2) == 'update') { ?>
+                    <?php foreach ($detail as $key => $dtl) { ?>
+                        <script type="text/javascript">
+                            ++i;
+                        </script>
+            		    <div class="row mb-2" id="<?= $key ?>">
+                		  	<div class="col">
+                                <label for="">ARMADA</label>
+                                <select class="form-control" name="idarmada[]" placeholder="ARMADA" required>
+                                    <?php foreach($dataArmada as $d) { ?>
+                                        <option value="<?php echo $d->idarmada ?>" <?php echo $d->idarmada == $dtl->idarmada ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                                    <?php } ?>
+                                </select>
+                		  	</div>
+                            <div class="col">
+                                <label for="">NO. CONTAINER</label>
+                  		  		<input type="number" value="<?php echo $dtl->no_cont ?>" name="no_cont[]" class="form-control" placeholder="NO. CONTAINER" required >
+                  		  	</div>
+                		  	<div class="col">
+                                <?php // if($key > 0) { ?>
+                		  			<a href="#" onclick="hapus(<?= $key ?>)" class="text-danger">Hapus</a>
+                		  		<?php // } ?>
+                		  	</div>
+                        </div>
+                    <?php } ?>
+                <?php } else { ?>
+                    <div class="row mb-2">
+              		  	<div class="col">
+              		  		<!-- <input type="text" name="idcost[]" class="form-control" placeholder="Cost" required> -->
+                            <label for="">ARMADA</label>
+                            <select class="form-control" name="idarmada[]" placeholder="ARMADA" required>
+                                <?php foreach($dataArmada as $d) { ?>
+                                    <option value="<?php echo $d->idarmada ?>"><?php echo $d->Merk . ' - ' . $d->Tipe . ' - ' . $d->NoPol ?></option>
+                                <?php } ?>
+                            </select>
+              		  	</div>
+                        <div class="col">
+                            <label for="">NO. CONTAINER</label>
+                            <input type="text" name="no_cont[]" class="form-control" placeholder="NO. CONTAINER" required >
+              		  	</div>
+              		  	<div class="col">
+
+              		  	</div>
+          		    </div>
+                <?php } ?>
+                </div>
+                <a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Armada</a>
+
+                <script type="text/javascript">
+
+            	function tambah()
+                {
+            		++i;
+            		$('#tmp').append(
+                        `
+                        <div class="row mb-2" id="`+i+`">
+                  		  	<div class="col">
+                  		  		<!-- <input type="text" name="idcost[]" class="form-control" placeholder="Cost" required> -->
+                                <select class="form-control form-control-sm" name="idarmada[]" placeholder="ARMADA" required>
+                                    <?php foreach($dataArmada as $d) { ?>
+                                        <option value="<?php echo $d->idarmada ?>"><?php echo $d->Merk . ' - ' . $d->Tipe . ' - ' . $d->NoPol ?></option>
+                                    <?php } ?>
+                                </select>
+                  		  	</div>
+                            <div class="col">
+                  		  		<input type="text" name="no_cont[]" class="form-control form-control-sm" placeholder="NO. CONTAINER" required >
+                  		  	</div>
+                            <div class="col">
+                    		      <a href="#" onclick="hapus(`+i+`)" class="text-danger">Hapus</a>
+                    		</div>
+              		    </div>
+                        `
+            		);
+            	};
+
+                function hapus(index)
+                {
+            		$('#'+index).remove();
+                    //--i;
+                    calculate();
+            	}
+                </script>
+            </div>
 			<!-- <div class="form-group">
             	<label for="timestamp">CREATED AT <?php echo form_error('created_at') ?></label>
             	<input type="text" class="form-control" name="created_at" id="created_at" placeholder="CREATED AT" value="<?php echo $created_at; ?>" />
@@ -82,7 +185,8 @@
     <!-- </body>
 </html> -->
 
-<script>
+<script type="text/javascript">
+
     $(document).ready(function () {
         //Date range picker
         $('#TglJO').datetimepicker({
@@ -99,10 +203,6 @@
         //     alert("It works!")});
     });
 
-
-</script>
-
-<script type="text/javascript">
     function newJO() {
         // alert('1');
         var tgl = document.getElementById("inputTglJO").value;
@@ -111,4 +211,5 @@
         window.location = "<?php echo site_url() ?>_30_jo/create/"+tgl;
         // tgl =
     }
+
 </script>

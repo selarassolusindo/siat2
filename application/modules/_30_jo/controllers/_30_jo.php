@@ -14,6 +14,7 @@ class _30_jo extends CI_Controller
         $this->load->model('_05_customer/_05_customer_model');
         $this->load->model('_06_shipper/_06_shipper_model');
         $this->load->model('_12_lokasi/_12_lokasi_model');
+        $this->load->model('_08_armada/_08_armada_model');
     }
 
     public function index()
@@ -58,6 +59,7 @@ class _30_jo extends CI_Controller
         $dataCustomer = $this->_05_customer_model->get_all();
         $dataShipper = $this->_06_shipper_model->get_all();
         $dataLokasi = $this->_12_lokasi_model->get_all();
+        $dataArmada = $this->_08_armada_model->get_all();
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('_30_jo/create_action'),
@@ -71,6 +73,7 @@ class _30_jo extends CI_Controller
             'dataCustomer' => $dataCustomer,
             'dataShipper' => $dataShipper,
             'dataLokasi' => $dataLokasi,
+            'dataArmada' => $dataArmada,
 		);
         // $this->load->view('_30_jo/t30_jo_form', $data);
         $data['_view'] = '_30_jo/t30_jo_form';
@@ -85,6 +88,10 @@ class _30_jo extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+
+            // konsep master-detail
+
+            // simpan data master
             $data = array(
 				'NoJO' => $this->input->post('NoJO',TRUE),
 				'TglJO' => dateMysql($this->input->post('TglJO',TRUE)),
@@ -96,6 +103,26 @@ class _30_jo extends CI_Controller
 				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_30_jo_model->insert($data);
+
+            // simpan data detail
+            /**
+             * ambil data id-master terbaru
+             */
+            $insert_id = $this->db->insert_id();
+
+            /**
+             * simpan data ke tabel detail
+             */
+            $data = $this->input->post();
+            foreach ($data['idarmada'] as $key => $item) {
+                $detail = [
+                    'idjo' => $insert_id,
+                    'idarmada' => $item,
+                    'no_cont' => $data['no_cont'][$key],
+                ];
+                $this->db->insert('t35_jod', $detail);
+            }
+
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('_30_jo'));
         }
