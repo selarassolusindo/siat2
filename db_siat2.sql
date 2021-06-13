@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2021 at 07:00 AM
+-- Generation Time: Jun 14, 2021 at 05:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -665,7 +665,10 @@ CREATE TABLE `t30_jo` (
 INSERT INTO `t30_jo` (`idjo`, `NoJO`, `TglJO`, `idcustomer`, `idshipper`, `TglMB`, `idlokasi`, `created_at`, `updated_at`) VALUES
 (2, '21.05.00001', '2021-05-05', 2, 2, '2021-05-05', 2, '2021-05-04 17:00:00', '2021-05-04 17:00:00'),
 (3, '21.06.00002', '2021-06-05', 3, 3, '2021-06-05', 3, '2021-06-04 17:00:00', '2021-06-04 17:00:00'),
-(4, '21.06.00001', '2021-06-05', 1, 1, '2021-06-05', 1, '2021-06-04 17:00:00', '2021-06-04 17:00:00');
+(4, '21.06.00001', '2021-06-05', 1, 1, '2021-06-05', 1, '2021-06-04 17:00:00', '2021-06-04 17:00:00'),
+(5, '21.06.00003', '2021-06-13', 1, 1, '2021-06-13', 1, '2021-06-12 20:27:22', '2021-06-12 20:27:22'),
+(6, '21.06.00004', '2021-06-13', 1, 1, '2021-06-13', 1, '2021-06-13 11:36:43', '2021-06-13 11:36:43'),
+(7, '21.06.00005', '2021-06-13', 1, 1, '2021-06-13', 1, '2021-06-13 11:49:31', '2021-06-13 11:49:31');
 
 -- --------------------------------------------------------
 
@@ -752,6 +755,15 @@ CREATE TABLE `t35_jod` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t35_jod`
+--
+
+INSERT INTO `t35_jod` (`idjod`, `idjo`, `idarmada`, `no_cont`, `created_at`, `updated_at`) VALUES
+(1, 6, 1, 'ABCD 123456', '2021-06-13 11:36:43', '2021-06-13 11:36:43'),
+(2, 6, 2, 'ABCD 234567', '2021-06-13 11:36:43', '2021-06-13 11:48:27'),
+(3, 7, 1, 'ABCD 123456', '2021-06-13 11:49:31', '2021-06-13 11:49:31');
 
 -- --------------------------------------------------------
 
@@ -876,7 +888,7 @@ CREATE TABLE `t46_users` (
 --
 
 INSERT INTO `t46_users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1622974571, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$10$/yCLRTZ3xd7y/XisRgzJjOWI5rFiMeGbkIaLwfOkvR3d6odU6wkoe', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1623583001, 1, 'Administrator', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'adi', '$2y$10$AMGd/Nbj/iYxTVBvWCiEvejLt5khsWVTg.IM1zsji/8l0rvb8pRZ2', 'e181429@f181429.g181429', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1613301269, 1619704079, 1, 'Adi', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1072,7 +1084,8 @@ ALTER TABLE `t34_invoiced`
 -- Indexes for table `t35_jod`
 --
 ALTER TABLE `t35_jod`
-  ADD PRIMARY KEY (`idjod`);
+  ADD PRIMARY KEY (`idjod`),
+  ADD UNIQUE KEY `idjo_idarmada` (`idjo`,`idarmada`);
 
 --
 -- Indexes for table `t44_menus`
@@ -1223,7 +1236,7 @@ ALTER TABLE `t16_ekor`
 -- AUTO_INCREMENT for table `t30_jo`
 --
 ALTER TABLE `t30_jo`
-  MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idjo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `t31_csheet`
@@ -1253,7 +1266,7 @@ ALTER TABLE `t34_invoiced`
 -- AUTO_INCREMENT for table `t35_jod`
 --
 ALTER TABLE `t35_jod`
-  MODIFY `idjod` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idjod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `t44_menus`
