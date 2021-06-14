@@ -102,29 +102,38 @@ class _30_jo extends CI_Controller
 				// 'created_at' => $this->input->post('created_at',TRUE),
 				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
-            $this->_30_jo_model->insert($data);
+            // $this->_30_jo_model->insert($data);
 
-            // simpan data detail
-            /**
-             * ambil data id-master terbaru
-             */
-            $insert_id = $this->db->insert_id();
+            // coba dulu check data double atau tidak saat proses simpan
+            $last_id = $this->_30_jo_model->insert($data); // $this->T30_csiswa_sekolah_model->insert($data); //echo pre($last_id == FALSE); exit;
+            if ($last_id == FALSE) {
+                // data double
+                $this->session->set_flashdata('message', 'Armada sudah terpakai !');
+                $this->create();
+            } else {
 
-            /**
-             * simpan data ke tabel detail
-             */
-            $data = $this->input->post();
-            foreach ($data['idarmada'] as $key => $item) {
-                $detail = [
-                    'idjo' => $insert_id,
-                    'idarmada' => $item,
-                    'no_cont' => $data['no_cont'][$key],
-                ];
-                $this->db->insert('t35_jod', $detail);
+                // simpan data detail
+                /**
+                 * ambil data id-master terbaru
+                 */
+                $insert_id = $this->db->insert_id();
+
+                /**
+                 * simpan data ke tabel detail
+                 */
+                $data = $this->input->post();
+                foreach ($data['idarmada'] as $key => $item) {
+                    $detail = [
+                        'idjo' => $insert_id,
+                        'idarmada' => $item,
+                        'no_cont' => $data['no_cont'][$key],
+                    ];
+                    $this->db->insert('t35_jod', $detail);
+                }
+
+                $this->session->set_flashdata('message', 'Create Record Success');
+                redirect(site_url('_30_jo'));
             }
-
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('_30_jo'));
         }
     }
 

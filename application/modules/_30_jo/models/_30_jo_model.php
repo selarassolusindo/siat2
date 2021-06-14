@@ -84,7 +84,16 @@ class _30_jo_model extends CI_Model
     // insert data
     function insert($data)
     {
-        $this->db->insert($this->table, $data);
+        // $this->db->insert($this->table, $data);
+        if (
+            $this->db
+            ->limit(1)
+            ->get_where($this->table, "idcsiswa = '" . $data['idcsiswa'] . "'")
+            ->num_rows() === 0
+        ) {
+            $this->db->insert($this->table, $data);
+        }
+        return ($this->db->trans_status()) ? $this->db->insert_id() : false;
     }
 
     // update data
