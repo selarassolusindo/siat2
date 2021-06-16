@@ -76,17 +76,6 @@
                 <!-- <label for="double">COST</label> -->
                 <!-- <p><a href="#" onclick="tambah()" class="btn btn-primary mb-2">Tambah Cost</a></p> -->
                 <div id="tmp">
-                    <!-- <div class="row mb-2">
-                        <div class="col">
-                            <label for="">ARMADA</label>
-                        </div>
-                        <div class="col">
-                            <label for="">NO. CONTAINER</label>
-                        </div>
-                        <div class="col">
-
-                        </div>
-                    </div> -->
                 <?php if ($this->uri->segment(2) == 'update') { ?>
                     <div class="row">
                         <div class="col">
