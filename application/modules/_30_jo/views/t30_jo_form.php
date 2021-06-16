@@ -106,13 +106,13 @@
                 		  	<div class="col">
                                 <select class="form-control" name="idarmada[]" placeholder="ARMADA" required>
                                     <?php foreach($dataArmada as $d) { ?>
-                                        <option value="<?php echo $d->idarmada ?>" <?php echo $d->idarmada == $dtl->idarmada ? "selected" : "" ?>><?php echo $d->Nama ?></option>
+                                        <option value="<?php echo $d->idarmada ?>" <?php echo $d->idarmada == $dtl->idarmada ? "selected" : "" ?>><?php echo $d->Merk . ' - ' . $d->Tipe . ' - ' . $d->NoPol ?></option>
                                     <?php } ?>
                                 </select>
                 		  	</div>
                             <div class="col">
                                 <!-- <label for="">NO. CONTAINER</label> -->
-                  		  		<input type="number" value="<?php echo $dtl->no_cont ?>" name="no_cont[]" class="form-control" placeholder="NO. CONTAINER" required >
+                  		  		<input type="text" value="<?php echo $dtl->no_cont ?>" name="no_cont[]" class="form-control" placeholder="NO. CONTAINER" required >
                   		  	</div>
                 		  	<div class="col">
                                 <?php // if($key > 0) { ?>
