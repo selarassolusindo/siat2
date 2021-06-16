@@ -142,19 +142,39 @@ class _30_jo extends CI_Controller
         $row = $this->_30_jo_model->get_by_id($id);
 
         if ($row) {
+            $dataCustomer = $this->_05_customer_model->get_all();
+            $dataShipper = $this->_06_shipper_model->get_all();
+            $dataLokasi = $this->_12_lokasi_model->get_all();
+            $dataArmada = $this->_08_armada_model->get_all();
             $data = array(
                 'button' => 'Simpan',
                 'action' => site_url('_30_jo/update_action'),
 				'idjo' => set_value('idjo', $row->idjo),
 				'NoJO' => set_value('NoJO', $row->NoJO),
-				'TglJO' => set_value('TglJO', $row->TglJO),
+				'TglJO' => set_value('TglJO', dateMysql($row->TglJO)),
 				'idcustomer' => set_value('idcustomer', $row->idcustomer),
 				'idshipper' => set_value('idshipper', $row->idshipper),
-				'TglMB' => set_value('TglMB', $row->TglMB),
+				'TglMB' => set_value('TglMB', dateMysql($row->TglMB)),
 				'idlokasi' => set_value('idlokasi', $row->idlokasi),
-				'created_at' => set_value('created_at', $row->created_at),
-				'updated_at' => set_value('updated_at', $row->updated_at),
+				// 'created_at' => set_value('created_at', $row->created_at),
+				// 'updated_at' => set_value('updated_at', $row->updated_at),
+                'dataCustomer' => $dataCustomer,
+                'dataShipper' => $dataShipper,
+                'dataLokasi' => $dataLokasi,
+                'dataArmada' => $dataArmada,
 			);
+
+            /**
+             * ambil data dari tabel detail
+             */
+            $data['detail'] =
+                $this->db
+                    ->select('t35_jod.*')
+                    ->from('t35_jod')
+                    ->where('idjo', $id)
+                    ->get()->result()
+                    ;
+
             // $this->load->view('_30_jo/t30_jo_form', $data);
             $data['_view'] = '_30_jo/t30_jo_form';
             $data['_caption'] = 'Job Order';

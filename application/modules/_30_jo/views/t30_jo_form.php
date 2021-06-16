@@ -88,13 +88,22 @@
                         </div>
                     </div> -->
                 <?php if ($this->uri->segment(2) == 'update') { ?>
+                    <div class="row">
+                        <div class="col">
+                            <label for="">ARMADA</label>
+                        </div>
+                        <div class="col">
+                            <label for="">NO. CONTAINER</label>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
                     <?php foreach ($detail as $key => $dtl) { ?>
                         <script type="text/javascript">
                             ++i;
                         </script>
             		    <div class="row mb-2" id="<?= $key ?>">
                 		  	<div class="col">
-                                <label for="">ARMADA</label>
                                 <select class="form-control" name="idarmada[]" placeholder="ARMADA" required>
                                     <?php foreach($dataArmada as $d) { ?>
                                         <option value="<?php echo $d->idarmada ?>" <?php echo $d->idarmada == $dtl->idarmada ? "selected" : "" ?>><?php echo $d->Nama ?></option>
@@ -102,7 +111,7 @@
                                 </select>
                 		  	</div>
                             <div class="col">
-                                <label for="">NO. CONTAINER</label>
+                                <!-- <label for="">NO. CONTAINER</label> -->
                   		  		<input type="number" value="<?php echo $dtl->no_cont ?>" name="no_cont[]" class="form-control" placeholder="NO. CONTAINER" required >
                   		  	</div>
                 		  	<div class="col">
