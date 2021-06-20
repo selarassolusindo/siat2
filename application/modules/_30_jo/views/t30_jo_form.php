@@ -13,6 +13,7 @@
         <h2 style="margin-top:0px">T30_jo <?php //echo $button ?></h2> -->
         <script type="text/javascript">
             var i = 0;
+            var update = '<?php echo $this->uri->segment(2) ?>';
         </script>
         <form action="<?php echo $action; ?>" method="post">
             <div class="row form-group">
@@ -195,7 +196,10 @@
         });
         $('#TglJO').on('change.datetimepicker', function () {
             // alert('!!!');
-            newJO();
+            if (update != 'update') {
+                newJO();
+            }
+            // newJO();
         });
         // $("#Datetimepicker").on("change.datetimepicker",function(){
         //     alert("It works!")});

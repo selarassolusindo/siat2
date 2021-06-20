@@ -194,15 +194,41 @@ class _30_jo extends CI_Controller
         } else {
             $data = array(
 				'NoJO' => $this->input->post('NoJO',TRUE),
-				'TglJO' => $this->input->post('TglJO',TRUE),
+				'TglJO' => dateMysql($this->input->post('TglJO',TRUE)),
 				'idcustomer' => $this->input->post('idcustomer',TRUE),
 				'idshipper' => $this->input->post('idshipper',TRUE),
-				'TglMB' => $this->input->post('TglMB',TRUE),
+				'TglMB' => dateMysql($this->input->post('TglMB',TRUE)),
 				'idlokasi' => $this->input->post('idlokasi',TRUE),
-				'created_at' => $this->input->post('created_at',TRUE),
-				'updated_at' => $this->input->post('updated_at',TRUE),
+				// 'created_at' => $this->input->post('created_at',TRUE),
+				// 'updated_at' => $this->input->post('updated_at',TRUE),
 			);
             $this->_30_jo_model->update($this->input->post('idjo', TRUE), $data);
+
+            /**
+             * simpan id data yang akan diupdate dari tabel master
+             */
+            $idjo = $this->input->post('idjo', TRUE);
+
+            /**
+             * hapus dulu data lama di tabel detail
+             */
+            $this->db->where('idjo', $idjo);
+			$this->db->delete('t35_jod');
+
+            /**
+             * simpan data di tabel detail
+             */
+            $totalJumlah = 0;
+            $data = $this->input->post();
+            foreach ($data['idarmada'] as $key => $item) {
+  				$detail = [
+  					'idjo' => $idjo,
+  					'idarmada' => $item,
+                    'no_cont' => $data['no_cont'][$key],
+                    ];
+  				$this->db->insert('t35_jod',$detail);
+  			}
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('_30_jo'));
         }
@@ -213,7 +239,17 @@ class _30_jo extends CI_Controller
         $row = $this->_30_jo_model->get_by_id($id);
 
         if ($row) {
+            /**
+             * hapus data di tabel master
+             */
             $this->_30_jo_model->delete($id);
+
+            /**
+             * hapus data di tabel detail
+             */
+            $this->db->where('idjo', $id);
+     		$this->db->delete('t35_jod');
+
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('_30_jo'));
         } else {
