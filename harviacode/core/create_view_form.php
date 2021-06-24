@@ -1,6 +1,6 @@
 <?php
 
-$string = "<!doctype html>
+$string = "<!-- <!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -12,20 +12,24 @@ $string = "<!doctype html>
         </style>
     </head>
     <body>
-        <h2 style=\"margin-top:0px\">".ucfirst($table_name)." <?php //echo \$button ?></h2>
+        <h2 style=\"margin-top:0px\">".ucfirst($table_name)." <?php //echo \$button ?></h2> -->
         <form action=\"<?php echo \$action; ?>\" method=\"post\">";
 foreach ($non_pk as $row) {
     if ($row["data_type"] == 'text')
     {
-    $string .= "\n\t\t\t<div class=\"form-group\">
-            \t<label for=\"".$row["column_name"]."\">".label(strtoupper($row["column_name"]))." <?php echo form_error('".$row["column_name"]."') ?></label>
-            \t<textarea class=\"form-control\" rows=\"3\" name=\"".$row["column_name"]."\" id=\"".$row["column_name"]."\" placeholder=\"".label(strtoupper($row["column_name"]))."\"><?php echo $".$row["column_name"]."; ?></textarea>
+    $string .= "\n\t\t\t<div class=\"row form-group\">
+            \t<label for=\"".$row["column_name"]."\" class=\"col-3 col-form-label text-right\">".label(ucfirst($row["column_name"]))." <?php echo form_error('".$row["column_name"]."') ?></label>
+            \t<div class=\"col-3\">
+            \t<textarea class=\"form-control\" rows=\"3\" name=\"".$row["column_name"]."\" id=\"".$row["column_name"]."\" placeholder=\"".label(ucfirst($row["column_name"]))."\"><?php echo $".$row["column_name"]."; ?></textarea>
+            \t</div>
         \t</div>";
     } else
     {
-    $string .= "\n\t\t\t<div class=\"form-group\">
-            \t<label for=\"".$row["data_type"]."\">".label(strtoupper($row["column_name"]))." <?php echo form_error('".$row["column_name"]."') ?></label>
-            \t<input type=\"text\" class=\"form-control\" name=\"".$row["column_name"]."\" id=\"".$row["column_name"]."\" placeholder=\"".label(strtoupper($row["column_name"]))."\" value=\"<?php echo $".$row["column_name"]."; ?>\" />
+    $string .= "\n\t\t\t<div class=\"row form-group\">
+            \t<label for=\"".$row["data_type"]."\" class=\"col-3 col-form-label text-right\">".label(ucfirst($row["column_name"]))." <?php echo form_error('".$row["column_name"]."') ?></label>
+            \t<div class=\"col-3\">
+            \t<input type=\"text\" class=\"form-control\" name=\"".$row["column_name"]."\" id=\"".$row["column_name"]."\" placeholder=\"".label(ucfirst($row["column_name"]))."\" value=\"<?php echo $".$row["column_name"]."; ?>\" />
+            \t</div>
         \t</div>";
     }
 }

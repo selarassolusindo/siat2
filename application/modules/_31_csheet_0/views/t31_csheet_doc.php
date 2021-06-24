@@ -20,10 +20,10 @@
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Nocsheet</th>
-		<th>Tglcsheet</th>
+		<th>NoCSheet</th>
+		<th>TglCSheet</th>
 		<th>Idjo</th>
-		<th>Totalcsheet</th>
+		<th>Total</th>
 		<th>Created At</th>
 		<th>Updated At</th>
 		
@@ -33,10 +33,10 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $_31_csheet->nocsheet ?></td>
-		      <td><?php echo $_31_csheet->tglcsheet ?></td>
+		      <td><?php echo $_31_csheet->NoCSheet ?></td>
+		      <td><?php echo $_31_csheet->TglCSheet ?></td>
 		      <td><?php echo $_31_csheet->idjo ?></td>
-		      <td><?php echo $_31_csheet->totalcsheet ?></td>
+		      <td><?php echo $_31_csheet->Total ?></td>
 		      <td><?php echo $_31_csheet->created_at ?></td>
 		      <td><?php echo $_31_csheet->updated_at ?></td>	
                 </tr>

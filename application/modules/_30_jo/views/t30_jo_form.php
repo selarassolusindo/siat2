@@ -17,9 +17,9 @@
         </script>
         <form action="<?php echo $action; ?>" method="post">
             <div class="row form-group">
-                <div class="col-2 ">
-                	<label for="date">TGL. JO <?php echo form_error('TglJO') ?></label>
-                	<!-- <input type="text" class="form-control" name="TglJO" id="TglJO" placeholder="TGLJO" value="<?php echo $TglJO; ?>" /> -->
+            	<label for="date" class="col-3 col-form-label text-right">Tgl. Job Order <?php echo form_error('TglJO') ?></label>
+            	<!-- <input type="text" class="form-control" name="TglJO" id="TglJO" placeholder="TGLJO" value="<?php echo $TglJO; ?>" /> -->
+                <div class="col-3">
                     <div class="input-group date" id="TglJO" data-target-input="nearest">
                         <div class="input-group-append" data-target="#TglJO" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -27,33 +27,39 @@
                         <input id="inputTglJO" placeholder="TGL. JO" type="text" name="TglJO" value="<?php echo $TglJO; ?>" class="form-control datetimepicker-input" data-target="#TglJO"/>
                     </div>
                 </div>
-                <div class="col-2">
-                	<label for="varchar">NO. JO <?php echo form_error('NoJO') ?></label>
+            </div>
+            <div class="row form-group">
+                <label for="varchar" class="col-3 col-form-label text-right">Nomor Job Order <?php echo form_error('NoJO') ?></label>
+                <div class="col-3">
                 	<input type="text" class="form-control" name="NoJO" id="NoJO" placeholder="NO. JO" value="<?php echo $NoJO; ?>" />
                 </div>
         	</div>
 			<div class="row form-group">
+                <label for="int" class="col-3 col-form-label text-right">Customer <?php echo form_error('idcustomer') ?></label>
+                <!-- <input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="IDCUSTOMER" value="<?php echo $idcustomer; ?>" /> -->
                 <div class="col-3">
-                	<label for="int">CUSTOMER <?php echo form_error('idcustomer') ?></label>
-                	<!-- <input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="IDCUSTOMER" value="<?php echo $idcustomer; ?>" /> -->
                     <select class="form-control" name="idcustomer">
                         <?php foreach($dataCustomer as $d) { ?>
                             <option value="<?php echo $d->idcustomer ?>" <?php echo $d->idcustomer == $idcustomer ? "selected" : "" ?>><?php echo $d->Nama ?></option>
                         <?php } ?>
                     </select>
                 </div>
+            </div>
+			<div class="row form-group">
+                <label for="int" class="col-3 col-form-label text-right">Shipper <?php echo form_error('idshipper') ?></label>
+                <!-- <input type="text" class="form-control" name="idshipper" id="idshipper" placeholder="IDSHIPPER" value="<?php echo $idshipper; ?>" /> -->
                 <div class="col-3">
-                	<label for="int">SHIPPER <?php echo form_error('idshipper') ?></label>
-                	<!-- <input type="text" class="form-control" name="idshipper" id="idshipper" placeholder="IDSHIPPER" value="<?php echo $idshipper; ?>" /> -->
                     <select class="form-control" name="idshipper">
                         <?php foreach($dataShipper as $d) { ?>
                             <option value="<?php echo $d->idshipper ?>" <?php echo $d->idshipper == $idshipper ? "selected" : "" ?>><?php echo $d->Nama ?></option>
                         <?php } ?>
                     </select>
                 </div>
-                <div class="col-2">
-                	<label for="date">TGL. MUAT <?php echo form_error('TglMB') ?></label>
-                	<!-- <input type="text" class="form-control" name="TglMB" id="TglMB" placeholder="TGLMB" value="<?php echo $TglMB; ?>" /> -->
+            </div>
+			<div class="row form-group">
+                <label for="date" class="col-3 col-form-label text-right">Tgl. Muat <?php echo form_error('TglMB') ?></label>
+                <!-- <input type="text" class="form-control" name="TglMB" id="TglMB" placeholder="TGLMB" value="<?php echo $TglMB; ?>" /> -->
+                <div class="col-3">
                     <div class="input-group date" id="TglMB" data-target-input="nearest">
                         <div class="input-group-append" data-target="#TglMB" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -61,9 +67,11 @@
                         <input placeholder="TGL. MUAT" type="text" name="TglMB" value="<?php echo $TglMB; ?>" class="form-control datetimepicker-input" data-target="#TglMB"/>
                     </div>
                 </div>
+            </div>
+			<div class="row form-group">
+                <label for="int" class="col-3 col-form-label text-right">Lokasi <?php echo form_error('idlokasi') ?></label>
+                <!-- <input type="text" class="form-control" name="idlokasi" id="idlokasi" placeholder="IDLOKASI" value="<?php echo $idlokasi; ?>" /> -->
                 <div class="col-3">
-                	<label for="int">LOKASI <?php echo form_error('idlokasi') ?></label>
-                	<!-- <input type="text" class="form-control" name="idlokasi" id="idlokasi" placeholder="IDLOKASI" value="<?php echo $idlokasi; ?>" /> -->
                     <select class="form-control" name="idlokasi">
                         <?php foreach($dataLokasi as $d) { ?>
                             <option value="<?php echo $d->idlokasi ?>" <?php echo $d->idlokasi == $idlokasi ? "selected" : "" ?>><?php echo $d->Nama ?></option>
