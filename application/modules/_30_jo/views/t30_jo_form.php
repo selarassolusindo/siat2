@@ -88,10 +88,10 @@
                 <?php if ($this->uri->segment(2) == 'update') { ?>
                     <div class="row">
                         <div class="col">
-                            <label for="">ARMADA</label>
+                            <label for="" class="col-form-label">Armada</label>
                         </div>
                         <div class="col">
-                            <label for="">NO. CONTAINER</label>
+                            <label for="" class="col-form-label">No. Container</label>
                         </div>
                         <div class="col">
                         </div>
@@ -123,7 +123,7 @@
                     <div class="row mb-2">
               		  	<div class="col">
               		  		<!-- <input type="text" name="idcost[]" class="form-control" placeholder="Cost" required> -->
-                            <label for="">ARMADA</label>
+                            <label for="" class="col-form-label">Armada</label>
                             <select class="form-control" name="idarmada[]" placeholder="ARMADA" required>
                                 <?php foreach($dataArmada as $d) { ?>
                                     <option value="<?php echo $d->idarmada ?>"><?php echo $d->Merk . ' - ' . $d->Tipe . ' - ' . $d->NoPol ?></option>
@@ -131,7 +131,7 @@
                             </select>
               		  	</div>
                         <div class="col">
-                            <label for="">NO. CONTAINER</label>
+                            <label for="" class="col-form-label">No. Container</label>
                             <input type="text" name="no_cont[]" class="form-control" placeholder="NO. CONTAINER" required >
               		  	</div>
               		  	<div class="col">
